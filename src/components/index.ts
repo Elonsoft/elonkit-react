@@ -11,6 +11,7 @@ export * from './Kbd';
 export * from './Link';
 export * from './locale';
 export * from './Pagination';
+export * from './Snackbar';
 export * from './Spinner';
 export * from './Swiper';
 export * from './TableActions';
