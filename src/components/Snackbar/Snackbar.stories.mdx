@@ -1,0 +1,108 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { Snackbar } from './Snackbar';
+import * as stories from './Snackbar.stories';
+
+<Meta
+  title="Components/Snackbar"
+  component={Snackbar}
+  parameters={{
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    maxSnack: {
+      control: { type: 'number' },
+      defaultValue: 3
+    },
+    timeout: {
+      control: { type: 'number' },
+      defaultValue: 300
+    },
+    anchorOrigin: {
+      control: { type: 'select' },
+      options: ['top-left', 'top-right', 'top-center', 'bottom-left', 'bottom-right', 'bottom-center'],
+      defaultValue: 'bottom-left'
+    },
+    labelCloseAll: {
+      table: {
+        disable: true
+      }
+    },
+    sx: {
+      table: {
+        disable: true
+      }
+    },
+    classes: {
+      table: {
+        disable: true
+      }
+    },
+    className: {
+      table: {
+        disable: true
+      }
+    },
+    onClose: {
+      table: {
+        disable: true
+      }
+    },
+    action: {
+      table: {
+        disable: true
+      }
+    },
+    customSnackbar: {
+      table: {
+        disable: true
+      }
+    },
+    icon: {
+      table: {
+        disable: true
+      }
+    },
+    message: {
+      table: {
+        disable: true
+      }
+    },
+    autoHideDuration: {
+      table: {
+        disable: true
+      }
+    },
+    persist: {
+      table: {
+        disable: true
+      }
+    },
+    preventDuplicate: {
+      table: {
+        disable: true
+      }
+    }
+  }}
+/>
+
+# Snackbar
+
+This component is to display a notification message.
+
+<Canvas>
+  <Story story={stories.Demo} name="Demo" />
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-snackbar" story="page">
+      <code>Snackbar</code>
+    </LinkTo>
+  </li>
+</ul>

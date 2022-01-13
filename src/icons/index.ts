@@ -148,6 +148,7 @@ export { IconStopLarge } from './IconStopLarge';
 export { IconStopMedium } from './IconStopMedium';
 export { IconStopSmall } from './IconStopSmall';
 export { IconSubdirectoryArrowLeft } from './IconSubdirectoryArrowLeft';
+export { IconSuccess } from './IconSuccess';
 export { IconTimerOutline } from './IconTimerOutline';
 export { IconTrashCan } from './IconTrashCan';
 export { IconTrayArrowDown } from './IconTrayArrowDown';
