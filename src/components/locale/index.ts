@@ -1,6 +1,7 @@
 import { FileInfoNameProps } from '../FileInfo';
 import { FormatSizeProps } from '../FormatSize';
 import { PaginationPagesProps, PaginationRangeProps } from '../Pagination';
+import { SnackbarProviderProps } from '../SnackbarProvider';
 import { SwiperButtonProps } from '../Swiper';
 import { TableActionsProps } from '../TableActions';
 
@@ -20,6 +21,9 @@ export interface Localization {
     };
     ESSwiperButton: {
       defaultProps: Pick<SwiperButtonProps, 'labelPrev' | 'labelNext'>;
+    };
+    ESSnackbarProvider: {
+      defaultProps: Pick<SnackbarProviderProps, 'labelCloseAll'>;
     };
     ESTableActions: {
       defaultProps: Pick<TableActionsProps, 'label'>;
@@ -57,6 +61,11 @@ export const en: Localization = {
       defaultProps: {
         labelPrev: 'Previous slide',
         labelNext: 'Next slide'
+      }
+    },
+    ESSnackbarProvider: {
+      defaultProps: {
+        labelCloseAll: 'Close all'
       }
     },
     ESTableActions: {
@@ -97,6 +106,11 @@ export const ru: Localization = {
       defaultProps: {
         labelPrev: 'Предыдущий слайд',
         labelNext: 'Следующий слайд'
+      }
+    },
+    ESSnackbarProvider: {
+      defaultProps: {
+        labelCloseAll: 'Закрыть все'
       }
     },
     ESTableActions: {
