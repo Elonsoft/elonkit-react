@@ -14,6 +14,9 @@ export { createIconButton } from './icon-button';
 import { createSlider } from './slider';
 export { createSlider } from './slider';
 
+import { createTab, createTabs } from './tabs';
+export { createTabs, createTab } from './tabs';
+
 import {
   createFormControl,
   createFormHelperText,
@@ -47,6 +50,8 @@ export const createComponents = (theme: Theme, typography: TypographyOptions) =>
   const MuiOutlinedInput = createOutlinedInput(theme, typography);
   const MuiSelect = createSelect(theme, typography);
   const MuiSlider = createSlider(theme, typography);
+  const MuiTabs = createTabs(theme, typography);
+  const MuiTab = createTab(theme, typography);
   const MuiTextField = createTextField(theme, typography);
   const MuiTooltip = createTooltip(theme, typography);
 
@@ -62,7 +67,9 @@ export const createComponents = (theme: Theme, typography: TypographyOptions) =>
     MuiSelect,
     MuiSlider,
     MuiTextField,
-    MuiTooltip
+    MuiTooltip,
+    MuiTabs,
+    MuiTab
   };
   return components;
 };
