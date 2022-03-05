@@ -13,5 +13,6 @@ export { IconChevronRight } from './IconChevronRight';
 export { IconCloseSm } from './IconCloseSm';
 export { IconDotsHorizontal } from './IconDotsHorizontal';
 export { IconOpenInNew } from './IconOpenInNew';
+export { IconSuccess } from './IconSuccess';
 export { IconTriangleArrowDown } from './IconTriangleArrowDown';
 export { IconUpload } from './IconUpload';
