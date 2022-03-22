@@ -1,0 +1,36 @@
+import { Meta, Story, Canvas, ArgsTable, Props } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { Breadcrumbs } from './Breadcrumbs';
+
+import * as stories from './Breadcrumbs.stories';
+
+<Meta
+  title="Components/Breadcrumbs"
+  component={Breadcrumbs}
+  parameters={{
+    options: { showPanel: true }
+  }}
+/>
+
+# Breadcrumbs
+
+<Canvas>
+  <Story story={stories.Demo} name="Demo"></Story>
+</Canvas>
+
+<br />
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-breadcrumbs" story="page">
+      <code>Breadcrumbs</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-breadcrumbsItem" story="page">
+      <code>BreadcrumbsItem</code>
+    </LinkTo>
+  </li>
+</ul>

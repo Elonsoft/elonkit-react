@@ -1,0 +1,1 @@
+export { BreadcrumbsCollapsedMenuItem } from './BreadcrumbsCollapsedMenuItem';
