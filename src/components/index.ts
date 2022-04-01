@@ -1,4 +1,5 @@
 export * from './AudioPlayer';
+export * from './Breadcrumbs';
 export * from './DateAdapter';
 export * from './Dialog';
 export * from './Dropzone';
@@ -12,6 +13,7 @@ export * from './Kbd';
 export * from './Link';
 export * from './locale';
 export * from './Pagination';
+export * from './Spinner';
 export * from './Spinner';
 export * from './Swiper';
 export * from './TableActions';

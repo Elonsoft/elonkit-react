@@ -22,6 +22,7 @@ import { TextFieldPropsSizeOverrides } from '@mui/material/TextField';
 import { TypographyPropsVariantOverrides } from '@mui/material/Typography';
 
 import { AudioPlayerClassKey, AudioPlayerProps } from './components/AudioPlayer';
+import { BreadcrumbsClassKey, BreadcrumbsProps } from './components/Breadcrumbs';
 import { DropzoneClassKey, DropzoneProps } from './components/Dropzone';
 import { EmptyStateClassKey, EmptyStateProps } from './components/EmptyState';
 import {
@@ -109,6 +110,7 @@ export interface IOverlayPalette {
 declare module '@mui/material/styles/props' {
   interface ComponentsPropsList {
     ESAudioPlayer: AudioPlayerProps;
+    ESBreadcrumbs: BreadcrumbsProps;
     ESDropzone: DropzoneProps;
     ESEmptyState: EmptyStateProps;
     ESFileIcon: FileIconProps;
@@ -139,6 +141,7 @@ declare module '@mui/material/styles/props' {
 declare module '@mui/material/styles/overrides' {
   interface ComponentNameToClassKey {
     ESAudioPlayer: AudioPlayerClassKey;
+    ESBreadcrumbs: BreadcrumbsClassKey;
     ESDropzone: DropzoneClassKey;
     ESEmptyState: EmptyStateClassKey;
     ESFileIcon: FileIconClassKey;
@@ -170,6 +173,10 @@ declare module '@mui/material/styles/components' {
     ESAudioPlayer?: {
       defaultProps?: ComponentsProps['ESAudioPlayer'];
       styleOverrides?: ComponentsOverrides['ESAudioPlayer'];
+    };
+    ESBreadcrumbs?: {
+      defaultProps?: ComponentsProps['ESBreadcrumbs'];
+      styleOverrides?: ComponentsOverrides['ESBreadcrumbs'];
     };
     ESEmptyState?: {
       defaultProps?: ComponentsProps['ESEmptyState'];
