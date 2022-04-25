@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars */
 
+import { ComponentProps } from 'react';
+
 import {
   BreakpointOverrides,
   Palette,
@@ -32,6 +34,7 @@ import {
   AlertTitleProps
 } from './components/Alert';
 import { AudioPlayerClassKey, AudioPlayerProps } from './components/AudioPlayer';
+import { AutocompleteClassKey, AutocompleteProps } from './components/Autocomplete';
 import {
   DialogActionsClassKey,
   DialogActionsProps,
@@ -146,6 +149,7 @@ declare module '@mui/material/styles/props' {
     ESAlertClose: AlertCloseProps;
     ESAlertTitle: AlertTitleProps;
     ESAudioPlayer: AudioPlayerProps;
+    ESAutocomplete: AutocompleteProps;
     ESDialog: DialogProps;
     ESDialogActions: DialogActionsProps;
     ESDialogArrow: DialogArrowProps;
@@ -190,6 +194,7 @@ declare module '@mui/material/styles/overrides' {
     ESAlertClose: AlertCloseClassKey;
     ESAlertTitle: AlertTitleClassKey;
     ESAudioPlayer: AudioPlayerClassKey;
+    ESAutocomplete: AutocompleteClassKey;
     ESDialog: DialogClassKey;
     ESDialogActions: DialogActionsClassKey;
     ESDialogArrow: DialogArrowClassKey;
@@ -247,6 +252,10 @@ declare module '@mui/material/styles/components' {
     ESAudioPlayer?: {
       defaultProps?: ComponentsProps['ESAudioPlayer'];
       styleOverrides?: ComponentsOverrides['ESAudioPlayer'];
+    };
+    ESAutocomplete?: {
+      defaultProps?: ComponentsProps['ESAutocomplete'];
+      styleOverrides?: ComponentsOverrides['ESAutocomplete'];
     };
     ESDialog?: {
       defaultProps?: ComponentsProps['ESDialog'];

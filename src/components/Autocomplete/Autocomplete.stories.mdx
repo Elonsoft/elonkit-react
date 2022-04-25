@@ -1,0 +1,50 @@
+import { Meta, Story, Canvas, ArgsTable, Props } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { Autocomplete } from './Autocomplete';
+import * as stories from './Autocomplete.stories';
+
+<Meta
+  title="Components/Autocomplete"
+  component={Autocomplete}
+  parameters={{
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    classes: {
+      table: {
+        disable: true
+      }
+    },
+    className: {
+      table: {
+        disable: true
+      }
+    },
+    sx: {
+      table: {
+        disable: true
+      }
+    }
+  }}
+/>
+
+# Autocomplete
+
+This component.
+
+<Canvas>
+  <Story story={stories.Demo} name="Demo" />
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-Autocomplete" story="page">
+      <code>Autocomplete</code>
+    </LinkTo>
+  </li>
+</ul>
