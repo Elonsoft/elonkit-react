@@ -134,6 +134,8 @@ export { IconSkipBackMedium } from './IconSkipBackMedium';
 export { IconSkipForwardMedium } from './IconSkipForwardMedium';
 export { IconSpeedometer } from './IconSpeedometer';
 export { IconStar } from './IconStar';
+export { IconStarEmptyRating } from './IconStarEmptyRating';
+export { IconStarRating } from './IconStarRating';
 export { IconStopLarge } from './IconStopLarge';
 export { IconStopMedium } from './IconStopMedium';
 export { IconStopSmall } from './IconStopSmall';

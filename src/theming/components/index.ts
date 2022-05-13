@@ -11,6 +11,9 @@ export { createCheckbox } from './checkbox';
 import { createIconButton } from './icon-button';
 export { createIconButton } from './icon-button';
 
+import { createRating } from './rating';
+export { createRating } from './rating';
+
 import { createSlider } from './slider';
 export { createSlider } from './slider';
 
@@ -42,6 +45,8 @@ export const createComponents = (theme: Theme, typography: TypographyOptions) =>
 
   const MuiIconButton = createIconButton(theme, typography);
 
+  const MuiRating = createRating(theme, typography);
+
   const MuiSlider = createSlider(theme, typography);
 
   const MuiFormControl = createFormControl(theme, typography);
@@ -58,6 +63,8 @@ export const createComponents = (theme: Theme, typography: TypographyOptions) =>
     MuiCheckbox,
 
     MuiIconButton,
+
+    MuiRating,
 
     MuiSlider,
 
