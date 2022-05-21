@@ -71,6 +71,7 @@ import {
 import { FlagClassKey } from './components/Flags';
 import { FormatDateProps } from './components/FormatDate';
 import { FormatSizeProps } from './components/FormatSize';
+import { InlineTextFieldClassKey, InlineTextFieldProps } from './components/InlineTextField';
 import { KbdClassKey, KbdProps } from './components/Kbd';
 import { LinkClassKey, LinkProps } from './components/Link';
 import { MenuItemClassKey, MenuItemProps } from './components/MenuItem';
@@ -165,6 +166,7 @@ declare module '@mui/material/styles/props' {
     ESFileInfoName: FileInfoNameProps;
     ESFormatDate: FormatDateProps;
     ESFormatSize: FormatSizeProps;
+    ESInlineTextField: InlineTextFieldProps;
     ESKbd: KbdProps;
     ESLink: LinkProps;
     ESMenuItem: MenuItemProps;
@@ -209,6 +211,7 @@ declare module '@mui/material/styles/overrides' {
     ESFileInfoMetaSeparator: FileInfoMetaSeparatorClassKey;
     ESFileInfoName: FileInfoNameClassKey;
     ESFlag: FlagClassKey;
+    ESInlineTextField: InlineTextFieldClassKey;
     ESKbd: KbdClassKey;
     ESLink: LinkClassKey;
     ESMenuItem: MenuItemClassKey;
@@ -344,8 +347,13 @@ declare module '@mui/material/styles/components' {
     ESFormatSize?: {
       defaultProps?: ComponentsProps['ESFormatSize'];
     };
+    InlineTextField?: {
+      defaultProps?: ComponentsProps['ESInlineTextField'];
+      styleOverrides?: ComponentsOverrides['ESInlineTextField'];
+    };
     ESKbd?: {
       defaultProps?: ComponentsProps['ESKbd'];
+      styleOverrides?: ComponentsOverrides['ESKbd'];
     };
     ESLink?: {
       defaultProps?: ComponentsProps['ESLink'];

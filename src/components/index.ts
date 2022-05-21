@@ -9,6 +9,7 @@ export * from './FileInfo';
 export * from './Flags';
 export * from './FormatDate';
 export * from './FormatSize';
+export * from './InlineTextField';
 export * from './Kbd';
 export * from './Link';
 export * from './locale';

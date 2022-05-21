@@ -1,0 +1,50 @@
+import { Meta, Story, Preview, Canvas, ArgsTable, Props } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { InlineTextField } from '.';
+import * as stories from './InlineTextField.stories';
+
+<Meta
+  title="Components/InlineTextField"
+  component={InlineTextField}
+  parameters={{
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    className: {
+      table: {
+        disable: true
+      }
+    },
+    classes: {
+      table: {
+        disable: true
+      }
+    },
+    sx: {
+      table: {
+        disable: true
+      }
+    }
+  }}
+/>
+
+# InlineTextField
+
+This component allows inline switching between display value and input.
+
+<Canvas>
+  <Story story={stories.Demo} name="Demo" />
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-InlineTextField" story="page">
+      <code>InlineTextField</code>
+    </LinkTo>
+  </li>
+</ul>

@@ -7,6 +7,8 @@ import { enUS as dateEN, ru as dateRU } from 'date-fns/locale';
 
 import { enUS, ruRU } from '@mui/material/locale';
 
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+
 import { DateAdapterProvider, en, ru } from '../../components';
 import { palettes, ThemeProvider } from '../../theming';
 
@@ -25,9 +27,11 @@ export const Theme: FC<IThemeProps> = ({ children, isDarkMode, locale }) => {
 
   return (
     <ThemeProvider palette={palette} args={args}>
-      <DateAdapterProvider adapter={DateFnsAdapter} locale={locale === 'ru' ? dateRU : dateEN}>
-        {children}
-      </DateAdapterProvider>
+      <LocalizationProvider dateAdapter={DateFnsAdapter}>
+        <DateAdapterProvider adapter={DateFnsAdapter} locale={locale === 'ru' ? dateRU : dateEN}>
+          {children}
+        </DateAdapterProvider>
+      </LocalizationProvider>
     </ThemeProvider>
   );
 };
