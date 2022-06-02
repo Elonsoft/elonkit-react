@@ -71,6 +71,28 @@ import {
 import { FlagClassKey } from './components/Flags';
 import { FormatDateProps } from './components/FormatDate';
 import { FormatSizeProps } from './components/FormatSize';
+import {
+  GalleryActionsClassKey,
+  GalleryActionsProps,
+  GalleryClassKey,
+  GalleryDescriptionClassKey,
+  GalleryDescriptionProps,
+  GalleryMetaClassKey,
+  GalleryMetaProps,
+  GalleryPanelClassKey,
+  GalleryPanelProps,
+  GalleryProps,
+  GallerySwiperClassKey,
+  GallerySwiperImageClassKey,
+  GallerySwiperImageProps,
+  GallerySwiperProps,
+  GalleryThumbnailsClassKey,
+  GalleryThumbnailsImageClassKey,
+  GalleryThumbnailsImageProps,
+  GalleryThumbnailsItemClassKey,
+  GalleryThumbnailsItemProps,
+  GalleryThumbnailsProps
+} from './components/Gallery';
 import { KbdClassKey, KbdProps } from './components/Kbd';
 import { LinkClassKey, LinkProps } from './components/Link';
 import { MenuItemClassKey, MenuItemProps } from './components/MenuItem';
@@ -165,6 +187,16 @@ declare module '@mui/material/styles/props' {
     ESFileInfoName: FileInfoNameProps;
     ESFormatDate: FormatDateProps;
     ESFormatSize: FormatSizeProps;
+    ESGallery: GalleryProps;
+    ESGalleryActions: GalleryActionsProps;
+    ESGalleryDescription: GalleryDescriptionProps;
+    ESGalleryMeta: GalleryMetaProps;
+    ESGalleryPanel: GalleryPanelProps;
+    ESGallerySwiper: GallerySwiperProps;
+    ESGallerySwiperImage: GallerySwiperImageProps;
+    ESGalleryThumbnails: GalleryThumbnailsProps;
+    ESGalleryThumbnailsImage: GalleryThumbnailsImageProps;
+    ESGalleryThumbnailsItem: GalleryThumbnailsItemProps;
     ESKbd: KbdProps;
     ESLink: LinkProps;
     ESMenuItem: MenuItemProps;
@@ -209,6 +241,16 @@ declare module '@mui/material/styles/overrides' {
     ESFileInfoMetaSeparator: FileInfoMetaSeparatorClassKey;
     ESFileInfoName: FileInfoNameClassKey;
     ESFlag: FlagClassKey;
+    ESGallery: GalleryClassKey;
+    ESGalleryActions: GalleryActionsClassKey;
+    ESGalleryDescription: GalleryDescriptionClassKey;
+    ESGalleryMeta: GalleryMetaClassKey;
+    ESGalleryPanel: GalleryPanelClassKey;
+    ESGallerySwiper: GallerySwiperClassKey;
+    ESGallerySwiperImage: GallerySwiperImageClassKey;
+    ESGalleryThumbnails: GalleryThumbnailsClassKey;
+    ESGalleryThumbnailsImage: GalleryThumbnailsImageClassKey;
+    ESGalleryThumbnailsItem: GalleryThumbnailsItemClassKey;
     ESKbd: KbdClassKey;
     ESLink: LinkClassKey;
     ESMenuItem: MenuItemClassKey;
@@ -278,6 +320,46 @@ declare module '@mui/material/styles/components' {
     ESEmptyState?: {
       defaultProps?: ComponentsProps['ESEmptyState'];
       styleOverrides?: ComponentsOverrides['ESEmptyState'];
+    };
+    ESGallery?: {
+      defaultProps?: ComponentsProps['ESGallery'];
+      styleOverrides?: ComponentsOverrides['ESGallery'];
+    };
+    ESGalleryActions?: {
+      defaultProps?: ComponentsProps['ESGalleryActions'];
+      styleOverrides?: ComponentsOverrides['ESGalleryActions'];
+    };
+    ESGalleryDescription?: {
+      defaultProps?: ComponentsProps['ESGalleryDescription'];
+      styleOverrides?: ComponentsOverrides['ESGalleryDescription'];
+    };
+    ESGalleryMeta?: {
+      defaultProps?: ComponentsProps['ESGalleryMeta'];
+      styleOverrides?: ComponentsOverrides['ESGalleryMeta'];
+    };
+    ESGalleryPanel?: {
+      defaultProps?: ComponentsProps['ESGalleryPanel'];
+      styleOverrides?: ComponentsOverrides['ESGalleryPanel'];
+    };
+    ESGallerySwiper?: {
+      defaultProps?: ComponentsProps['ESGallerySwiper'];
+      styleOverrides?: ComponentsOverrides['ESGallerySwiper'];
+    };
+    ESGallerySwiperImage?: {
+      defaultProps?: ComponentsProps['ESGallerySwiperImage'];
+      styleOverrides?: ComponentsOverrides['ESGallerySwiperImage'];
+    };
+    ESGalleryThumbnails?: {
+      defaultProps?: ComponentsProps['ESGalleryThumbnails'];
+      styleOverrides?: ComponentsOverrides['ESGalleryThumbnails'];
+    };
+    ESGalleryThumbnailsImage?: {
+      defaultProps?: ComponentsProps['ESGalleryThumbnailsImage'];
+      styleOverrides?: ComponentsOverrides['ESGalleryThumbnailsImage'];
+    };
+    ESGalleryThumbnailsItem?: {
+      defaultProps?: ComponentsProps['ESGalleryThumbnailsItem'];
+      styleOverrides?: ComponentsOverrides['ESGalleryThumbnailsItem'];
     };
     ESSwiper?: {
       defaultProps?: ComponentsProps['ESSwiper'];

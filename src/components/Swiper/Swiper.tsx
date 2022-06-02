@@ -197,7 +197,7 @@ export const Swiper = (inProps: SwiperProps) => {
    * @param index Index of the slide.
    */
   const setActiveSlide = useCallback(
-    (index: number) => {
+    (index: number, options?: { smooth?: boolean }) => {
       if (container.current) {
         const children = container.current.children[
           Math.max(0, Math.min(index, container.current.children.length - 1))
@@ -205,7 +205,10 @@ export const Swiper = (inProps: SwiperProps) => {
         if (children) {
           const start =
             children[mapping.offset] - container.current[mapping.clientSize] / 2 + children[mapping.clientSize] / 2;
-          container.current.scrollTo({ [mapping.start]: start, behavior: 'smooth' });
+          container.current.scrollTo({
+            [mapping.start]: start,
+            behavior: options?.smooth ?? true ? 'smooth' : 'auto'
+          });
         }
       }
     },
@@ -415,6 +418,12 @@ export const Swiper = (inProps: SwiperProps) => {
   useResizeObserver(container, () => {
     onScroll();
     getPaginationRange();
+
+    setTimeout(() => {
+      if (container.current) {
+        container.current.scrollBy({ [mapping.start]: 0, behavior: 'smooth' });
+      }
+    });
   });
 
   useEffect(() => {

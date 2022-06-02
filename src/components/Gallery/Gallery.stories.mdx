@@ -1,0 +1,128 @@
+import { Meta, Story, Canvas, ArgsTable, Props, Description } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { Gallery } from './Gallery';
+import * as stories from './Gallery.stories';
+
+<Meta
+  title="Components/Gallery"
+  component={Gallery}
+  parameters={{
+    options: { showPanel: true },
+    docs: {
+      source: {
+        type: 'code'
+      }
+    }
+  }}
+  argTypes={{
+    classes: {
+      table: {
+        disable: true
+      }
+    },
+    className: {
+      table: {
+        disable: true
+      }
+    },
+    items: {
+      table: {
+        disable: true
+      }
+    },
+    open: {
+      table: {
+        disable: true
+      }
+    },
+    onClose: {
+      table: {
+        disable: true
+      }
+    }
+  }}
+/>
+
+# Gallery
+
+<Description of={Gallery} />
+
+<Canvas>
+  <Story story={stories.Demo} name="Demo" />
+</Canvas>
+
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-formatdate" story="page">
+      <code>FormatDate</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-formatsize" story="page">
+      <code>FormatSize</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-gallery" story="page">
+      <code>Gallery</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-galleryactions" story="page">
+      <code>GalleryActions</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-gallerydescription" story="page">
+      <code>GalleryDescription</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-gallerymeta" story="page">
+      <code>GalleryMeta</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-gallerymetaseparator" story="page">
+      <code>GalleryMetaSeparator</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-gallerymetatext" story="page">
+      <code>GalleryMetaText</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-gallerypanel" story="page">
+      <code>GalleryPanel</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-galleryswiper" story="page">
+      <code>GallerySwiper</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-galleryswiperimage" story="page">
+      <code>GallerySwiperImage</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-gallerythumbnails" story="page">
+      <code>GalleryThumbnails</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-gallerythumbnailsimage" story="page">
+      <code>GalleryThumbnailsImage</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-gallerythumbnailsitem" story="page">
+      <code>GalleryThumbnailsItem</code>
+    </LinkTo>
+  </li>
+</ul>

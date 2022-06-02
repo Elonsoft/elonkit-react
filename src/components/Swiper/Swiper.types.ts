@@ -9,7 +9,7 @@ export type SwiperAlignment = 'center' | 'start';
 
 export interface SwiperImperativeActions {
   /** Set active slide by its index. */
-  setActiveSlide: (index: number) => void;
+  setActiveSlide: (index: number, options?: { smooth?: boolean }) => void;
 }
 
 export interface SwiperProps {
@@ -32,7 +32,7 @@ export interface SwiperProps {
   /**
    * Alignment of the slides.
    * @default 'center'
-   **/
+   */
   alignment?: SwiperAlignment;
 
   /**

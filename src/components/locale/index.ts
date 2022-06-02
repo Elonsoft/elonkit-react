@@ -3,6 +3,7 @@ import { AudioPlayerProps } from '../AudioPlayer';
 import { DialogArrowProps, DialogCloseProps } from '../Dialog';
 import { FileInfoNameProps } from '../FileInfo';
 import { FormatSizeProps } from '../FormatSize';
+import { GalleryActionsProps, GalleryDescriptionProps, GalleryMetaProps } from '../Gallery';
 import { PaginationPagesProps, PaginationRangeProps } from '../Pagination';
 import { SwiperButtonProps } from '../Swiper';
 import { TableActionsProps } from '../TableActions';
@@ -36,6 +37,15 @@ export interface Localization {
     };
     ESFileInfoName: {
       defaultProps: Pick<FileInfoNameProps, 'labelDelete'>;
+    };
+    ESGalleryActions: {
+      defaultProps: Pick<GalleryActionsProps, 'closeLabel' | 'fullscreenLabel' | 'moreLabel'>;
+    };
+    ESGalleryDescription: {
+      defaultProps: Pick<GalleryDescriptionProps, 'collapseLabel' | 'expandLabel'>;
+    };
+    ESGalleryMeta: {
+      defaultProps: Pick<GalleryMetaProps, 'showingLabel' | 'ofLabel'>;
     };
     ESPaginationPages: {
       defaultProps: Pick<PaginationPagesProps, 'labelPrevPage' | 'labelNextPage' | 'labelPage'>;
@@ -97,6 +107,25 @@ export const en: Localization = {
       defaultProps: {
         metricUnits: ['B', 'KB', 'MB', 'GB', 'TB'],
         binaryUnits: ['B', 'KiB', 'MiB', 'GiB', 'TiB']
+      }
+    },
+    ESGalleryActions: {
+      defaultProps: {
+        closeLabel: 'Close',
+        fullscreenLabel: 'Fullscreen mode',
+        moreLabel: 'More'
+      }
+    },
+    ESGalleryDescription: {
+      defaultProps: {
+        collapseLabel: 'Collapse description',
+        expandLabel: 'Expand description'
+      }
+    },
+    ESGalleryMeta: {
+      defaultProps: {
+        showingLabel: 'Showing',
+        ofLabel: 'of'
       }
     },
     ESPaginationPages: {
@@ -168,6 +197,25 @@ export const ru: Localization = {
       defaultProps: {
         metricUnits: ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ'],
         binaryUnits: ['Б', 'КиБ', 'МиБ', 'ГиБ', 'ТиБ']
+      }
+    },
+    ESGalleryActions: {
+      defaultProps: {
+        closeLabel: 'Закрыть',
+        fullscreenLabel: 'Полноэкранный режим',
+        moreLabel: 'Ещё'
+      }
+    },
+    ESGalleryDescription: {
+      defaultProps: {
+        collapseLabel: 'Свернуть описание',
+        expandLabel: 'Развернуть описание'
+      }
+    },
+    ESGalleryMeta: {
+      defaultProps: {
+        showingLabel: 'Просмотр',
+        ofLabel: 'из'
       }
     },
     ESPaginationPages: {
