@@ -1,22 +1,18 @@
-import { DialogClasses } from './Dialog.classes';
+import { BottomSheetClasses } from './BottomSheet.classes';
 
 import { SxProps, Theme } from '@mui/material/styles';
 import { ModalProps } from '@mui/material/Modal';
 import { TransitionProps } from '@mui/material/transitions';
 
-export interface DialogProps {
+export interface BottomSheetProps {
   /** Override or extend the styles applied to the component. */
-  classes?: Partial<DialogClasses>;
+  classes?: Partial<BottomSheetClasses>;
   /** Class applied to the root element. */
   className?: string;
   /** The system prop that allows defining system overrides as well as additional CSS styles. */
   sx?: SxProps<Theme>;
-  /** Dialog children, usually the included sub-components. */
+  /** Bottom sheet children, usually the included sub-components. */
   children?: React.ReactNode;
-  /** Content inserted before the paper element. */
-  before?: React.ReactNode;
-  /** Content inserted after the paper element. */
-  after?: React.ReactNode;
   /** The id(s) of the element(s) that describe the dialog. */
   'aria-describedby'?: string;
   /**
@@ -29,18 +25,6 @@ export interface DialogProps {
    */
   disableEscapeKeyDown?: boolean;
   /**
-   * If `true`, the dialog is full-screen.
-   * @default false
-   */
-  fullScreen?: boolean;
-  /**
-   * If `true`, the dialog stretches to `maxWidth`.
-   *
-   * Notice that the dialog width grow is limited by the default margin.
-   * @default false
-   */
-  fullWidth?: boolean;
-  /**
    * Determine the max-width of the dialog.
    * The dialog width grows with the size of the screen.
    * @default '100%'
@@ -48,9 +32,9 @@ export interface DialogProps {
   maxWidth?: string;
   /**
    * Dialog vertical alignment.
-   * @default 'center'
+   * @default 'flex-end'
    */
-  align?: 'flex-start' | 'center';
+  align?: 'flex-end' | 'stretch';
   /** Callback fired when the backdrop is clicked. */
   onBackdropClick?: ModalProps['onBackdropClick'];
   /**
@@ -74,4 +58,12 @@ export interface DialogProps {
    * @default { enter: duration.enteringScreen, exit: duration.leavingScreen }
    */
   transitionDuration?: TransitionProps['timeout'];
+
+  /** Whether the sheet should collapse when higher than screen. */
+  collapse?: boolean;
+  /**
+   * The min screen height required for the sheet to be able to collapse.
+   * @default 480
+   */
+  collapseScreenHeight?: number;
 }
