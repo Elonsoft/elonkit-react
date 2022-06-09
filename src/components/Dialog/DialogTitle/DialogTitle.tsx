@@ -39,14 +39,21 @@ const DialogTitleRoot = styled('div', {
 })<{ ownerState: DialogTitleOwnerState }>(({ theme, ownerState }) => ({
   ...theme.typography.h4,
   color: theme.palette.monoA.A900,
-  padding: 24,
-  paddingBottom: 6,
+  padding: 16,
+  paddingBottom: 8,
+
+  [theme.breakpoints.up('tabletXS')]: {
+    padding: 24,
+    paddingBottom: 6
+  },
+
   ...(ownerState.sticky && {
     position: 'sticky',
     top: -1,
     backgroundColor: theme.palette.surface[600],
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
+    zIndex: 1,
 
     ...(ownerState.isStuck && {
       borderRadius: 0,
@@ -56,11 +63,15 @@ const DialogTitleRoot = styled('div', {
         borderBottom: `1px solid ${theme.palette.monoA.A100}`,
         content: '""',
         display: 'block',
-        height: 18,
+        height: 8,
         left: 0,
         position: 'absolute',
         right: 0,
-        top: '100%'
+        top: '100%',
+
+        [theme.breakpoints.up('tabletXS')]: {
+          height: 18
+        }
       }
     })
   })

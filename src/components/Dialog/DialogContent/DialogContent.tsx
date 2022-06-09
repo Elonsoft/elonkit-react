@@ -33,7 +33,11 @@ const DialogContentRoot = styled('div', {
   flex: '1 1 auto',
   overflowY: 'auto',
   color: theme.palette.monoA.A700,
-  padding: '0 24px'
+  padding: '0 16px',
+
+  [theme.breakpoints.up('tabletXS')]: {
+    padding: '0 24px'
+  }
 }));
 
 export const DialogContent: FC<DialogContentProps> = (inProps) => {

@@ -39,7 +39,11 @@ const DialogActionsRoot = styled('div', {
 })<{ ownerState: DialogActionsOwnerState }>(({ theme, ownerState }) => ({
   display: 'flex',
   justifyContent: 'flex-end',
-  padding: 24,
+  padding: 16,
+
+  [theme.breakpoints.up('tabletXS')]: {
+    padding: 24
+  },
 
   '> :not(:first-of-type)': {
     marginLeft: 16
@@ -51,6 +55,7 @@ const DialogActionsRoot = styled('div', {
     backgroundColor: theme.palette.surface[600],
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
+    zIndex: 1,
 
     ...(ownerState.isStuck && {
       borderTop: `1px solid ${theme.palette.monoA.A100}`,

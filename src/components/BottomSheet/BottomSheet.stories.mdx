@@ -1,0 +1,50 @@
+import { Meta, Story, Canvas, ArgsTable, Props, Description } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { BottomSheet } from './BottomSheet';
+import * as stories from './BottomSheet.stories';
+
+<Meta
+  title="Components/BottomSheet"
+  parameters={{
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    collapse: {
+      description: 'Whether the sheet should collapse when higher than screen.',
+      defaultValue: true,
+      control: {
+        type: 'boolean'
+      }
+    },
+    align: {
+      defaultValue: 'flex-end',
+      options: ['flex-end', 'stretch'],
+      control: { type: 'select' }
+    },
+    maxWidth: {
+      defaultValue: '100%',
+      control: { type: 'text' }
+    }
+  }}
+/>
+
+# BottomSheet
+
+<Description of={BottomSheet} />
+
+<Canvas>
+  <Story story={stories.Demo} name="Demo" />
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-BottomSheet" story="page">
+      <code>BottomSheet</code>
+    </LinkTo>
+  </li>
+</ul>

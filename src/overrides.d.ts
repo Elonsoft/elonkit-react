@@ -33,6 +33,7 @@ import {
 } from './components/Alert';
 import { AudioPlayerClassKey, AudioPlayerProps } from './components/AudioPlayer';
 import { AvatarGroupClassKey, AvatarGroupProps } from './components/AvatarGroup';
+import { BottomSheetClassKey, BottomSheetProps } from './components/BottomSheet';
 import {
   DialogActionsClassKey,
   DialogActionsProps,
@@ -149,6 +150,7 @@ declare module '@mui/material/styles/props' {
     ESAvatarGroup: AvatarGroupProps;
     ESAlertTitle: AlertTitleProps;
     ESAudioPlayer: AudioPlayerProps;
+    ESBottomSheet: BottomSheetProps;
     ESDialog: DialogProps;
     ESDialogActions: DialogActionsProps;
     ESDialogArrow: DialogArrowProps;
@@ -195,6 +197,7 @@ declare module '@mui/material/styles/overrides' {
     ESAvatarGroup: AvatarGroupClassKey;
     ESAlertTitle: AlertTitleClassKey;
     ESAudioPlayer: AudioPlayerClassKey;
+    ESBottomSheet: BottomSheetClassKey;
     ESDialog: DialogClassKey;
     ESDialogActions: DialogActionsClassKey;
     ESDialogArrow: DialogArrowClassKey;
@@ -257,6 +260,10 @@ declare module '@mui/material/styles/components' {
     ESAudioPlayer?: {
       defaultProps?: ComponentsProps['ESAudioPlayer'];
       styleOverrides?: ComponentsOverrides['ESAudioPlayer'];
+    };
+    ESBottomSheet?: {
+      defaultProps?: ComponentsProps['ESBottomSheet'];
+      styleOverrides?: ComponentsOverrides['ESBottomSheet'];
     };
     ESDialog?: {
       defaultProps?: ComponentsProps['ESDialog'];
