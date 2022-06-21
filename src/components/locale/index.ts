@@ -4,6 +4,7 @@ import { DialogArrowProps, DialogCloseProps } from '../Dialog';
 import { FileInfoNameProps } from '../FileInfo';
 import { FormatSizeProps } from '../FormatSize';
 import { PaginationPagesProps, PaginationRangeProps } from '../Pagination';
+import { SidebarToggleProps } from '../Sidebar';
 import { SwiperButtonProps } from '../Swiper';
 import { TableActionsProps } from '../Table';
 
@@ -42,6 +43,9 @@ export interface Localization {
     };
     ESPaginationRange: {
       defaultProps: Pick<PaginationRangeProps, 'labelItemsPerPage' | 'labelOf'>;
+    };
+    ESSidebarToggle: {
+      defaultProps: Pick<SidebarToggleProps, 'labelOpen' | 'labelHide'>;
     };
     ESFormatSize: {
       defaultProps: Pick<FormatSizeProps, 'metricUnits' | 'binaryUnits'>;
@@ -110,6 +114,12 @@ export const en: Localization = {
       defaultProps: {
         labelItemsPerPage: 'Per:',
         labelOf: 'of'
+      }
+    },
+    ESSidebarToggle: {
+      defaultProps: {
+        labelOpen: 'Show',
+        labelHide: 'Hide'
       }
     },
     ESSwiperButton: {
@@ -181,6 +191,12 @@ export const ru: Localization = {
       defaultProps: {
         labelItemsPerPage: 'По:',
         labelOf: 'из'
+      }
+    },
+    ESSidebarToggle: {
+      defaultProps: {
+        labelOpen: 'Показать',
+        labelHide: 'Скрыть'
       }
     },
     ESSwiperButton: {

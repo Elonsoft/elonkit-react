@@ -85,6 +85,16 @@ import {
   PaginationRangeProps
 } from './components/Pagination';
 import {
+  SidebarClassKey,
+  SidebarDividerClassKey,
+  SidebarProps,
+  SidebarScrollableClassKey,
+  SidebarSpacerClassKey,
+  SidebarSpacerProps,
+  SidebarToggleClassKey,
+  SidebarToggleProps
+} from './components/Sidebar';
+import {
   SpinnerDashRingClassKey,
   SpinnerDashRingProps,
   SpinnerFadingBarsClassKey,
@@ -197,6 +207,9 @@ declare module '@mui/material/styles/props' {
     ESPagination: PaginationProps;
     ESPaginationPages: PaginationPagesProps;
     ESPaginationRange: PaginationRangeProps;
+    ESSidebar: SidebarProps;
+    ESSidebarSpacer: SidebarSpacerProps;
+    ESSidebarToggle: SidebarToggleProps;
     ESSpinnerDashRing: SpinnerDashRingProps;
     ESSpinnerFadingBars: SpinnerFadingBarsProps;
     ESSpinnerFadingDots: SpinnerFadingDotsProps;
@@ -251,6 +264,11 @@ declare module '@mui/material/styles/overrides' {
     ESPagination: PaginationClassKey;
     ESPaginationPages: PaginationPagesClassKey;
     ESPaginationRange: PaginationRangeClassKey;
+    ESSidebar: SidebarClassKey;
+    ESSidebarDivider: SidebarDividerClassKey;
+    ESSidebarSpacer: SidebarSpacerClassKey;
+    ESSidebarScrollable: SidebarScrollableClassKey;
+    ESSidebarToggleClassKey: SidebarToggleClassKey;
     ESSpinnerDashRing: SpinnerDashRingClassKey;
     ESSpinnerFadingBars: SpinnerFadingBarsClassKey;
     ESSpinnerFadingDots: SpinnerFadingDotsClassKey;
