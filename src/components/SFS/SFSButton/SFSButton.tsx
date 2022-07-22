@@ -5,12 +5,9 @@ const SFSButtonRoot = styled(Button)(({ theme }) => ({
   textTransform: 'inherit',
   '&.MuiButton-root': {
     padding: '0 8px',
+    flexShrink: 0,
 
-    '&:hover .MuiTypography-root': {
-      color: theme.palette.monoA.A600
-    },
-
-    '&:hover .MuiSvgIcon-root': {
+    '&:hover .MuiSvgIcon-root, &:hover .MuiTypography-root': {
       color: theme.palette.monoA.A600
     },
 
@@ -19,7 +16,7 @@ const SFSButtonRoot = styled(Button)(({ theme }) => ({
     },
 
     '& .MuiSvgIcon-root': {
-      color: theme.palette.monoA.A500,
+      color: theme.palette.monoA.A550,
       margin: '0 -4px'
     },
 

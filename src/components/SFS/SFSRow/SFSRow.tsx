@@ -26,8 +26,7 @@ const SFSRowRoot = styled('div', {
   slot: 'Root',
   overridesResolver: (_, styles) => styles.root
 })(() => ({
-  display: 'flex',
-  flexWrap: 'wrap'
+  display: 'flex'
 }));
 
 export const SFSRow = (inProps: SFSPRowProps) => {

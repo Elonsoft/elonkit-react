@@ -4,13 +4,13 @@ export type SFSSortingClasses = {
   /** Styled applied to the root element. */
   root: string;
   /** Styles applied to the button which open sorting menu element. */
-  menuOpenButton: string;
+  openSortMenuButton: string;
   /** Styles applied to the menu element. */
   menu: string;
   /** Styles applied to the menu wrapper element. */
   menuWrapper: string;
   /** Styles applied to the menu item title element. */
-  menuItemTitle: string;
+  menuItemTooltip: string;
   /** Styles applied to the menu item element. */
   menuItem: string;
   /** Styles applied to the menu list. */
@@ -25,6 +25,8 @@ export type SFSSortingClasses = {
   resetSortButton: string;
   /** Styles applied to the direction badge element. */
   directionBadge: string;
+  /** Styles applied to the change direction button inside MenuItem. */
+  changeSortDirectionButton: string;
 };
 
 export type SFSSortingClassKey = keyof SFSSortingClasses;
@@ -35,15 +37,16 @@ export function getSFSSortingUtilityClass(slot: string) {
 
 export const sfsSortingClasses: SFSSortingClasses = generateUtilityClasses('ESSFSSorting', [
   'root',
-  'menuOpenButton',
+  'openSortMenuButton',
   'menu',
   'menuWrapper',
-  'menuItemTitle',
+  'menuItemTooltip',
   'menuItem',
   'menuList',
   'menuTooltip',
   'menuTooltipPC',
   'menuTooltipMobile',
   'resetSortButton',
-  'directionBadge'
+  'directionBadge',
+  'changeSortDirectionButton'
 ]);

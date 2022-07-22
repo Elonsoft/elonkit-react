@@ -12,7 +12,7 @@ const SFSButtonTextRoot = styled(Typography)(({ theme }) => ({
 }));
 
 export const SFSButtonText = ({ children }: { children: ReactNode }) => (
-  <SFSButtonTextRoot color="monoA.A500" variant="body100">
+  <SFSButtonTextRoot color="monoA.A550" variant="body100">
     {children}
   </SFSButtonTextRoot>
 );

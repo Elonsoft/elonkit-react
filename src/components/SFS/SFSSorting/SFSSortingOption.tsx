@@ -12,20 +12,27 @@ const SFSSortingOptionRoot = styled('div')(() => ({
   marginLeft: 'auto'
 }));
 
-const SFSSortingOptionBadge = styled('div')(({ theme }) => ({
-  marginLeft: '6px',
-  backgroundColor: theme.palette.secondary.A400,
-  border: `1px solid ${theme.palette.monoA.A25}`,
-  borderRadius: '4px',
-  display: 'flex',
-  padding: '3px 2px',
-  alignItems: 'center',
-  '& .MuiSvgIcon-root': {
-    color: theme.palette.monoA.A600,
-    width: '8px',
-    height: '12px'
-  }
-}));
+const SFSSortingOptionBadge = styled('div')<{ ownerState: { isWithCount?: boolean } }>(
+  ({ ownerState: { isWithCount }, theme }) => ({
+    marginLeft: '6px',
+    backgroundColor: theme.palette.secondary.A400,
+    border: `1px solid ${theme.palette.monoA.A25}`,
+    borderRadius: '4px',
+    display: 'flex',
+    padding: '2px 1px',
+
+    ...(isWithCount && {
+      minWidth: '18px'
+    }),
+
+    alignItems: 'center',
+    '& .MuiSvgIcon-root': {
+      color: theme.palette.monoA.A600,
+      width: '8px',
+      height: '12px'
+    }
+  })
+);
 
 export const SFSSortingOption = ({ direction, count }: { direction: IDirection; count?: number }) => {
   let sortingOptions = null;
@@ -52,7 +59,7 @@ export const SFSSortingOption = ({ direction, count }: { direction: IDirection; 
       <Typography variant="caption" color="monoA.A600">
         {sortingOptions.label}
       </Typography>
-      <SFSSortingOptionBadge>
+      <SFSSortingOptionBadge ownerState={{ isWithCount: !!count }}>
         {sortingOptions.icon}
         {count && (
           <Typography component="div" variant="mini100Bold" color="monoA.A600">

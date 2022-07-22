@@ -35,10 +35,11 @@ const useUtilityClasses = (ownerState: SFSSortingOwnerState) => {
 
   const slots = {
     root: ['root'],
-    menuOpenButton: ['menuOpenButton'],
+    openSortMenuButton: ['openSortMenuButton'],
     menu: ['menu'],
     menuWrapper: ['menuWrapper'],
-    menuItemTitle: ['menuItemTitle'],
+    menuItemTooltip: ['menuItemTooltip'],
+    changeSortDirectionButton: ['changeSortDirectionButton'],
     menuItem: ['menuItem'],
     menuList: ['menuList'],
     menuTooltip: ['menuTooltip'],
@@ -57,10 +58,10 @@ const SFSSortingRoot = styled('div', {
   overridesResolver: (_, styles) => styles.root
 })(() => ({}));
 
-const SFSSortingMenuOpenButton = styled(SFSButton, {
+const SFSSortingOpenSortMenuButton = styled(SFSButton, {
   name: 'ESSFSSorting',
-  slot: 'MenuOpenButton',
-  overridesResolver: (_, styles) => styles.menuOpenButton
+  slot: 'OpenSortMenuButton',
+  overridesResolver: (_, styles) => styles.openSortMenuButton
 })(({ theme }) => ({
   [theme.breakpoints.down('tabletXS')]: {
     [`& .${sfsSortingClasses.directionBadge}`]: {
@@ -69,7 +70,7 @@ const SFSSortingMenuOpenButton = styled(SFSButton, {
   }
 }));
 
-const SFSSortingMenuOpenMobileIcon = styled(IconSortSmallCustom)<{ ownerState: { isHidden?: boolean } }>(
+const SFSSortingOpenSortMenuButtonIcon = styled(IconSortSmallCustom)<{ ownerState: { isHidden?: boolean } }>(
   ({ ownerState: { isHidden }, theme }) => ({
     [theme.breakpoints.up('tabletXS')]: {
       ...(isHidden && { display: 'none' })
@@ -95,20 +96,20 @@ const SFSSortingMenuWrapper = styled('div', {
   overridesResolver: (_, styles) => styles.menuWrapper
 })(() => ({
   width: '320px',
-  padding: '10px 16px 0 16px'
+  padding: '8px 16px 0 16px'
 }));
 
-const SFSSortingMenuItemTitle = styled(MenuItem, {
+const SFSSortingMenuItemTooltip = styled(MenuItem, {
   name: 'ESSFSSorting',
-  slot: 'MenuItemTitle',
-  overridesResolver: (_, styles) => styles.menuItemTitle
-})(() => ({
+  slot: 'MenuItemTooltip',
+  overridesResolver: (_, styles) => styles.menuItemTooltip
+})<{ ownerState?: { isDivider?: boolean } }>(({ ownerState: { isDivider = false } = { isDivider: false } }) => ({
   '&.MuiMenuItem-root.Mui-disabled': {
     color: 'inherit',
-    padding: '6px 0',
-    display: 'flex',
-    minHeight: '28px',
-    height: '28px',
+    padding: isDivider ? '0' : '6px 0',
+    display: isDivider ? 'block' : 'flex',
+    minHeight: isDivider ? '0' : '28px',
+    height: isDivider ? 'auto' : '28px',
     opacity: 1
   }
 }));
@@ -147,10 +148,10 @@ const SFSSortingMenuItem = styled(MenuItem, {
   }
 }));
 
-const SFSSortingMenuItemSortButton = styled(Button, {
+const SFSSortingChangeSortDirectionButton = styled(Button, {
   name: 'ESSFSSorting',
-  slot: 'MenuItemSortButton',
-  overridesResolver: (_, styles) => styles.menuItemSortButton
+  slot: 'ChangeSortDirectionButton',
+  overridesResolver: (_, styles) => styles.changeSortDirectionButton
 })(({ theme }) => ({
   '&.MuiButton-root': {
     textTransform: 'unset',
@@ -254,6 +255,10 @@ const SFSResetSortButton = styled(Button, {
       textDecoration: 'underline'
     },
 
+    '&:active': {
+      textDecorationLine: 'none'
+    },
+
     '&.Mui-focusVisible': {
       '&::after': {
         content: '""',
@@ -281,6 +286,7 @@ const SFSSortingOptionsCount = styled('div', {
   width: '16px',
   height: '16px',
   backgroundColor: theme.palette.secondary[300],
+  color: theme.palette.black.A800,
   ...theme.typography.mini200,
 
   [theme.breakpoints.down('tabletXS')]: {
@@ -396,11 +402,13 @@ export const SFSSorting = (inProps: SFSSortingProps) => {
   };
 
   const onLongTouchAction = (cb: () => void) => {
-    longTouchHandlerRef.current = setTimeout(() => {
-      isMultiSelectRef.current = true;
-      vibrateDevice();
-      cb();
-    }, 500);
+    if (!isMultiSelectRef.current) {
+      longTouchHandlerRef.current = setTimeout(() => {
+        isMultiSelectRef.current = true;
+        vibrateDevice();
+        cb();
+      }, 500);
+    }
   };
 
   const onLongTouchStartStopSort = (value: string) => () => {
@@ -517,16 +525,16 @@ export const SFSSorting = (inProps: SFSSortingProps) => {
 
   return (
     <SFSSortingRoot sx={sx} className={clsx(classes.root, className)}>
-      <SFSSortingMenuOpenButton onClick={onSortingMenuOpen} className={classes.menuOpenButton}>
+      <SFSSortingOpenSortMenuButton onClick={onSortingMenuOpen} className={classes.openSortMenuButton}>
         <SFSButtonText>
           {isSortingByOneParam ? (sortingOptionsMap as any).get(values[0].value).label : 'Сортировка'}
         </SFSButtonText>
-        <SFSSortingMenuOpenMobileIcon ownerState={{ isHidden: !!values?.[0] }} />
+        <SFSSortingOpenSortMenuButtonIcon ownerState={{ isHidden: !!values?.[0] }} />
         {isSortingByOneParam && <SFSSortingOpenMenuButtonBadge direction={values[0].direction as 'asc' | 'desc'} />}
         {values && values.length > 1 && (
           <SFSSortingOptionsCount className={classes.sortingCount}>{values.length}</SFSSortingOptionsCount>
         )}
-      </SFSSortingMenuOpenButton>
+      </SFSSortingOpenSortMenuButton>
       <SFSSortingMenu
         onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
@@ -545,7 +553,9 @@ export const SFSSorting = (inProps: SFSSortingProps) => {
       >
         <SFSSortingMenuWrapper className={classes.menuWrapper}>
           {isMultiSortActivated && (
-            <SFSSortingMenuItemTitle disabled className={classes.menuItemTitle}>
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore:next-line
+            <SFSSortingMenuItemTooltip component="div" disabled className={classes.menuItemTooltip}>
               <Typography color="monoA.A600" variant="caption">
                 Порядок сортировки
               </Typography>
@@ -560,7 +570,7 @@ export const SFSSorting = (inProps: SFSSortingProps) => {
               >
                 Сбросить
               </SFSResetSortButton>
-            </SFSSortingMenuItemTitle>
+            </SFSSortingMenuItemTooltip>
           )}
           <SFSSortingMenuList
             className={classes.menuList}
@@ -576,14 +586,13 @@ export const SFSSorting = (inProps: SFSSortingProps) => {
                   key={value.value}
                   ownerState={{ isSorting: !!value.direction }}
                   onClick={onStartStopSort(value.value)}
-                  onTouchStart={onLongTouchStartStopSort(value.value)}
-                  onTouchEnd={onTouchClearLongTouchHandler}
                 >
                   <Typography variant="body100" color="monoA.A900">
                     {(sortingOptionsMap as any).get(value.value).label}
                   </Typography>
-                  <SFSSortingMenuItemSortButton
+                  <SFSSortingChangeSortDirectionButton
                     tabIndex={-1}
+                    className={classes.changeSortDirectionButton}
                     disableRipple
                     color="monoA"
                     size="32"
@@ -592,12 +601,16 @@ export const SFSSorting = (inProps: SFSSortingProps) => {
                     onMouseDown={onMouseDown}
                   >
                     <SFSSortingOption count={i + 1} direction={value.direction} />
-                  </SFSSortingMenuItemSortButton>
+                  </SFSSortingChangeSortDirectionButton>
                 </SFSSortingMenuItem>
               ))}
-            {isMultiSortActivated && isNotAllSortOptionActivated && <SFSSortingMenuDivider />}
+            {isMultiSortActivated && isNotAllSortOptionActivated && (
+              <SFSSortingMenuItemTooltip ownerState={{ isDivider: true }} disabled>
+                <SFSSortingMenuDivider />
+              </SFSSortingMenuItemTooltip>
+            )}
             {isNotAllSortOptionActivated && (
-              <SFSSortingMenuItemTitle disabled className={classes.menuItemTitle}>
+              <SFSSortingMenuItemTooltip disabled className={classes.menuItemTooltip}>
                 <Typography color="monoA.A600" variant="caption">
                   Сортировать по свойствам
                 </Typography>
@@ -613,7 +626,7 @@ export const SFSSorting = (inProps: SFSSortingProps) => {
                     Сбросить
                   </SFSResetSortButton>
                 )}
-              </SFSSortingMenuItemTitle>
+              </SFSSortingMenuItemTooltip>
             )}
             {(isMultiSelectRef.current && !!values?.length
               ? options.filter((option) => !(sortingOptionsMap as any).get(option.value).direction)
@@ -634,8 +647,9 @@ export const SFSSorting = (inProps: SFSSortingProps) => {
                     {option.label}
                   </Typography>
                   {!!direction && (
-                    <SFSSortingMenuItemSortButton
+                    <SFSSortingChangeSortDirectionButton
                       disableRipple
+                      className={classes.changeSortDirectionButton}
                       tabIndex={-1}
                       onMouseDown={onMouseDown}
                       onMouseUp={onMouseUp}
@@ -645,7 +659,7 @@ export const SFSSorting = (inProps: SFSSortingProps) => {
                       size="32"
                     >
                       <SFSSortingOption direction={direction} />
-                    </SFSSortingMenuItemSortButton>
+                    </SFSSortingChangeSortDirectionButton>
                   )}
                 </SFSSortingMenuItem>
               );

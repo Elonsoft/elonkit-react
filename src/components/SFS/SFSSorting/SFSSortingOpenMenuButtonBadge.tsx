@@ -24,7 +24,7 @@ const SFSSortingOpenMenuButtonBadgeRoot = styled('div')(({ theme }) => ({
   borderRadius: '16px',
 
   '& .MuiSvgIcon-root': {
-    stroke: theme.palette.black.A800
+    color: `${theme.palette.black.A800}!important`
   },
 
   [theme.breakpoints.down('tabletXS')]: {
