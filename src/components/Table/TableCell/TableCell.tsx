@@ -1,4 +1,4 @@
-import { MouseEvent, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { TableCellProps } from './TableCell.types';
 
@@ -11,16 +11,20 @@ import { styled, useThemeProps } from '@mui/material/styles';
 
 import { useTableCellContext } from './TableCell.context';
 
+import { useLatest } from '../../../hooks/useLatest';
+
 type TableCellOwnerState = {
   classes?: TableCellProps['classes'];
   variant: NonNullable<TableCellProps['variant']>;
   padding: NonNullable<TableCellProps['padding']>;
+  align?: TableCellProps['align'];
   colSpan?: number;
   overlap?: boolean;
+  isResizing?: boolean;
 };
 
 const useUtilityClasses = (ownerState: TableCellOwnerState) => {
-  const { classes, variant, padding, overlap } = ownerState;
+  const { classes, variant, padding, align, overlap } = ownerState;
 
   const slots = {
     root: [
@@ -32,7 +36,13 @@ const useUtilityClasses = (ownerState: TableCellOwnerState) => {
       overlap && 'overlap'
     ],
     container: ['container'],
-    content: ['content']
+    content: [
+      'content',
+      align === 'flex-start' && 'contentAlignFlexStart',
+      align === 'center' && 'contentAlignCenter',
+      align === 'flex-end' && 'contentAlignFlexEnd'
+    ],
+    resize: ['resize']
   };
 
   return composeClasses(slots, getTableCellUtilityClass, classes);
@@ -100,6 +110,25 @@ const TableCellRoot = styled('div', {
     '&:last-of-type .ESTableCell-content': {
       paddingRight: '16px'
     }
+  }),
+
+  '&:hover .ESTableCell-resize::after': {
+    width: '1px',
+    backgroundColor: theme.palette.monoA.A200
+  },
+  '.ESTableCell-resize:hover::after': {
+    width: '3px',
+    backgroundColor: theme.palette.monoA.A400
+  },
+  '.ESTableCell-resize:focus-visible::after': {
+    width: '3px',
+    backgroundColor: theme.palette.info.A600
+  },
+  ...(ownerState.isResizing && {
+    '.ESTableCell-resize.ESTableCell-resize::after': {
+      width: '3px',
+      backgroundColor: theme.palette.info.A600
+    }
   })
 }));
 
@@ -119,14 +148,51 @@ const TableCellContent = styled('div', {
   name: 'ESTableCell',
   slot: 'Content',
   overridesResolver: (props, styles) => styles.content
-})<{ ownerState: TableCellOwnerState }>(({ theme }) => ({
+})<{ ownerState: TableCellOwnerState }>(({ theme, ownerState }) => ({
   transition: `${theme.transitions.duration.short}ms`,
   width: '100%',
   height: '100%',
   overflow: 'hidden',
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  justifyContent: ownerState.align
 }));
+
+const TableCellResize = styled('button', {
+  name: 'ESTableCell',
+  slot: 'Resize',
+  overridesResolver: (props, styles) => styles.content
+})<{ ownerState: TableCellOwnerState }>(({ theme, ownerState }) => ({
+  position: 'absolute',
+  right: 0,
+  top: 0,
+  bottom: 0,
+  width: '8px',
+  cursor: 'col-resize',
+  border: 0,
+  padding: 0,
+  margin: 0,
+  background: 'none',
+  outline: 'none',
+  textDecoration: 'none',
+
+  '&::after': {
+    ...(ownerState.isResizing && {
+      display: 'block !important'
+    }),
+    content: '""',
+    position: 'absolute',
+    right: 0,
+    top: '12px',
+    bottom: '12px',
+    borderRadius: '3px'
+  }
+}));
+
+const RESIZE_STEPS: Record<string, number | undefined> = {
+  ArrowLeft: -16,
+  ArrowRight: 16
+};
 
 export const TableCell = (inProps: TableCellProps) => {
   const context = useTableCellContext();
@@ -136,7 +202,11 @@ export const TableCell = (inProps: TableCellProps) => {
     className,
     variant = context.variant,
     padding = 'normal',
+    align = 'flex-start',
     id,
+    onResize,
+    onResizeCommit,
+    minWidth,
     ...props
   } = useThemeProps({
     props: inProps,
@@ -144,8 +214,87 @@ export const TableCell = (inProps: TableCellProps) => {
   });
 
   const ref = useRef<HTMLDivElement | null>(null);
+  const screenX = useRef<number | null>(null);
 
-  const ownerState = { variant, padding, ...props };
+  const [isResizing, setResizing] = useState(false);
+
+  const onResizeLatest = useLatest(onResize);
+  const onResizeCommitLatest = useLatest(onResizeCommit);
+
+  const onMouseMoveLatest = useLatest((event: MouseEvent) => {
+    if (onResizeLatest.current && ref.current) {
+      if (screenX.current !== null) {
+        const width = Math.max(
+          minWidth || 0,
+          ref.current.getBoundingClientRect().width + (event.screenX - screenX.current)
+        );
+        onResizeLatest.current(width, ref.current);
+      }
+      screenX.current = event.screenX;
+    }
+  });
+
+  const onMouseDown = (event: React.MouseEvent<HTMLButtonElement>) => {
+    screenX.current = event.screenX;
+    setResizing(true);
+  };
+
+  const onKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    const step = RESIZE_STEPS[event.key];
+    if (onResizeLatest.current && ref.current && step) {
+      event.preventDefault();
+      const width = Math.max(
+        minWidth || 0,
+        ref.current.getBoundingClientRect().width + (event.shiftKey ? step * 3 : step)
+      );
+      onResizeLatest.current(width, ref.current);
+    }
+  };
+
+  const onKeyUp = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if ((event.key === 'ArrowLeft' || event.key === 'ArrowRight') && onResizeCommitLatest.current && ref.current) {
+      onResizeCommitLatest.current(ref.current.getBoundingClientRect().width, ref.current);
+    }
+  };
+
+  useEffect(() => {
+    if (isResizing) {
+      const onMouseUp = () => {
+        screenX.current = null;
+        setResizing(false);
+
+        if (onResizeCommitLatest.current && ref.current) {
+          onResizeCommitLatest.current(ref.current.getBoundingClientRect().width, ref.current);
+        }
+      };
+
+      document.addEventListener('mouseup', onMouseUp);
+      return () => {
+        document.removeEventListener('mouseup', onMouseUp);
+      };
+    }
+  }, [isResizing]);
+
+  useEffect(() => {
+    if (isResizing) {
+      const onMouseMove = (event: MouseEvent) => {
+        onMouseMoveLatest.current(event);
+      };
+
+      const style = document.createElement('STYLE');
+      style.textContent = '* { cursor: col-resize !important; } .ESTableCell-resize::after { display: none; }';
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.head.appendChild(style);
+
+      return () => {
+        document.removeEventListener('mousemove', onMouseMove);
+        document.head.removeChild(style);
+      };
+    }
+  }, [isResizing]);
+
+  const ownerState = { variant, padding, align, isResizing, ...props };
   const classes = useUtilityClasses(ownerState);
 
   return (
@@ -155,11 +304,21 @@ export const TableCell = (inProps: TableCellProps) => {
       ownerState={ownerState}
       id={id}
       role={variant === 'head' ? 'columnheader' : 'cell'}
+      data-minwidth={minWidth}
     >
       <TableCellContainer className={classes.container}>
         <TableCellContent className={classes.content} ownerState={ownerState}>
           {children}
         </TableCellContent>
+        {!!onResize && (
+          <TableCellResize
+            className={classes.resize}
+            ownerState={ownerState}
+            onMouseDown={onMouseDown}
+            onKeyDown={onKeyDown}
+            onKeyUp={onKeyUp}
+          />
+        )}
       </TableCellContainer>
     </TableCellRoot>
   );

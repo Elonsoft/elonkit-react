@@ -1,4 +1,4 @@
-import { Children, isValidElement, useMemo } from 'react';
+import { Children, forwardRef, isValidElement, useMemo } from 'react';
 
 import { TableRowProps, TableRowTypeMap } from './TableRow.types';
 
@@ -75,6 +75,7 @@ const TableRowContent = styled(Box, {
 })<{ ownerState: TableRowOwnerState }>(({ theme, ownerState }) => ({
   display: 'grid',
   gridAutoRows: 'max-content',
+  minWidth: '100%',
   border: 0,
   padding: 0,
   margin: 0,
@@ -110,10 +111,11 @@ const TableRowOverlap = styled('div', {
 })(() => ({
   display: 'grid',
   gridAutoRows: 'max-content',
+  minWidth: '100%',
   height: 0
 }));
 
-export const TableRow: OverridableComponent<TableRowTypeMap> = (inProps: TableRowProps) => {
+export const TableRow = forwardRef((inProps: TableRowProps, ref) => {
   const { children, className, sx, selected, hover, ...props } = useThemeProps({
     props: inProps,
     name: 'ESTableRow'
@@ -155,6 +157,7 @@ export const TableRow: OverridableComponent<TableRowTypeMap> = (inProps: TableRo
   return (
     <TableRowRoot ownerState={ownerState} className={clsx(classes.root, className)} sx={sx}>
       <TableRowContent
+        ref={ref}
         ownerState={ownerState}
         className={classes.content}
         style={{ gridTemplateColumns: columns.join(' ') }}
@@ -170,4 +173,8 @@ export const TableRow: OverridableComponent<TableRowTypeMap> = (inProps: TableRo
       )}
     </TableRowRoot>
   );
-};
+}) as OverridableComponent<TableRowTypeMap>;
+
+// eslint-disable-next-line
+// @ts-ignore
+TableRow.displayName = 'TableRow';

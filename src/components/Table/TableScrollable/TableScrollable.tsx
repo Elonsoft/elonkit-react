@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { TableScrollableProps } from './TableScrollable.types';
 
@@ -10,6 +10,7 @@ import { unstable_composeClasses as composeClasses } from '@mui/base';
 import { styled, useThemeProps } from '@mui/material/styles';
 
 import { useResizeObserver, useScrollSync } from '../../../hooks';
+import { useTableContext } from '../Table.context';
 import { useTableScrollbarContext } from '../TableScrollbar';
 
 type TableOwnerState = {
@@ -52,6 +53,7 @@ export const TableScrollable = (inProps: TableScrollableProps) => {
     name: 'ESTableScrollable'
   });
 
+  const { columns } = useTableContext();
   const { setWidth, ref: scrollbarRef } = useTableScrollbarContext();
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -60,6 +62,12 @@ export const TableScrollable = (inProps: TableScrollableProps) => {
       setWidth(ref.current.scrollWidth);
     }
   });
+
+  useEffect(() => {
+    if (ref.current) {
+      setWidth(ref.current.scrollWidth);
+    }
+  }, [columns]);
 
   useScrollSync(ref, { current: scrollbarRef });
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Story } from '@storybook/react';
 
@@ -16,6 +16,7 @@ import { TableRow } from './TableRow';
 import { TableScrollable } from './TableScrollable';
 import { TableScrollbar } from './TableScrollbar';
 import { TableText } from './TableText';
+import { useTableResize } from './useTableResize';
 
 import { IconClose, IconDotsVerticalLarge, IconPencilOutline } from '../../icons';
 import { Pagination, PaginationPages, PaginationRange } from '../Pagination';
@@ -76,16 +77,21 @@ for (let i = 0; i < 50; i++) {
 export const Demo: Story = (args, context) => {
   const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
+  const ref = useRef<HTMLDivElement | null>(null);
+  const rowRef = useRef<HTMLDivElement | null>(null);
+
   const [fields] = useState<Array<keyof typeof DATA[0]['en']>>(['id', 'name', 'age', 'status', 'city']);
-  const [columns] = useState([
+  const [columns, setColumns] = useState([
     '56px',
-    'minmax(100px, 1fr)',
+    'minmax(50px, 1fr)',
     'minmax(200px, 2fr)',
     '150px',
-    'minmax(400px, 1fr)',
-    'minmax(200px, 1fr)',
-    '64px'
+    'minmax(100px, 2fr)',
+    'minmax(100px, 1fr)',
+    'minmax(64px, auto)'
   ]);
+
+  const { onResize, onResizeCommit } = useTableResize(ref, rowRef, columns, setColumns);
 
   const [selected, setSelected] = useState<number[]>([]);
 
@@ -113,7 +119,7 @@ export const Demo: Story = (args, context) => {
   };
 
   return (
-    <Table columns={columns}>
+    <Table ref={ref} columns={columns}>
       <TableScrollable>
         <TableHead sticky={0}>
           <TableRow>
@@ -126,14 +132,25 @@ export const Demo: Story = (args, context) => {
                 color="secondary"
               />
             </TableCell>
-            <TableCell colSpan={3}>{locale === 'en' ? 'Group 1' : 'Группа 1'}</TableCell>
-            <TableCell colSpan={2}>{locale === 'en' ? 'Group 2' : 'Группа 2'}</TableCell>
+            <TableCell colSpan={3} onResize={onResize(1, 3)} onResizeCommit={onResizeCommit(1, 3)}>
+              {locale === 'en' ? 'Group 1' : 'Группа 1'}
+            </TableCell>
+            <TableCell colSpan={2} onResize={onResize(4, 2)} onResizeCommit={onResizeCommit(4, 2)}>
+              {locale === 'en' ? 'Group 2' : 'Группа 2'}
+            </TableCell>
             <TableCell />
           </TableRow>
-          <TableRow>
+          <TableRow ref={rowRef}>
             <TableCell padding="checkbox" />
-            {fields.map((field) => (
-              <TableCell key={field}>{NAMES[locale][field]}</TableCell>
+            {fields.map((field, index) => (
+              <TableCell
+                key={field}
+                onResize={onResize(index + 1)}
+                onResizeCommit={onResizeCommit(index + 1)}
+                minWidth={100}
+              >
+                <TableText>{NAMES[locale][field]}</TableText>
+              </TableCell>
             ))}
             <TableCell />
           </TableRow>
@@ -158,7 +175,7 @@ export const Demo: Story = (args, context) => {
                     <TableText>{row[locale][field]}</TableText>
                   </TableCell>
                 ))}
-                <TableCell overlap>
+                <TableCell overlap align="flex-end">
                   <IconButton aria-label={locale === 'en' ? 'More' : 'Ещё'}>
                     <IconDotsVerticalLarge />
                   </IconButton>
