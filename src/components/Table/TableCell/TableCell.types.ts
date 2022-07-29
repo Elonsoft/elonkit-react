@@ -24,7 +24,22 @@ export interface TableCellProps {
   colSpan?: number;
   /** If true, the table cell will overlap it's row. */
   overlap?: boolean;
+  /**
+   * Set the text-align on the table cell content.
+   * @default 'flex-start'
+   */
+  align?: 'flex-start' | 'center' | 'flex-end';
 
   /** The id attribute passed to root element. */
   id?: string;
+
+  /** Callback function that is fired when the cell's width changed. */
+  onResize?: (width: number, element: HTMLElement) => void;
+  /** Callback function that is fired when the cell's width finished changing. */
+  onResizeCommit?: (width: number, element: HTMLElement) => void;
+  /**
+   * The minimum width of the cell used for manual resizing.
+   * @default 0
+   */
+  minWidth?: number;
 }

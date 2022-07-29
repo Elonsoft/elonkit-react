@@ -35,6 +35,7 @@ const TableHeadRoot = styled('div', {
     return [styles.root, ownerState.sticky !== undefined && 'sticky'];
   }
 })<{ ownerState: TableHeadOwnerState }>(() => ({
+  minWidth: '100%',
   width: 'fit-content',
   position: 'relative',
   zIndex: 1

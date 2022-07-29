@@ -19,6 +19,14 @@ export type TableCellClasses = {
   container: string;
   /** Styles applied to the content element. */
   content: string;
+  /** Styles applied to the content element if align="flex-start". */
+  contentAlignFlexStart: string;
+  /** Styles applied to the content element if align="center". */
+  contentAlignCenter: string;
+  /** Styles applied to the content element if align="flex-end". */
+  contentAlignFlexEnd: string;
+  /** Styles applied to the resize element. */
+  resize: string;
 };
 export type TableCellClassKey = keyof TableCellClasses;
 
@@ -35,5 +43,9 @@ export const tableCellClasses: TableCellClasses = generateUtilityClasses('ESTabl
   'paddingCheckbox',
   'overlap',
   'container',
-  'content'
+  'content',
+  'contentAlignFlexStart',
+  'contentAlignCenter',
+  'contentAlignFlexEnd',
+  'resize'
 ]);

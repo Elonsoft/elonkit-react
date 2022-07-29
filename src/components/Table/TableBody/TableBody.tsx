@@ -28,6 +28,7 @@ const TableBodyRoot = styled('div', {
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
 })(() => ({
+  minWidth: '100%',
   width: 'fit-content'
 }));
 

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { forwardRef, useMemo, useState } from 'react';
 
 import { TableProps } from './Table.types';
 
@@ -40,7 +40,7 @@ const TableRoot = styled('div', {
 
 const TABLE_CELL_CONTEXT_VALUE = { variant: 'body' as const };
 
-export const Table = (inProps: TableProps) => {
+export const Table = forwardRef<HTMLDivElement, TableProps>((inProps, ref) => {
   const { children, className, columns, ...props } = useThemeProps({
     props: inProps,
     name: 'ESTable'
@@ -64,11 +64,13 @@ export const Table = (inProps: TableProps) => {
     <TableContext.Provider value={value}>
       <TableCellContext.Provider value={TABLE_CELL_CONTEXT_VALUE}>
         <TableScrollbarContext.Provider value={scrollbarValue}>
-          <TableRoot className={clsx(classes.root, className)} role="table">
+          <TableRoot ref={ref} className={clsx(classes.root, className)} role="table">
             {children}
           </TableRoot>
         </TableScrollbarContext.Provider>
       </TableCellContext.Provider>
     </TableContext.Provider>
   );
-};
+});
+
+Table.displayName = 'Table';
