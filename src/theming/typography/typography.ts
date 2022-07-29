@@ -197,7 +197,8 @@ export const createTypography = (theme: Theme) => {
     },
     body100Bold: {
       ...body100,
-      fontWeight: 700
+      fontWeight: 700,
+      lineHeight: pxToRem(12)
     },
     mini200: {
       fontSize: pxToRem(11),
@@ -210,7 +211,7 @@ export const createTypography = (theme: Theme) => {
     mini100,
     mini100Bold: {
       ...mini100,
-      fontWeight: 700
+      lineHeight: pxToRem(12)
     },
     micro: {
       fontSize: pxToRem(9),

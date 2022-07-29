@@ -84,6 +84,7 @@ import {
   PaginationRangeClassKey,
   PaginationRangeProps
 } from './components/Pagination';
+import { SFSClassKey, SFSProps, SFSSearchClassKey, SFSSearchProps } from './components/SFS';
 import {
   SpinnerDashRingClassKey,
   SpinnerDashRingProps,
@@ -214,6 +215,8 @@ declare module '@mui/material/styles/props' {
     ESPagination: PaginationProps;
     ESPaginationPages: PaginationPagesProps;
     ESPaginationRange: PaginationRangeProps;
+    ESSFS: SFSProps;
+    ESSFSSearch: SFSSearchProps;
     ESSpinnerDashRing: SpinnerDashRingProps;
     ESSpinnerFadingBars: SpinnerFadingBarsProps;
     ESSpinnerFadingDots: SpinnerFadingDotsProps;
@@ -268,6 +271,8 @@ declare module '@mui/material/styles/overrides' {
     ESPagination: PaginationClassKey;
     ESPaginationPages: PaginationPagesClassKey;
     ESPaginationRange: PaginationRangeClassKey;
+    ESSFS: SFSClassKey;
+    ESSFSSearch: SFSSearchClassKey;
     ESSpinnerDashRing: SpinnerDashRingClassKey;
     ESSpinnerFadingBars: SpinnerFadingBarsClassKey;
     ESSpinnerFadingDots: SpinnerFadingDotsClassKey;
@@ -428,6 +433,14 @@ declare module '@mui/material/styles/components' {
     ESPaginationRange?: {
       defaultProps?: ComponentsProps['ESPaginationRange'];
       styleOverrides?: ComponentsOverrides['ESPaginationRange'];
+    };
+    ESSFS?: {
+      defaultProps?: ComponentsProps['ESSFS'];
+      styleOverrides?: ComponentsOverrides['ESSFS'];
+    };
+    ESSFSSearch?: {
+      defaultProps?: ComponentsProps['ESSFSSearch'];
+      styleOverrides?: ComponentsOverrides['ESSFSSearch'];
     };
     ESSpinnerDashRing?: {
       defaultProps?: ComponentsProps['ESSpinnerDashRing'];
@@ -639,7 +652,7 @@ declare module '@mui/material/styles' {
     captionMedium: React.CSSProperties;
     captionBold: React.CSSProperties;
     mini1: React.CSSProperties;
-    mini2: React.CSSProperties;
+    mini200: React.CSSProperties;
     micro: React.CSSProperties;
   }
 
@@ -659,7 +672,7 @@ declare module '@mui/material/styles' {
     captionMedium?: React.CSSProperties;
     captionBold?: React.CSSProperties;
     mini1?: React.CSSProperties;
-    mini2?: React.CSSProperties;
+    mini200: React.CSSProperties;
     micro?: React.CSSProperties;
   }
 }
