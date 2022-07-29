@@ -15,6 +15,8 @@ export * from './Link';
 export * from './locale';
 export * from './MenuItem';
 export * from './Pagination';
+export * from './Sidebar';
+export * from './Sidenav';
 export * from './Spinner';
 export * from './Spinner';
 export * from './Swiper';

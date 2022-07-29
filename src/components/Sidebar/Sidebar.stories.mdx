@@ -1,0 +1,109 @@
+import { Meta, Story, Canvas, ArgsTable, Props, Description } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { Sidebar } from './Sidebar';
+import * as stories from './Sidebar.stories';
+
+<Meta
+  title="Components/Sidebar"
+  component={Sidebar}
+  parameters={{
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    open: {
+      table: {
+        disable: true
+      }
+    },
+    sx: {
+      table: {
+        disable: true
+      }
+    },
+    color: {
+      control: {
+        type: 'select',
+        options: ['default', 'primary'],
+        defaultValue: 'default'
+      }
+    },
+    behaviour: {
+      control: {
+        type: 'select',
+        options: ['click', 'hover'],
+        defaultValue: 'click'
+      }
+    },
+    className: {
+      table: {
+        disable: true
+      }
+    },
+    classes: {
+      table: {
+        disable: true
+      }
+    },
+    width: {
+      table: {
+        disable: true
+      }
+    },
+    onWidthChange: {
+      table: {
+        disable: true
+      }
+    }
+  }}
+/>
+
+# Sidebar
+
+<Description of={Sidebar} />
+
+<Canvas>
+  <Story story={stories.Demo} name="Demo" />
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+# API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-sidebar" story="page">
+      <code>Sidebar</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-sidebardivider" story="page">
+      <code>SidebarDivider</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-sidebaritem" story="page">
+      <code>SidebarItem</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-sidebarmenu" story="page">
+      <code>SidebarMenu</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-sidebarscrollable" story="page">
+      <code>SidebarScrollable</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-sidebarspacer" story="page">
+      <code>SidebarSpacer</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-sidebartoggle" story="page">
+      <code>SidebarToggle</code>
+    </LinkTo>
+  </li>
+</ul>
