@@ -12,6 +12,10 @@ module.exports = {
         backgrounds: false
       }
     },
+    {
+      name: '@storybook/addon-docs',
+      options: { transcludeMarkdown: true }
+    },
     '@storybook/addon-a11y',
     'storybook-dark-mode'
   ],
