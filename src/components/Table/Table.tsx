@@ -41,14 +41,21 @@ const TableRoot = styled('div', {
 const TABLE_CELL_CONTEXT_VALUE = { variant: 'body' as const };
 
 export const Table = forwardRef<HTMLDivElement, TableProps>((inProps, ref) => {
-  const { children, className, columns, sx, ...props } = useThemeProps({
+  const {
+    children,
+    className,
+    columns,
+    striped = false,
+    sx,
+    ...props
+  } = useThemeProps({
     props: inProps,
     name: 'ESTable'
   });
 
   const value = useMemo(() => {
-    return { columns };
-  }, [columns]);
+    return { columns, striped };
+  }, [columns, striped]);
 
   const [scrollbarWidth, setScrollbarWidth] = useState(0);
   const [scrollbarRef, setScrollbarRef] = useState<HTMLDivElement | null>(null);

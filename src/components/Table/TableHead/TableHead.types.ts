@@ -20,4 +20,12 @@ export interface TableHeadProps {
    * @default document
    */
   relativeTo?: HTMLElement | null;
+  /** If `true`, the table row dividers are shown.
+   * @default true
+   */
+  rowDividers?: boolean;
+  /** If `true`, the table col dividers are shown.
+   * @default false
+   */
+  colDividers?: boolean;
 }

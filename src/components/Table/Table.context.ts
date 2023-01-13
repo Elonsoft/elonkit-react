@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react';
 
 export interface TableContextValue {
   columns: string[];
+  striped: boolean;
 }
 
 export const TableContext = createContext<TableContextValue | null>(null);

@@ -24,6 +24,14 @@ export interface TableCellProps {
   colSpan?: number;
   /** If true, the table cell will overlap it's row. */
   overlap?: boolean;
+  /** If `true`, the table row divider is shown.
+   * @default false
+   */
+  rowDivider?: boolean;
+  /** If `true`, the table col divider is shown.
+   * @default false
+   */
+  colDivider?: boolean;
   /**
    * Set the text-align on the table cell content.
    * @default 'flex-start'
