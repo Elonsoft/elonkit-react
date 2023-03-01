@@ -14,6 +14,9 @@ export { createIconButton } from './icon-button';
 import { createRadio } from './radio';
 export { createRadio } from './radio';
 
+import { createRating } from './rating';
+export { createRating } from './rating';
+
 import { createSlider } from './slider';
 export { createSlider } from './slider';
 
@@ -58,6 +61,8 @@ export const createComponents = (theme: Theme, typography: TypographyOptions) =>
 
   const MuiRadio = createRadio(theme, typography);
 
+  const MuiRating = createRating(theme, typography);
+
   const MuiSlider = createSlider(theme, typography);
 
   const MuiFormControl = createFormControl(theme, typography);
@@ -84,6 +89,8 @@ export const createComponents = (theme: Theme, typography: TypographyOptions) =>
     MuiIconButton,
 
     MuiRadio,
+
+    MuiRating,
 
     MuiSlider,
 

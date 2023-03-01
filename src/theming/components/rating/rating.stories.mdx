@@ -1,0 +1,35 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+
+import Rating from '@mui/material/Rating';
+
+import * as stories from './rating.stories';
+
+<Meta
+  title="Overrides/Rating"
+  parameters={{
+    viewMode: 'canvas',
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    max: {
+      control: { type: 'number' },
+      defaultValue: 5
+    },
+    precision: {
+      control: { type: 'number' },
+      defaultValue: 0.5
+    },
+    disabled: {
+      control: { type: 'boolean' }
+    },
+    size: {
+      options: ['14', '16', '20', '24', '28', '32', '36', '40'],
+      control: { type: 'select' },
+      defaultValue: '24'
+    }
+  }}
+/>
+
+<Canvas>
+  <Story name="Rating" story={stories.Demo} />
+</Canvas>

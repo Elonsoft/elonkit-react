@@ -20,6 +20,7 @@ import { ButtonPropsSizeOverrides } from '@mui/material/Button';
 import { FormControlPropsSizeOverrides } from '@mui/material/FormControl';
 import { IconButtonPropsSizeOverrides } from '@mui/material/IconButton';
 import { InputBasePropsSizeOverrides } from '@mui/material/InputBase';
+import { RatingPropsSizeOverrides } from '@mui/material/Rating';
 import { TextFieldPropsSizeOverrides } from '@mui/material/TextField';
 import { TypographyPropsVariantOverrides } from '@mui/material/Typography';
 
@@ -865,6 +866,22 @@ declare module '@mui/material/IconButton' {
     white: true;
     black: true;
     default: false;
+  }
+}
+
+declare module '@mui/material/Rating' {
+  interface RatingPropsSizeOverrides {
+    '14': true;
+    '16': true;
+    '20': true;
+    '24': true;
+    '28': true;
+    '32': true;
+    '36': true;
+    '40': true;
+    small: false;
+    medium: false;
+    large: false;
   }
 }
 
