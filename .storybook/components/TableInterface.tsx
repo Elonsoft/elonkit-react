@@ -4,7 +4,7 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../../src/overrides.d.ts" />
 
-import { ReactNode, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -36,9 +36,13 @@ const TableInterfaceBase = ({ name, variant }: TableInterfaceProps) => {
     let entry = json.children.find((e) => e.name === name);
     let children = entry?.children || entry?.type?.declaration?.children;
 
-    if (variant === 'props' && entry.kindString === 'Type alias') {
-      entry = json.children.find((e) => e.name === (entry.type.typeArguments[0] as any).name);
-      children = (entry as any)?.children?.[1]?.type?.types?.[1]?.declaration?.children;
+    if (variant === 'props' && entry?.kindString === 'Type alias') {
+      if (entry?.type?.typeArguments?.length) {
+        entry = json.children.find((e) => e.name === (entry?.type as any).typeArguments[0]?.name);
+        children = (entry as any)?.children?.[1]?.type?.types?.[1]?.declaration?.children;
+      } else {
+        children = (entry as any).type.types[0].declaration.children;
+      }
     }
 
     if (children) {

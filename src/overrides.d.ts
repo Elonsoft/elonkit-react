@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars */
-
 import {
   BreakpointOverrides,
   Palette,
@@ -158,7 +157,7 @@ import {
   TableTextClassKey,
   TableTextProps
 } from './components/Table';
-import { buttonMixin, listItemMixin } from './theming/mixins';
+import { buttonMixin, gridContainerMixin, gridItemMixin, listItemMixin } from './theming/mixins';
 
 export interface ISurfacePalette {
   50: string;
@@ -808,6 +807,8 @@ declare module '@mui/material/styles/createMixins' {
   interface Mixins {
     button: typeof buttonMixin;
     listItem: typeof listItemMixin;
+    gridContainer: ReturnType<typeof gridContainerMixin>;
+    gridItem: ReturnType<typeof gridItemMixin>;
   }
 }
 
