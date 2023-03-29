@@ -34,6 +34,7 @@ export { IconCheckLarge } from './IconCheckLarge';
 export { IconCheckMedium } from './IconCheckMedium';
 export { IconCheckSmall } from './IconCheckSmall';
 export { IconChevronDown } from './IconChevronDown';
+export { IconChevronDownSmall } from './IconChevronDownSmall';
 export { IconChevronLeft } from './IconChevronLeft';
 export { IconChevronLeftMedium } from './IconChevronLeftMedium';
 export { IconChevronLeftSmall } from './IconChevronLeftSmall';
