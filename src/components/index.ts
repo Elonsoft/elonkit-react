@@ -2,6 +2,8 @@ export * from './Alert';
 export * from './AudioPlayer';
 export * from './AvatarGroup';
 export * from './Breadcrumbs';
+export * from './Chip';
+export * from './Chips';
 export * from './DateAdapter';
 export * from './Dialog';
 export * from './Dropzone';

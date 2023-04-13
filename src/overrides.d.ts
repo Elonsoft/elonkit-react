@@ -36,6 +36,7 @@ import {
 import { AudioPlayerClassKey, AudioPlayerProps } from './components/AudioPlayer';
 import { AvatarGroupClassKey, AvatarGroupProps } from './components/AvatarGroup';
 import { BreadcrumbClassKey, BreadcrumbProps, BreadcrumbsClassKey, BreadcrumbsProps } from './components/Breadcrumbs';
+import { ChipsClassKey, ChipsProps } from './components/Chips';
 import {
   DialogActionsClassKey,
   DialogActionsProps,
@@ -222,6 +223,7 @@ declare module '@mui/material/styles/props' {
     ESAudioPlayer: AudioPlayerProps;
     ESBreadcrumbs: BreadcrumbsProps;
     ESBreadcrumb: BreadcrumbProps;
+    ESChips: ChipsProps;
     ESDialog: DialogProps;
     ESDialogActions: DialogActionsProps;
     ESDialogArrow: DialogArrowProps;
@@ -292,6 +294,7 @@ declare module '@mui/material/styles/overrides' {
     ESAudioPlayer: AudioPlayerClassKey;
     ESBreadcrumbs: BreadcrumbsClassKey;
     ESBreadcrumb: BreadcrumbClassKey;
+    ESChips: ChipsClassKey;
     ESDialog: DialogClassKey;
     ESDialogActions: DialogActionsClassKey;
     ESDialogArrow: DialogArrowClassKey;
@@ -384,6 +387,10 @@ declare module '@mui/material/styles/components' {
     ESBreadcrumb?: {
       defaultProps?: ComponentsProps['ESBreadcrumb'];
       styleOverrides?: ComponentsOverrides['ESBreadcrumb'];
+    };
+    ESChips?: {
+      defaultProps?: ComponentsProps['ESChips'];
+      styleOverrides?: ComponentsOverrides['ESChips'];
     };
     ESDialog?: {
       defaultProps?: ComponentsProps['ESDialog'];

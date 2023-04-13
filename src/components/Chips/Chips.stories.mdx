@@ -1,0 +1,77 @@
+import { Meta, Story, Canvas, ArgsTable, Props, Description } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import Tooltip from '@mui/material/Tooltip';
+
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import { IconClose, IconAccoun, IconCheckMedium } from '../../icons';
+import Box from '@mui/material/Box';
+
+import { Chips } from '.';
+import { Chip } from '../Chip';
+
+<Meta
+  title="Components/Chips"
+  component={Chips}
+  parameters={{
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    classes: {
+      table: {
+        disable: true
+      }
+    },
+    className: {
+      table: {
+        disable: true
+      }
+    },
+    chips: {
+      table: {
+        disable: true
+      }
+    },
+    sx: {
+      table: {
+        disable: true
+      }
+    }
+  }}
+/>
+
+# Chip
+
+<Description of={Chips} />
+
+<Canvas>
+  <Story name="Demo">
+    <Chips>
+      {[
+        { id: 1, name: 'Весь отдел', deleteIcon: <IconClose />, onDelete: () => null },
+        { id: 2, name: 'В наличии', deleteIcon: <IconClose />, onDelete: () => null },
+        { id: 3, name: 'Встреча', deleteIcon: <IconClose />, onDelete: () => null },
+        { id: 4, name: '11 авг – 12 сен 2020', deleteIcon: <IconClose />, onDelete: () => null },
+        { id: 5, name: 'Наличные', deleteIcon: <IconClose />, onDelete: () => null },
+        { id: 6, name: 'Ростов-на-Дону', deleteIcon: <IconClose />, onDelete: () => null },
+        { id: 7, name: 'Встреча', deleteIcon: <IconClose />, onDelete: () => null },
+        { id: 8, name: '11 авг – 12 сен 2020', deleteIcon: <IconClose />, onDelete: () => null }
+      ].map((item) => (
+        <Chip size="small" key={item.id} label={item.name} {...item} />
+      ))}
+    </Chips>
+  </Story>
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+# API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-chips" story="page">
+      <code>Chips</code>
+    </LinkTo>
+  </li>
+</ul>

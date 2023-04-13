@@ -1,6 +1,7 @@
 import { AlertCloseProps } from '../Alert';
 import { AudioPlayerProps } from '../AudioPlayer';
 import { BreadcrumbsProps } from '../Breadcrumbs';
+import { ChipsProps } from '../Chips';
 import { DialogArrowProps, DialogCloseProps } from '../Dialog';
 import { FileInfoNameProps } from '../FileInfo';
 import { FormatSizeProps } from '../FormatSize';
@@ -33,6 +34,9 @@ export interface Localization {
     };
     ESBreadcrumbs: {
       defaultProps: Pick<BreadcrumbsProps, 'labelButtonMore'>;
+    };
+    ESChips: {
+      defaultProps: Pick<ChipsProps, 'labelButtonMore' | 'labelTooltip'>;
     };
     ESDialogArrow: {
       defaultProps: Pick<DialogArrowProps, 'labelPrev' | 'labelNext'>;
@@ -113,6 +117,12 @@ export const en: Localization = {
     ESBreadcrumbs: {
       defaultProps: {
         labelButtonMore: 'More'
+      }
+    },
+    ESChips: {
+      defaultProps: {
+        labelButtonMore: 'Hide',
+        labelTooltip: 'Show all'
       }
     },
     ESDialogArrow: {
@@ -227,6 +237,12 @@ export const ru: Localization = {
     ESBreadcrumbs: {
       defaultProps: {
         labelButtonMore: 'Ещё'
+      }
+    },
+    ESChips: {
+      defaultProps: {
+        labelButtonMore: 'Скрыть',
+        labelTooltip: 'Показать все'
       }
     },
     ESDialogArrow: {
