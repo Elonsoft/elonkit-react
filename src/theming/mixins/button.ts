@@ -24,16 +24,16 @@ export const buttonMixin = (states: ButtonMixinStates) => {
       backgroundColor: background,
       color: color
     },
-    [`& .${touchRippleClasses.root}`]: {
+    [`& > .${touchRippleClasses.root}`]: {
       color: active
     },
     '@media (hover: hover)': {
-      [`&:not(.${buttonClasses.focusVisible}):not(:disabled):hover .${touchRippleClasses.root}`]: {
+      [`&:not(.${buttonClasses.focusVisible}):not(:disabled):hover > .${touchRippleClasses.root}`]: {
         backgroundColor: hover
       }
     },
     [`&.${buttonClasses.focusVisible}`]: {
-      [`& .${touchRippleClasses.root}`]: {
+      [`& > .${touchRippleClasses.root}`]: {
         backgroundColor: focus
       }
     }
