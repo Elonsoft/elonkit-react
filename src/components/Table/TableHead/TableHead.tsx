@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 
 import { TableHeadProps } from './TableHead.types';
 
@@ -10,18 +10,20 @@ import { unstable_composeClasses as composeClasses } from '@mui/base';
 import { styled, useThemeProps } from '@mui/material/styles';
 
 import { useSticky } from '../../../hooks';
-import { TableCellContext } from '../TableCell';
+import { tableCellClasses, TableCellContext } from '../TableCell';
 
 type TableHeadOwnerState = {
   classes?: TableHeadProps['classes'];
   sticky?: number;
+  rowDividers?: boolean;
+  colDividers?: boolean;
 };
 
 const useUtilityClasses = (ownerState: TableHeadOwnerState) => {
-  const { classes, sticky } = ownerState;
+  const { classes, sticky, rowDividers, colDividers } = ownerState;
 
   const slots = {
-    root: ['root', sticky !== undefined && 'sticky']
+    root: ['root', sticky !== undefined && 'sticky', rowDividers && 'rowDividers', colDividers && 'colDividers']
   };
 
   return composeClasses(slots, getTableHeadUtilityClass, classes);
@@ -32,19 +34,46 @@ const TableHeadRoot = styled('div', {
   slot: 'Root',
   overridesResolver: (props, styles) => {
     const { ownerState } = props;
-    return [styles.root, ownerState.sticky !== undefined && 'sticky'];
+    return [
+      styles.root,
+      ownerState.sticky !== undefined && 'sticky',
+      ownerState.rowDividers && 'rowDividers',
+      ownerState.colDividers && 'colDividers'
+    ];
   }
-})<{ ownerState: TableHeadOwnerState }>(() => ({
+})<{ ownerState: TableHeadOwnerState }>(({ ownerState, theme }) => ({
   minWidth: '100%',
   width: 'fit-content',
   position: 'relative',
-  zIndex: 1
+  zIndex: 1,
+
+  ...(!ownerState.rowDividers && {
+    [`& .${tableCellClasses.container}`]: {
+      borderBottom: '0'
+    }
+  }),
+  ...(ownerState.colDividers && {
+    '&:not(:first-of-type)': {
+      [`& .${tableCellClasses.container}`]: {
+        borderLeft: `1px solid ${theme.palette.monoA.A100}`
+      }
+    }
+  })
 }));
 
 const TABLE_CELL_CONTEXT_VALUE = { variant: 'head' as const };
 
 export const TableHead = (inProps: TableHeadProps) => {
-  const { children, className, sticky, relativeTo, sx, ...props } = useThemeProps({
+  const {
+    children,
+    className,
+    sticky,
+    relativeTo,
+    sx,
+    rowDividers = true,
+    colDividers = false,
+    ...props
+  } = useThemeProps({
     props: inProps,
     name: 'ESTableHead'
   });
@@ -52,11 +81,15 @@ export const TableHead = (inProps: TableHeadProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
   useSticky(ref, { top: sticky, relativeTo });
 
-  const ownerState = { sticky, ...props };
+  const value = useMemo(() => {
+    return { ...TABLE_CELL_CONTEXT_VALUE, rowDividers, colDividers };
+  }, [rowDividers, colDividers]);
+
+  const ownerState = { sticky, rowDividers, colDividers, ...props };
   const classes = useUtilityClasses(ownerState);
 
   return (
-    <TableCellContext.Provider value={TABLE_CELL_CONTEXT_VALUE}>
+    <TableCellContext.Provider value={value}>
       <TableHeadRoot
         ref={ref}
         className={clsx(classes.root, className)}

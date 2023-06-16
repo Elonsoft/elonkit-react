@@ -15,4 +15,8 @@ export interface TableProps {
   sx?: SxProps<Theme>;
   /** The width of the columns. */
   columns: string[];
+  /** If `true`, the table has zebra-striping variant.
+   * @default false
+   */
+  striped?: boolean;
 }

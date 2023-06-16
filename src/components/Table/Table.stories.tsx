@@ -75,6 +75,7 @@ for (let i = 0; i < 50; i++) {
 }
 
 export const Demo: Story = (args, context) => {
+  const { striped, colDividers, rowDividers } = args;
   const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
   const ref = useRef<HTMLDivElement | null>(null);
@@ -88,7 +89,7 @@ export const Demo: Story = (args, context) => {
     '150px',
     'minmax(100px, 2fr)',
     'minmax(100px, 1fr)',
-    'minmax(64px, auto)'
+    'minmax(64px, 1fr)'
   ]);
 
   const { onResize, onResizeCommit } = useTableResize(ref, rowRef, columns, setColumns);
@@ -119,9 +120,9 @@ export const Demo: Story = (args, context) => {
   };
 
   return (
-    <Table ref={ref} columns={columns}>
+    <Table ref={ref} columns={columns} striped={striped}>
       <TableScrollable>
-        <TableHead sticky={0}>
+        <TableHead sticky={0} colDividers={colDividers}>
           <TableRow>
             <TableCell padding="checkbox">
               <Checkbox
@@ -155,7 +156,7 @@ export const Demo: Story = (args, context) => {
             <TableCell />
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody colDividers={colDividers} rowDividers={rowDividers}>
           {DATA.map((row) => {
             const isSelected = selected.indexOf(row[locale].id) !== -1;
             const labelId = `story-usage-checkbox-${row[locale].id}`;

@@ -21,10 +21,12 @@ type TableCellOwnerState = {
   colSpan?: number;
   overlap?: boolean;
   isResizing?: boolean;
+  rowDivider?: boolean;
+  colDivider?: boolean;
 };
 
 const useUtilityClasses = (ownerState: TableCellOwnerState) => {
-  const { classes, variant, padding, align, overlap, isResizing } = ownerState;
+  const { classes, variant, padding, align, overlap, isResizing, rowDivider, colDivider } = ownerState;
 
   const slots = {
     root: [
@@ -34,8 +36,11 @@ const useUtilityClasses = (ownerState: TableCellOwnerState) => {
       padding === 'normal' && 'paddingNormal',
       padding === 'checkbox' && 'paddingCheckbox',
       overlap && 'overlap',
-      isResizing && 'resizing'
+      isResizing && 'resizing',
+      rowDivider && 'rowDivider',
+      colDivider && 'colDivider'
     ],
+    wrapper: ['wrapper'],
     container: ['container'],
     content: [
       'content',
@@ -61,7 +66,9 @@ const TableCellRoot = styled('div', {
       ownerState.padding === 'normal' && styles.paddingNormal,
       ownerState.padding === 'checkbox' && styles.paddingCheckbox,
       ownerState.overlap && styles.overlap,
-      ownerState.isResizing && styles.resizing
+      ownerState.isResizing && styles.resizing,
+      ownerState.rowDivider && styles.rowDivider,
+      ownerState.colDivider && styles.colDivider
     ];
   }
 })<{ ownerState: TableCellOwnerState }>(({ theme, ownerState }) => ({
@@ -133,7 +140,28 @@ const TableCellRoot = styled('div', {
       width: '3px',
       backgroundColor: theme.palette.info.A600
     }
+  }),
+  ...(ownerState.rowDivider && {
+    [`& .${tableCellClasses.container}`]: {
+      borderBottom: `1px solid ${theme.palette.monoA.A100}`
+    }
+  }),
+  ...(ownerState.colDivider && {
+    '&:not(:first-of-type)': {
+      [`& .${tableCellClasses.container}`]: {
+        borderLeft: `1px solid ${theme.palette.monoA.A100}`
+      }
+    }
   })
+}));
+
+const TableCellWrapper = styled('div', {
+  name: 'ESTableCell',
+  slot: 'Wrapper',
+  overridesResolver: (props, styles) => styles.wrapper
+})(() => ({
+  width: '100%',
+  height: '100%'
 }));
 
 const TableCellContainer = styled('div', {
@@ -141,8 +169,8 @@ const TableCellContainer = styled('div', {
   slot: 'Container',
   overridesResolver: (props, styles) => styles.container
 })(({ theme }) => ({
-  borderBottom: `1px solid ${theme.palette.monoA.A100}`,
   transition: `${theme.transitions.duration.short}ms`,
+  borderBottom: 0,
   width: '100%',
   height: '100%',
   display: 'flex'
@@ -210,12 +238,14 @@ const RESIZE_STEPS: Record<string, number | undefined> = {
 };
 
 export const TableCell = (inProps: TableCellProps) => {
-  const context = useTableCellContext();
+  const { rowDividers, colDividers, ...context } = useTableCellContext();
 
   const {
     children,
     className,
     variant = context.variant,
+    rowDivider = rowDividers,
+    colDivider = colDividers,
     padding = 'normal',
     align = 'flex-start',
     id,
@@ -304,7 +334,7 @@ export const TableCell = (inProps: TableCellProps) => {
     }
   }, [isResizing]);
 
-  const ownerState = { variant, padding, align, isResizing, ...props };
+  const ownerState = { variant, padding, align, isResizing, rowDivider, colDivider, ...props };
   const classes = useUtilityClasses(ownerState);
 
   return (
@@ -317,21 +347,23 @@ export const TableCell = (inProps: TableCellProps) => {
       role={variant === 'head' ? 'columnheader' : 'cell'}
       data-minwidth={minWidth}
     >
-      <TableCellContainer className={classes.container}>
-        <TableCellContent className={classes.content} ownerState={ownerState}>
-          {children}
-        </TableCellContent>
-        {!!onResize && (
-          <TableCellResize
-            className={classes.resize}
-            ownerState={ownerState}
-            onMouseDown={onMouseDown}
-            onKeyDown={onKeyDown}
-            onKeyUp={onKeyUp}
-            aria-label={labelResize}
-          />
-        )}
-      </TableCellContainer>
+      <TableCellWrapper className={classes.wrapper}>
+        <TableCellContainer className={classes.container}>
+          <TableCellContent className={classes.content} ownerState={ownerState}>
+            {children}
+          </TableCellContent>
+          {!!onResize && (
+            <TableCellResize
+              className={classes.resize}
+              ownerState={ownerState}
+              onMouseDown={onMouseDown}
+              onKeyDown={onKeyDown}
+              onKeyUp={onKeyUp}
+              aria-label={labelResize}
+            />
+          )}
+        </TableCellContainer>
+      </TableCellWrapper>
     </TableCellRoot>
   );
 };

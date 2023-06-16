@@ -2,6 +2,8 @@ import { createContext, useContext } from 'react';
 
 export interface TableCellContextValue {
   variant: 'head' | 'body';
+  rowDividers?: boolean;
+  colDividers?: boolean;
 }
 
 export const TableCellContext = createContext<TableCellContextValue | null>(null);
