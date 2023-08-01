@@ -8,6 +8,7 @@ import { PaginationPagesProps, PaginationRangeProps } from '../Pagination';
 import { PasswordFieldProps } from '../PasswordField';
 import { SFSFiltersProps, SFSSearchProps, SFSSortingProps } from '../SFS';
 import { SidebarItemProps, SidebarToggleProps } from '../Sidebar';
+import { SnackbarCloseAllProps } from '../Snackbar';
 import { SwiperButtonProps } from '../Swiper';
 import { TableActionsProps, TableCellProps } from '../Table';
 
@@ -85,6 +86,9 @@ export interface Localization {
     };
     ESSwiperButton: {
       defaultProps: Pick<SwiperButtonProps, 'labelPrev' | 'labelNext'>;
+    };
+    ESSnackbarCloseAll: {
+      defaultProps: Pick<SnackbarCloseAllProps, 'labelCloseAll'>;
     };
     ESTableActions: {
       defaultProps: Pick<TableActionsProps, 'label'>;
@@ -208,6 +212,11 @@ export const en: Localization = {
       defaultProps: {
         labelPrev: 'Previous slide',
         labelNext: 'Next slide'
+      }
+    },
+    ESSnackbarCloseAll: {
+      defaultProps: {
+        labelCloseAll: 'Close all'
       }
     },
     ESTableActions: {
@@ -336,6 +345,11 @@ export const ru: Localization = {
       defaultProps: {
         labelPrev: 'Предыдущий слайд',
         labelNext: 'Следующий слайд'
+      }
+    },
+    ESSnackbarCloseAll: {
+      defaultProps: {
+        labelCloseAll: 'Закрыть все'
       }
     },
     ESTableActions: {

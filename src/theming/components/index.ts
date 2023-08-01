@@ -17,6 +17,9 @@ export { createRadio } from './radio';
 import { createSlider } from './slider';
 export { createSlider } from './slider';
 
+import { createSnackbar } from './snackbar';
+export { createSnackbar } from './snackbar';
+
 import {
   createFormControl,
   createFormHelperText,
@@ -60,6 +63,8 @@ export const createComponents = (theme: Theme, typography: TypographyOptions) =>
 
   const MuiSlider = createSlider(theme, typography);
 
+  const MuiSnackbar = createSnackbar(theme, typography);
+
   const MuiFormControl = createFormControl(theme, typography);
   const MuiFormHelperText = createFormHelperText(theme, typography);
   const MuiFormLabel = createFormLabel(theme, typography);
@@ -86,6 +91,8 @@ export const createComponents = (theme: Theme, typography: TypographyOptions) =>
     MuiRadio,
 
     MuiSlider,
+
+    MuiSnackbar,
 
     MuiFormControl,
     MuiFormHelperText,

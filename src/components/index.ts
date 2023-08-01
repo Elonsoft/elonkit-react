@@ -21,6 +21,7 @@ export * from './PasswordField';
 export * from './SFS';
 export * from './Sidebar';
 export * from './Sidenav';
+export * from './Snackbar';
 export * from './Spinner';
 export * from './Spinner';
 export * from './Swiper';

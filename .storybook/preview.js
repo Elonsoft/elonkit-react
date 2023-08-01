@@ -25,6 +25,7 @@ export const parameters = {
     storySort: {
       order: [
         'Getting Started',
+        'Discover More',
         ['Installation', 'Usage', 'Theming', 'Localization', 'Icons', 'Scrollbars'],
         'Discover More',
         'Components',
