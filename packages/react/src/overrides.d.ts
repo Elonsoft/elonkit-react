@@ -37,6 +37,26 @@ import {
   AlertTitleClassKey,
   AlertTitleProps,
 } from './components/Alert';
+import {
+  AuthCardActionsClassKey,
+  AuthCardActionsProps,
+  AuthCardClassKey,
+  AuthCardContentClassKey,
+  AuthCardContentProps,
+  AuthCardHeadingClassKey,
+  AuthCardHeadingProps,
+  AuthCardProps,
+  AuthClassKey,
+  AuthFooterClassKey,
+  AuthFooterProps,
+  AuthLinkClassKey,
+  AuthLinkProps,
+  AuthLogoClassKey,
+  AuthLogoProps,
+  AuthMainClassKey,
+  AuthMainProps,
+  AuthProps,
+} from './components/Auth';
 import { AppBarClassKey, AppBarProps } from './components/AppBar';
 import { AudioPlayerClassKey, AudioPlayerProps } from './components/AudioPlayer';
 import { AutocompleteClassKey, AutocompleteProps } from './components/Autocomplete';
@@ -329,6 +349,15 @@ declare module '@mui/material/styles/props' {
     ESAlert: AlertProps;
     ESAlertActions: AlertActionsProps;
     ESAlertClose: AlertCloseProps;
+    ESAuth: AuthProps;
+    ESAuthCard: AuthCardProps;
+    ESAuthCardActions: AuthCardActionsProps;
+    ESAuthCardContent: AuthCardContentProps;
+    ESAuthCardHeading: AuthCardHeadingProps;
+    ESAuthFooter: AuthFooterProps;
+    ESAuthLink: AuthLinkProps;
+    ESAuthLogo: AuthLogoProps;
+    ESAuthMain: AuthMainProps;
     ESAppBar: AppBarProps;
     ESAvatar: AvatarProps;
     ESAvatarGroup: AvatarGroupProps;
@@ -456,6 +485,15 @@ declare module '@mui/material/styles/overrides' {
     ESAlert: AlertClassKey;
     ESAlertActions: AlertActionsClassKey;
     ESAlertClose: AlertCloseClassKey;
+    ESAuth: AuthClassKey;
+    ESAuthCard: AuthCardClassKey;
+    ESAuthCardActions: AuthCardActionsClassKey;
+    ESAuthCardContent: AuthCardContentClassKey;
+    ESAuthCardHeading: AuthCardHeadingClassKey;
+    ESAuthFooter: AuthFooterClassKey;
+    ESAuthLink: AuthLinkClassKey;
+    ESAuthLogo: AuthLogoClassKey;
+    ESAuthMain: AuthMainClassKey;
     ESAppBar: AppBarClassKey;
     ESAvatar: AvatarClasses;
     ESAvatarGroup: AvatarGroupClassKey;
@@ -582,6 +620,42 @@ declare module '@mui/material/styles/components' {
     ESAlert?: {
       defaultProps?: ComponentsProps['ESAlert'];
       styleOverrides?: ComponentsOverrides['ESAlert'];
+    };
+    ESAuth?: {
+      defaultProps?: ComponentsProps['ESAuth'];
+      styleOverrides?: ComponentsOverrides['ESAuth'];
+    };
+    ESAuthCard?: {
+      defaultProps?: ComponentsProps['ESAuthCard'];
+      styleOverrides?: ComponentsOverrides['ESAuthCard'];
+    };
+    ESAuthCardActions?: {
+      defaultProps?: ComponentsProps['ESAuthCardActions'];
+      styleOverrides?: ComponentsOverrides['ESAuthCardActions'];
+    };
+    ESAuthCardContent?: {
+      defaultProps?: ComponentsProps['ESAuthCardContent'];
+      styleOverrides?: ComponentsOverrides['ESAuthCardContent'];
+    };
+    ESAuthCardHeading?: {
+      defaultProps?: ComponentsProps['ESAuthCardHeading'];
+      styleOverrides?: ComponentsOverrides['ESAuthCardHeading'];
+    };
+    ESAuthFooter?: {
+      defaultProps?: ComponentsProps['ESAuthFooter'];
+      styleOverrides?: ComponentsOverrides['ESAuthFooter'];
+    };
+    ESAuthLink?: {
+      defaultProps?: ComponentsProps['ESAuthLink'];
+      styleOverrides?: ComponentsOverrides['ESAuthLink'];
+    };
+    ESAuthLogo?: {
+      defaultProps?: ComponentsProps['ESAuthLogo'];
+      styleOverrides?: ComponentsOverrides['ESAuthLogo'];
+    };
+    ESAuthMain?: {
+      defaultProps?: ComponentsProps['ESAuthMain'];
+      styleOverrides?: ComponentsOverrides['ESAuthMain'];
     };
     ESAvatar?: {
       defaultProps?: ComponentsProps['ESAvatar'];
