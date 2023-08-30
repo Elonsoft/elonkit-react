@@ -1,5 +1,6 @@
 export * from './Alert';
 export * from './AudioPlayer';
+export * from './Auth';
 export * from './AvatarGroup';
 export * from './Breadcrumbs';
 export * from './DateAdapter';

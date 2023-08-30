@@ -1,0 +1,33 @@
+
+import { Meta, Story, Canvas, ArgsTable, Props, Description } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { Auth } from './Auth.tsx';
+import * as stories from './Auth.stories';
+
+<Meta
+  title="Components/Auth"
+  parameters={{
+    options: { showPanel: true }
+  }}
+/>
+
+# Auth
+
+<Description of={Auth} />
+
+<Canvas>
+  <Story story={stories.Demo} name="Demo" />
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-Auth" story="page">
+      <code>Auth</code>
+    </LinkTo>
+  </li>
+</ul>
