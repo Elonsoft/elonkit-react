@@ -1,0 +1,65 @@
+import { Meta, Story, Canvas, ArgsTable, Props } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { DatePicker } from '.';
+import * as stories from './DatePicker.stories';
+
+<Meta
+  title="Components/DatePicker"
+  component={DatePicker}
+  parameters={{
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    classes: {
+      table: {
+        disable: true
+      }
+    },
+    className: {
+      table: {
+        disable: true
+      }
+    },
+    sx: {
+      table: {
+        disable: true
+      }
+    }
+  }}
+/>
+
+# DatePicker
+
+This is a DatePicker.
+
+<Canvas>
+  <Story story={stories.Demo} name="Demo" />
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-DatePicker" story="page">
+      <code>DatePicker</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-DatePickerCalendar" story="page">
+      <code>DatePickerCalendar</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-DatePickerPresets" story="page">
+      <code>DatePickerPresets</code>
+    </LinkTo>
+  </li>
+  <li>
+    <LinkTo kind="components-api-DatePickerView" story="page">
+      <code>DatePickerView</code>
+    </LinkTo>
+  </li>
+</ul>

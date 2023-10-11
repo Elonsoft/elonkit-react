@@ -2,6 +2,7 @@ import { AlertCloseProps } from '../Alert';
 import { AudioPlayerProps } from '../AudioPlayer';
 import { AutocompleteProps } from '../Autocomplete';
 import { BreadcrumbsProps } from '../Breadcrumbs';
+import { DatePickerPresetsProps } from '../DatePicker';
 import { DialogArrowProps, DialogCloseProps } from '../Dialog';
 import { FileInfoNameProps } from '../FileInfo';
 import { FormatSizeProps } from '../FormatSize';
@@ -41,6 +42,22 @@ export interface Localization {
     };
     ESBreadcrumbs: {
       defaultProps: Pick<BreadcrumbsProps, 'labelButtonMore'>;
+    };
+    ESDatePickerPresets: {
+      defaultProps: Pick<
+        DatePickerPresetsProps,
+        | 'labelManual'
+        | 'labelYesterday'
+        | 'labelToday'
+        | 'labelTomorrow'
+        | 'labelPrevWeek'
+        | 'labelWeek'
+        | 'labelNextWeek'
+        | 'labelPrevMonth'
+        | 'labelMonth'
+        | 'labelNextMonth'
+        | 'labelYear'
+      >;
     };
     ESDialogArrow: {
       defaultProps: Pick<DialogArrowProps, 'labelPrev' | 'labelNext'>;
@@ -136,6 +153,21 @@ export const en: Localization = {
     ESBreadcrumbs: {
       defaultProps: {
         labelButtonMore: 'More'
+      }
+    },
+    ESDatePickerPresets: {
+      defaultProps: {
+        labelManual: 'Manual',
+        labelYesterday: 'Yesterday',
+        labelToday: 'Today',
+        labelTomorrow: 'Tomorrow',
+        labelPrevWeek: 'Previous week',
+        labelWeek: 'Week',
+        labelNextWeek: 'Next week',
+        labelPrevMonth: 'Previous month',
+        labelMonth: 'Month',
+        labelNextMonth: 'Next month',
+        labelYear: 'Year'
       }
     },
     ESDialogArrow: {
@@ -273,6 +305,21 @@ export const ru: Localization = {
     ESBreadcrumbs: {
       defaultProps: {
         labelButtonMore: 'Ещё'
+      }
+    },
+    ESDatePickerPresets: {
+      defaultProps: {
+        labelManual: 'Выбрать вручную',
+        labelYesterday: 'Вчера',
+        labelToday: 'Сегодня',
+        labelTomorrow: 'Завтра',
+        labelPrevWeek: 'Прошлая неделя',
+        labelWeek: 'Эта неделя',
+        labelNextWeek: 'Следующая неделя',
+        labelPrevMonth: 'Прошлый месяц',
+        labelMonth: 'Этот месяц',
+        labelNextMonth: 'Следующий месяц',
+        labelYear: 'Этот год'
       }
     },
     ESDialogArrow: {

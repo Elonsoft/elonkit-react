@@ -1,0 +1,49 @@
+import { Meta, Story, Canvas, ArgsTable, Props } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { DatePickerView } from '.';
+
+<Meta
+  title="Components/DatePicker/DatePickerView"
+  component={DatePickerView}
+  parameters={{
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    classes: {
+      table: {
+        disable: true
+      }
+    },
+    className: {
+      table: {
+        disable: true
+      }
+    },
+    sx: {
+      table: {
+        disable: true
+      }
+    }
+  }}
+/>
+
+# DatePickerView
+
+This is a DatePickerView.
+
+<Canvas>
+  <Story name="Demo">{(args, context) => <DatePickerView {...args} weekStart={+args.weekStart || 0} />}</Story>
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-DatePickerView" story="page">
+      <code>DatePickerView</code>
+    </LinkTo>
+  </li>
+</ul>

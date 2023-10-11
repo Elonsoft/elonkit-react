@@ -1,0 +1,171 @@
+import { useMemo } from 'react';
+
+import { DatePickerPresetsProps } from './DatePickerPresets.types';
+
+import clsx from 'clsx';
+import { getDatePickerPresetsUtilityClass } from './DatePickerPresets.classes';
+
+import { unstable_composeClasses as composeClasses } from '@mui/base';
+
+import { styled, useThemeProps } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+
+type DatePickerPresetsOwnerState = {
+  classes?: DatePickerPresetsProps['classes']
+};
+
+const useUtilityClasses = (ownerState: DatePickerPresetsOwnerState) => {
+  const { classes } = ownerState;
+
+  const slots = {
+    root: ['root']
+  };
+
+  return composeClasses(slots, getDatePickerPresetsUtilityClass, classes);
+};
+
+const DatePickerPresetsRoot = styled('div', {
+  name: 'ESDatePickerPresets',
+  slot: 'Root',
+  overridesResolver: (props, styles) => styles.root
+})(() => ({}));
+
+const PRESETS: Array<{ name: string, getDates: () => [Date, Date | null] }> = [
+  {
+    name: 'Yesterday',
+    getDates: () => {
+      const date = new Date();
+      date.setDate(date.getDate() - 1);
+      return [date, null];
+    }
+  },
+  {
+    name: 'Today',
+    getDates: () => {
+      return [new Date(), null];
+    }
+  },
+  {
+    name: 'Tomorrow',
+    getDates: () => {
+      const date = new Date();
+      date.setDate(date.getDate() + 1);
+      return [date, null];
+    }
+  },
+  {
+    name: 'PrevWeek',
+    getDates: () => {
+      const startDate = new Date();
+      const endDate = new Date();
+      return [startDate, endDate];
+    }
+  },
+  {
+    name: 'Week',
+    getDates: () => {
+      const startDate = new Date();
+      const endDate = new Date();
+      return [startDate, endDate];
+    }
+  },
+  {
+    name: 'NextWeek',
+    getDates: () => {
+      const startDate = new Date();
+      const endDate = new Date();
+      return [startDate, endDate];
+    }
+  },
+  {
+    name: 'PrevMonth',
+    getDates: () => {
+      const startDate = new Date();
+      const endDate = new Date();
+      return [startDate, endDate];
+    }
+  },
+  {
+    name: 'Month',
+    getDates: () => {
+      const startDate = new Date();
+      startDate.setDate(1);
+      const endDate = new Date();
+      endDate.setMonth(endDate.getMonth() + 1);
+      endDate.setDate(-1);
+      return [startDate, endDate];
+    }
+  },
+  {
+    name: 'NextMonth',
+    getDates: () => {
+      const startDate = new Date();
+      const endDate = new Date();
+      return [startDate, endDate];
+    }
+  },
+  {
+    name: 'Year',
+    getDates: () => {
+      const startDate = new Date();
+      startDate.setMonth(0);
+      startDate.setDate(1);
+      const endDate = new Date();
+      endDate.setMonth(11);
+      endDate.setDate(31);
+      return [startDate, endDate];
+    }
+  }
+];
+
+export const DatePickerPresets: React.FC<DatePickerPresetsProps> = (inProps) => {
+  const {
+    className,
+    sx,
+    onSelect,
+
+    labelManual,
+    labelYesterday,
+    labelToday,
+    labelTomorrow,
+    labelPrevWeek,
+    labelWeek,
+    labelNextWeek,
+    labelPrevMonth,
+    labelMonth,
+    labelNextMonth,
+    labelYear,
+
+    ...props
+  } = useThemeProps({
+    props: inProps,
+    name: 'ESDatePickerPresets'
+  });
+
+  const labels = {
+    labelManual,
+    labelYesterday,
+    labelToday,
+    labelTomorrow,
+    labelPrevWeek,
+    labelWeek,
+    labelNextWeek,
+    labelPrevMonth,
+    labelMonth,
+    labelNextMonth,
+    labelYear
+  };
+
+  const ownerState = { ...props };
+  const classes = useUtilityClasses(ownerState);
+
+  return (
+    <DatePickerPresetsRoot className={clsx(classes.root, className)} sx={sx}>
+      {PRESETS.map((preset) => (
+        <button key={preset.name} onClick={onSelect ? () => onSelect(preset.getDates()) : undefined}>
+          {labels[`label${preset.name}`]} {preset.name}
+        </button>
+      ))}
+    </DatePickerPresetsRoot>
+  );
+};

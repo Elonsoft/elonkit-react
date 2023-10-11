@@ -1,0 +1,109 @@
+import { Meta, Story, Canvas, ArgsTable, Props } from '@storybook/addon-docs';
+import LinkTo from '@storybook/addon-links/react';
+
+import { DatePickerPresets } from '.';
+
+<Meta
+  title="Components/DatePicker/DatePickerPresets"
+  component={DatePickerPresets}
+  parameters={{
+    options: { showPanel: true }
+  }}
+  argTypes={{
+    classes: {
+      table: {
+        disable: true
+      }
+    },
+    className: {
+      table: {
+        disable: true
+      }
+    },
+    sx: {
+      table: {
+        disable: true
+      }
+    },
+    onSelect: {
+      table: {
+        disable: true
+      }
+    },
+    labelManual: {
+      table: {
+        disable: true
+      }
+    },
+    labelYesterday: {
+      table: {
+        disable: true
+      }
+    },
+    labelToday: {
+      table: {
+        disable: true
+      }
+    },
+    labelTomorrow: {
+      table: {
+        disable: true
+      }
+    },
+    labelPrevWeek: {
+      table: {
+        disable: true
+      }
+    },
+    labelWeek: {
+      table: {
+        disable: true
+      }
+    },
+    labelNextWeek: {
+      table: {
+        disable: true
+      }
+    },
+    labelPrevMonth: {
+      table: {
+        disable: true
+      }
+    },
+    labelMonth: {
+      table: {
+        disable: true
+      }
+    },
+    labelNextMonth: {
+      table: {
+        disable: true
+      }
+    },
+    labelYear: {
+      table: {
+        disable: true
+      }
+    }
+  }}
+/>
+
+# DatePickerPresets
+
+This is a DatePickerPresets.
+
+<Canvas>
+  <Story name="Demo">{(args, context) => <DatePickerPresets {...args} />}</Story>
+</Canvas>
+
+<ArgsTable story="Demo" />
+
+## API
+
+<ul>
+  <li>
+    <LinkTo kind="components-api-DatePickerPresets" story="page">
+      <code>DatePickerPresets</code>
+    </LinkTo>
+  </li>
+</ul>
