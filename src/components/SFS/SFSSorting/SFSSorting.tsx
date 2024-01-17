@@ -28,6 +28,7 @@ import { Link } from '../../Link';
 import { svgIconClasses } from '../../SvgIcon';
 import { Switch, switchClasses } from '../../Switch';
 import { SFSButton } from '../SFSButton';
+import { SFSButtonBadge } from '../SFSButton/SFSButton';
 
 type SFSSortingOwnerState = {
   classes?: SFSSortingProps['classes'];
@@ -74,11 +75,11 @@ const SFSSortingMenuButton = styled(SFSButton, {
   }
 }));
 
-const SFSSortingButtonBadge = styled(Typography, {
+const SFSSortingButtonBadge = styled(SFSButtonBadge, {
   name: 'ESSFSSorting',
   slot: 'buttonBadge',
   overridesResolver: (_, styles) => styles.buttonBadge
-})(() => ({})) as typeof Typography;
+})(() => ({})) as typeof SFSButtonBadge;
 
 const SFSSortingMenu = styled(Popover, {
   name: 'ESSFSSorting',

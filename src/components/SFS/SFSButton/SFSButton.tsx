@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 import { svgIconClasses } from '../../SvgIcon';
 import { sfsFiltersClasses } from '../SFSFilters';
@@ -22,15 +23,6 @@ const SFSButtonRoot = styled(Button)(({ theme }) => ({
       color: theme.palette.monoA.A500
     }
   },
-  [`& .${sfsSortingClasses.buttonBadge}, & .${sfsFiltersClasses.buttonBadge}`]: {
-    width: '16px',
-    height: '16px',
-    borderRadius: '16px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.palette.secondary[300]
-  },
   [theme.breakpoints.down('tabletXS')]: {
     gap: '2px',
     '& > .MuiTypography-root:first-of-type': {
@@ -44,6 +36,16 @@ const SFSButtonRoot = styled(Button)(({ theme }) => ({
       }
     }
 }));
+
+export const SFSButtonBadge = styled(Typography)(({ theme }) => ({
+  width: '16px',
+  height: '16px',
+  borderRadius: '16px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: theme.palette.secondary[300]
+})) as typeof Typography;
 
 export const SFSButton: typeof Button = ({ children, ...props }: any) => (
   <SFSButtonRoot color="tertiary" size="32" {...props}>

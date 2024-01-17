@@ -17,6 +17,7 @@ import Typography from '@mui/material/Typography';
 import { IconCloseW600, IconFilter } from '../../../icons';
 import { svgIconClasses } from '../../SvgIcon';
 import { SFSButton } from '../SFSButton';
+import { SFSButtonBadge } from '../SFSButton/SFSButton';
 
 type SFSFiltersOwnerState = {
   classes?: SFSFiltersProps['classes'];
@@ -61,11 +62,11 @@ const SFSFiltersButton = styled(SFSButton, {
   }
 }));
 
-const SFSFiltersButtonBadge = styled(Typography, {
+const SFSFiltersButtonBadge = styled(SFSButtonBadge, {
   name: 'ESSFSFilters',
   slot: 'ButtonBadge',
   overridesResolver: (_, styles) => styles.buttonBadge
-})(() => ({})) as typeof Typography;
+})(() => ({})) as typeof SFSButtonBadge;
 
 const SFSFiltersDrawer = styled(Drawer, {
   name: 'ESSFSFilters',
