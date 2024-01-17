@@ -3,7 +3,7 @@ import { memo, useState } from 'react';
 import { SFSFiltersProps } from './SFSFilters.types';
 
 import clsx from 'clsx';
-import { getSFSFiltersUtilityClass, sfsFiltersClasses } from './SFSFilters.classes';
+import { getSFSFiltersUtilityClass } from './SFSFilters.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
@@ -12,7 +12,7 @@ import { backdropClasses } from '@mui/material/Backdrop';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import { paperClasses } from '@mui/material/Paper';
-import Typography, { typographyClasses } from '@mui/material/Typography';
+import Typography from '@mui/material/Typography';
 
 import { IconCloseW600, IconFilter } from '../../../icons';
 import { svgIconClasses } from '../../SvgIcon';
@@ -54,23 +54,9 @@ const SFSFiltersButton = styled(SFSButton, {
   slot: 'Button',
   overridesResolver: (_, styles) => styles.button
 })<{ ownerState: SFSFiltersOwnerState }>(({ theme, ownerState }) => ({
-  gap: '4px',
-
-  [`&:hover .${sfsFiltersClasses.buttonBadge}, &:focus-visible .${sfsFiltersClasses.buttonBadge}, & .${sfsFiltersClasses.buttonBadge}`]:
-    {
-      [`&.${typographyClasses.root}, & .${svgIconClasses.root}`]: {
-        color: `${theme.palette.black.A800}`
-      }
-    },
   [theme.breakpoints.up('tabletXS')]: {
     [`& > .${svgIconClasses.root}`]: {
       display: ownerState.isWithValue && 'none'
-    }
-  },
-  [theme.breakpoints.down('tabletXS')]: {
-    gap: '2px',
-    [`& > .${typographyClasses.root}:first-of-type`]: {
-      display: 'none'
     }
   }
 }));
@@ -79,15 +65,7 @@ const SFSFiltersButtonBadge = styled(Typography, {
   name: 'ESSFSFilters',
   slot: 'ButtonBadge',
   overridesResolver: (_, styles) => styles.buttonBadge
-})(({ theme }) => ({
-  width: '16px',
-  height: '16px',
-  borderRadius: '16px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: theme.palette.secondary[300]
-})) as typeof Typography;
+})(() => ({})) as typeof Typography;
 
 const SFSFiltersDrawer = styled(Drawer, {
   name: 'ESSFSFilters',

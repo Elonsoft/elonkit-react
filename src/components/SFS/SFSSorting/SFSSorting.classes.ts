@@ -6,7 +6,7 @@ export type SFSSortingClasses = {
   /** Styles applied to the menu open button. */
   menuButton: string;
   /** Styles applied to the menu open button badge. */
-  menuButtonBadge: string;
+  buttonBadge: string;
   /** Styles applied to the root menu element. */
   menu: string;
   /** Styles applied to the menu item element. */
@@ -36,7 +36,7 @@ export function getSFSSortingUtilityClass(slot: string) {
 export const sfsSortingClasses: SFSSortingClasses = generateUtilityClasses('ESSFSSorting', [
   'root',
   'menuButton',
-  'menuButtonBadge',
+  'buttonBadge',
   'menu',
   'menuItem',
   'menuHeader',
