@@ -1,10 +1,11 @@
+import { sfsFiltersClasses } from '../SFSFilters/SFSFilters.classes';
+import { sfsSortingClasses } from '../SFSSorting/SFSSorting.classes';
+
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import { svgIconClasses } from '../../SvgIcon';
-import { sfsFiltersClasses } from '../SFSFilters';
-import { sfsSortingClasses } from '../SFSSorting';
 
 const SFSButtonRoot = styled(Button)(({ theme }) => ({
   gap: '4px',
