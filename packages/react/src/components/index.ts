@@ -15,6 +15,7 @@ export * from './Divider';
 export * from './Dropzone';
 export * from './EmptyState';
 export * from './EmptyStateCompact';
+export * from './ErrorPage';
 export * from './FileIcon';
 export * from './FileInfo';
 export * from './Flags';

@@ -74,6 +74,22 @@ import { DropzoneClassKey, DropzoneProps } from './components/Dropzone';
 import { EmptyStateClassKey, EmptyStateProps } from './components/EmptyState';
 import { EmptyStateCompactClassKey, EmptyStateCompactProps } from './components/EmptyStateCompact';
 import {
+  ErrorPageActionsClassKey,
+  ErrorPageActionsProps,
+  ErrorPageClassKey,
+  ErrorPageDescriptionClassKey,
+  ErrorPageDescriptionProps,
+  ErrorPageFooterClassKey,
+  ErrorPageFooterProps,
+  ErrorPageHeadingClassKey,
+  ErrorPageHeadingProps,
+  ErrorPageLogoClassKey,
+  ErrorPageLogoProps,
+  ErrorPageProps,
+  ErrorPageStatusClassKey,
+  ErrorPageStatusProps
+} from './components/ErrorPage';
+import {
   FileIconBadgeClassKey,
   FileIconBadgeProps,
   FileIconClassKey,
@@ -315,6 +331,13 @@ declare module '@mui/material/styles/props' {
     ESDropzone: DropzoneProps;
     ESEmptyState: EmptyStateProps;
     ESEmptyStateCompact: EmptyStateCompactProps;
+    ESErrorPage: ErrorPageProps;
+    ESErrorPageActions: ErrorPageActionsProps;
+    ESErrorPageDescription: ErrorPageDescriptionProps;
+    ESErrorPageFooter: ErrorPageFooterProps;
+    ESErrorPageHeading: ErrorPageHeadingProps;
+    ESErrorPageLogo: ErrorPageLogoProps;
+    ESErrorPageStatus: ErrorPageStatusProps;
     ESFileIcon: FileIconProps;
     ESFileIconBadge: FileIconBadgeProps;
     ESFileIconText: FileIconTextProps;
@@ -424,6 +447,13 @@ declare module '@mui/material/styles/overrides' {
     ESDropzone: DropzoneClassKey;
     ESEmptyState: EmptyStateClassKey;
     ESEmptyStateCompact: EmptyStateCompactClassKey;
+    ESErrorPage: ErrorPageClassKey;
+    ESErrorPageActions: ErrorPageActionsClassKey;
+    ESErrorPageDescription: ErrorPageDescriptionClassKey;
+    ESErrorPageFooter: ErrorPageFooterClassKey;
+    ESErrorPageHeading: ErrorPageHeadingClassKey;
+    ESErrorPageLogo: ErrorPageLogoClassKey;
+    ESErrorPageStatus: ErrorPageStatusClassKey;
     ESFileIcon: FileIconClassKey;
     ESFileIconBadge: FileIconBadgeClassKey;
     ESFileIconText: FileIconTextClassKey;
@@ -611,6 +641,34 @@ declare module '@mui/material/styles/components' {
     ESEmptyStateCompact?: {
       defaultProps?: ComponentsProps['ESEmptyStateCompact'];
       styleOverrides?: ComponentsOverrides['ESEmptyStateCompact'];
+    };
+    ESErrorPage?: {
+      defaultProps?: ComponentsProps['ESErrorPage'];
+      styleOverrides?: ComponentsOverrides['ESErrorPage'];
+    };
+    ESErrorPageActions?: {
+      defaultProps?: ComponentsProps['ESErrorPageActions'];
+      styleOverrides?: ComponentsOverrides['ESErrorPageActions'];
+    };
+    ESErrorPageDescription?: {
+      defaultProps?: ComponentsProps['ESErrorPageDescription'];
+      styleOverrides?: ComponentsOverrides['ESErrorPageDescription'];
+    };
+    ESErrorPageFooter?: {
+      defaultProps?: ComponentsProps['ESErrorPageFooter'];
+      styleOverrides?: ComponentsOverrides['ESErrorPageFooter'];
+    };
+    ESErrorPageHeading?: {
+      defaultProps?: ComponentsProps['ESErrorPageHeading'];
+      styleOverrides?: ComponentsOverrides['ESErrorPageHeading'];
+    };
+    ESErrorPageLogo?: {
+      defaultProps?: ComponentsProps['ESErrorPageLogo'];
+      styleOverrides?: ComponentsOverrides['ESErrorPageLogo'];
+    };
+    ESErrorPageStatus?: {
+      defaultProps?: ComponentsProps['ESErrorPageStatus'];
+      styleOverrides?: ComponentsOverrides['ESErrorPageStatus'];
     };
     ESGallery?: {
       defaultProps?: ComponentsProps['ESGallery'];
