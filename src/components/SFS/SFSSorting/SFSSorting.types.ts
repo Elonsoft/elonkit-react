@@ -4,6 +4,8 @@ import { SFSSortingClasses } from './SFSSorting.classes';
 
 import { SxProps, Theme } from '@mui/material';
 
+import { SortingMenuProps } from 'src/components/SortingMenu';
+
 export type SFSSortingDirection = 'asc' | 'desc';
 
 export type SFSSortingValue = {
@@ -33,38 +35,16 @@ export type SFSSortingProps = {
   className?: string;
   /** The sorting options. */
   options: { value: string; label: string }[];
-
-  /** Text for the ascending label. */
-  labelAsc?: string;
-  /** Text for the descending label. */
-  labelDesc?: string;
-  /** Text for the reset button. */
-  labelResetButton?: string;
   /** Text for the menu open button. */
   labelButton?: string;
-  /** Text for the sorting menu button label when multisort is enabled. */
-  labelSortOrder?: string;
-  /** Text for the menu title. */
-  labelSortTooltip?: string;
-  /** Text for the left mouse button. */
-  labelMultisortLMB?: string;
-  /** Text for the switch label. */
-  labelMultisortTitle?: string;
-  /** Text for the switch label. */
-  labelMultisortMobileOn?: string;
-  /** Text for the switch label. */
-  labelMultisortMobileOff?: string;
-
   /** Icon for the menu button. */
   iconSort?: ReactNode;
   /** Icon for the ascending badge. */
   iconAsc?: ReactNode;
   /** Icon for the descending badge. */
   iconDesc?: ReactNode;
-  /** Icon for the ascending item direction. */
-  iconItemAsc?: ReactNode;
-  /** Icon for the descending item direction. */
-  iconItemDesc?: ReactNode;
+
+  children?: React.ReactElement<SortingMenuProps>;
 } & (
   | {
       /** If `true`, multiple options can be selected. */
