@@ -1,3 +1,3 @@
 export { SortingMenu } from './SortingMenu';
 export { SortingMenuClasses, SortingMenuClassKey } from './SortingMenu.classes';
-export { SortingMenuProps } from './SortingMenu.types';
+export { SortingMenuDirection, SortingMenuProps, SortingMenuValue } from './SortingMenu.types';

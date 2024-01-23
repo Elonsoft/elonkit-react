@@ -1,6 +1,6 @@
-import React, { memo, useRef, useState } from 'react';
+import React, { memo, useState } from 'react';
 
-import { SFSSortingDirection, SFSSortingOptionMap, SFSSortingProps, SFSSortingValue } from './SFSSorting.types';
+import { SFSSortingProps } from './SFSSorting.types';
 
 import clsx from 'clsx';
 import { getSFSSortingUtilityClass, sfsSortingClasses } from './SFSSorting.classes';
@@ -11,6 +11,7 @@ import { styled, useThemeProps } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
 import { IconSortAscending2, IconSortDescending2, IconSortOff } from '../../../icons';
+import { SortingMenu } from '../../SortingMenu';
 import { svgIconClasses } from '../../SvgIcon';
 import { SFSButton } from '../SFSButton';
 
@@ -79,10 +80,10 @@ const SFSSortingMenuButtonBadge = styled(Typography, {
 
 export const SFSSorting = memo(function SFSSorting(inProps: SFSSortingProps) {
   const {
-    button,
-
+    classes: inClasses,
     className,
     sx,
+
     options,
 
     labelButton,
@@ -98,29 +99,10 @@ export const SFSSorting = memo(function SFSSorting(inProps: SFSSortingProps) {
 
   const values = props.multiple ? props.value : props.value ? [props.value] : [];
 
-  const ownerState = { classes: props.classes, isWithValue: !!values[0] };
+  const ownerState = { classes: inClasses, isWithValue: !!values[0] };
   const classes = useUtilityClasses(ownerState);
 
   const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null);
-
-  const menuListRef = useRef<HTMLUListElement | null>(null);
-
-  const sortMap: Record<string, SFSSortingOptionMap> = {};
-  const valuesMap: Record<string, { i: number; direction: SFSSortingDirection }> = {};
-
-  values.forEach((value, i) => {
-    valuesMap[value.value] = {
-      direction: value.direction,
-      i
-    };
-  });
-
-  options.forEach((option) => {
-    sortMap[option.value] = {
-      ...option,
-      ...valuesMap[option.value]
-    };
-  });
 
   const onMenuClose = () => {
     setMenuAnchor(null);
@@ -132,39 +114,39 @@ export const SFSSorting = memo(function SFSSorting(inProps: SFSSortingProps) {
 
   return (
     <SFSSortingRoot className={clsx(classes.root, className)} sx={sx}>
-      {button ? (
-        button({ anchorEl: menuAnchor, setAnchorEl: setMenuAnchor })
-      ) : (
-        <SFSSortingMenuButton className={classes.menuButton} ownerState={ownerState} onClick={onMenuOpen}>
-          <Typography component="div" variant="body100">
-            {values.length === 1 ? sortMap[values[0].value].label : labelButton}
-          </Typography>
-          {iconSort}
-          {values.length === 1 && (
-            <SFSSortingMenuButtonBadge className={classes.menuButtonBadge} component="div">
-              {values[0].direction === 'asc' ? iconAsc : iconDesc}
-            </SFSSortingMenuButtonBadge>
-          )}
-          {values.length > 1 && (
-            <SFSSortingMenuButtonBadge className={classes.menuButtonBadge} component="div" variant="mini200">
-              {values.length}
-            </SFSSortingMenuButtonBadge>
-          )}
-        </SFSSortingMenuButton>
-      )}
-      {React.isValidElement(inProps.children)
-        ? React.cloneElement(inProps.children, {
-            menuAnchor,
-            menuListRef,
-            multiple: props.multiple,
-            options,
-            sortMap,
-            values,
-            valuesMap,
-            onChange: props.onChange as (values: SFSSortingValue[] | SFSSortingValue | null) => void,
-            onMenuClose
-          })
-        : null}
+      <SFSSortingMenuButton className={classes.menuButton} ownerState={ownerState} onClick={onMenuOpen}>
+        <Typography component="div" variant="body100">
+          {values.length === 1 ? options.find((o) => o.value === values[0].value)?.label : labelButton}
+        </Typography>
+        {iconSort}
+        {values.length === 1 && (
+          <SFSSortingMenuButtonBadge className={classes.menuButtonBadge} component="div">
+            {values[0].direction === 'asc' ? iconAsc : iconDesc}
+          </SFSSortingMenuButtonBadge>
+        )}
+        {values.length > 1 && (
+          <SFSSortingMenuButtonBadge className={classes.menuButtonBadge} component="div" variant="mini200">
+            {values.length}
+          </SFSSortingMenuButtonBadge>
+        )}
+      </SFSSortingMenuButton>
+      <SortingMenu
+        PopoverProps={{
+          anchorEl: menuAnchor,
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right'
+          },
+          open: !!menuAnchor,
+          transformOrigin: {
+            vertical: 'top',
+            horizontal: 'right'
+          },
+          onClose: onMenuClose
+        }}
+        options={options}
+        {...props}
+      />
     </SFSSortingRoot>
   );
 });

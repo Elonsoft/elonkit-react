@@ -1,37 +1,35 @@
-import { MutableRefObject, ReactNode } from 'react';
-
-import { SFSSortingDirection, SFSSortingOptionMap } from '../SFS/SFSSorting/SFSSorting.types';
+import { ReactNode } from 'react';
 
 import { SortingMenuClasses } from './SortingMenu.classes';
 
-import { SFSSortingValue } from '../SFS';
+import { PopoverProps } from '@mui/material';
+
+export type SortingMenuDirection = 'asc' | 'desc';
+
+export type SortingMenuValue = {
+  value: string;
+  direction: SortingMenuDirection;
+};
+
+export interface SortingMenuOptionMap {
+  value: string;
+  label: string;
+  direction: SortingMenuDirection;
+  i: number;
+}
 
 export type SortingMenuProps = {
-  /** An array of sorting values to display and interact with. */
-  values?: SFSSortingValue[];
   /** Override or extend the styles applied to the component. */
   classes?: Partial<SortingMenuClasses>;
-  /** The anchor element to which the sorting menu will be positioned relative to. */
-  menuAnchor?: HTMLElement | null;
-  /** Callback function triggered when the sorting menu is closed. */
-  onMenuClose?: () => void;
-  /** Ref object to store a reference to the menu list element. */
-  menuListRef?: MutableRefObject<HTMLUListElement | null>;
-  /** A mapping of sorting values to their corresponding sorting options. */
-  sortMap?: Record<string, SFSSortingOptionMap>;
-  /** A mapping of sorting values to their index and direction. */
-  valuesMap?: Record<
-    string,
-    {
-      i: number;
-      direction: SFSSortingDirection;
-    }
-  >;
+
   /** The sorting options. */
   options?: {
     value: string;
     label: string;
   }[];
+
+  PopoverProps: PopoverProps;
+
   /** Text for the ascending label. */
   labelAsc?: string;
   /** Text for the descending label. */
@@ -50,12 +48,26 @@ export type SortingMenuProps = {
   labelMultisortMobileOn?: string;
   /** Text for the switch label. */
   labelMultisortMobileOff?: string;
+
   /** Icon for the ascending item direction. */
   iconItemAsc?: ReactNode;
   /** Icon for the descending item direction. */
   iconItemDesc?: ReactNode;
-  /** If true, allows multiple sorting values to be selected simultaneously. */
-  multiple?: boolean;
-  /** Callback function triggered when the selected sorting values change. */
-  onChange?: (values: SFSSortingValue[] | SFSSortingValue | null) => void;
-};
+} & (
+  | {
+      /** If `true`, multiple options can be selected. */
+      multiple: true;
+      /** The selected options with directions. */
+      value: SortingMenuValue[];
+      /** Callback fired when user changes sorting. */
+      onChange: (value: SortingMenuValue[]) => void;
+    }
+  | {
+      /** If `true`, multiple options can be selected. */
+      multiple?: false;
+      /** The selected option with direction. */
+      value: SortingMenuValue | null;
+      /** Callback fired when user changes sorting. */
+      onChange: (value: SortingMenuValue | null) => void;
+    }
+);

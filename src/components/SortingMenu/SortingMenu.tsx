@@ -1,15 +1,16 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useRef, useState } from 'react';
 
-import { SFSSortingValue } from '../SFS/SFSSorting/SFSSorting.types';
-import { SortingMenuProps } from './SortingMenu.types';
+import { SortingMenuDirection, SortingMenuOptionMap, SortingMenuProps, SortingMenuValue } from './SortingMenu.types';
 
+import clsx from 'clsx';
 import { sortingMenuClasses } from '../SortingMenu/SortingMenu.classes';
 import { getSortingMenuUtilityClass } from './SortingMenu.classes';
 
 import { styled, useThemeProps } from '@mui/material/styles';
-import { ListItemText, unstable_composeClasses, useMediaQuery } from '@mui/material';
+import { unstable_composeClasses, useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Popover from '@mui/material/Popover';
@@ -44,13 +45,13 @@ const useUtilityClasses = (ownerState: SortingMenuOwnerState) => {
   return unstable_composeClasses(slots, getSortingMenuUtilityClass, classes);
 };
 
-const SortingMenuMain = styled(Popover, {
+const SortingMenuRoot = styled(Popover, {
   name: 'ESSortingMenu',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.menu
+  overridesResolver: (_, styles) => styles.root
 })(({ theme }) => ({
   '& .MuiPopover-paper': {
-    ...theme.scrollbars.overlay,
+    ...theme.scrollbars.overlayMonoA,
     marginTop: '4px',
     paddingBottom: '6px',
     backgroundImage: 'none',
@@ -225,16 +226,10 @@ const getNextItem = (elem: HTMLLIElement): HTMLLIElement | undefined => {
 
 export const SortingMenu = memo(function SortingMenu(inProps: SortingMenuProps) {
   const {
+    PopoverProps,
+
     options = [],
 
-    multiple,
-    values = [],
-    menuAnchor,
-    onChange,
-    onMenuClose,
-    menuListRef,
-    sortMap = {},
-    valuesMap = {},
     labelAsc,
     labelDesc,
     labelResetButton,
@@ -254,11 +249,18 @@ export const SortingMenu = memo(function SortingMenu(inProps: SortingMenuProps) 
     name: 'ESSortingMenu'
   });
 
+  const values = props.multiple ? props.value : props.value ? [props.value] : [];
+
   const ownerState = { classes: props.classes, isWithValue: !!values[0] };
   const classes = useUtilityClasses(ownerState);
 
   const isTouchScreen = useMediaQuery('(hover: none) and (pointer: coarse)');
-  const [isMultiple, setMultiple] = useState(multiple && values.length > 1);
+  const [isMultiple, setMultiple] = useState(props.multiple && values.length > 1);
+
+  const menuListRef = useRef<HTMLUListElement | null>(null);
+
+  const sortMap: Record<string, SortingMenuOptionMap> = {};
+  const valuesMap: Record<string, { i: number; direction: SortingMenuDirection }> = {};
 
   values.forEach((value, i) => {
     valuesMap[value.value] = {
@@ -287,8 +289,8 @@ export const SortingMenu = memo(function SortingMenu(inProps: SortingMenuProps) 
     });
   };
 
-  const onSortChange = (values: SFSSortingValue[]) => {
-    multiple && onChange ? onChange(values) : onChange && onChange(values[0] ? { ...values[0] } : null);
+  const onSortChange = (values: SortingMenuValue[]) => {
+    props.multiple ? props.onChange(values) : props.onChange(values[0] ? { ...values[0] } : null);
   };
 
   const onChangeSortMode = () => {
@@ -302,7 +304,7 @@ export const SortingMenu = memo(function SortingMenu(inProps: SortingMenuProps) 
   };
 
   const toggleMultiSort = (value: string) => {
-    const newValues: SFSSortingValue[] = values[sortMap[value].i]
+    const newValues: SortingMenuValue[] = values[sortMap[value].i]
       ? values.filter(({ value: v }) => v !== value || !isMultiple)
       : [...values, { value, direction: 'asc' }];
 
@@ -312,7 +314,7 @@ export const SortingMenu = memo(function SortingMenu(inProps: SortingMenuProps) 
 
   const onHandleSort =
     (value: string) => (e?: React.MouseEvent<HTMLLIElement> | React.KeyboardEvent<HTMLLIElement>) => {
-      const isMultipleSort = multiple && (isMultiple || e?.metaKey || e?.ctrlKey);
+      const isMultipleSort = props.multiple && (isMultiple || e?.metaKey || e?.ctrlKey);
 
       isMultipleSort
         ? toggleMultiSort(value)
@@ -360,7 +362,7 @@ export const SortingMenu = memo(function SortingMenu(inProps: SortingMenuProps) 
     e.stopPropagation();
   };
 
-  const renderItem = (item: SFSSortingValue, i: number, isCalcTabIndex = false) => (
+  const renderItem = (item: SortingMenuValue, i: number, isCalcTabIndex = false) => (
     <SortingMenuItem
       key={item.value}
       className={classes.menuItem}
@@ -395,22 +397,16 @@ export const SortingMenu = memo(function SortingMenu(inProps: SortingMenuProps) 
   );
 
   return (
-    <SortingMenuMain
+    <SortingMenuRoot
+      {...PopoverProps}
       TransitionProps={{
-        onExited: () => isMultiple && values.length === 1 && setMultiple(false)
+        ...PopoverProps.TransitionProps,
+        onExited: (...args) => {
+          isMultiple && values.length === 1 && setMultiple(false);
+          PopoverProps.TransitionProps?.onExited?.(...args);
+        }
       }}
-      anchorEl={menuAnchor}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right'
-      }}
-      className={classes.root}
-      open={!!menuAnchor}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right'
-      }}
-      onClose={onMenuClose}
+      className={clsx(classes.root, PopoverProps.className)}
     >
       <SortingMenuHeader className={classes.menuHeader}>
         <SortingCaption className={classes.caption} variant="caption">
@@ -443,7 +439,7 @@ export const SortingMenu = memo(function SortingMenu(inProps: SortingMenuProps) 
           options.filter((v) => !sortMap[v.value].direction).map((o, i) => renderItem(sortMap[o.value], i))}
         {!isMultiple && options.map((option, i) => renderItem(sortMap[option.value], i, true))}
       </MenuList>
-      {multiple && (
+      {props.multiple && (
         <SortingMenuFooter className={classes.menuFooter}>
           {isTouchScreen ? (
             <SortingCaption className={classes.caption} variant="caption">
@@ -464,6 +460,6 @@ export const SortingMenu = memo(function SortingMenu(inProps: SortingMenuProps) 
           <Switch checked={isMultiple} size="small" type="button" onChange={onChangeSortMode} />
         </SortingMenuFooter>
       )}
-    </SortingMenuMain>
+    </SortingMenuRoot>
   );
 });
