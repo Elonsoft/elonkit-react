@@ -71,7 +71,8 @@
   },
   "dependencies": {
     "@date-io/core": "^2.11.0",
-    "@use-gesture/react": "^10.2.27"
+    "@use-gesture/react": "^10.2.27",
+    "libphonenumber-js": "^1.11.2"
   },
   "peerDependencies": {
     "@date-io/core": "^2.11.0",

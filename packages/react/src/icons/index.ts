@@ -131,6 +131,7 @@ export { IconFormatStrikethrough } from './IconFormatStrikethrough';
 export { IconFormatUnderline } from './IconFormatUnderline';
 export { IconFullscreen } from './IconFullscreen';
 export { IconFullscreenExit } from './IconFullscreenExit';
+export { IconGlobalLineW500 } from './IconGlobalLineW500';
 export { IconGroupBy } from './IconGroupBy';
 export { IconHeart } from './IconHeart';
 export { IconHome } from './IconHome';
