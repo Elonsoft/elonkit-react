@@ -4,6 +4,7 @@ export * from './AudioPlayer';
 export * from './Autocomplete';
 export * from './AutocompleteField';
 export * from './AvatarGroup';
+export * from './Banner';
 export * from './BottomSheet';
 export * from './Breadcrumbs';
 export * from './DateAdapter';

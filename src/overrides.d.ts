@@ -44,6 +44,14 @@ import {
 } from './components/Autocomplete';
 import { AutocompleteFieldClassKey, AutocompleteFieldProps } from './components/AutocompleteField';
 import { AvatarGroupClassKey, AvatarGroupProps } from './components/AvatarGroup';
+import {
+  BannerActionsClassKey,
+  BannerActionsProps,
+  BannerClassKey,
+  BannerProps,
+  BannerTitleClassKey,
+  BannerTitleProps
+} from './components/Banner';
 import { BottomSheetClassKey, BottomSheetProps } from './components/BottomSheet';
 import { BreadcrumbClassKey, BreadcrumbProps, BreadcrumbsClassKey, BreadcrumbsProps } from './components/Breadcrumbs';
 import {
@@ -258,6 +266,9 @@ declare module '@mui/material/styles/props' {
     ESAutocompleteFooter: AutocompleteFooterProps;
     ESAutocompleteHeader: AutocompleteHeaderProps;
     ESAutocompleteField: AutocompleteFieldProps<any>;
+    ESBanner: BannerProps;
+    ESBannerActions: BannerActionsProps;
+    ESBannerTitle: BannerTitleProps;
     ESBreadcrumbs: BreadcrumbsProps;
     ESBreadcrumb: BreadcrumbProps;
     ESBottomSheet: BottomSheetProps;
@@ -347,6 +358,9 @@ declare module '@mui/material/styles/overrides' {
     ESAutocompleteFooter: AutocompleteFooterClassKey;
     ESAutocompleteHeader: AutocompleteHeaderClassKey;
     ESAutocompleteField: AutocompleteFieldClassKey;
+    ESBanner: BannerClassKey;
+    ESBannerActions: BannerActionsClassKey;
+    ESBannerTitle: BannerTitleClassKey;
     ESBreadcrumbs: BreadcrumbsClassKey;
     ESBreadcrumb: BreadcrumbClassKey;
     ESBottomSheet: BottomSheetClassKey;
@@ -467,6 +481,18 @@ declare module '@mui/material/styles/components' {
     ESAutocompleteField?: {
       defaultProps?: ComponentsProps['ESAutocompleteField'];
       styleOverrides?: ComponentsOverrides['ESAutocompleteField'];
+    };
+    ESBanner?: {
+      defaultProps?: ComponentsProps['ESBanner'];
+      styleOverrides?: ComponentsOverrides['ESBanner'];
+    };
+    ESBannerActions?: {
+      defaultProps?: ComponentsProps['ESBannerActions'];
+      styleOverrides?: ComponentsOverrides['ESBannerActions'];
+    };
+    ESBannerTitle?: {
+      defaultProps?: ComponentsProps['ESBannerTitle'];
+      styleOverrides?: ComponentsOverrides['ESBannerTitle'];
     };
     ESBreadcrumbs?: {
       defaultProps?: ComponentsProps['ESBreadcrumbs'];
