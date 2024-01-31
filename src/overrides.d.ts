@@ -46,6 +46,7 @@ import { AutocompleteFieldClassKey, AutocompleteFieldProps } from './components/
 import { AvatarGroupClassKey, AvatarGroupProps } from './components/AvatarGroup';
 import { BottomSheetClassKey, BottomSheetProps } from './components/BottomSheet';
 import { BreadcrumbClassKey, BreadcrumbProps, BreadcrumbsClassKey, BreadcrumbsProps } from './components/Breadcrumbs';
+import { ChipClassKey, ChipProps } from './components/Chip';
 import {
   DialogActionsClassKey,
   DialogActionsProps,
@@ -263,6 +264,7 @@ declare module '@mui/material/styles/props' {
     ESBreadcrumbs: BreadcrumbsProps;
     ESBreadcrumb: BreadcrumbProps;
     ESBottomSheet: BottomSheetProps;
+    ESChip: ChipProps;
     ESDialog: DialogProps;
     ESDialogActions: DialogActionsProps;
     ESDialogArrow: DialogArrowProps;
@@ -354,6 +356,7 @@ declare module '@mui/material/styles/overrides' {
     ESBreadcrumbs: BreadcrumbsClassKey;
     ESBreadcrumb: BreadcrumbClassKey;
     ESBottomSheet: BottomSheetClassKey;
+    ESChip: ChipClassKey;
     ESDialog: DialogClassKey;
     ESDialogActions: DialogActionsClassKey;
     ESDialogArrow: DialogArrowClassKey;
@@ -485,6 +488,10 @@ declare module '@mui/material/styles/components' {
     ESBottomSheet?: {
       defaultProps?: ComponentsProps['ESBottomSheet'];
       styleOverrides?: ComponentsOverrides['ESBottomSheet'];
+    };
+    ESChip?: {
+      defaultProps?: ComponentsProps['ESChip'];
+      styleOverrides?: ComponentsOverrides['ESChip'];
     };
     ESDialog?: {
       defaultProps?: ComponentsProps['ESDialog'];

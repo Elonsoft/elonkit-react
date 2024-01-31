@@ -6,6 +6,7 @@ export * from './AutocompleteField';
 export * from './AvatarGroup';
 export * from './BottomSheet';
 export * from './Breadcrumbs';
+export * from './Chip';
 export * from './DateAdapter';
 export * from './Dialog';
 export * from './DialogStack';
