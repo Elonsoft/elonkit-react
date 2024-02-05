@@ -28,6 +28,7 @@ import { Link } from '../../Link';
 import { svgIconClasses } from '../../SvgIcon';
 import { Switch, switchClasses } from '../../Switch';
 import { SFSButton } from '../SFSButton';
+import { SFSButtonBadge } from '../SFSButton/SFSButton';
 
 type SFSSortingOwnerState = {
   classes?: SFSSortingProps['classes'];
@@ -40,7 +41,7 @@ const useUtilityClasses = (ownerState: SFSSortingOwnerState) => {
   const slots = {
     root: ['root'],
     menuButton: ['menuButton'],
-    menuButtonBadge: ['menuButtonBadge'],
+    buttonBadge: ['buttonBadge'],
     menu: ['menu'],
     menuItem: ['menuItem'],
     menuHeader: ['menuHeader'],
@@ -67,40 +68,18 @@ const SFSSortingMenuButton = styled(SFSButton, {
   slot: 'MenuButton',
   overridesResolver: (_, styles) => styles.menuButton
 })<{ ownerState: SFSSortingOwnerState }>(({ ownerState, theme }) => ({
-  gap: '4px',
-
-  [`&:hover .${sfsSortingClasses.menuButtonBadge}, &:focus-visible .${sfsSortingClasses.menuButtonBadge},, & .${sfsSortingClasses.menuButtonBadge}`]:
-    {
-      [`&.MuiTypography-root, & .${svgIconClasses.root}`]: {
-        color: `${theme.palette.black.A800}`
-      }
-    },
   [theme.breakpoints.up('tabletXS')]: {
     [`& > .${svgIconClasses.root}`]: {
       display: ownerState.isWithValue && 'none'
     }
-  },
-  [theme.breakpoints.down('tabletXS')]: {
-    gap: '2px',
-    '& > .MuiTypography-root:first-of-type': {
-      display: 'none'
-    }
   }
 }));
 
-const SFSSortingMenuButtonBadge = styled(Typography, {
+const SFSSortingButtonBadge = styled(SFSButtonBadge, {
   name: 'ESSFSSorting',
-  slot: 'MenuButtonBadge',
-  overridesResolver: (_, styles) => styles.menuButtonBadge
-})(({ theme }) => ({
-  width: '16px',
-  height: '16px',
-  borderRadius: '16px',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: theme.palette.secondary[300]
-})) as typeof Typography;
+  slot: 'buttonBadge',
+  overridesResolver: (_, styles) => styles.buttonBadge
+})(() => ({})) as typeof SFSButtonBadge;
 
 const SFSSortingMenu = styled(Popover, {
   name: 'ESSFSSorting',
@@ -479,14 +458,14 @@ export const SFSSorting = memo(function SFSSorting(inProps: SFSSortingProps) {
           </Typography>
           {iconSort}
           {values.length === 1 && (
-            <SFSSortingMenuButtonBadge className={classes.menuButtonBadge} component="div">
+            <SFSSortingButtonBadge className={classes.buttonBadge} component="div">
               {values[0].direction === 'asc' ? iconAsc : iconDesc}
-            </SFSSortingMenuButtonBadge>
+            </SFSSortingButtonBadge>
           )}
           {values.length > 1 && (
-            <SFSSortingMenuButtonBadge className={classes.menuButtonBadge} component="div" variant="mini200">
+            <SFSSortingButtonBadge className={classes.buttonBadge} component="div" variant="mini200">
               {values.length}
-            </SFSSortingMenuButtonBadge>
+            </SFSSortingButtonBadge>
           )}
         </SFSSortingMenuButton>
       )}
