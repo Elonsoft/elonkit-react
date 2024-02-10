@@ -199,6 +199,12 @@ import {
   TableTextProps
 } from './components/Table';
 import { TextFieldGroupClassKey, TextFieldGroupProps } from './components/TextFieldGroup';
+import {
+  ToggleButtonClassKey,
+  ToggleButtonGroupClassKey,
+  ToggleButtonGroupProps,
+  ToggleButtonProps
+} from './components/ToggleButtonGroup';
 import { buttonMixin, listItemMixin } from './theming/mixins';
 
 export interface ISurfacePalette {
@@ -346,6 +352,8 @@ declare module '@mui/material/styles/props' {
     ESTableScrollbar: TableScrollbarProps;
     ESTableText: TableTextProps;
     ESTextFieldGroup: TextFieldGroupProps;
+    ESToggleButtonGroup: ToggleButtonGroupProps;
+    ESToggleButton: ToggleButtonProps;
   }
 }
 
@@ -439,6 +447,8 @@ declare module '@mui/material/styles/overrides' {
     ESTableScrollbar: TableScrollbarClassKey;
     ESTableText: TableTextClassKey;
     ESTextFieldGroup: TextFieldGroupClassKey;
+    ESToggleButtonGroup: ToggleButtonGroupClassKey;
+    ESToggleButton: ToggleButtonClassKey;
   }
 }
 
@@ -799,6 +809,14 @@ declare module '@mui/material/styles/components' {
     ESTextFieldGroup?: {
       defaultProps?: ComponentsProps['ESTextFieldGroup'];
       styleOverrides?: ComponentsOverrides['ESTextFieldGroup'];
+    };
+    ESToggleButtonGroup?: {
+      defaultProps?: ComponentsProps['ESToggleButtonGroup'];
+      styleOverrides?: ComponentsOverrides['ESToggleButtonGroup'];
+    };
+    ESToggleButton?: {
+      defaultProps?: ComponentsProps['ESToggleButton'];
+      styleOverrides?: ComponentsOverrides['ESToggleButton'];
     };
   }
 }
