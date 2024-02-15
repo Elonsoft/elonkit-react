@@ -2,7 +2,13 @@
   "import": ["@cspell/dict-ru_ru/cspell-ext.json", "@cspell/dict-lorem-ipsum/cspell-ext.json"],
   "dictionaries": ["ru-ru", "lorem-ipsum"],
   "languageSettings": [{ "languageId": "commit-msg", "ignoreRegExpList": ["/^#.*/gm"] }],
-  "ignorePaths": ["node_modules/**", "**/lib/**", "src/typedoc.json", "lerna.json"],
+  "ignorePaths": [
+    "node_modules/**",
+    "**/lib/**",
+    "**/storybook-static/**",
+    "packages/react/src/typedoc.json",
+    "lerna.json"
+  ],
   "words": [
     "autodocs",
     "behaviour",

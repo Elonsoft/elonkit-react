@@ -15,7 +15,9 @@ export const TooltipEllipsis = ({ children, ...props }: TooltipEllipsisProps) =>
   useResizeObserver(ref, () => {
     const isOverflow =
       (childrenRef.current && childrenRef.current.scrollWidth > childrenRef.current.offsetWidth) ||
-      (ref.current && ref.current.scrollWidth > ref.current.offsetWidth);
+      (ref.current && ref.current.scrollWidth > ref.current.offsetWidth) ||
+      (childrenRef.current && childrenRef.current.scrollHeight > childrenRef.current.offsetHeight) ||
+      (ref.current && ref.current.scrollHeight > ref.current.offsetHeight);
 
     setOverflow(!!isOverflow);
   });

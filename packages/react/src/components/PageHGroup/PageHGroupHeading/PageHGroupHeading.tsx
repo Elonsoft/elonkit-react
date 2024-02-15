@@ -7,6 +7,8 @@ import { unstable_composeClasses as composeClasses } from '@mui/base';
 
 import { styled, useThemeProps } from '@mui/material/styles';
 
+import { TooltipEllipsis, TooltipEllipsisProps } from '../../../components/TooltipEllipsis';
+
 type PageHGroupHeadingOwnerState = {
   classes?: PageHGroupHeadingProps['classes'];
   maxLines: PageHGroupHeadingProps['maxLines'];
@@ -17,7 +19,7 @@ const useUtilityClasses = (ownerState: PageHGroupHeadingOwnerState) => {
 
   const slots = {
     root: ['root'],
-    wrapper: ['wrapper']
+    tooltip: ['tooltip']
   };
 
   return composeClasses(slots, getPageHGroupHeadingUtilityClass, classes);
@@ -27,21 +29,15 @@ const PageHGroupHeadingRoot = styled('h1', {
   name: 'ESPageHGroupHeading',
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
-})(({ theme }) => ({
+})<{ ownerState: PageHGroupHeadingOwnerState }>(({ theme, ownerState }) => ({
   ...theme.typography.h2,
   alignSelf: 'center',
   padding: 0,
+  maxHeight: '100%',
   margin: 0,
   color: theme.palette.monoA.A900,
   wordBreak: 'break-word',
-  minWidth: 0
-}));
-
-const PageHGroupHeadingWrapper = styled('span', {
-  name: 'ESPageHGroupHeading',
-  slot: 'Wrapper',
-  overridesResolver: (props, styles) => styles.wrapper
-})<{ ownerState: PageHGroupHeadingOwnerState }>(({ ownerState }) => ({
+  minWidth: 0,
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   display: '-webkit-box',
@@ -49,12 +45,22 @@ const PageHGroupHeadingWrapper = styled('span', {
   WebkitBoxOrient: 'vertical'
 }));
 
+const PageHGroupHeadingTooltip = styled(
+  ({ className, ...props }: TooltipEllipsisProps) => <TooltipEllipsis {...props} classes={{ popper: className }} />,
+  {
+    name: 'ESBreadcrumbs',
+    slot: 'Tooltip',
+    overridesResolver: (props, styles) => styles.tooltip
+  }
+)(() => ({}));
+
 export const PageHGroupHeading = (inProps: PageHGroupHeadingProps) => {
   const {
     className,
     children,
     sx,
     maxLines = 1,
+    TooltipProps,
     ...props
   } = useThemeProps({
     props: inProps,
@@ -65,10 +71,24 @@ export const PageHGroupHeading = (inProps: PageHGroupHeadingProps) => {
   const classes = useUtilityClasses(ownerState);
 
   return (
-    <PageHGroupHeadingRoot className={clsx(classes.root, className)} sx={sx}>
-      <PageHGroupHeadingWrapper className={classes.wrapper} ownerState={ownerState}>
-        {children}
-      </PageHGroupHeadingWrapper>
-    </PageHGroupHeadingRoot>
+    <PageHGroupHeadingTooltip
+      arrow
+      disableInteractive
+      className={classes.tooltip}
+      placement="top"
+      title={children || false}
+      {...TooltipProps}
+    >
+      {({ ref }) => (
+        <PageHGroupHeadingRoot
+          ref={ref as React.RefObject<HTMLHeadingElement>}
+          className={clsx(classes.root, className)}
+          ownerState={ownerState}
+          sx={sx}
+        >
+          {children}
+        </PageHGroupHeadingRoot>
+      )}
+    </PageHGroupHeadingTooltip>
   );
 };
