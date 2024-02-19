@@ -5,7 +5,7 @@ import { AutocompleteClasses } from './Autocomplete.classes';
 import { SxProps, Theme } from '@mui/material/styles';
 import { OutlinedInputProps, TextFieldProps } from '@mui/material';
 
-import { AutocompleteMenuProps } from '..';
+import { AutocompleteMenuProps } from '../AutocompleteMenu';
 
 export type AutocompleteProps<T> = {
   /** Override or extend the styles applied to the component. */

@@ -151,6 +151,7 @@ import {
   PaginationRangeProps
 } from './components/Pagination';
 import { PasswordFieldClassKey, PasswordFieldProps } from './components/PasswordField';
+import { PhoneFieldClassKey, PhoneFieldProps } from './components/PhoneField';
 import {
   SFSClassKey,
   SFSFiltersClassKey,
@@ -351,6 +352,7 @@ declare module '@mui/material/styles/props' {
     ESPaginationPages: PaginationPagesProps;
     ESPaginationRange: PaginationRangeProps;
     ESPasswordField: PasswordFieldProps;
+    ESPhoneField: PhoneFieldProps;
     ESSidebar: SidebarProps;
     ESSidebarSpacer: SidebarSpacerProps;
     ESSidebarToggle: SidebarToggleProps;
@@ -458,6 +460,7 @@ declare module '@mui/material/styles/overrides' {
     ESPaginationPages: PaginationPagesClassKey;
     ESPaginationRange: PaginationRangeClassKey;
     ESPasswordField: PasswordFieldClassKey;
+    ESPhoneField: PhoneFieldClassKey;
     ESSidebar: SidebarClassKey;
     ESSidebarItem: SidebarItemClassKey;
     ESSidebarToggle: SidebarToggleClassKey;
@@ -776,6 +779,10 @@ declare module '@mui/material/styles/components' {
     ESPasswordField?: {
       defaultProps?: ComponentsProps['ESPasswordField'];
       styleOverrides?: ComponentsOverrides['ESPasswordField'];
+    };
+    ESPhoneField?: {
+      defaultProps?: ComponentsProps['ESPhoneField'];
+      styleOverrides?: ComponentsOverrides['ESPhoneField'];
     };
     ESSFS?: {
       defaultProps?: ComponentsProps['ESSFS'];
