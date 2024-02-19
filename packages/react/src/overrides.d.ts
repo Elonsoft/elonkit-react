@@ -298,6 +298,7 @@ declare module '@mui/material/styles/props' {
     ESAutocompleteMenu: AutocompleteMenuProps<any>;
     ESAutocompleteMenuFooter: AutocompleteMenuFooterProps;
     ESAutocompleteMenuHeader: AutocompleteMenuHeaderProps;
+    ESBadge: BadgeProps;
     ESBreadcrumbs: BreadcrumbsProps;
     ESBreadcrumb: BreadcrumbProps;
     ESBottomSheet: BottomSheetProps;
@@ -406,6 +407,7 @@ declare module '@mui/material/styles/overrides' {
     ESAutocompleteMenu: AutocompleteMenuClassKey;
     ESAutocompleteMenuFooter: AutocompleteMenuFooterClassKey;
     ESAutocompleteMenuHeader: AutocompleteMenuHeaderClassKey;
+    ESBadge: BadgeClassKey;
     ESBreadcrumbs: BreadcrumbsClassKey;
     ESBreadcrumb: BreadcrumbClassKey;
     ESBottomSheet: BottomSheetClassKey;
@@ -548,6 +550,10 @@ declare module '@mui/material/styles/components' {
     ESAutocompleteMenuHeader?: {
       defaultProps?: ComponentsProps['ESAutocompleteMenuHeader'];
       styleOverrides?: ComponentsOverrides['ESAutocompleteMenuHeader'];
+    };
+    ESBadge?: {
+      defaultProps?: ComponentsProps['ESBadge'];
+      styleOverrides?: ComponentsOverrides['ESBadge'];
     };
     ESBreadcrumbs?: {
       defaultProps?: ComponentsProps['ESBreadcrumbs'];
