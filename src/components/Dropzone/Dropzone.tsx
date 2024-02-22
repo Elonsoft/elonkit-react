@@ -3,16 +3,27 @@ import React, { useRef } from 'react';
 import { DropzoneProps, FileError, FileRejection } from './Dropzone.types';
 
 import clsx from 'clsx';
-import { getDropzoneUtilityClass } from './Dropzone.classes';
+import { dropzoneClasses, getDropzoneUtilityClass } from './Dropzone.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { styled, useThemeProps } from '@mui/material/styles';
-import { ButtonBase, touchRippleClasses, Typography } from '@mui/material';
+import { keyframes, styled, useThemeProps } from '@mui/material/styles';
+import { ButtonBase, buttonBaseClasses, touchRippleClasses, Typography } from '@mui/material';
 
 import { validateFileType } from './validateFileType';
 
 import { useDocumentEventListener, useDragOver } from '../../hooks';
+
+const enterKeyframe = keyframes`
+  0% {
+    transform: scale(0);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 type DropzoneOwnerState = {
   classes?: DropzoneProps['classes'];
@@ -68,34 +79,44 @@ const DropzoneDropzone = styled(ButtonBase, {
     ];
   }
 })<{ ownerState: DropzoneOwnerState }>(({ theme, ownerState }) => ({
-  width: '100%',
-  backgroundColor: theme.palette.monoA.A50,
-  border: `1px dashed ${theme.palette.monoA.A200}`,
-  borderRadius: 4,
-  display: 'flex',
-  flexDirection: 'column',
-  padding: '22px 24px',
-  transitionDuration: `${theme.transitions.duration.short}ms`,
-  transitionProperty: 'background-color, border',
-  transitionTimingFunction: theme.transitions.easing.easeInOut,
-  ...(ownerState.isDragOverDocument && {
-    backgroundColor: theme.palette.primary.A50,
-    border: `1px dashed ${theme.palette.primary.A500}`
-  }),
-  [`& .${touchRippleClasses.root}`]: {
+  [`&.${buttonBaseClasses.root}`]: {
+    width: '100%',
+    backgroundColor: `${theme.palette.monoA.A50} !important`,
+    border: `1px dashed ${theme.palette.monoA.A200}`,
+    borderRadius: 4,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '32px  24px',
     transitionDuration: `${theme.transitions.duration.short}ms`,
     transitionProperty: 'background-color, border',
     transitionTimingFunction: theme.transitions.easing.easeInOut,
-    ...(ownerState.isDragOver && {
-      backgroundColor: theme.palette.primary.A100
+    ...(ownerState.isDragOverDocument && {
+      backgroundColor: theme.palette.primary.A50,
+      borderColor: theme.palette.primary.A500
     }),
     ...(ownerState.error && {
-      backgroundColor: theme.palette.error.A50,
-      border: `1px dashed ${theme.palette.error.A800}`
+      backgroundColor: `${theme.palette.error.A50} !important`,
+      borderColor: theme.palette.error.A800
+    }),
+
+    [`&.${dropzoneClasses.dropzone}`]: {
+      [`& .${touchRippleClasses.root}`]: {
+        transitionDuration: `${theme.transitions.duration.short}ms`
+      }
+    },
+
+    [`& .${touchRippleClasses.rippleVisible}`]: {
+      animationName: `${enterKeyframe} !important`,
+      opacity: '1 !important'
+    },
+
+    ...theme.mixins.button({
+      background: 'transparent',
+      color: theme.palette.monoA.A200,
+      hover: theme.palette.monoA.A50,
+      focus: theme.palette.monoA.A200,
+      active: theme.palette.monoA.A150
     })
-  },
-  [`&:hover .${touchRippleClasses.root}, &:focus-visible .${touchRippleClasses.root}`]: {
-    backgroundColor: theme.palette.monoA.A50
   }
 }));
 
@@ -291,7 +312,7 @@ export const Dropzone = (inProps: DropzoneProps): JSX.Element => {
             </DropzoneHeadingText>
           ) : (
             !!heading && (
-              <DropzoneHeadingText className={classes.headingText} variant="button">
+              <DropzoneHeadingText className={classes.headingText} variant="body100">
                 {heading}
               </DropzoneHeadingText>
             )
