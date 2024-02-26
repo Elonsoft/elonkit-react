@@ -7,7 +7,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import Divider from '@mui/material/Divider';
 import TextField from '@mui/material/TextField';
 
-import { SFS, SFSFilters, SFSFiltersGroup, SFSRow, SFSSearch, SFSSorting } from '..';
+import { SFS, SFSFilters, SFSFiltersGroup, SFSRow, SFSSearch, SFSSorting, SortingMenu } from '..';
 
 const sortingOptionsRu = [
   { label: 'Кол-во квартир', value: 'byCount' },
@@ -86,14 +86,18 @@ export const Demo: Story = {
               options={locale == 'ru' ? sortingOptionsRu : sortingOptionsEn}
               value={values}
               onChange={setValues}
-            />
+            >
+              <SortingMenu />
+            </SFSSorting>
           ) : (
             <SFSSorting
               key="2"
               options={locale == 'ru' ? sortingOptionsRu : sortingOptionsEn}
               value={value}
               onChange={setValue}
-            />
+            >
+              <SortingMenu />
+            </SFSSorting>
           )}
           <Divider orientation="vertical" />
           <SFSFilters

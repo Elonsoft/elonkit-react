@@ -32,6 +32,7 @@ export * from './PasswordField';
 export * from './SFS';
 export * from './Sidebar';
 export * from './Sidenav';
+export * from './SortingMenu';
 export * from './Spinner';
 export * from './Spinner';
 export * from './SvgIcon';

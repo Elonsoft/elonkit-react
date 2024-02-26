@@ -182,6 +182,7 @@ import {
   SidebarToggleProps
 } from './components/Sidebar';
 import { SidenavClassKey, SidenavItemClassKey, SidenavItemProps, SidenavProps } from './components/Sidenav';
+import { SortingMenuClassKey, SortingMenuProps } from './components/SortingMenu';
 import {
   SpinnerDashRingClassKey,
   SpinnerDashRingProps,
@@ -372,6 +373,7 @@ declare module '@mui/material/styles/props' {
     ESSpinnerFadingDoubleRing: SpinnerFadingDoubleRingProps;
     ESSpinnerFadingRing: SpinnerFadingRingProps;
     ESSpinnerRing: SpinnerRingProps;
+    ESSortingMenu: SortingMenuProps;
     ESSvgIcon: SvgIconProps;
     ESSwiper: SwiperProps;
     ESSwitch: SwitchProps;
@@ -479,6 +481,7 @@ declare module '@mui/material/styles/overrides' {
     ESSpinnerFadingDoubleRing: SpinnerFadingDoubleRingClassKey;
     ESSpinnerFadingRing: SpinnerFadingRingClassKey;
     ESSpinnerRing: SpinnerRingClassKey;
+    ESSortingMenu: SortingMenuClassKey;
     ESSvgIcon: SvgIconClassKey;
     ESSwiper: SwiperClassKey;
     ESSwitch: SwitchClassKey;
@@ -824,6 +827,10 @@ declare module '@mui/material/styles/components' {
     ESSpinnerRing?: {
       defaultProps?: ComponentsProps['ESSpinnerRing'];
       styleOverrides?: ComponentsOverrides['ESSpinnerRing'];
+    };
+    ESSortingMenu?: {
+      defaultProps?: ComponentsProps['ESSortingMenu'];
+      styleOverrides?: ComponentsOverrides['ESSortingMenu'];
     };
     ESSvgIcon?: {
       defaultProps?: ComponentsProps['ESSvgIcon'];
