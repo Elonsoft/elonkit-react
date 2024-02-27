@@ -34,6 +34,8 @@ export interface RibbonBadgeTypeMap<P = {}, D extends React.ElementType = 'butto
       'success' | 'warning' | 'error' | 'info' | 'secondary' | 'primary' | 'monoB500',
       RibbonBadgePropsColorOverrides
     >;
+
+    clickable?: boolean;
   };
   defaultComponent: D;
 }

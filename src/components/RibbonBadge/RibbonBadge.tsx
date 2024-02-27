@@ -20,17 +20,18 @@ const enterKeyframe = keyframes`
   }
 `;
 
-type BadgeOwnerState = {
+type RibbonBadgeOwnerState = {
   classes?: RibbonBadgeProps['classes'];
   color: NonNullable<RibbonBadgeProps['color']>;
   orientation: NonNullable<RibbonBadgeProps['orientation']>;
+  clickable?: NonNullable<RibbonBadgeProps['clickable']>;
 };
 
-const useUtilityClasses = (ownerState: BadgeOwnerState) => {
-  const { classes, color, orientation } = ownerState;
+const useUtilityClasses = (ownerState: RibbonBadgeOwnerState) => {
+  const { classes, color, orientation, clickable } = ownerState;
 
   const slots = {
-    root: ['root', `color${capitalize(color)}`, `orientation${capitalize(orientation)}`]
+    root: ['root', clickable && 'clickable', `color${capitalize(color)}`, `orientation${capitalize(orientation)}`]
   };
 
   return composeClasses(slots, getRibbonBadgeUtilityClass, classes);
@@ -46,12 +47,16 @@ const BadgeRoot = styled(ButtonBase, {
 
     return [styles.root, styles[`colors${capitalize(color)}`], styles[`orientation${capitalize(orientation)}`]];
   }
-})(({ theme }) => ({
+})<{ ownerState: RibbonBadgeOwnerState }>(({ theme, ownerState }) => ({
   ...theme.typography.caption,
+  cursor: 'default',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   padding: '2px 6px',
+  boxSizing: 'border-box',
+  position: 'relative',
+  width: 'fit-content',
 
   '&:after': {
     content: "''",
@@ -63,6 +68,10 @@ const BadgeRoot = styled(ButtonBase, {
     width: '8px',
     height: '5px'
   },
+
+  ...(ownerState.clickable && {
+    cursor: 'pointer'
+  }),
 
   [`&.${ribbonBadgeClasses.root}`]: {
     [`& .${touchRippleClasses.root}`]: {
@@ -188,21 +197,25 @@ export const RibbonBadge: OverridableComponent<RibbonBadgeTypeMap> = (inProps: R
     classes: inClasses,
     color = 'success',
     orientation = 'left',
+    clickable,
     ...props
   } = useThemeProps({
     props: inProps,
     name: 'ESRibbonBadge'
   });
 
-  const component = (props as any).component as React.ElementType;
+  const component = clickable ? ButtonBase : 'div';
+
+  //const component = (props as any).component as React.ElementType;
 
   const ownerState = {
     classes: inClasses,
     color,
-    orientation
+    orientation,
+    clickable
   };
 
   const classes = useUtilityClasses(ownerState);
 
-  return <BadgeRoot as={component} className={clsx(classes.root, className)} {...props} />;
+  return <BadgeRoot as={component} className={clsx(classes.root, className)} ownerState={ownerState} {...props} />;
 };
