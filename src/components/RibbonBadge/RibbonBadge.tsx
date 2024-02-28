@@ -24,7 +24,7 @@ type RibbonBadgeOwnerState = {
   classes?: RibbonBadgeProps['classes'];
   color: NonNullable<RibbonBadgeProps['color']>;
   orientation: NonNullable<RibbonBadgeProps['orientation']>;
-  clickable?: NonNullable<RibbonBadgeProps['clickable']>;
+  clickable?: RibbonBadgeProps['clickable'];
 };
 
 const useUtilityClasses = (ownerState: RibbonBadgeOwnerState) => {
@@ -42,12 +42,17 @@ const BadgeRoot = styled(ButtonBase, {
   slot: 'Root',
   overridesResolver: (props, styles) => {
     const {
-      ownerState: { color, orientation }
+      ownerState: { color, orientation, clickable }
     } = props;
 
-    return [styles.root, styles[`colors${capitalize(color)}`], styles[`orientation${capitalize(orientation)}`]];
+    return [
+      styles.root,
+      clickable && styles.clickable,
+      styles[`colors${capitalize(color)}`],
+      styles[`orientation${capitalize(orientation)}`]
+    ];
   }
-})<{ ownerState: RibbonBadgeOwnerState }>(({ theme, ownerState }) => ({
+})(({ theme }) => ({
   ...theme.typography.caption,
   cursor: 'default',
   display: 'flex',
@@ -69,9 +74,9 @@ const BadgeRoot = styled(ButtonBase, {
     height: '5px'
   },
 
-  ...(ownerState.clickable && {
+  [`&.${ribbonBadgeClasses.clickable}`]: {
     cursor: 'pointer'
-  }),
+  },
 
   [`&.${ribbonBadgeClasses.root}`]: {
     [`& .${touchRippleClasses.root}`]: {
@@ -206,8 +211,6 @@ export const RibbonBadge: OverridableComponent<RibbonBadgeTypeMap> = (inProps: R
 
   const component = clickable ? ButtonBase : 'div';
 
-  //const component = (props as any).component as React.ElementType;
-
   const ownerState = {
     classes: inClasses,
     color,
@@ -217,5 +220,5 @@ export const RibbonBadge: OverridableComponent<RibbonBadgeTypeMap> = (inProps: R
 
   const classes = useUtilityClasses(ownerState);
 
-  return <BadgeRoot as={component} className={clsx(classes.root, className)} ownerState={ownerState} {...props} />;
+  return <BadgeRoot as={component} className={clsx(classes.root, className)} {...props} />;
 };

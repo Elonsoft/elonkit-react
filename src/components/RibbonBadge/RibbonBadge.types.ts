@@ -35,6 +35,10 @@ export interface RibbonBadgeTypeMap<P = {}, D extends React.ElementType = 'butto
       RibbonBadgePropsColorOverrides
     >;
 
+    /**
+     * If `true`, the badge will appear clickable, even if the onClick prop is not defined.
+     * If `false`, the badge will not appear clickable, even if onClick prop is defined.
+     * */
     clickable?: boolean;
   };
   defaultComponent: D;
