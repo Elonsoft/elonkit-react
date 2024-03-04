@@ -5,6 +5,8 @@ export type PageHGroupHeadingClasses = {
   root: string;
   /** Styles applied to the tooltip element. */
   tooltip: string;
+  /** Styles applied to the title element. */
+  title: string;
 };
 export type PageHGroupHeadingClassKey = keyof PageHGroupHeadingClasses;
 
@@ -14,5 +16,6 @@ export function getPageHGroupHeadingUtilityClass(slot: string): string {
 
 export const pageHGroupHeadingClasses: PageHGroupHeadingClasses = generateUtilityClasses('ESPageHGroupHeading', [
   'root',
-  'tooltip'
+  'tooltip',
+  'title'
 ]);

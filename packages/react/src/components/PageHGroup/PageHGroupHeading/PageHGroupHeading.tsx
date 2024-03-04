@@ -25,10 +25,20 @@ const useUtilityClasses = (ownerState: PageHGroupHeadingOwnerState) => {
   return composeClasses(slots, getPageHGroupHeadingUtilityClass, classes);
 };
 
-const PageHGroupHeadingRoot = styled('h1', {
+const PageHGroupHeadingRoot = styled('div', {
   name: 'ESPageHGroupHeading',
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
+})(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '12px'
+}));
+
+const PageHGroupHeadingTitle = styled('h1', {
+  name: 'ESPageHGroupHeading',
+  slot: 'Title',
+  overridesResolver: (props, styles) => styles.title
 })<{ ownerState: PageHGroupHeadingOwnerState }>(({ theme, ownerState }) => ({
   ...theme.typography.h2,
   alignSelf: 'center',
@@ -60,6 +70,7 @@ export const PageHGroupHeading = (inProps: PageHGroupHeadingProps) => {
     children,
     sx,
     maxLines = 1,
+    endAdornment,
     TooltipProps,
     ...props
   } = useThemeProps({
@@ -71,24 +82,27 @@ export const PageHGroupHeading = (inProps: PageHGroupHeadingProps) => {
   const classes = useUtilityClasses(ownerState);
 
   return (
-    <PageHGroupHeadingTooltip
-      arrow
-      disableInteractive
-      className={classes.tooltip}
-      placement="top"
-      title={children || false}
-      {...TooltipProps}
-    >
-      {({ ref }) => (
-        <PageHGroupHeadingRoot
-          ref={ref as React.RefObject<HTMLHeadingElement>}
-          className={clsx(classes.root, className)}
-          ownerState={ownerState}
-          sx={sx}
-        >
-          {children}
-        </PageHGroupHeadingRoot>
-      )}
-    </PageHGroupHeadingTooltip>
+    <PageHGroupHeadingRoot>
+      <PageHGroupHeadingTooltip
+        arrow
+        disableInteractive
+        className={classes.tooltip}
+        placement="top"
+        title={children || false}
+        {...TooltipProps}
+      >
+        {({ ref }) => (
+          <PageHGroupHeadingTitle
+            ref={ref as React.RefObject<HTMLHeadingElement>}
+            className={clsx(classes.root, className)}
+            ownerState={ownerState}
+            sx={sx}
+          >
+            {children}
+          </PageHGroupHeadingTitle>
+        )}
+      </PageHGroupHeadingTooltip>
+      {endAdornment}
+    </PageHGroupHeadingRoot>
   );
 };
