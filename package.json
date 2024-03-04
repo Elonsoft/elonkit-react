@@ -1,6 +1,6 @@
 {
   "name": "@elonkit/monorepo",
-  "version": "0.9.2",
+  "version": "0.0.0",
   "description": "",
   "private": true,
   "workspaces": [
@@ -14,7 +14,7 @@
     "prettier:write": "prettier --write .",
     "cspell": "cspell --no-progress .",
     "husky": "husky install",
-    "release": "lerna version --no-push"
+    "release": "lerna version --no-push --no-git-tag-version"
   },
   "repository": {
     "type": "git",
