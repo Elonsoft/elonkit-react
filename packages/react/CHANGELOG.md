@@ -3,13 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-### [0.9.3](https://github.com/Elonsoft/elonkit-react/compare/v0.9.2...v0.9.3) (2024-03-04)
+### 0.9.4 (2024-03-05)
+
+
+### Features
+
+* **Link:** change display type based on icon presence ([dca5175](https://github.com/Elonsoft/elonkit-react/commit/dca5175c13b8f86cf6d0a56a746dce7914280480))
+
+
+### Bug Fixes
+
+* **AutocompleteMenu:** safely pass callbacks from TransitionProps ([d2dce1d](https://github.com/Elonsoft/elonkit-react/commit/d2dce1db035d20bc34eba495705755ae9d61c871))
+
+### 0.9.3 (2024-03-04)
 
 
 ### Features
 
 * **PageHGroupHeading:** add tooltip for overflown text ([34ee4f5](https://github.com/Elonsoft/elonkit-react/commit/34ee4f57474fba9c019334ad16520de282cfa252))
-
 
 
 ### [0.9.2](https://github.com/Elonsoft/elonkit-react/compare/v0.9.1...v0.9.2) (2024-02-21)
