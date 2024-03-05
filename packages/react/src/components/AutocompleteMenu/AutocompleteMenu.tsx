@@ -413,7 +413,19 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
       ]}
     >
       {({ TransitionProps }) => (
-        <Grow {...TransitionProps} timeout={transitionDuration} {...inTransitionProps}>
+        <Grow
+          in={TransitionProps?.in}
+          timeout={transitionDuration}
+          {...inTransitionProps}
+          onEnter={(...args) => {
+            TransitionProps?.onEnter?.();
+            inTransitionProps?.onEnter?.(...args);
+          }}
+          onExited={(...args) => {
+            TransitionProps?.onExited?.();
+            inTransitionProps?.onExited?.(...args);
+          }}
+        >
           <div>
             <TrapFocus
               disableAutoFocus={disableAutoFocus}
