@@ -62,9 +62,11 @@ const LinkRoot = styled(Typography, {
 })<{ ownerState: LinkOwnerState }>(({ theme, ownerState }) => {
   const color = getPath<string>(theme, `palette.${ownerState.color}`) || (ownerState.color as string);
 
+  const display = !!ownerState.startIcon || !!ownerState.endIcon ? 'inline-flex' : 'inline';
+
   return {
     position: 'relative',
-    display: 'inline-flex',
+    display,
     alignItems: 'baseline',
     textDecorationLine: 'none',
     color,
