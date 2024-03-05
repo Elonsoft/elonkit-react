@@ -7,6 +7,7 @@ import { DialogArrowProps, DialogCloseProps } from '../Dialog';
 import { FileInfoNameProps } from '../FileInfo';
 import { FormatSizeProps } from '../FormatSize';
 import { GalleryActionsProps, GalleryDescriptionProps, GalleryMetaProps, GallerySwiperProps } from '../Gallery';
+import { MadeByProps } from '../MadeBy';
 import { PaginationPagesProps, PaginationRangeProps } from '../Pagination';
 import { PasswordFieldProps } from '../PasswordField';
 import { SFSFiltersProps, SFSSearchProps, SFSSortingProps } from '../SFS';
@@ -115,6 +116,9 @@ export interface Localization {
     };
     ESTableCell: {
       defaultProps: Pick<TableCellProps, 'labelResize'>;
+    };
+    ESMadeBy: {
+      defaultProps: Pick<MadeByProps, 'text'>;
     };
   };
 }
@@ -280,6 +284,11 @@ export const en: Localization = {
       defaultProps: {
         labelResize: 'Resize'
       }
+    },
+    ESMadeBy: {
+      defaultProps: {
+        text: 'Made by'
+      }
     }
   }
 };
@@ -444,6 +453,11 @@ export const ru: Localization = {
     ESTableCell: {
       defaultProps: {
         labelResize: 'Изменить ширину'
+      }
+    },
+    ESMadeBy: {
+      defaultProps: {
+        text: 'Сделано в'
       }
     }
   }

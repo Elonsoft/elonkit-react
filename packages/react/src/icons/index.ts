@@ -103,6 +103,7 @@ export { IconDragVertical2 } from './IconDragVertical2';
 export { IconDragVerticalW400 } from './IconDragVerticalW400';
 export { IconDragVerticalW500 } from './IconDragVerticalW500';
 export { IconDuplicate } from './IconDuplicate';
+export { IconElonsoft } from './IconElonsoft';
 export { IconEmoticonPlus } from './IconEmoticonPlus';
 export { IconEmotionHappy } from './IconEmotionHappy';
 export { IconEmotionHappy2 } from './IconEmotionHappy2';

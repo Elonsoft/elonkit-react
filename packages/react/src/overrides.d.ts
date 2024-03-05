@@ -127,6 +127,7 @@ import {
 import { KbdClassKey, KbdProps } from './components/Kbd';
 import { LinkClassKey, LinkProps } from './components/Link';
 import { LoadingButtonClassKey, LoadingButtonProps } from './components/LoadingButton';
+import { MadeByClassKey, MadeByProps } from './components/MadeBy';
 import { MenuItemClassKey, MenuItemProps } from './components/MenuItem';
 import {
   PageHGroupActionsClassKey,
@@ -341,6 +342,7 @@ declare module '@mui/material/styles/props' {
     ESLink: LinkProps;
     ESLoadingButton: LoadingButtonProps;
     ESMenuItem: MenuItemProps;
+    ESMadeBy: MadeByProps;
     ESPageHGroup: PageHGroupProps;
     ESPageHGroupActions: PageHGroupActionsProps;
     ESPageHGroupBreadcrumbs: PageHGroupBreadcrumbsProps;
@@ -448,6 +450,7 @@ declare module '@mui/material/styles/overrides' {
     ESLink: LinkClassKey;
     ESLoadingButton: LoadingButtonClassKey;
     ESMenuItem: MenuItemClassKey;
+    ESMadeBy: MadeByClassKey;
     ESPageHGroup: PageHGroupClassKey;
     ESPageHGroupActions: PageHGroupActionsClassKey;
     ESPageHGroupBreadcrumbs: PageHGroupBreadcrumbsClassKey;
@@ -736,6 +739,10 @@ declare module '@mui/material/styles/components' {
     ESMenuItem?: {
       defaultProps?: ComponentsProps['ESMenuItem'];
       styleOverrides?: ComponentsOverrides['ESMenuItem'];
+    };
+    ESMadeBy?: {
+      defaultProps?: ComponentsProps['ESMadeBy'];
+      styleOverrides?: ComponentsOverrides['ESMadeBy'];
     };
     ESPageHGroup?: {
       defaultProps?: ComponentsProps['ESPageHGroup'];
