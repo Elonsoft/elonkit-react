@@ -47,6 +47,16 @@ const PasswordFieldRoot = styled(TextField, {
         color: theme.palette.monoA.A500
       }
     }
+  },
+  'input[type="password"]': {
+    fontFamily: 'Roboto-Custom',
+    fontWeight: '400',
+    lineHeight: '20px',
+    textAlign: 'left',
+
+    '@supports (-moz-appearance:none)': {
+      marginRight: '1.666px'
+    }
   }
 }));
 
@@ -112,17 +122,6 @@ export const PasswordField = (inProps: PasswordFieldProps) => {
             </IconButton>
           </InputAdornment>
         ),
-        inputProps: {
-          style: !visible
-            ? {
-                fontFamily: 'Roboto-Custom',
-                fontWeight: '400',
-                lineHeight: '20px',
-                letterSpacing: '3px',
-                textAlign: 'left'
-              }
-            : undefined
-        },
         ...InputProps
       }}
       className={clsx(classes.root, className)}
