@@ -112,6 +112,17 @@ export const PasswordField = (inProps: PasswordFieldProps) => {
             </IconButton>
           </InputAdornment>
         ),
+        inputProps: {
+          style: !visible
+            ? {
+                fontFamily: 'Roboto-Custom',
+                fontWeight: '400',
+                lineHeight: '20px',
+                letterSpacing: '3px',
+                textAlign: 'left'
+              }
+            : undefined
+        },
         ...InputProps
       }}
       className={clsx(classes.root, className)}
