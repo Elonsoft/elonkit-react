@@ -3,7 +3,7 @@ import { forwardRef, useRef } from 'react';
 import { DialogProps } from './Dialog.types';
 
 import clsx from 'clsx';
-import { getDialogUtilityClass } from './Dialog.classes';
+import { dialogClasses, getDialogUtilityClass } from './Dialog.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
@@ -29,7 +29,8 @@ const useUtilityClasses = (ownerState: DialogOwnerState) => {
       'wrapper',
       align === 'center' && 'wrapperAlignCenter',
       align === 'flex-start' && 'wrapperAlignFlexStart',
-      align === 'flex-start' && 'wrapperAlignFlexEnd'
+      align === 'flex-start' && 'wrapperAlignFlexEnd',
+      fullScreen && 'wrapperFullScreen'
     ],
     container: ['container'],
     content: ['content', fullWidth && 'contentFullWidth', fullScreen && 'contentFullScreen'],
@@ -95,7 +96,8 @@ const DialogWrapper = styled('div', {
       styles.wrapper,
       ownerState.align === 'center' && styles.wrapperAlignCenter,
       ownerState.align === 'flex-start' && styles.wrapperAlignFlexStart,
-      ownerState.align === 'flex-end' && styles.wrapperAlignFlexEnd
+      ownerState.align === 'flex-end' && styles.wrapperAlignFlexEnd,
+      ownerState.fullScreen && styles.wrapperFullScreen
     ];
   }
 })<{ ownerState: DialogOwnerState }>(({ ownerState }) => ({
@@ -107,7 +109,11 @@ const DialogWrapper = styled('div', {
   alignItems: ownerState.align,
   justifyContent: 'center',
   margin: 0,
-  overflow: 'visible'
+  overflow: 'visible',
+
+  [`&.${dialogClasses.wrapperFullScreen}`]: {
+    height: '100%'
+  }
 }));
 
 const DialogContent = styled('div', {
@@ -143,12 +149,17 @@ const DialogContent = styled('div', {
     width: '100%'
   }),
   ...(ownerState.fullScreen && {
-    margin: 0,
+    margin: '0 !important',
     width: '100%',
     maxWidth: '100%',
     height: '100%',
     maxHeight: 'none',
-    borderRadius: 0
+    borderRadius: 0,
+
+    [`& > .ESDialog-paper`]: {
+      height: '100%',
+      borderRadius: 0
+    }
   })
 }));
 
@@ -161,11 +172,17 @@ const DialogPaper = styled('div', {
     return [styles.paper, ownerState.fullScreen && styles.paperFullScreen];
   }
 })<{ ownerState: DialogOwnerState }>(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
   textAlign: 'left',
   borderRadius: 8,
   width: '100%',
   boxShadow: theme.palette.shadow.down[900],
   backgroundColor: theme.palette.surface[600],
+
+  '& .ESDialogActions-root': {
+    marginTop: 'auto'
+  },
 
   '@media print': {
     boxShadow: 'none'
@@ -188,7 +205,7 @@ export const Dialog = forwardRef<HTMLDivElement | null, DialogProps>(function Di
     className,
     disableEscapeKeyDown = false,
     fullScreen = false,
-    fullWidth = false,
+    fullWidth = fullScreen,
     maxWidth = '100%',
     align = 'center',
     onBackdropClick,
