@@ -18,6 +18,7 @@ import { TableHead } from './TableHead';
 import { TableRow } from './TableRow';
 import { TableScrollbar } from './TableScrollbar';
 import { TableText } from './TableText';
+import { useShiftSelected } from './useShiftSelected';
 import { useTableResize } from './useTableResize';
 import { useTableSelection } from './useTableSelection';
 
@@ -129,16 +130,23 @@ export const Demo: Story = {
 
     const { onResize, onResizeCommit } = useTableResize(ref, rowRef, columns, setColumns);
 
-    const { selected, setSelected, isAllSelected, isSomeSelected, toggle, toggleAll } = useTableSelection(
-      DATA[locale],
-      {
-        key: 'id'
-      }
-    );
+    const { selected, setSelected, isAllSelected, isSomeSelected, toggleAll } = useTableSelection(DATA[locale], {
+      key: 'id'
+    });
 
     const onClose = useCallback(() => {
       setSelected([]);
     }, []);
+
+    const handleChange = useShiftSelected(DATA[locale], (isChecked, items) => {
+      if (isChecked) {
+        setSelected((prevSelected) => [...prevSelected, ...items.map((item) => item.id)]);
+      } else {
+        setSelected((prevSelected) =>
+          prevSelected.filter((selectedId) => !items.some((item) => item.id === selectedId))
+        );
+      }
+    });
 
     return (
       <>
@@ -191,7 +199,7 @@ export const Demo: Story = {
                       checked={isSelected}
                       color="secondary"
                       inputProps={{ 'aria-labelledby': labelId }}
-                      onChange={() => toggle(row.id)}
+                      onChange={(event) => handleChange(event, row)}
                     />
                   </TableCell>
                   {fields.map((field) => (
