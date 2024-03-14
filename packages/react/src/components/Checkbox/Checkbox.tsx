@@ -80,13 +80,8 @@ const CheckboxRoot = styled(SwitchBase, {
     ];
   }
 })<{ ownerState: CheckboxOwnerState }>(({ theme }) => ({
-  '& .MuiSvgIcon-root': {
-    fill: 'none',
-    '&.MuiSvgIcon-fontSizeSmall': {
-      fontSize: '18px'
-    }
-  },
   '& svg': {
+    fill: 'none',
     borderRadius: '4px',
     '& path': {
       strokeDasharray: '15',
@@ -96,6 +91,27 @@ const CheckboxRoot = styled(SwitchBase, {
     },
     '& circle': {
       transition: '200ms'
+    }
+  },
+  [`&.${checkboxClasses.sizeLarge}`]: {
+    '& svg': {
+      fontSize: '24px',
+      height: '24px !important',
+      width: '24px !important'
+    }
+  },
+  [`&.${checkboxClasses.sizeMedium}`]: {
+    '& svg': {
+      fontSize: '20px',
+      height: '20px !important',
+      width: '20px !important'
+    }
+  },
+  [`&.${checkboxClasses.sizeSmall}`]: {
+    '& svg': {
+      fontSize: '16px',
+      height: '16px !important',
+      width: '16px !important'
     }
   },
   [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
@@ -134,13 +150,22 @@ const CheckboxRoot = styled(SwitchBase, {
     }
   },
   [`&.${checkboxClasses.indeterminate}`]: {
+    [`&.${checkboxClasses.variantFilled}, &.${checkboxClasses.variantHybrid}`]: {
+      '& svg': {
+        '& rect': {
+          stroke: 'transparent'
+        }
+      }
+    },
     [`&.${checkboxClasses.variantOutlined}`]: {
       '& svg': {
         '& rect:first-of-type': {
-          fill: 'transparent'
+          fill: 'transparent',
+          stroke: 'transparent'
         },
         '& rect:last-of-type': {
-          fill: 'currentColor'
+          fill: 'currentColor',
+          stroke: 'transparent'
         }
       }
     }
@@ -249,6 +274,16 @@ const CheckboxRoot = styled(SwitchBase, {
     }
   },
   [`&.${checkboxClasses.colorError}`]: {
+    [`&.${checkboxClasses.variantOutlined}`]: {
+      '& svg': {
+        '& rect': {
+          stroke: 'none'
+        },
+        '& rect:first-of-type': {
+          stroke: 'currentColor'
+        }
+      }
+    },
     [`&.${checkboxClasses.disabled}`]: {
       '&, &:hover': {
         color: theme.palette.error.A500
@@ -293,7 +328,7 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(funct
     indeterminate = false,
     indeterminateIcon: indeterminateIconProp = defaultIndeterminateIcon,
     inputProps,
-    size = 'medium',
+    size = 'large',
     className,
     checked,
     disabled,

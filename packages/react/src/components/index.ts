@@ -8,6 +8,7 @@ export * from './AvatarGroup';
 export * from './BottomSheet';
 export * from './Breadcrumbs';
 export * from './Calendar';
+export * from './Checkbox';
 export * from './DateAdapter';
 export * from './Dialog';
 export * from './DialogStack';

@@ -2,8 +2,6 @@ import { ComponentProps } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
-import Box from '@mui/material/Box';
-
 import { Checkbox } from './Checkbox';
 
 type Args = ComponentProps<typeof Checkbox>;
@@ -15,9 +13,34 @@ const meta: Meta<Args> = {
     references: ['Checkbox']
   },
   argTypes: {
-    color: {
+    checkedIcon: {
       control: {
-        type: 'select'
+        type: '-'
+      }
+    },
+    icon: {
+      control: {
+        type: '-'
+      }
+    },
+    indeterminateIcon: {
+      control: {
+        type: '-'
+      }
+    },
+    inputProps: {
+      control: {
+        type: '-'
+      }
+    },
+    inputRef: {
+      control: {
+        type: '-'
+      }
+    },
+    value: {
+      control: {
+        type: '-'
       }
     }
   },
@@ -31,11 +54,6 @@ type Story = StoryObj<Args>;
 
 export const Demo: Story = {
   render: (args) => {
-    return (
-      <Box margin="-1rem">
-        <Checkbox {...args}></Checkbox>
-        <Box height="10vh" />
-      </Box>
-    );
+    return <Checkbox {...args}></Checkbox>;
   }
 };
