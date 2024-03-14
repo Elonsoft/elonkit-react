@@ -15,6 +15,7 @@ export const IconCheckboxIndeterminate = (props: SvgIconProps) => {
       {...props}
     >
       <rect fill="currentColor" height="18" rx="4" width="18" />
+      <rect height="16" rx="3" stroke={theme.palette.monoA.A500} strokeWidth="1" width="16" x="1" y="1" />
       <rect fill={theme.palette.monoB[500]} height="2" rx="1" width="10" x="4" y="8" />
     </SvgIcon>
   );

@@ -36,6 +36,12 @@ export interface CheckboxProps {
   color?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'monoA';
 
   /**
+   * The variant of the component.
+   * @default 'filled'
+   */
+  variant?: 'filled' | 'outlined' | 'hybrid';
+
+  /**
    * The default checked state. Use when the component is not controlled.
    */
   defaultChecked?: boolean;

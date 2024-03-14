@@ -27,6 +27,12 @@ export type CheckboxClasses = {
   sizeSmall: string;
   /** State class applied to the root element if `size="medium"`. */
   sizeMedium: string;
+  /** State class applied to the root element if `variant = "filled"`. */
+  variantFilled: string;
+  /** State class applied to the root element if `variant = "outlined"`. */
+  variantOutlined: string;
+  /** State class applied to the root element if `variant = "hybrid"`. */
+  variantHybrid: string;
 };
 export type CheckboxClassKey = keyof CheckboxClasses;
 
@@ -47,5 +53,8 @@ export const checkboxClasses: CheckboxClasses = generateUtilityClasses('ESCheckb
   'colorSuccess',
   'colorInfo',
   'sizeSmall',
-  'sizeMedium'
+  'sizeMedium',
+  'variantFilled',
+  'variantOutlined',
+  'variantHybrid'
 ]);
