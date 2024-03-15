@@ -17,7 +17,7 @@ type SwitchOwnerState = {
   checked?: boolean;
   disabled?: boolean;
   color: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
-  size: 'medium' | 'small';
+  size: 'large' | 'medium' | 'small';
 };
 
 const useUtilityClasses = (ownerState: SwitchOwnerState) => {
@@ -55,6 +55,14 @@ const SwitchRoot = styled('div', {
     [`& .${switchClasses.input}`]: {
       transform: 'translateX(-12px)'
     },
+    [`&.${switchClasses.large}`]: {
+      [`& .${switchClasses.input}`]: {
+        transform: 'translateX(-16px)'
+      },
+      [`& .${switchClasses.button}`]: {
+        transform: 'translateX(16px)'
+      }
+    },
     [`& .${switchClasses.button}`]: {
       transform: 'translateX(12px)',
       '&:hover': {
@@ -75,6 +83,22 @@ const SwitchRoot = styled('div', {
   [`&.${switchClasses.disabled}`]: {
     opacity: '0.3',
     cursor: 'not-allowed'
+  },
+  [`&.${switchClasses.large}`]: {
+    height: '36px',
+    width: '56px',
+    [`& .${switchClasses.track}`]: {
+      borderRadius: '20px',
+      width: '38px',
+      height: '24px'
+    },
+    [`& .${switchClasses.input}`]: {
+      width: '56px'
+    },
+    [`& .${switchClasses.thumb}`]: {
+      width: '24px',
+      height: '24px'
+    }
   },
   [`&.${switchClasses.medium}`]: {
     height: '36px',
