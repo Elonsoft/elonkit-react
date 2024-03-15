@@ -7,6 +7,8 @@ export type SwitchClasses = {
   checked: string;
   /** Styles applied to the root element if component disabled. */
   disabled: string;
+  /** Styles applied to the root element if size='large'. */
+  large: string;
   /** Styles applied to the root element if size='medium'. */
   medium: string;
   /** Styles applied to the root element if size='small'. */
@@ -35,6 +37,7 @@ export const switchClasses: SwitchClasses = generateUtilityClasses('ESSwitch', [
   'thumb',
   'button',
   'disabled',
+  'large',
   'medium',
   'small'
 ]);

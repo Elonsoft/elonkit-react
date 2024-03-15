@@ -29,7 +29,7 @@ export interface SwitchProps {
    * The size of the component.
    * @default 'medium'
    */
-  size?: 'medium' | 'small';
+  size?: 'large' | 'medium' | 'small';
 
   /** If `true`, the component is disabled. */
   disabled?: boolean;
