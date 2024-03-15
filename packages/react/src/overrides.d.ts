@@ -151,6 +151,8 @@ import {
   PaginationRangeProps
 } from './components/Pagination';
 import { PasswordFieldClassKey, PasswordFieldProps } from './components/PasswordField';
+import { RadioClassKey, RadioProps } from './components/Radio';
+import { RadioGroupClassKey, RadioGroupProps } from './components/RadioGroup';
 import {
   SFSClassKey,
   SFSFiltersClassKey,
@@ -351,6 +353,8 @@ declare module '@mui/material/styles/props' {
     ESPaginationPages: PaginationPagesProps;
     ESPaginationRange: PaginationRangeProps;
     ESPasswordField: PasswordFieldProps;
+    ESRadio: RadioProps;
+    ESRadioGroup: RadioGroupProps;
     ESSidebar: SidebarProps;
     ESSidebarSpacer: SidebarSpacerProps;
     ESSidebarToggle: SidebarToggleProps;
@@ -458,6 +462,8 @@ declare module '@mui/material/styles/overrides' {
     ESPaginationPages: PaginationPagesClassKey;
     ESPaginationRange: PaginationRangeClassKey;
     ESPasswordField: PasswordFieldClassKey;
+    ESRadio: RadioClassKey;
+    ESRadioGroup: RadioGroupClassKey;
     ESSidebar: SidebarClassKey;
     ESSidebarItem: SidebarItemClassKey;
     ESSidebarToggle: SidebarToggleClassKey;
@@ -776,6 +782,14 @@ declare module '@mui/material/styles/components' {
     ESPasswordField?: {
       defaultProps?: ComponentsProps['ESPasswordField'];
       styleOverrides?: ComponentsOverrides['ESPasswordField'];
+    };
+    ESRadio?: {
+      defaultProps?: ComponentsProps['ESRadio'];
+      styleOverrides?: ComponentsOverrides['ESRadio'];
+    };
+    ESRadioGroup?: {
+      defaultProps?: ComponentsProps['ESRadioGroup'];
+      styleOverrides?: ComponentsOverrides['ESRadioGroup'];
     };
     ESSFS?: {
       defaultProps?: ComponentsProps['ESSFS'];

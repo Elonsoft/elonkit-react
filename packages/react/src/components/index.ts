@@ -29,6 +29,8 @@ export * from './MenuItem';
 export * from './PageHGroup';
 export * from './Pagination';
 export * from './PasswordField';
+export * from './Radio';
+export * from './RadioGroup';
 export * from './SFS';
 export * from './Sidebar';
 export * from './Sidenav';
