@@ -1,9 +1,8 @@
-import { ReactNode, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 
 import { Tab, Tabs, tabsClasses } from '.';
 
@@ -81,46 +80,43 @@ export default meta;
 
 type Story = StoryObj<typeof Tabs>;
 
-interface TabPanelProps {
-  children?: ReactNode;
-  index: number;
-  value: number;
-}
-
-const tabsData = [
-  'First',
-  'Second',
-  'Third',
-  'Fourth',
-  'Fifth',
-  'Sixth',
-  'Seventh',
-  'Eighth',
-  'Ninth',
-  'Tenth',
-  'Eleventh',
-  'Twelfth'
-];
-
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div {...other}>
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
+const tabsData = {
+  en: [
+    'First',
+    'Second',
+    'Third',
+    'Fourth',
+    'Fifth',
+    'Sixth',
+    'Seventh',
+    'Eighth',
+    'Ninth',
+    'Tenth',
+    'Eleventh',
+    'Twelfth'
+  ],
+  ru: [
+    'Первый',
+    'Второй',
+    'Третий',
+    'Четвертый',
+    'Пятый',
+    'Шестой',
+    'Седьмой',
+    'Восьмой',
+    'Девятый',
+    'Десятый',
+    'Одиннадцатый',
+    'Двенадцатый'
+  ]
+};
 
 export const Demo: Story = {
-  render: (args) => {
+  render: (args, context) => {
     const [value, setValue] = useState(0);
     const [tabsWidth, setTabsWidth] = useState(0);
     const tabRefs = useRef<Array<HTMLButtonElement | undefined>>([]);
+    const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
     const handleChange = (event: SyntheticEvent, newValue: number) => {
       setValue(newValue);
@@ -149,25 +145,19 @@ export const Demo: Story = {
             value={value}
             onChange={handleChange}
           >
-            {tabsData.map((label, index) => (
+            {(locale === 'en' ? tabsData.en : tabsData.ru).map((label, index) => (
               <Tab
                 key={index}
                 ref={(el) => {
                   tabRefs.current[index] = el || undefined;
                 }}
-                endIcon={<IconAt size="20" />}
+                endIcon={<IconAt size="20px" />}
                 label={label}
-                startIcon={<IconAt size="20" />}
+                startIcon={<IconAt size="20px" />}
               />
             ))}
           </Tabs>
         </Box>
-
-        {tabsData.map((content, index) => (
-          <CustomTabPanel key={index} index={index} value={value}>
-            {content}
-          </CustomTabPanel>
-        ))}
       </Box>
     );
   }
