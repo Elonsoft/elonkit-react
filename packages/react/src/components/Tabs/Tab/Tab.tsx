@@ -9,11 +9,9 @@ import { unstable_composeClasses as composeClasses } from '@mui/base';
 
 import { styled, useThemeProps } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
-import { capitalize } from '@mui/material/utils';
 
 type TabOwnerState = {
   classes?: TabProps['classes'];
-  textColor?: 'inherit' | 'primary' | 'secondary';
   fullWidth?: boolean;
   wrapped?: boolean;
   icon?: boolean;
@@ -21,18 +19,16 @@ type TabOwnerState = {
   selected?: boolean;
   disabled?: boolean;
   disableFocusRipple?: boolean;
-  iconPosition?: 'top' | 'bottom' | 'start' | 'end';
-  variant?: 'default' | 'rounded';
+  rounded?: boolean;
 };
 
 const useUtilityClasses = (ownerState: TabOwnerState) => {
-  const { classes, textColor, fullWidth, wrapped, icon, label, selected, disabled } = ownerState;
+  const { classes, fullWidth, wrapped, icon, label, selected, disabled } = ownerState;
 
   const slots = {
     root: [
       'root',
       icon && label && 'labelIcon',
-      textColor && `textColor${capitalize(textColor)}`,
       fullWidth && 'fullWidth',
       wrapped && 'wrapped',
       selected && 'selected',
@@ -53,13 +49,11 @@ const TabRoot = styled(ButtonBase, {
     return [
       styles.root,
       ownerState.label && ownerState.icon && styles.labelIcon,
-      styles[`textColor${capitalize(ownerState.textColor)}`],
       ownerState.fullWidth && styles.fullWidth,
       ownerState.wrapped && styles.wrapped
     ];
   }
 })<{ ownerState: TabOwnerState }>(({ theme, ownerState }) => ({
-  ...theme.typography.button,
   ...theme.typography.body100,
   maxWidth: 360,
   minWidth: 90,
@@ -70,71 +64,26 @@ const TabRoot = styled(ButtonBase, {
   whiteSpace: 'normal',
   textAlign: 'center',
   color: theme.palette.monoA.A700,
+  gap: 8,
 
   ...(ownerState.selected && {
     color: theme.palette.monoA.A900
   }),
-  ...(ownerState.variant === 'default' && {
+  ...(!ownerState.rounded && {
     minHeight: 48
   }),
-  ...(ownerState.variant === 'rounded' && {
+  ...(ownerState.rounded && {
     borderRadius: '4px',
     maxHeight: 36,
     marginTop: 6,
     marginBottom: 6
   }),
-  ...(ownerState.label && {
-    flexDirection: ownerState.iconPosition === 'top' || ownerState.iconPosition === 'bottom' ? 'column' : 'row'
-  }),
   lineHeight: 1.25,
   ...(ownerState.icon &&
     ownerState.label && {
-      minHeight: 72,
       paddingTop: 9,
-      paddingBottom: 9,
-      [`& > .${tabClasses.iconWrapper}`]: {
-        ...(ownerState.iconPosition === 'top' && {
-          marginBottom: 6
-        }),
-        ...(ownerState.iconPosition === 'bottom' && {
-          marginTop: 6
-        }),
-        ...(ownerState.iconPosition === 'start' && {
-          marginRight: theme.spacing(1)
-        }),
-        ...(ownerState.iconPosition === 'end' && {
-          marginLeft: theme.spacing(1)
-        })
-      }
+      paddingBottom: 9
     }),
-  ...(ownerState.textColor === 'inherit' && {
-    color: 'inherit',
-    opacity: 0.6,
-    [`&.${tabClasses.selected}`]: {
-      opacity: 1
-    },
-    [`&.${tabClasses.disabled}`]: {
-      opacity: theme.palette.action.disabledOpacity
-    }
-  }),
-  ...(ownerState.textColor === 'primary' && {
-    color: theme.palette.text.secondary,
-    [`&.${tabClasses.selected}`]: {
-      color: theme.palette.primary.main
-    },
-    [`&.${tabClasses.disabled}`]: {
-      color: theme.palette.text.disabled
-    }
-  }),
-  ...(ownerState.textColor === 'secondary' && {
-    color: theme.palette.text.secondary,
-    [`&.${tabClasses.selected}`]: {
-      color: theme.palette.secondary.main
-    },
-    [`&.${tabClasses.disabled}`]: {
-      color: theme.palette.text.disabled
-    }
-  }),
   ...(ownerState.fullWidth && {
     flexShrink: 1,
     flexGrow: 1,
@@ -166,8 +115,8 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
     disabled = false,
     disableFocusRipple = false,
     fullWidth,
-    icon: iconProp,
-    iconPosition = 'top',
+    startIcon: startIconProp,
+    endIcon: endIconProp,
     indicator,
     label,
     onChange,
@@ -175,9 +124,7 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
     onFocus,
     selected,
     selectionFollowsFocus,
-    textColor = 'inherit',
     value,
-    variant = 'default',
     wrapped = false,
     ...other
   } = useThemeProps({ props: inProps, name: 'ESTab' });
@@ -187,22 +134,26 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
     disabled,
     disableFocusRipple,
     selected,
-    icon: !!iconProp,
-    iconPosition,
+    icon: !!startIconProp || !!endIconProp,
     label: !!label,
     fullWidth,
-    textColor,
-    variant,
     wrapped
   };
 
   const classes = useUtilityClasses(ownerState);
-  const icon =
-    iconProp && label && isValidElement(iconProp)
-      ? cloneElement(iconProp as ReactElement, {
-          className: clsx(classes.iconWrapper, (iconProp as ReactElement).props.className)
+  const startIcon =
+    startIconProp && isValidElement(startIconProp)
+      ? cloneElement(startIconProp as ReactElement, {
+          className: clsx(classes.iconWrapper, (startIconProp as ReactElement).props.className)
         })
-      : iconProp;
+      : startIconProp;
+
+  const endIcon =
+    endIconProp && isValidElement(endIconProp)
+      ? cloneElement(endIconProp as ReactElement, {
+          className: clsx(classes.iconWrapper, (endIconProp as ReactElement).props.className)
+        })
+      : endIconProp;
   const handleClick = (event: MouseEvent) => {
     if (!selected && onChange) {
       onChange(event, value);
@@ -237,18 +188,9 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
       onFocus={handleFocus}
       {...other}
     >
-      {iconPosition === 'top' || iconPosition === 'start' ? (
-        <>
-          {icon}
-          {label}
-        </>
-      ) : (
-        <>
-          {label}
-          {icon}
-        </>
-      )}
-
+      {startIcon}
+      {label}
+      {endIcon}
       {indicator}
     </TabRoot>
   );

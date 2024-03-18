@@ -105,6 +105,19 @@ export type TabsProps = {
    */
   sx?: SxProps<Theme>;
   /**
+   * If 'true' each nested Tab component will be smaller and have rounded corners.
+   */
+  rounded?: boolean;
+  /**
+   * Determines position of TabIndicator component:
+   *
+   *  - `top` TabIndicator will be at the top of the Tab
+   *  - `bottom` TabIndicator will be at the bottom of the Tab
+   * @default 'bottom'
+   */
+  TabIndicatorPosition?: 'top' | 'bottom';
+  /**
+  /**
    * Props applied to the tab indicator element.
    * @default  {}
    */
@@ -114,11 +127,6 @@ export type TabsProps = {
    * @default {}
    */
   TabScrollButtonProps?: Partial<TabScrollButtonProps>;
-  /**
-   * Determines the color of the `Tab`.
-   * @default 'primary'
-   */
-  textColor?: 'inherit' | 'primary' | 'secondary';
   /**
    * The value of the currently selected `Tab`.
    * If you don't want any selected `Tab`, you can set this prop to `false`.
