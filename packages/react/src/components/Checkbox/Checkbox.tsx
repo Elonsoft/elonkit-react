@@ -241,7 +241,58 @@ const CheckboxRoot = styled(SwitchBase, {
       })
     }
   },
-
+  [`&.${checkboxClasses.colorBlack}`]: {
+    [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
+      [`&.${checkboxClasses.disabled}`]: {
+        '&, &:hover': {
+          color: theme.palette.black.A500
+        }
+      },
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.black[500],
+        hover: theme.palette.black.A50,
+        focus: theme.palette.black.A200,
+        active: theme.palette.black.A150
+      })
+    },
+    [`&.${checkboxClasses.checked}`]: {
+      [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
+        '& svg': {
+          '& path': {
+            strokeDashoffset: '30px',
+            stroke: theme.palette.white[500]
+          }
+        }
+      }
+    }
+  },
+  [`&.${checkboxClasses.colorWhite}`]: {
+    [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
+      [`&.${checkboxClasses.disabled}`]: {
+        '&, &:hover': {
+          color: theme.palette.white.A500
+        }
+      },
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.white[500],
+        hover: theme.palette.white.A50,
+        focus: theme.palette.white.A200,
+        active: theme.palette.white.A150
+      })
+    },
+    [`&.${checkboxClasses.checked}`]: {
+      [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
+        '& svg': {
+          '& path': {
+            strokeDashoffset: '30px',
+            stroke: theme.palette.black[500]
+          }
+        }
+      }
+    }
+  },
   [`&.${checkboxClasses.colorMonoA}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
       [`&.${checkboxClasses.disabled}`]: {

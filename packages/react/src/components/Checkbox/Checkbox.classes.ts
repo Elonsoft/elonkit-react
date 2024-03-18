@@ -23,6 +23,10 @@ export type CheckboxClasses = {
   colorError: string;
   /** State class applied to the root element if `color="info"`. */
   colorInfo: string;
+  /** State class applied to the root element if `color="black"`. */
+  colorBlack: string;
+  /** State class applied to the root element if `color="white"`. */
+  colorWhite: string;
   /** State class applied to the root element if `color="success"`. */
   colorSuccess: string;
   /** State class applied to the root element if `size="small"`. */
@@ -57,6 +61,8 @@ export const checkboxClasses: CheckboxClasses = generateUtilityClasses('ESCheckb
   'colorError',
   'colorSuccess',
   'colorInfo',
+  'colorBlack',
+  'colorWhite',
   'sizeSmall',
   'sizeMedium',
   'sizeLarge',

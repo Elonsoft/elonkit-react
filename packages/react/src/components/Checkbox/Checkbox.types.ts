@@ -31,7 +31,7 @@ export interface CheckboxProps {
    * The color of the component.
    * @default 'primary'
    */
-  color?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'monoA' | 'monoB';
+  color?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | 'monoA' | 'monoB' | 'black' | 'white';
 
   /**
    * The variant of the component.
