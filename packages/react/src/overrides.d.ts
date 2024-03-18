@@ -2,6 +2,8 @@
 import type {} from '@mui/material/themeCssVarsAugmentation';
 
 /* eslint-disable @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars */
+import { TabScrollButtonProps } from './components/Tabs/TabScrollButton/TabScrollButton.types';
+
 import {
   BreakpointOverrides,
   Palette,
@@ -19,7 +21,7 @@ import { CommonColors } from '@mui/material/styles/createPalette';
 import { ThemeVars } from '@mui/material/styles/experimental_extendTheme';
 import { ComponentNameToClassKey, ComponentsOverrides } from '@mui/material/styles/overrides';
 import { ComponentsProps, ComponentsPropsList } from '@mui/material/styles/props';
-import { Color, ComponentsVariants } from '@mui/material';
+import { Color, ComponentsVariants, TabProps } from '@mui/material';
 import { ButtonPropsSizeOverrides } from '@mui/material/Button';
 import { FormControlPropsSizeOverrides } from '@mui/material/FormControl';
 import { IconButtonPropsSizeOverrides } from '@mui/material/IconButton';
@@ -446,6 +448,9 @@ declare module '@mui/material/styles/props' {
     ESTableRow: TableRowProps;
     ESTableScrollbar: TableScrollbarProps;
     ESTableText: TableTextProps;
+    ESTabs: TabsProps;
+    ESTab: TabProps;
+    ESTabScrollButton: TabScrollButtonProps;
     ESTouchRipple: TouchRippleProps;
     ESTextFieldGroup: TextFieldGroupProps;
   }
@@ -1022,6 +1027,18 @@ declare module '@mui/material/styles/components' {
     ESTableText?: {
       defaultProps?: ComponentsProps['ESTableText'];
       styleOverrides?: ComponentsOverrides['ESTableText'];
+    };
+    ESTabs?: {
+      defaultProps?: ComponentsProps['ESTabs'];
+      styleOverrides?: ComponentsOverrides['ESTabs'];
+    };
+    ESTab?: {
+      defaultProps?: ComponentsProps['ESTab'];
+      styleOverrides?: ComponentsOverrides['ESTab'];
+    };
+    ESTabScrollButton?: {
+      defaultProps?: ComponentsProps['ESTabScrollButton'];
+      styleOverrides?: ComponentsOverrides['ESTabScrollButton'];
     };
     ESTouchRipple?: {
       defaultProps?: ComponentsProps['ESTouchRipple'];
