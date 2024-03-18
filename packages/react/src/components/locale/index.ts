@@ -1,5 +1,8 @@
 import { AlertCloseProps } from '../Alert';
-import { AudioPlayerProps } from '../AudioPlayer';
+import { AudioPlayerMenuProps } from '../AudioPlayer/AudioPlayerMenu';
+import { AudioPlayerPlayButtonProps } from '../AudioPlayer/AudioPlayerPlayButton';
+import { AudioPlayerProgressBarProps } from '../AudioPlayer/AudioPlayerProgressBar';
+import { AudioPlayerVolumeProps } from '../AudioPlayer/AudioPlayerVolume';
 import { AutocompleteMenuProps } from '../AutocompleteMenu';
 import { BreadcrumbsProps } from '../Breadcrumbs';
 import { CalendarHeadProps } from '../Calendar';
@@ -20,21 +23,20 @@ export interface Localization {
     ESAlertClose: {
       defaultProps: Pick<AlertCloseProps, 'label'>;
     };
-    ESAudioPlayer: {
+    ESAudioPlayerMenu: {
       defaultProps: Pick<
-        AudioPlayerProps,
-        | 'labelBack'
-        | 'labelCurrent'
-        | 'labelDownload'
-        | 'labelMute'
-        | 'labelOptions'
-        | 'labelPause'
-        | 'labelPlay'
-        | 'labelRate'
-        | 'labelRateNormal'
-        | 'labelUnmute'
-        | 'labelVolume'
+        AudioPlayerMenuProps,
+        'labelBack' | 'labelDownload' | 'labelOptions' | 'labelRate' | 'labelRateNormal'
       >;
+    };
+    ESAudioPlayerVolume: {
+      defaultProps: Pick<AudioPlayerVolumeProps, 'labelMute' | 'labelUnmute' | 'labelVolume'>;
+    };
+    ESAudioPlayerPlayButton: {
+      defaultProps: Pick<AudioPlayerPlayButtonProps, 'labelPause' | 'labelPlay'>;
+    };
+    ESAudioPlayerProgressBar: {
+      defaultProps: Pick<AudioPlayerProgressBarProps, 'labelCurrent'>;
     };
     ESAutocompleteMenu: {
       defaultProps: Pick<
@@ -130,19 +132,31 @@ export const en: Localization = {
         label: 'Close'
       }
     },
-    ESAudioPlayer: {
+    ESAudioPlayerMenu: {
       defaultProps: {
         labelBack: 'Back',
-        labelCurrent: 'Current playback time',
         labelDownload: 'Download',
-        labelMute: 'Mute',
         labelOptions: 'Options',
-        labelPause: 'Pause',
-        labelPlay: 'Play',
         labelRate: 'Rate',
-        labelRateNormal: 'Normal',
+        labelRateNormal: 'Normal'
+      }
+    },
+    ESAudioPlayerVolume: {
+      defaultProps: {
+        labelMute: 'Mute',
         labelUnmute: 'Unmute',
         labelVolume: 'Volume'
+      }
+    },
+    ESAudioPlayerPlayButton: {
+      defaultProps: {
+        labelPause: 'Pause',
+        labelPlay: 'Play'
+      }
+    },
+    ESAudioPlayerProgressBar: {
+      defaultProps: {
+        labelCurrent: 'Current playback time'
       }
     },
     ESAutocompleteMenu: {
@@ -300,19 +314,31 @@ export const ru: Localization = {
         label: 'Закрыть'
       }
     },
-    ESAudioPlayer: {
+    ESAudioPlayerMenu: {
       defaultProps: {
         labelBack: 'Назад',
-        labelCurrent: 'Текущее время воспроизведения',
         labelDownload: 'Скачать',
-        labelMute: 'Выключить звук',
         labelOptions: 'Опции',
-        labelPause: 'Остановить воспроизведение',
-        labelPlay: 'Начать воспроизведение',
         labelRate: 'Скорость',
-        labelRateNormal: 'Обычная',
+        labelRateNormal: 'Обычная'
+      }
+    },
+    ESAudioPlayerVolume: {
+      defaultProps: {
+        labelMute: 'Выключить звук',
         labelUnmute: 'Включить звук',
         labelVolume: 'Громкость'
+      }
+    },
+    ESAudioPlayerPlayButton: {
+      defaultProps: {
+        labelPause: 'Остановить воспроизведение',
+        labelPlay: 'Начать воспроизведение'
+      }
+    },
+    ESAudioPlayerProgressBar: {
+      defaultProps: {
+        labelCurrent: 'Текущее время воспроизведения'
       }
     },
     ESAutocompleteMenu: {
