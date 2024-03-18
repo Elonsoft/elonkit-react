@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars */
+import { TabScrollButtonProps } from './components/Tabs/TabScrollButton/TabScrollButton.types';
+
 import {
   BreakpointOverrides,
   Palette,
@@ -14,7 +16,7 @@ import { Mixins } from '@mui/material/styles/createMixins';
 import { CommonColors } from '@mui/material/styles/createPalette';
 import { ComponentNameToClassKey, ComponentsOverrides } from '@mui/material/styles/overrides';
 import { ComponentsProps, ComponentsPropsList } from '@mui/material/styles/props';
-import { Color, ComponentsVariants } from '@mui/material';
+import { Color, ComponentsVariants, TabProps } from '@mui/material';
 import { ButtonPropsSizeOverrides } from '@mui/material/Button';
 import { FormControlPropsSizeOverrides } from '@mui/material/FormControl';
 import { IconButtonPropsSizeOverrides } from '@mui/material/IconButton';
@@ -246,6 +248,7 @@ import {
 } from './components/Table';
 import { TextFieldGroupClassKey, TextFieldGroupProps } from './components/TextFieldGroup';
 import { buttonMixin, listItemMixin } from './theming/mixins';
+import { TabsProps } from './components';
 
 export interface ISurfacePalette {
   background: string;
@@ -413,6 +416,9 @@ declare module '@mui/material/styles/props' {
     ESTableRow: TableRowProps;
     ESTableScrollbar: TableScrollbarProps;
     ESTableText: TableTextProps;
+    ESTabs: TabsProps;
+    ESTab: TabProps;
+    ESTabScrollButton: TabScrollButtonProps;
     ESTextFieldGroup: TextFieldGroupProps;
   }
 }
@@ -937,6 +943,18 @@ declare module '@mui/material/styles/components' {
     ESTableText?: {
       defaultProps?: ComponentsProps['ESTableText'];
       styleOverrides?: ComponentsOverrides['ESTableText'];
+    };
+    ESTabs?: {
+      defaultProps?: ComponentsProps['ESTabs'];
+      styleOverrides?: ComponentsOverrides['ESTabs'];
+    };
+    ESTab?: {
+      defaultProps?: ComponentsProps['ESTab'];
+      styleOverrides?: ComponentsOverrides['ESTab'];
+    };
+    ESTabScrollButton?: {
+      defaultProps?: ComponentsProps['ESTabScrollButton'];
+      styleOverrides?: ComponentsOverrides['ESTabScrollButton'];
     };
     ESSidebar?: {
       defaultProps?: ComponentsProps['ESSidebar'];
