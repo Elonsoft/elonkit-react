@@ -5,6 +5,7 @@ export * from './Autocomplete';
 export * from './AutocompleteField';
 export * from './AutocompleteMenu';
 export * from './AvatarGroup';
+export * from './Badge';
 export * from './BottomSheet';
 export * from './Breadcrumbs';
 export * from './Calendar';
