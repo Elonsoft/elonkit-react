@@ -15,6 +15,8 @@ export type CheckboxClasses = {
   colorSecondary: string;
   /** State class applied to the root element if `color="monoA"`. */
   colorMonoA: string;
+  /** State class applied to the root element if `color="monoB"`. */
+  colorMonoB: string;
   /** State class applied to the root element if `color="warning"`. */
   colorWarning: string;
   /** State class applied to the root element if `color="error"`. */
@@ -29,8 +31,8 @@ export type CheckboxClasses = {
   sizeMedium: string;
   /** State class applied to the root element if `size="large"`. */
   sizeLarge: string;
-  /** State class applied to the root element if `variant = "filled"`. */
-  variantFilled: string;
+  /** State class applied to the root element if `variant = "contained"`. */
+  variantContained: string;
   /** State class applied to the root element if `variant = "outlined"`. */
   variantOutlined: string;
   /** State class applied to the root element if `variant = "hybrid"`. */
@@ -50,6 +52,7 @@ export const checkboxClasses: CheckboxClasses = generateUtilityClasses('ESCheckb
   'colorPrimary',
   'colorSecondary',
   'colorMonoA',
+  'colorMonoB',
   'colorWarning',
   'colorError',
   'colorSuccess',
@@ -57,7 +60,7 @@ export const checkboxClasses: CheckboxClasses = generateUtilityClasses('ESCheckb
   'sizeSmall',
   'sizeMedium',
   'sizeLarge',
-  'variantFilled',
+  'variantContained',
   'variantOutlined',
   'variantHybrid'
 ]);

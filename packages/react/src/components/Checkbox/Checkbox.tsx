@@ -82,7 +82,8 @@ const CheckboxRoot = styled(SwitchBase, {
 })<{ ownerState: CheckboxOwnerState }>(({ theme }) => ({
   '& svg': {
     fill: 'none',
-    borderRadius: '4px',
+    borderRadius: '6px',
+    '& rect': { rx: 4 },
     '& path': {
       strokeDasharray: '15',
       strokeDashoffset: '18px',
@@ -93,25 +94,35 @@ const CheckboxRoot = styled(SwitchBase, {
       transition: '200ms'
     }
   },
+  [`&:not(.${checkboxClasses.checked}):hover`]: {
+    '& svg': {
+      '& path': {
+        strokeDashoffset: '30px',
+        stroke: theme.palette.monoA.A400
+      }
+    }
+  },
   [`&.${checkboxClasses.sizeLarge}`]: {
     '& svg': {
-      fontSize: '24px',
-      height: '24px !important',
-      width: '24px !important'
+      fontSize: '22px',
+      height: '22px !important',
+      width: '22px !important'
     }
   },
   [`&.${checkboxClasses.sizeMedium}`]: {
     '& svg': {
-      fontSize: '20px',
-      height: '20px !important',
-      width: '20px !important'
+      borderRadius: '4px',
+      fontSize: '18px',
+      height: '18px !important',
+      width: '18px !important'
     }
   },
   [`&.${checkboxClasses.sizeSmall}`]: {
     '& svg': {
-      fontSize: '16px',
-      height: '16px !important',
-      width: '16px !important'
+      borderRadius: '4px',
+      fontSize: '14px',
+      height: '14px !important',
+      width: '14px !important'
     }
   },
   [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
@@ -122,8 +133,11 @@ const CheckboxRoot = styled(SwitchBase, {
     }
   },
   [`&.${checkboxClasses.checked}`]: {
-    [`&.${checkboxClasses.variantFilled}, &.${checkboxClasses.variantHybrid}`]: {
+    [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
       '& svg': {
+        '& rect': {
+          stroke: 'transparent'
+        },
         '& circle': {
           strokeWidth: '20px',
           stroke: 'currentColor'
@@ -150,7 +164,7 @@ const CheckboxRoot = styled(SwitchBase, {
     }
   },
   [`&.${checkboxClasses.indeterminate}`]: {
-    [`&.${checkboxClasses.variantFilled}, &.${checkboxClasses.variantHybrid}`]: {
+    [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
       '& svg': {
         '& rect': {
           stroke: 'transparent'
@@ -187,6 +201,8 @@ const CheckboxRoot = styled(SwitchBase, {
     active: theme.palette.monoA.A150
   }),
   [`&.${checkboxClasses.disabled}`]: {
+    cursor: 'not-allowed',
+    pointerEvents: 'auto',
     '&, &:hover': {
       color: theme.palette.monoA.A400
     }
@@ -205,6 +221,23 @@ const CheckboxRoot = styled(SwitchBase, {
         hover: theme.palette.success.A50,
         focus: theme.palette.success.A200,
         active: theme.palette.success.A150
+      })
+    }
+  },
+
+  [`&.${checkboxClasses.colorMonoB}`]: {
+    [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
+      [`&.${checkboxClasses.disabled}`]: {
+        '&, &:hover': {
+          color: theme.palette.monoB.A500
+        }
+      },
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.monoB[300],
+        hover: theme.palette.monoB.A50,
+        focus: theme.palette.monoB.A200,
+        active: theme.palette.monoB.A150
       })
     }
   },
@@ -332,7 +365,7 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(funct
     className,
     checked,
     disabled,
-    variant = 'filled',
+    variant = 'contained',
     ...other
   } = props;
 
