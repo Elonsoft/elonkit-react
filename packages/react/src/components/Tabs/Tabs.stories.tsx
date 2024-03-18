@@ -1,11 +1,13 @@
-import { ReactNode, SyntheticEvent, useState } from 'react';
+import { ReactNode, SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import { Tab, Tabs } from '.';
+import { Tab, Tabs, tabsClasses } from '.';
+
+import { IconAt } from '../../icons';
 
 const meta: Meta<typeof Tabs> = {
   tags: ['autodocs'],
@@ -117,46 +119,46 @@ function CustomTabPanel(props: TabPanelProps) {
 export const Demo: Story = {
   render: (args) => {
     const [value, setValue] = useState(0);
+    const [tabsWidth, setTabsWidth] = useState(0);
+    const tabRefs = useRef<Array<HTMLButtonElement | undefined>>([]);
 
     const handleChange = (event: SyntheticEvent, newValue: number) => {
       setValue(newValue);
     };
 
+    useEffect(() => {
+      const newTabsWidth = tabRefs.current.reduce((acc, tabRef) => {
+        return acc + (tabRef ? tabRef.scrollWidth : 0);
+      }, 0);
+
+      setTabsWidth(newTabsWidth);
+    }, [tabRefs]);
+
     return (
       <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs {...args} value={value} onChange={handleChange}>
+        <Box>
+          <Tabs
+            {...args}
+            sx={{
+              [`.${tabsClasses.flexContainer}`]: {
+                borderBottom: 1,
+                borderColor: 'divider',
+                width: tabsWidth
+              }
+            }}
+            value={value}
+            onChange={handleChange}
+          >
             {tabsData.map((label, index) => (
-              <Tab key={index} label={label} />
-            ))}
-          </Tabs>
-        </Box>
-
-        {tabsData.map((content, index) => (
-          <CustomTabPanel key={index} index={index} value={value}>
-            {content}
-          </CustomTabPanel>
-        ))}
-      </Box>
-    );
-  }
-};
-
-/** We can use `variant` prop on each Tab component to make the tabs smaller and have rounded corners. */
-export const Rounded: Story = {
-  render: (args) => {
-    const [value, setValue] = useState(0);
-
-    const handleChange = (event: SyntheticEvent, newValue: number) => {
-      setValue(newValue);
-    };
-
-    return (
-      <Box sx={{ width: '100%' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs {...args} value={value} onChange={handleChange}>
-            {tabsData.slice(0, 3).map((label, index) => (
-              <Tab key={index} label={label} variant="rounded" />
+              <Tab
+                key={index}
+                ref={(el) => {
+                  tabRefs.current[index] = el || undefined;
+                }}
+                endIcon={<IconAt size="20" />}
+                label={label}
+                startIcon={<IconAt size="20" />}
+              />
             ))}
           </Tabs>
         </Box>

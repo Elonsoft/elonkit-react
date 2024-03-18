@@ -26,15 +26,6 @@ export type TabProps = {
    */
   disableFocusRipple?: boolean;
   /**
-   * The icon to display.
-   */
-  icon?: string | ReactElement;
-  /**
-   * The position of the icon relative to the label.
-   * @default 'top'
-   */
-  iconPosition?: 'top' | 'bottom' | 'start' | 'end';
-  /**
    * The label element.
    */
   label?: ReactNode;
@@ -47,13 +38,9 @@ export type TabProps = {
    */
   value?: any;
   /**
-   * Determines additional display behavior of the tab:
-   *
-   *  - `default` will make tab corners and tab height standard.
-   *  - `rounded` will make the tab corners rounded and make tab height less.
-   * @default 'default'
+   * If 'true' the component will be smaller and have rounded corners.
    */
-  variant?: 'default' | 'rounded';
+  rounded?: boolean;
   /**
    * Tab labels appear in a single row.
    * They can use a second line if needed.
@@ -93,7 +80,11 @@ export type TabProps = {
    */
   selected?: boolean;
   /**
-   * Text color of the tab. Can be `'inherit'`, `'primary'`, or `'secondary'`.
+   * Element placed before the children.
    */
-  textColor?: 'inherit' | 'primary' | 'secondary';
+  startIcon?: string | ReactElement;
+  /**
+   * Element placed after the children.
+   */
+  endIcon?: string | ReactElement;
 };

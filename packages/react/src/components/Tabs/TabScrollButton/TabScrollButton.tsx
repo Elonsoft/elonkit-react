@@ -78,6 +78,20 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
 
   return (
     <>
+      {direction === 'right' && !other.disabled && (
+        <Divider
+          flexItem
+          orientation="vertical"
+          sx={{
+            [`&.${dividerClasses.vertical}.${dividerClasses.flexItem}`]: {
+              position: 'relative',
+              left: 1,
+              alignSelf: 'center',
+              height: '36px'
+            }
+          }}
+        />
+      )}
       <TabScrollButtonRoot
         ref={ref}
         className={clsx(classes.root, className)}
@@ -89,38 +103,26 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
         tabIndex={undefined}
         {...other}
       >
-        {direction === 'right' && (
-          <Divider
-            flexItem
-            orientation="vertical"
-            sx={{
-              [`&.${dividerClasses.vertical}.${dividerClasses.flexItem}`]: {
-                alignSelf: 'center',
-                marginRight: '6px',
-                height: '36px'
-              }
-            }}
-          />
-        )}
         {direction === 'left' ? (
           <StartButtonIcon sx={{ color: theme.palette.monoA.A600 }} />
         ) : (
           <EndButtonIcon sx={{ color: theme.palette.monoA.A600 }} />
         )}
-        {direction === 'left' && (
-          <Divider
-            flexItem
-            orientation="vertical"
-            sx={{
-              [`&.${dividerClasses.vertical}.${dividerClasses.flexItem}`]: {
-                alignSelf: 'center',
-                marginLeft: '6px',
-                height: '36px'
-              }
-            }}
-          />
-        )}
       </TabScrollButtonRoot>
+      {direction === 'left' && !other.disabled && (
+        <Divider
+          flexItem
+          orientation="vertical"
+          sx={{
+            [`&.${dividerClasses.vertical}.${dividerClasses.flexItem}`]: {
+              position: 'relative',
+              right: 1,
+              alignSelf: 'center',
+              height: '36px'
+            }
+          }}
+        />
+      )}
     </>
   );
 });

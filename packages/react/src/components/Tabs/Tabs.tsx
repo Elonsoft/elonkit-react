@@ -39,6 +39,7 @@ type TabsOwnerState = {
   scrollButtonsHideMobile: boolean;
   classes?: TabsProps['classes'];
   indicatorColor: TabsProps['indicatorColor'];
+  TabIndicatorPosition?: 'top' | 'bottom';
 };
 
 const easeInOutSin = (time: number) => {
@@ -324,6 +325,7 @@ const TabsIndicator = styled('span', {
   bottom: 0,
   width: '100%',
   transition: theme.transitions.create(['width']),
+  ...(ownerState.TabIndicatorPosition === 'top' ? { top: 0 } : { bottom: 0 }),
   ...(ownerState.indicatorColor === 'primary' && {
     backgroundColor: theme.palette.primary.main
   }),
@@ -368,9 +370,9 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     scrollButtons = 'auto',
     selectionFollowsFocus,
     slots = {},
+    TabIndicatorPosition = 'bottom',
     TabIndicatorProps = {},
     TabScrollButtonProps = {},
-    textColor = 'inherit',
     value,
     variant = 'standard',
     visibleScrollbar = false,
@@ -396,7 +398,6 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     orientation,
     vertical,
     scrollButtons,
-    textColor,
     variant,
     visibleScrollbar,
     fixed: !scrollable,
@@ -404,7 +405,8 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     scrollableX: scrollable && !vertical,
     scrollableY: scrollable && vertical,
     centered: centered && !scrollable,
-    scrollButtonsHideMobile: !allowScrollButtonsMobile
+    scrollButtonsHideMobile: !allowScrollButtonsMobile,
+    TabIndicatorPosition
   };
 
   const classes = useUtilityClasses(ownerState);
@@ -820,7 +822,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
       selected,
       selectionFollowsFocus,
       onChange,
-      textColor,
+      rounded: other.rounded,
       value: childValue,
       ...(childIndex === 1 && value === false && !child.props.tabIndex ? { tabIndex: 0 } : {})
     });
