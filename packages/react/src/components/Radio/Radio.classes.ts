@@ -13,6 +13,12 @@ export type RadioClasses = {
   colorSecondary: string;
   /** State class applied to the root element if `color="monoA"`. */
   colorMonoA: string;
+  /** State class applied to the root element if `color="monoB"`. */
+  colorMonoB: string;
+  /** State class applied to the root element if `color="black"`. */
+  colorBlack: string;
+  /** State class applied to the root element if `color="white"`. */
+  colorWhite: string;
   /** State class applied to the root element if `color="warning"`. */
   colorWarning: string;
   /** State class applied to the root element if `color="error"`. */
@@ -28,7 +34,7 @@ export type RadioClasses = {
   /** State class applied to the root element if `size="large"`. */
   sizeLarge: string;
   /** State class applied to the root element if `variant = "filled"`. */
-  variantFilled: string;
+  variantContained: string;
   /** State class applied to the root element if `variant = "outlined"`. */
   variantOutlined: string;
   /** State class applied to the root element if `variant = "hybrid"`. */
@@ -47,6 +53,9 @@ export const radioClasses: RadioClasses = generateUtilityClasses('ESRadio', [
   'colorPrimary',
   'colorSecondary',
   'colorMonoA',
+  'colorMonoB',
+  'colorBlack',
+  'colorWhite',
   'colorWarning',
   'colorError',
   'colorSuccess',
@@ -54,7 +63,7 @@ export const radioClasses: RadioClasses = generateUtilityClasses('ESRadio', [
   'sizeSmall',
   'sizeMedium',
   'sizeLarge',
-  'variantFilled',
+  'variantContained',
   'variantOutlined',
   'variantHybrid'
 ]);

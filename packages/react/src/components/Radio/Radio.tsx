@@ -87,6 +87,13 @@ const RadioRoot = styled(SwitchBase, {
       fill: 'transparent'
     }
   },
+  [`&:not(.${radioClasses.checked}):not(.${radioClasses.disabled}):hover`]: {
+    '& svg': {
+      '& circle:last-of-type': {
+        fill: theme.palette.monoA.A400
+      }
+    }
+  },
 
   [`&.${radioClasses.sizeLarge}`]: {
     '& svg': {
@@ -109,7 +116,7 @@ const RadioRoot = styled(SwitchBase, {
       width: '16px !important'
     }
   },
-  [`&.${radioClasses.variantFilled}`]: {
+  [`&.${radioClasses.variantContained}`]: {
     '& svg': {
       '& circle:first-of-type': {
         strokeWidth: '2'
@@ -117,7 +124,7 @@ const RadioRoot = styled(SwitchBase, {
     }
   },
   [`&.${radioClasses.checked}`]: {
-    [`&.${radioClasses.variantFilled}, &.${radioClasses.variantHybrid}`]: {
+    [`&.${radioClasses.variantContained}, &.${radioClasses.variantHybrid}`]: {
       '& svg': {
         '& circle:first-of-type': {
           strokeWidth: '12px'
@@ -184,10 +191,58 @@ const RadioRoot = styled(SwitchBase, {
       },
       ...theme.mixins.button({
         background: 'transparent',
-        color: theme.palette.monoA[300],
+        color: theme.palette.monoA[500],
         hover: theme.palette.monoA.A50,
         focus: theme.palette.monoA.A200,
         active: theme.palette.monoA.A150
+      })
+    }
+  },
+  [`&.${radioClasses.colorMonoB}`]: {
+    [`&.${radioClasses.checked}`]: {
+      [`&.${radioClasses.disabled}`]: {
+        '&, &:hover': {
+          color: theme.palette.monoB.A500
+        }
+      },
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.monoB[500],
+        hover: theme.palette.monoB.A50,
+        focus: theme.palette.monoB.A200,
+        active: theme.palette.monoB.A150
+      })
+    }
+  },
+  [`&.${radioClasses.colorBlack}`]: {
+    [`&.${radioClasses.checked}`]: {
+      [`&.${radioClasses.disabled}`]: {
+        '&, &:hover': {
+          color: theme.palette.black.A500
+        }
+      },
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.black[500],
+        hover: theme.palette.black.A50,
+        focus: theme.palette.black.A200,
+        active: theme.palette.black.A150
+      })
+    }
+  },
+  [`&.${radioClasses.colorWhite}`]: {
+    [`&.${radioClasses.checked}`]: {
+      [`&.${radioClasses.disabled}`]: {
+        '&, &:hover': {
+          color: theme.palette.white.A500
+        }
+      },
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.white[500],
+        hover: theme.palette.white.A50,
+        focus: theme.palette.white.A200,
+        active: theme.palette.white.A150
       })
     }
   },
@@ -301,7 +356,7 @@ export const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(function Ra
     className,
     checked: checkedProp,
     disabled,
-    variant = 'filled',
+    variant = 'contained',
     onChange: onChangeProp,
     name: nameProp,
     ...other
@@ -334,22 +389,24 @@ export const Radio = React.forwardRef<HTMLButtonElement, RadioProps>(function Ra
   const classes = useUtilityClasses(ownerState);
 
   return (
-    <RadioRoot
-      ref={ref}
-      checked={checked}
-      checkedIcon={checkedIcon}
-      className={clsx(classes.root, className)}
-      classes={classes}
-      disabled={disabled}
-      icon={iconProp}
-      inputProps={{
-        ...inputProps
-      }}
-      name={name}
-      ownerState={ownerState}
-      type="radio"
-      onChange={onChange}
-      {...other}
-    />
+    <div style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}>
+      <RadioRoot
+        ref={ref}
+        checked={checked}
+        checkedIcon={checkedIcon}
+        className={clsx(classes.root, className)}
+        classes={classes}
+        disabled={disabled}
+        icon={iconProp}
+        inputProps={{
+          ...inputProps
+        }}
+        name={name}
+        ownerState={ownerState}
+        type="radio"
+        onChange={onChange}
+        {...other}
+      />
+    </div>
   );
 });
