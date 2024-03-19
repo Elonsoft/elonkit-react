@@ -144,8 +144,8 @@ export const Demo: Story = {
             sx={{
               [`.${tabsClasses.flexContainer}`]: {
                 gap: args.rounded ? `${gap}px` : 0,
-                borderBottom: 1,
-                borderColor: 'divider',
+                borderBottom: args.orientation === 'vertical' ? undefined : 1,
+                borderColor: args.orientation === 'vertical' ? undefined : 'divider',
                 width: args.orientation === 'vertical' ? undefined : tabsWidth,
                 height: args.orientation === 'vertical' ? '200px' : undefined
               }
