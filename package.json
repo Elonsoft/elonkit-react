@@ -13,6 +13,7 @@
     "prettier:check": "prettier --check .",
     "prettier:write": "prettier --write .",
     "cspell": "cspell --no-progress .",
+    "depcruise": "depcruise packages/react/src",
     "husky": "husky install",
     "release": "lerna version --no-push --no-git-tag-version"
   },
@@ -32,6 +33,7 @@
     "@cspell/dict-lorem-ipsum": "^3.0.0",
     "@cspell/dict-ru_ru": "^2.0.5",
     "cspell": "^6.31.1",
+    "dependency-cruiser": "^16.2.4",
     "eslint": "^8.56.0",
     "husky": "^7.0.4",
     "lerna": "^8.1.2",

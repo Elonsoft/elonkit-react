@@ -4,3 +4,4 @@
 npm run eslint
 npm run prettier:check
 npm run cspell
+npm run depcruise
