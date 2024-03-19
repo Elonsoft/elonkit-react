@@ -7,11 +7,22 @@ import { getTabScrollButtonUtilityClass, tabScrollButtonClasses } from './TabScr
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { styled, useTheme, useThemeProps } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
+import { keyframes, styled, useTheme, useThemeProps } from '@mui/material/styles';
+import ButtonBase, { touchRippleClasses } from '@mui/material/ButtonBase';
 
 import { IconChevronLeftW400, IconChevronRightW400 } from '../../../icons';
 import { Divider, dividerClasses } from '../../Divider';
+
+const enterKeyframe = keyframes`
+  0% {
+    transform: scale(0);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 interface TabScrollButtonOwnerState extends TabScrollButtonProps {
   isRtl?: boolean;
@@ -39,6 +50,25 @@ const TabScrollButtonRoot = styled(ButtonBase, {
   width: 40,
   flexShrink: 0,
   opacity: 0.8,
+
+  ...theme.mixins.button({
+    background: 'initial',
+    color: 'initial',
+    hover: theme.palette.monoA.A50,
+    active: theme.palette.monoA.A150,
+    focus: theme.palette.monoA.A200
+  }),
+
+  [`& .${touchRippleClasses.rippleVisible}`]: {
+    animationName: `${enterKeyframe} !important`,
+    opacity: '1 !important'
+  },
+  [`&.${tabScrollButtonClasses.root}`]: {
+    [`& .${touchRippleClasses.root}`]: {
+      transitionDuration: `${theme.transitions.duration.standard}ms`
+    }
+  },
+
   [`&.${tabScrollButtonClasses.disabled}`]: {
     opacity: 0
   },
@@ -48,16 +78,7 @@ const TabScrollButtonRoot = styled(ButtonBase, {
     '& svg': {
       transform: `rotate(${ownerState.isRtl ? -90 : 90}deg)`
     }
-  }),
-  '&:hover': {
-    backgroundColor: theme.palette.monoA.A50
-  },
-  '&:active': {
-    backgroundColor: theme.palette.monoA.A150
-  },
-  '&:focus': {
-    backgroundColor: theme.palette.monoA.A200
-  }
+  })
 }));
 
 export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProps>(function TabScrollButton(
@@ -81,7 +102,7 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
       {direction === 'right' && !other.disabled && (
         <Divider
           flexItem
-          orientation="vertical"
+          orientation={other.orientation === 'vertical' ? 'horizontal' : 'vertical'}
           sx={{
             [`&.${dividerClasses.vertical}.${dividerClasses.flexItem}`]: {
               position: 'relative',
@@ -112,7 +133,7 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
       {direction === 'left' && !other.disabled && (
         <Divider
           flexItem
-          orientation="vertical"
+          orientation={other.orientation === 'vertical' ? 'horizontal' : 'vertical'}
           sx={{
             [`&.${dividerClasses.vertical}.${dividerClasses.flexItem}`]: {
               position: 'relative',

@@ -117,29 +117,37 @@ export const Demo: Story = {
     const [tabsWidth, setTabsWidth] = useState(0);
     const tabRefs = useRef<Array<HTMLButtonElement | undefined>>([]);
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
+    const gap = 4;
 
     const handleChange = (event: SyntheticEvent, newValue: number) => {
       setValue(newValue);
     };
 
     useEffect(() => {
-      const newTabsWidth = tabRefs.current.reduce((acc, tabRef) => {
-        return acc + (tabRef ? tabRef.scrollWidth : 0);
-      }, 0);
+      const newTabsWidth =
+        tabRefs.current.reduce((acc, tabRef) => {
+          return acc + (tabRef ? tabRef.scrollWidth : 0);
+        }, 0) + (args.rounded ? gap * (tabsData[locale].length - 1) : 0);
 
       setTabsWidth(newTabsWidth);
-    }, [tabRefs]);
+    }, [tabRefs, args.rounded, locale]);
 
     return (
-      <Box sx={{ width: '100%' }}>
+      <Box
+        sx={{
+          width: args.orientation === 'vertical' ? '50%' : '100%'
+        }}
+      >
         <Box>
           <Tabs
             {...args}
             sx={{
               [`.${tabsClasses.flexContainer}`]: {
+                gap: args.rounded ? `${gap}px` : 0,
                 borderBottom: 1,
                 borderColor: 'divider',
-                width: tabsWidth
+                width: args.orientation === 'vertical' ? undefined : tabsWidth,
+                height: args.orientation === 'vertical' ? '200px' : undefined
               }
             }}
             value={value}

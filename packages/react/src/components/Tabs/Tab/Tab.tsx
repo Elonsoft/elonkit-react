@@ -7,8 +7,19 @@ import { getTabUtilityClass, tabClasses } from './Tab.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { styled, useThemeProps } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
+import { keyframes, styled, useThemeProps } from '@mui/material/styles';
+import ButtonBase, { touchRippleClasses } from '@mui/material/ButtonBase';
+
+const enterKeyframe = keyframes`
+  0% {
+    transform: scale(0);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+`;
 
 type TabOwnerState = {
   classes?: TabProps['classes'];
@@ -54,7 +65,7 @@ const TabRoot = styled(ButtonBase, {
     ];
   }
 })<{ ownerState: TabOwnerState }>(({ theme, ownerState }) => ({
-  ...theme.typography.body100,
+  color: theme.palette.monoA.A700,
   maxWidth: 360,
   minWidth: 90,
   position: 'relative',
@@ -63,12 +74,27 @@ const TabRoot = styled(ButtonBase, {
   overflow: 'hidden',
   whiteSpace: 'normal',
   textAlign: 'center',
-  color: theme.palette.monoA.A700,
   gap: 8,
+  ...theme.typography.body100,
 
-  ...(ownerState.selected && {
-    color: theme.palette.monoA.A900
+  ...theme.mixins.button({
+    background: 'initial',
+    color: ownerState.selected ? theme.palette.monoA.A900 : theme.palette.monoA.A700,
+    hover: theme.palette.monoA.A50,
+    active: theme.palette.monoA.A150,
+    focus: theme.palette.monoA.A200
   }),
+
+  [`& .${touchRippleClasses.rippleVisible}`]: {
+    animationName: `${enterKeyframe} !important`,
+    opacity: '1 !important'
+  },
+  [`&.${tabClasses.root}`]: {
+    [`& .${touchRippleClasses.root}`]: {
+      transitionDuration: `${theme.transitions.duration.standard}ms`
+    }
+  },
+
   ...(!ownerState.rounded && {
     minHeight: 48
   }),
@@ -93,19 +119,8 @@ const TabRoot = styled(ButtonBase, {
   ...(ownerState.wrapped && {
     fontSize: theme.typography.pxToRem(12)
   }),
-  [`&.${tabClasses.root}`]: {
-    '&:hover': {
-      backgroundColor: theme.palette.monoA.A50
-    },
-    '&:active': {
-      backgroundColor: theme.palette.monoA.A150
-    },
-    '&:focus': {
-      backgroundColor: theme.palette.monoA.A200
-    },
-    '&.Mui-disabled': {
-      color: theme.palette.monoA.A400
-    }
+  '&.Mui-disabled': {
+    color: theme.palette.monoA.A400
   }
 }));
 
@@ -113,7 +128,7 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
   const {
     className,
     disabled = false,
-    disableFocusRipple = false,
+    disableFocusRipple = true,
     fullWidth,
     startIcon: startIconProp,
     endIcon: endIconProp,
