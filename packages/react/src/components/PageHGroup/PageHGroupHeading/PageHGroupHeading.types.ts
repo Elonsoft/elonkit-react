@@ -23,4 +23,7 @@ export interface PageHGroupHeadingProps {
 
   /** Props applied to the Tooltip component. */
   TooltipProps?: Partial<Omit<TooltipProps, 'children'>>;
+
+  /** Props applied to the endAdornment component. */
+  endAdornment?: ReactNode;
 }
