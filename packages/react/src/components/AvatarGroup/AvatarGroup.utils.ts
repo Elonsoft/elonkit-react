@@ -1,4 +1,4 @@
-import { AvatarGroupProps } from '.';
+import { AvatarGroupProps } from './AvatarGroup.types';
 
 export const getCuttingOffset = (
   size: number,
