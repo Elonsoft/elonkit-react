@@ -22,7 +22,7 @@ export type TabProps = {
   disabled?: boolean;
   /**
    * If `true`, the  keyboard focus ripple is disabled.
-   * @default false
+   * @default true
    */
   disableFocusRipple?: boolean;
   /**
