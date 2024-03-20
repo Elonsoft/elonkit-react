@@ -14,11 +14,17 @@ import SwitchBase from '@mui/material/internal/SwitchBase';
 
 import {
   IconCheckboxLarge,
+  IconCheckboxLargeOutlined,
   IconCheckboxMedium,
+  IconCheckboxMediumOutlined,
   IconCheckboxSmall,
+  IconCheckboxSmallOutlined,
   IconIndeterminateLarge,
+  IconIndeterminateLargeOutlined,
   IconIndeterminateMedium,
-  IconIndeterminateSmall
+  IconIndeterminateMediumOutlined,
+  IconIndeterminateSmall,
+  IconIndeterminateSmallOutlined
 } from '../../icons';
 
 const enterKeyframe = keyframes`
@@ -93,14 +99,22 @@ const CheckboxRoot = styled(SwitchBase, {
       stroke: 'transparent'
     }
   },
-  [`&:not(.${checkboxClasses.checked}):not(.${checkboxClasses.disabled}):not(.${checkboxClasses.indeterminate}):hover`]:
-    {
+  [`&:not(.${checkboxClasses.checked}):not(.${checkboxClasses.disabled}):not(.${checkboxClasses.indeterminate})`]: {
+    '&:hover': {
       '& svg': {
         '& path': {
           stroke: theme.palette.monoA.A400
         }
       }
     },
+    '&:active': {
+      '& svg': {
+        '& path': {
+          stroke: theme.palette.monoA.A600
+        }
+      }
+    }
+  },
   [`&.${checkboxClasses.sizeLarge}`]: {
     '& svg': {
       fontSize: '24px',
@@ -124,10 +138,17 @@ const CheckboxRoot = styled(SwitchBase, {
       width: '16px !important'
     }
   },
+  [`&.${checkboxClasses.variantContained}`]: {
+    '& svg': {
+      '& rect': {
+        stroke: theme.palette.monoA.A600
+      }
+    }
+  },
   [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
     '& svg': {
       '& rect': {
-        strokeWidth: '1'
+        stroke: theme.palette.monoA.A500
       }
     }
   },
@@ -136,7 +157,7 @@ const CheckboxRoot = styled(SwitchBase, {
       '& svg': {
         '& rect': {
           fill: 'currentColor',
-          stroke: 'transparent'
+          stroke: 'currentColor'
         },
         '& path': {
           stroke: theme.palette.monoB[500]
@@ -145,36 +166,12 @@ const CheckboxRoot = styled(SwitchBase, {
     },
     [`&.${checkboxClasses.variantOutlined}`]: {
       '& svg': {
-        '& rect': {
-          stroke: theme.palette.monoA.A500
-        },
         '& path': {
           stroke: 'currentColor'
         }
       }
     }
   },
-  // [`&.${checkboxClasses.indeterminate}`]: {
-  //   [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
-  //     '& svg': {
-  //       '& rect': {
-  //         stroke: 'transparent'
-  //       }
-  //     }
-  //   },
-  //   [`&.${checkboxClasses.variantOutlined}`]: {
-  //     '& svg': {
-  //       '& rect:first-of-type': {
-  //         fill: 'transparent',
-  //         stroke: 'transparent'
-  //       },
-  //       '& rect:last-of-type': {
-  //         fill: 'currentColor',
-  //         stroke: 'transparent'
-  //       }
-  //     }
-  //   }
-  // },
   '& .MuiTouchRipple-rippleVisible': {
     animationName: `${enterKeyframe} !important`,
     opacity: '1 !important'
@@ -192,35 +189,29 @@ const CheckboxRoot = styled(SwitchBase, {
     active: theme.palette.monoA.A150
   }),
   [`&.${checkboxClasses.disabled}`]: {
-    '&, &:hover': {
-      color: theme.palette.monoA.A400
-    }
+    opacity: '30%'
   },
 
   [`&.${checkboxClasses.colorSuccess}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
-      [`&.${checkboxClasses.disabled}`]: {
-        '&, &:hover': {
-          color: theme.palette.success.A500
-        }
-      },
       ...theme.mixins.button({
         background: 'transparent',
         color: theme.palette.success[300],
         hover: theme.palette.success.A50,
         focus: theme.palette.success.A200,
         active: theme.palette.success.A150
-      })
+      }),
+      '&:focus': {
+        backgroundColor: theme.palette.success.A200
+      },
+      '&:active': {
+        backgroundColor: theme.palette.success.A150
+      }
     }
   },
 
   [`&.${checkboxClasses.colorMonoB}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
-      [`&.${checkboxClasses.disabled}`]: {
-        '&, &:hover': {
-          color: theme.palette.monoB.A500
-        }
-      },
       [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
         '& path': {
           stroke: theme.palette.monoA[500]
@@ -233,15 +224,24 @@ const CheckboxRoot = styled(SwitchBase, {
         focus: theme.palette.monoB.A200,
         active: theme.palette.monoB.A150
       })
+    },
+    [`&.${checkboxClasses.variantContained}`]: {
+      '& svg': {
+        '& rect': {
+          stroke: theme.palette.monoB.A600
+        }
+      }
+    },
+    [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
+      '& svg': {
+        '& rect': {
+          stroke: theme.palette.monoB.A500
+        }
+      }
     }
   },
   [`&.${checkboxClasses.colorBlack}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
-      [`&.${checkboxClasses.disabled}`]: {
-        '&, &:hover': {
-          color: theme.palette.black.A500
-        }
-      },
       ...theme.mixins.button({
         background: 'transparent',
         color: theme.palette.black[500],
@@ -259,15 +259,24 @@ const CheckboxRoot = styled(SwitchBase, {
           }
         }
       }
+    },
+    [`&.${checkboxClasses.variantContained}`]: {
+      '& svg': {
+        '& rect': {
+          stroke: theme.palette.black.A600
+        }
+      }
+    },
+    [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
+      '& svg': {
+        '& rect': {
+          stroke: theme.palette.black.A500
+        }
+      }
     }
   },
   [`&.${checkboxClasses.colorWhite}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
-      [`&.${checkboxClasses.disabled}`]: {
-        '&, &:hover': {
-          color: theme.palette.white.A500
-        }
-      },
       ...theme.mixins.button({
         background: 'transparent',
         color: theme.palette.white[500],
@@ -284,15 +293,24 @@ const CheckboxRoot = styled(SwitchBase, {
           }
         }
       }
+    },
+    [`&.${checkboxClasses.variantContained}`]: {
+      '& svg': {
+        '& rect': {
+          stroke: theme.palette.white.A600
+        }
+      }
+    },
+    [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
+      '& svg': {
+        '& rect': {
+          stroke: theme.palette.white.A500
+        }
+      }
     }
   },
   [`&.${checkboxClasses.colorMonoA}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
-      [`&.${checkboxClasses.disabled}`]: {
-        '&, &:hover': {
-          color: theme.palette.monoA.A500
-        }
-      },
       ...theme.mixins.button({
         background: 'transparent',
         color: theme.palette.monoA[500],
@@ -304,50 +322,53 @@ const CheckboxRoot = styled(SwitchBase, {
   },
   [`&.${checkboxClasses.colorPrimary}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
-      [`&.${checkboxClasses.disabled}`]: {
-        '&, &:hover': {
-          color: theme.palette.primary.A500
-        }
-      },
       ...theme.mixins.button({
         background: 'transparent',
         color: theme.palette.primary[300],
         hover: theme.palette.primary.A50,
         focus: theme.palette.primary.A200,
         active: theme.palette.primary.A150
-      })
+      }),
+      '&:focus': {
+        backgroundColor: theme.palette.primary.A200
+      },
+      '&:active': {
+        backgroundColor: theme.palette.primary.A150
+      }
     }
   },
   [`&.${checkboxClasses.colorSecondary}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
-      [`&.${checkboxClasses.disabled}`]: {
-        '&, &:hover': {
-          color: theme.palette.secondary.A500
-        }
-      },
       ...theme.mixins.button({
         background: 'transparent',
         color: theme.palette.secondary[300],
         hover: theme.palette.secondary.A50,
         focus: theme.palette.secondary.A200,
         active: theme.palette.secondary.A150
-      })
+      }),
+      '&:focus': {
+        backgroundColor: theme.palette.secondary.A200
+      },
+      '&:active': {
+        backgroundColor: theme.palette.secondary.A150
+      }
     }
   },
   [`&.${checkboxClasses.colorWarning}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
-      [`&.${checkboxClasses.disabled}`]: {
-        '&, &:hover': {
-          color: theme.palette.warning.A500
-        }
-      },
       ...theme.mixins.button({
         background: 'transparent',
         color: theme.palette.warning[300],
         hover: theme.palette.warning.A50,
         focus: theme.palette.warning.A200,
         active: theme.palette.warning.A150
-      })
+      }),
+      '&:focus': {
+        backgroundColor: theme.palette.warning.A200
+      },
+      '&:active': {
+        backgroundColor: theme.palette.warning.A150
+      }
     }
   },
   [`&.${checkboxClasses.colorError}`]: {
@@ -361,68 +382,95 @@ const CheckboxRoot = styled(SwitchBase, {
         }
       }
     },
-    [`&.${checkboxClasses.disabled}`]: {
-      '&, &:hover': {
-        color: theme.palette.error.A500
-      }
-    },
     ...theme.mixins.button({
       background: 'transparent',
       color: theme.palette.error[300],
       hover: theme.palette.error.A50,
       focus: theme.palette.error.A200,
       active: theme.palette.error.A150
-    })
+    }),
+    '&:focus': {
+      backgroundColor: theme.palette.error.A200
+    },
+    '&:active': {
+      backgroundColor: theme.palette.error.A150
+    }
   },
   [`&.${checkboxClasses.colorInfo}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
-      [`&.${checkboxClasses.disabled}`]: {
-        '&, &:hover': {
-          color: theme.palette.info.A500
-        }
-      },
       ...theme.mixins.button({
         background: 'transparent',
         color: theme.palette.info[300],
         hover: theme.palette.info.A50,
         focus: theme.palette.info.A200,
         active: theme.palette.info.A150
-      })
+      }),
+      '&:focus': {
+        backgroundColor: theme.palette.info.A200
+      },
+      '&:active': {
+        backgroundColor: theme.palette.info.A150
+      }
     }
   }
 }));
 
 const defaultIcon = {
-  large: <IconCheckboxLarge />,
-  medium: <IconCheckboxMedium />,
-  small: <IconCheckboxSmall />
+  large: {
+    contained: <IconCheckboxLarge />,
+    outlined: <IconCheckboxLargeOutlined />,
+    hybrid: <IconCheckboxLargeOutlined />
+  },
+  medium: {
+    contained: <IconCheckboxMedium />,
+    outlined: <IconCheckboxMediumOutlined />,
+    hybrid: <IconCheckboxMediumOutlined />
+  },
+  small: {
+    contained: <IconCheckboxSmall />,
+    outlined: <IconCheckboxSmallOutlined />,
+    hybrid: <IconCheckboxSmallOutlined />
+  }
 };
 
 const defaultIndeterminateIcon = {
-  large: <IconIndeterminateLarge />,
-  medium: <IconIndeterminateMedium />,
-  small: <IconIndeterminateSmall />
+  large: {
+    contained: <IconIndeterminateLarge />,
+    outlined: <IconIndeterminateLargeOutlined />,
+    hybrid: <IconIndeterminateLargeOutlined />
+  },
+  medium: {
+    contained: <IconIndeterminateMedium />,
+    outlined: <IconIndeterminateMediumOutlined />,
+    hybrid: <IconIndeterminateMediumOutlined />
+  },
+  small: {
+    contained: <IconIndeterminateSmall />,
+    outlined: <IconIndeterminateSmallOutlined />,
+    hybrid: <IconIndeterminateSmallOutlined />
+  }
 };
 
 export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(function Checkbox(inProps, ref) {
   const props = useThemeProps({ props: inProps, name: 'ESCheckbox' });
   const {
     size = 'large',
-    checkedIcon = defaultIcon[size],
+    variant = 'contained',
+    checkedIcon,
     color = 'primary',
-    icon: iconProp = defaultIcon[size],
+    icon: iconProp,
     indeterminate = false,
-    indeterminateIcon: indeterminateIconProp = defaultIndeterminateIcon[size],
+    indeterminateIcon: indeterminateIconProp = defaultIndeterminateIcon[size][variant],
+    iconMapping = defaultIcon,
     inputProps,
     className,
     checked,
     disabled,
-    variant = 'contained',
     ...other
   } = props;
 
-  const icon = indeterminate ? indeterminateIconProp : iconProp;
-  const indeterminateIcon = indeterminate ? indeterminateIconProp : checkedIcon;
+  const icon = indeterminate ? indeterminateIconProp : iconProp ?? iconMapping[size][variant];
+  const indeterminateIcon = indeterminate ? indeterminateIconProp : checkedIcon ?? iconMapping[size][variant];
 
   const ownerState = {
     ...props,
@@ -440,6 +488,7 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(funct
     <div style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}>
       <CheckboxRoot
         ref={ref}
+        focusRipple
         checked={checked}
         checkedIcon={indeterminateIcon}
         className={clsx(classes.root, className)}

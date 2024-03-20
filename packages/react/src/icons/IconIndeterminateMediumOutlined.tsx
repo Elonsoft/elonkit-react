@@ -1,12 +1,9 @@
 import { SvgIcon, SvgIconProps } from '../components/SvgIcon';
 
-export const IconIndeterminateMedium = (props: SvgIconProps) => {
+export const IconIndeterminateMediumOutlined = (props: SvgIconProps) => {
   return (
     <SvgIcon fill="none" height="20" viewBox="0 0 20 20" width="20" {...props}>
-      <path
-        d="M1 5C1 2.79086 2.79086 1 5 1H15C17.2091 1 19 2.79086 19 5V15C19 17.2091 17.2091 19 15 19H5C2.79086 19 1 17.2091 1 15V5Z"
-        fill="currentColor"
-      />
+      <rect height="17" rx="3.5" stroke="currentColor" width="17" x="1.5" y="1.5" />
       <path d="M6 10H14" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
     </SvgIcon>
   );

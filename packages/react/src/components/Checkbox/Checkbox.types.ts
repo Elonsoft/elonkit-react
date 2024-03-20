@@ -58,9 +58,29 @@ export interface CheckboxProps {
 
   /**
    * The icon to display when the component is unchecked.
-  
    */
   icon?: ReactNode;
+
+  /**
+   * The icon to display when the component is unchecked.
+   */
+  iconMapping?: {
+    large: {
+      contained: ReactNode;
+      outlined: ReactNode;
+      hybrid: ReactNode;
+    };
+    medium: {
+      contained: ReactNode;
+      outlined: ReactNode;
+      hybrid: ReactNode;
+    };
+    small: {
+      contained: ReactNode;
+      outlined: ReactNode;
+      hybrid: ReactNode;
+    };
+  };
 
   /**
    * The id of the `input` element.
