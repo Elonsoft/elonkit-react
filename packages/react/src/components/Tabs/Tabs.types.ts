@@ -149,7 +149,7 @@ export type TabsProps = {
   TabIndicatorProps?: HTMLAttributes<HTMLDivElement>;
   /**
    * Determines width of TabIndicator relative to the current Tab. Cannot exceed Tab width.
-   * Value should be a string containg width either in pixels or in percentage.
+   * Value should be a string containing width either in pixels or in percentage.
    * @default '100%'
    */
   TabIndicatorWidth?: string;
