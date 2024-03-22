@@ -25,7 +25,7 @@ module.exports = {
     '@storybook/addon-mdx-gfm'
   ],
 
-  webpackFinal: async (config) => {
+  webpackFinal: (config) => {
     return {
       ...config,
       resolve: {

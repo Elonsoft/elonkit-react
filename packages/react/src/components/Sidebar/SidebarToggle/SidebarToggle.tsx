@@ -137,7 +137,7 @@ export const SidebarToggle = (inProps: SidebarToggleProps) => {
 
   const onClickToggle = () => {
     onCloseTooltip();
-    onClick && onClick();
+    onClick?.();
   };
 
   return (

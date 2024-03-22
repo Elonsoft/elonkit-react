@@ -354,12 +354,7 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
 
     if (!!groupBy && (index === 0 || group !== groupBy(options[index - 1]))) {
       groupedOptions.push(
-        <AutocompleteMenuMenuGroup
-          key={`${value}-${group}`}
-          aria-disabled={true}
-          className={classes.menuGroup}
-          tabIndex={-1}
-        >
+        <AutocompleteMenuMenuGroup key={`${value}-${group}`} aria-disabled className={classes.menuGroup} tabIndex={-1}>
           {group}
         </AutocompleteMenuMenuGroup>
       );
@@ -500,7 +495,7 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
                       </AutocompleteMenuMenuList>
                     ) : (
                       <AutocompleteMenuEmptyState className={classes.emptyState}>
-                        {!!SearchProps?.value ? labelNoMatches : labelNoOptions}
+                        {SearchProps?.value ? labelNoMatches : labelNoOptions}
                       </AutocompleteMenuEmptyState>
                     )}
                     {footer}
@@ -513,4 +508,5 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
       )}
     </AutocompleteMenuRoot>
   );
+  // eslint-disable-next-line no-use-before-define
 }) as <T>(props: AutocompleteMenuProps<T> & { ref?: ForwardedRef<HTMLDivElement> }) => JSX.Element;

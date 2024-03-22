@@ -72,7 +72,7 @@ export default meta;
 type Story = StoryObj<Args>;
 
 export const Demo: Story = {
-  render: (args, context) => {
+  render: function Render(args, context) {
     const dialogStack = useDialogStack();
 
     const onOpen = () => {
@@ -141,7 +141,7 @@ export const Demo: Story = {
           </Dialog>
         ))
         .afterClosed.then((data) => {
-          console.log(data);
+          console.info(data);
         });
     };
 
@@ -155,7 +155,7 @@ export const Demo: Story = {
 
 /** Dialogs can be aligned to the top of the screen. */
 export const Alignment: Story = {
-  render: (_args, context) => {
+  render: function Render(_args, context) {
     const dialogStack = useDialogStack();
 
     const onOpen = () => {
@@ -182,7 +182,7 @@ export const Alignment: Story = {
           </Dialog>
         ))
         .afterClosed.then((data) => {
-          console.log(data);
+          console.info(data);
         });
     };
 
@@ -196,7 +196,7 @@ export const Alignment: Story = {
 
 /** Dialogs can be easily stacked on top of each other with the help of the `DialogStackProvider`. */
 export const Stack: Story = {
-  render: (_args, context) => {
+  render: function Render(_args, context) {
     const dialogStack = useDialogStack();
 
     const onOpen = (i: number) => () => {

@@ -27,13 +27,11 @@ export const Demo: Story = {
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
     return (
-      <>
-        <TextFieldGroup breakpoint={breakpoint}>
-          <TextField required label={locale === 'en' ? 'First name' : 'Имя'} />
-          <TextField required label={locale === 'en' ? 'Second name' : 'Фамилия'} />
-          <TextField error required label={locale === 'en' ? 'Patronymic' : 'Отчество'} />
-        </TextFieldGroup>
-      </>
+      <TextFieldGroup breakpoint={breakpoint}>
+        <TextField required label={locale === 'en' ? 'First name' : 'Имя'} />
+        <TextField required label={locale === 'en' ? 'Second name' : 'Фамилия'} />
+        <TextField error required label={locale === 'en' ? 'Patronymic' : 'Отчество'} />
+      </TextFieldGroup>
     );
   }
 };

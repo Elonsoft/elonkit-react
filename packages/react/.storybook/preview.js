@@ -38,7 +38,7 @@ export const parameters = {
     }
   },
   docs: {
-    container: (props) => {
+    container: function Container(props) {
       const isDarkMode = useDarkMode();
       const currentProps = { ...props };
       currentProps.theme = isDarkMode ? themeDark : themeLight;

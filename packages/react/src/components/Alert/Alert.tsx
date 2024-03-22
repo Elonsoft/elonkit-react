@@ -132,9 +132,7 @@ export const Alert = (inProps: AlertProps) => {
   });
 
   const isWithActions = Array.isArray(children)
-    ? children.some((elem) =>
-        typeof elem === 'object' ? (elem.type?.displayName === 'AlertActions' ? true : false) : false
-      )
+    ? children.some((elem) => (typeof elem === 'object' ? elem.type?.displayName === 'AlertActions' : false))
     : false;
 
   const ownerState = { ...props, variant, severity, color, isWithActions };

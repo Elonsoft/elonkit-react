@@ -135,7 +135,7 @@ export const SidenavItem: OverridableComponent<SidenavItemTypeMap> = (inProps: S
   const shouldSkipClick = useRef(false);
 
   const onItemTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    onTouchStart && onTouchStart(event);
+    onTouchStart?.(event);
 
     if (id && !open && (!hover || id !== itemId)) {
       shouldSkipClick.current = true;
@@ -145,7 +145,9 @@ export const SidenavItem: OverridableComponent<SidenavItemTypeMap> = (inProps: S
   const onItemClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (id) {
       setItemId(id);
-      !open && setHover(true);
+      if (!open) {
+        setHover(true);
+      }
     } else {
       setHover(false);
     }
@@ -157,22 +159,24 @@ export const SidenavItem: OverridableComponent<SidenavItemTypeMap> = (inProps: S
       return;
     }
 
-    onClick && onClick(event);
+    onClick?.(event);
   };
 
   const onItemFocus = (event: React.FocusEvent<HTMLDivElement>) => {
-    onFocus && onFocus(event);
+    onFocus?.(event);
 
     if (id) {
       setItemId(id);
-      !open && setHover(true);
+      if (!open) {
+        setHover(true);
+      }
     } else {
       setHover(false);
     }
   };
 
   const onItemKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    onKeyDown && onKeyDown(event);
+    onKeyDown?.(event);
 
     if (ref.current && event.key === 'ArrowRight') {
       const sidenav = ref.current.closest(`.${sidenavClasses.root}`) as HTMLElement;
@@ -192,7 +196,9 @@ export const SidenavItem: OverridableComponent<SidenavItemTypeMap> = (inProps: S
   }, []);
 
   const onTooltipOpen = () => {
-    text && (!id || (id !== itemId && open && disableItemHover)) && setTooltipOpen(true);
+    if (text && (!id || (id !== itemId && open && disableItemHover))) {
+      setTooltipOpen(true);
+    }
   };
 
   useEffect(() => {
@@ -205,37 +211,35 @@ export const SidenavItem: OverridableComponent<SidenavItemTypeMap> = (inProps: S
   const classes = useUtilityClasses(ownerState);
 
   return (
-    <>
-      <SidenavItemTooltip
-        disableInteractive
-        arrow={!!text}
-        className={clsx(classes.tooltip)}
-        enterNextDelay={200}
-        leaveDelay={120}
-        open={isTooltipOpen}
-        placement="right"
-        title={<>{text}</>}
-        onClose={onTooltipClose}
-        onOpen={onTooltipOpen}
-      >
-        <div className="ESSidenavItem-wrapper" data-id={id}>
-          <SidenavItemRoot
-            ref={ref}
-            className={clsx(classes.root, className)}
-            data-id={id}
-            ownerState={ownerState}
-            selected={selected}
-            sx={sx}
-            onClick={onItemClick}
-            onFocus={onItemFocus}
-            onKeyDown={onItemKeyDown}
-            onTouchStart={onItemTouchStart}
-            {...props}
-          >
-            <ListItemIcon>{icon}</ListItemIcon>
-          </SidenavItemRoot>
-        </div>
-      </SidenavItemTooltip>
-    </>
+    <SidenavItemTooltip
+      disableInteractive
+      arrow={!!text}
+      className={clsx(classes.tooltip)}
+      enterNextDelay={200}
+      leaveDelay={120}
+      open={isTooltipOpen}
+      placement="right"
+      title={<>{text}</>}
+      onClose={onTooltipClose}
+      onOpen={onTooltipOpen}
+    >
+      <div className="ESSidenavItem-wrapper" data-id={id}>
+        <SidenavItemRoot
+          ref={ref}
+          className={clsx(classes.root, className)}
+          data-id={id}
+          ownerState={ownerState}
+          selected={selected}
+          sx={sx}
+          onClick={onItemClick}
+          onFocus={onItemFocus}
+          onKeyDown={onItemKeyDown}
+          onTouchStart={onItemTouchStart}
+          {...props}
+        >
+          <ListItemIcon>{icon}</ListItemIcon>
+        </SidenavItemRoot>
+      </div>
+    </SidenavItemTooltip>
   );
 };

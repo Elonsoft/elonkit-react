@@ -47,7 +47,7 @@ export const TableScrollbar = memo(function TableScrollbar(inProps: TableScrollb
 
   return (
     <TableScrollbarRoot ref={setRef} className={clsx(className, classes.root)} sx={sx}>
-      <div style={{ width: `${width}px`, height: '1px' }}></div>
+      <div style={{ width: `${width}px`, height: '1px' }} />
     </TableScrollbarRoot>
   );
 });

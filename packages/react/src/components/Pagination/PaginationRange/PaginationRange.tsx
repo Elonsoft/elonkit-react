@@ -99,11 +99,13 @@ export const PaginationRange = memo(function PaginationRange(inProps: Pagination
     name: 'ESPaginationRange'
   });
 
+  const { count, itemsPerPage, page, onItemsPerPageChange, onPageChange } = usePaginationContext();
+
   const onClickListItem = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const onMenuItemClick = (event: React.MouseEvent<HTMLElement>, index: number) => {
+  const onMenuItemClick = (_event: React.MouseEvent<HTMLElement>, index: number) => {
     setAnchorEl(null);
 
     onItemsPerPageChange(options[index]);
@@ -113,8 +115,6 @@ export const PaginationRange = memo(function PaginationRange(inProps: Pagination
   const onClose = () => {
     setAnchorEl(null);
   };
-
-  const { count, itemsPerPage, page, onItemsPerPageChange, onPageChange } = usePaginationContext();
 
   const ownerState = { ...props };
   const classes = useUtilityClasses(ownerState);

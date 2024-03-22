@@ -7,8 +7,7 @@ import { getGalleryDescriptionUtilityClass } from './GalleryDescription.classes'
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { styled, useThemeProps } from '@mui/material/styles';
-import { useTheme } from '@mui/material/styles';
+import { styled, useTheme, useThemeProps } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
@@ -180,12 +179,10 @@ export const GalleryDescription = (inProps: GalleryDescriptionProps) => {
         } else {
           //
         }
+      } else if (rectBottom) {
+        setMaxHeight(rectBottom.top - rect.top);
       } else {
-        if (rectBottom) {
-          setMaxHeight(rectBottom.top - rect.top);
-        } else {
-          //
-        }
+        //
       }
     }
   }, [position, rectTop, rectBottom]);

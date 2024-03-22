@@ -78,7 +78,7 @@ export const SvgIcon = (inProps: SvgIconProps) => {
     <SvgIconSvg
       className={clsx(classes.svg, !container && [classes.root, className])}
       focusable="false"
-      sx={!container ? sx : undefined}
+      sx={container ? undefined : sx}
       {...props}
       style={{ width: width || size, height: height || size, ...props.style }}
     >

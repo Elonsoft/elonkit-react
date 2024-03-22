@@ -22,9 +22,8 @@ export const useCookie = <T extends string | null = null>(
     const cookie = document.cookie.split('; ').find((c) => c.startsWith(`${encodeURIComponent(name)}=`));
     if (cookie) {
       return decodeURIComponent(cookie.slice(cookie.indexOf('=') + 1));
-    } else {
-      return (defaultValue ?? null) as T;
     }
+    return (defaultValue ?? null) as T;
   }, []);
 
   const [value, setValue] = useState<string | T>(initialValue);

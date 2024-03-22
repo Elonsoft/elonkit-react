@@ -162,13 +162,33 @@ export const Sidenav = (inProps: SidenavProps) => {
   }, [open, disableEscapeKeyDown]);
 
   const onHoverItem = (id?: string) => {
-    timeout.current && clearTimeout(timeout.current);
+    if (timeout.current) {
+      clearTimeout(timeout.current);
+    }
     timeout.current = setTimeout(() => {
       if (id) {
         setItemId(id);
-        !open && setHover(true);
+        if (!open) {
+          setHover(true);
+        }
       }
     }, 90);
+  };
+
+  const onMouseLeaveSidenav = () => {
+    if (timeout.current) {
+      clearTimeout(timeout.current);
+    }
+
+    const activeItem = document.activeElement;
+    const sidenavDrawer = document.querySelector(`.${sidenavClasses.drawer}`);
+    const isContainsActiveItems = sidenavDrawer?.contains(activeItem);
+
+    if (!isContainsActiveItems || activeItem?.tagName !== 'INPUT') {
+      if (!isMouseDown) {
+        setHover(false);
+      }
+    }
   };
 
   const activate = (target: HTMLElement) => {
@@ -187,26 +207,16 @@ export const Sidenav = (inProps: SidenavProps) => {
       onHoverItem();
     } else {
       onMouseLeaveSidenav();
-      timeout.current && clearTimeout(timeout.current);
+      if (timeout.current) {
+        clearTimeout(timeout.current);
+      }
     }
   };
 
   const onCloseSidenav = () => {
-    onClose && onClose();
+    onClose?.();
     setHover(false);
     setMouseDown(false);
-  };
-
-  const onMouseLeaveSidenav = () => {
-    timeout.current && clearTimeout(timeout.current);
-
-    const activeItem = document.activeElement;
-    const sidenavDrawer = document.querySelector(`.${sidenavClasses.drawer}`);
-    const isContainsActiveItems = sidenavDrawer?.contains(activeItem);
-
-    if (!isContainsActiveItems || activeItem?.tagName !== 'INPUT') {
-      !isMouseDown && setHover(false);
-    }
   };
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {

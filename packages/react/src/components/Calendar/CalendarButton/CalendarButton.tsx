@@ -1,8 +1,7 @@
 import { CalendarButtonProps } from './CalendarButton.types';
 
 import clsx from 'clsx';
-import { getCalendarButtonUtilityClass } from './CalendarButton.classes';
-import { calendarButtonClasses } from './CalendarButton.classes';
+import { calendarButtonClasses, getCalendarButtonUtilityClass } from './CalendarButton.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 

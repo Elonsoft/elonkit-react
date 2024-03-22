@@ -222,8 +222,12 @@ export const Dropzone = (inProps: DropzoneProps): JSX.Element => {
         acceptedFiles.push(file);
       } else {
         const errors: FileError[] = [];
-        !typeMatch && errors.push('file-invalid-type');
-        !sizeMatch && errors.push('file-too-large');
+        if (!typeMatch) {
+          errors.push('file-invalid-type');
+        }
+        if (!sizeMatch) {
+          errors.push('file-too-large');
+        }
         rejectedFiles.push({
           file,
           errors
@@ -231,7 +235,7 @@ export const Dropzone = (inProps: DropzoneProps): JSX.Element => {
       }
     }
     if (rejectedFiles.length) {
-      onReject && onReject(event, rejectedFiles);
+      onReject?.(event, rejectedFiles);
     } else if (!multiple && acceptedFiles.length > 1) {
       acceptedFiles.forEach((file) => {
         rejectedFiles.push({
@@ -239,9 +243,9 @@ export const Dropzone = (inProps: DropzoneProps): JSX.Element => {
           errors: ['too-many-files']
         });
       });
-      onReject && onReject(event, rejectedFiles);
+      onReject?.(event, rejectedFiles);
     } else {
-      onChange && onChange(event, acceptedFiles);
+      onChange?.(event, acceptedFiles);
     }
   };
 
@@ -252,11 +256,15 @@ export const Dropzone = (inProps: DropzoneProps): JSX.Element => {
   const onDropzoneDrop = (event: React.DragEvent<HTMLButtonElement>) => {
     event.preventDefault();
     onDrop();
-    event.dataTransfer && onFileList(event, event.dataTransfer.files);
+    if (event.dataTransfer) {
+      onFileList(event, event.dataTransfer.files);
+    }
   };
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.target.files && onFileList(event, event.target.files);
+    if (event.target.files) {
+      onFileList(event, event.target.files);
+    }
   };
 
   useDocumentEventListener('dragenter', callbacks.onDragEnter);

@@ -1,10 +1,11 @@
-import { Theme } from '@mui/material/styles';
-import { PaletteColor } from '@mui/material/styles';
+import { PaletteColor, Theme } from '@mui/material/styles';
 
 const getScrollbarWidth = () => {
   let scrollbarWidth = 0;
 
-  if (typeof document !== 'undefined') {
+  if (typeof document === 'undefined') {
+    scrollbarWidth = 0;
+  } else {
     const div = document.createElement('div');
     div.style.width = '100px';
     div.style.height = '100px';
@@ -15,8 +16,6 @@ const getScrollbarWidth = () => {
     document.body.appendChild(div);
     scrollbarWidth = div.offsetWidth - div.clientWidth;
     document.body.removeChild(div);
-  } else {
-    scrollbarWidth = 0;
   }
   return scrollbarWidth || 0;
 };

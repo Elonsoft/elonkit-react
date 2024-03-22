@@ -110,7 +110,7 @@ export default meta;
 type Story = StoryObj<typeof Table>;
 
 export const Demo: Story = {
-  render: (_args, context) => {
+  render: function Render(_args, context) {
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
     const ref = useRef<HTMLDivElement | null>(null);
@@ -149,48 +149,47 @@ export const Demo: Story = {
     });
 
     return (
-      <>
-        <Table ref={ref} columns={columns}>
-          <TableHead sticky={0}>
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  checked={isAllSelected}
-                  color="secondary"
-                  indeterminate={isSomeSelected}
-                  inputProps={{ 'aria-label': isAllSelected ? 'Unselect all' : 'Select all' }}
-                  onChange={() => toggleAll()}
-                />
+      <Table ref={ref} columns={columns}>
+        <TableHead sticky={0}>
+          <TableRow>
+            <TableCell padding="checkbox">
+              <Checkbox
+                checked={isAllSelected}
+                color="secondary"
+                indeterminate={isSomeSelected}
+                inputProps={{ 'aria-label': isAllSelected ? 'Unselect all' : 'Select all' }}
+                onChange={() => toggleAll()}
+              />
+            </TableCell>
+            <TableCell colSpan={3} onResize={onResize(1, 3)} onResizeCommit={onResizeCommit(1, 3)}>
+              {locale === 'en' ? 'Group 1' : 'Группа 1'}
+            </TableCell>
+            <TableCell colSpan={2} onResize={onResize(4, 2)} onResizeCommit={onResizeCommit(4, 2)}>
+              {locale === 'en' ? 'Group 2' : 'Группа 2'}
+            </TableCell>
+            <TableCell padding="none" />
+            <TableCell />
+          </TableRow>
+          <TableRow ref={rowRef}>
+            <TableCell padding="checkbox" />
+            {fields.map((field, index) => (
+              <TableCell
+                key={field}
+                minWidth={100}
+                onResize={onResize(index + 1)}
+                onResizeCommit={onResizeCommit(index + 1)}
+              >
+                <TableText>{NAMES[locale][field]}</TableText>
               </TableCell>
-              <TableCell colSpan={3} onResize={onResize(1, 3)} onResizeCommit={onResizeCommit(1, 3)}>
-                {locale === 'en' ? 'Group 1' : 'Группа 1'}
-              </TableCell>
-              <TableCell colSpan={2} onResize={onResize(4, 2)} onResizeCommit={onResizeCommit(4, 2)}>
-                {locale === 'en' ? 'Group 2' : 'Группа 2'}
-              </TableCell>
-              <TableCell padding="none" />
-              <TableCell />
-            </TableRow>
-            <TableRow ref={rowRef}>
-              <TableCell padding="checkbox" />
-              {fields.map((field, index) => (
-                <TableCell
-                  key={field}
-                  minWidth={100}
-                  onResize={onResize(index + 1)}
-                  onResizeCommit={onResizeCommit(index + 1)}
-                >
-                  <TableText>{NAMES[locale][field]}</TableText>
-                </TableCell>
-              ))}
-              <TableCell padding="none" />
-              <TableCell />
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {DATA[locale].map((row) => {
-              const isSelected = selected.indexOf(row.id) !== -1;
-              const labelId = `story-usage-checkbox-${row.id}`;
+            ))}
+            <TableCell padding="none" />
+            <TableCell />
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {DATA[locale].map((row) => {
+            const isSelected = selected.indexOf(row.id) !== -1;
+            const labelId = `story-usage-checkbox-${row.id}`;
 
               return (
                 <TableRow key={row.id} hover selected={isSelected} tabIndex={0}>
@@ -262,7 +261,7 @@ export const Demo: Story = {
 that the table can accommodate properly, at least, these columns.
  */
 export const ColumnPinning: Story = {
-  render: (_args, context) => {
+  render: function Render(_args, context) {
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
     const ref = useRef<HTMLDivElement | null>(null);

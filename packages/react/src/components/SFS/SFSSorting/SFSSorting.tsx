@@ -342,11 +342,17 @@ export const SFSSorting = memo(function SFSSorting(inProps: SFSSortingProps) {
   });
 
   const onSortChange = (values: SFSSortingValue[]) => {
-    props.multiple ? props.onChange(values) : props.onChange(values[0] ? { ...values[0] } : null);
+    if (props.multiple) {
+      props.onChange(values);
+    } else {
+      props.onChange(values[0] ? { ...values[0] } : null);
+    }
   };
 
   const setFocusOnLastPressedElement = (label: string, e?: React.KeyboardEvent<HTMLLIElement>) => {
-    if (!e?.code) return;
+    if (!e?.code) {
+      return;
+    }
     setTimeout(() => {
       let elem = menuListRef.current?.firstChild as HTMLLIElement;
       do {
@@ -389,9 +395,12 @@ export const SFSSorting = memo(function SFSSorting(inProps: SFSSortingProps) {
     (value: string) => (e?: React.MouseEvent<HTMLLIElement> | React.KeyboardEvent<HTMLLIElement>) => {
       const isMultipleSort = props.multiple && (isMultiple || e?.metaKey || e?.ctrlKey);
 
-      isMultipleSort
-        ? toggleMultiSort(value)
-        : onSortChange(values[sortMap[value].i] ? [] : [{ value, direction: 'asc' }]);
+      if (isMultipleSort) {
+        toggleMultiSort(value);
+      } else {
+        onSortChange(values[sortMap[value].i] ? [] : [{ value, direction: 'asc' }]);
+      }
+
       setFocusOnLastPressedElement(sortMap[value].label, e as React.KeyboardEvent<HTMLLIElement>);
     };
 
@@ -423,10 +432,8 @@ export const SFSSorting = memo(function SFSSorting(inProps: SFSSortingProps) {
           }
           break;
       }
-    } else {
-      if (e.code === 'ArrowRight' && (e.target as any).childNodes[1]) {
-        ((e.target as HTMLLIElement).childNodes[1] as HTMLButtonElement).focus();
-      }
+    } else if (e.code === 'ArrowRight' && (e.target as any).childNodes[1]) {
+      ((e.target as HTMLLIElement).childNodes[1] as HTMLButtonElement).focus();
     }
   };
 

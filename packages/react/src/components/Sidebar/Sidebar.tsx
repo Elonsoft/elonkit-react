@@ -275,7 +275,7 @@ export const Sidebar = (inProps: SidebarProps) => {
           ref={ref}
           className={clsx(classes.content)}
           ownerState={ownerState}
-          style={{ width: !open ? undefined : `${width}px` }}
+          style={{ width: open ? `${width}px` : undefined }}
         >
           {children}
         </SidebarContent>

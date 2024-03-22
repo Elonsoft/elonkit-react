@@ -67,7 +67,7 @@ export default meta;
 type Story = StoryObj<typeof BottomSheet>;
 
 export const Demo: Story = {
-  render: (args, context) => {
+  render: function Render(args, context) {
     const [isOpen, setOpen] = useState(false);
 
     const onOpen = () => {
@@ -84,7 +84,7 @@ export const Demo: Story = {
           {getOpenButtonText(context)}
         </Button>
         <BottomSheet {...args} open={isOpen} onClose={onClose}>
-          <DialogTitle sticky={true}>{getHeadingText(context)}</DialogTitle>
+          <DialogTitle sticky>{getHeadingText(context)}</DialogTitle>
           <DialogContent>
             <Typography variant="body200">
               Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
@@ -111,7 +111,7 @@ export const Demo: Story = {
               quam.
             </Typography>
           </DialogContent>
-          <DialogActions sticky={true}>
+          <DialogActions sticky>
             <Button fullWidth color="monoA" size="40" variant="outlined" onClick={onClose}>
               {getCancelButtonText(context)}
             </Button>

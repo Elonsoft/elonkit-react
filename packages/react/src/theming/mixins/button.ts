@@ -22,7 +22,7 @@ export const buttonMixin = (states: ButtonMixinStates) => {
   return {
     '&, &:not(:disabled):hover, &:not(:disabled):active': {
       backgroundColor: background,
-      color: color
+      color
     },
     [`& .${touchRippleClasses.root}`]: {
       color: active

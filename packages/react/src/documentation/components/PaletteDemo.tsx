@@ -90,7 +90,7 @@ export const PaletteDemo = () => {
                   sx={{
                     backgroundColor: (theme.palette as any)[palette][color] as string
                   }}
-                ></PaletteDemoColorBackground>
+                />
               </div>
             ))}
         </Fragment>

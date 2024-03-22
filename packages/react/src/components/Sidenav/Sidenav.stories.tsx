@@ -131,7 +131,7 @@ export default meta;
 type Story = StoryObj<Args>;
 
 export const Demo: Story = {
-  render: ({ disableEscapeKeyDown, disableItemHover, color }, { globals: { locale } }) => {
+  render: function Render({ disableEscapeKeyDown, disableItemHover, color }, { globals: { locale } }) {
     const [isOpen, setIsOpen] = useState(false);
     const [width, setWidth] = useState(287);
 
@@ -171,7 +171,7 @@ export const Demo: Story = {
                 text={locale === 'en' ? 'Projects' : 'Проекты'}
                 onClick={() => {
                   setPage(2);
-                  console.log('Projects');
+                  console.info('Projects');
                 }}
               />
               <SidenavItem
@@ -181,7 +181,7 @@ export const Demo: Story = {
                 text={locale === 'en' ? 'Reports' : 'Отчеты'}
                 onClick={() => {
                   setPage(3);
-                  console.log('Reports');
+                  console.info('Reports');
                 }}
               />
             </SidebarMenu>
@@ -247,20 +247,20 @@ export const Demo: Story = {
                             <SidebarMenuItem
                               icon={<IconAt />}
                               text={locale === 'en' ? 'All projects' : 'Все проекты'}
-                              onClick={onProjectClick(() => console.log(`All projects`))}
+                              onClick={onProjectClick(() => console.info(`All projects`))}
                             />
                             <SidebarMenuItem
                               icon={<IconAt />}
                               id="1"
                               text={locale === 'en' ? 'Documents' : 'Документы'}
-                              onClick={onProjectClick(() => console.log(`Selected`))}
+                              onClick={onProjectClick(() => console.info(`Selected`))}
                             >
                               {[...Array(10)].map((_, idx) => (
                                 <SidebarMenuItem
                                   key={idx}
-                                  inset={true}
+                                  inset
                                   text={(locale === 'en' ? 'Document' : 'Документ') + ' №' + idx}
-                                  onClick={onProjectClick(() => console.log(`Project ${idx}`))}
+                                  onClick={onProjectClick(() => console.info(`Project ${idx}`))}
                                 />
                               ))}
                             </SidebarMenuItem>
@@ -268,14 +268,14 @@ export const Demo: Story = {
                               icon={<IconAt />}
                               id="2"
                               text={locale === 'en' ? 'New projects' : 'Новые проекты'}
-                              onClick={() => console.log(`Projects`)}
+                              onClick={() => console.info(`Projects`)}
                             >
                               {[...Array(10)].map((_, idx) => (
                                 <SidebarMenuItem
                                   key={idx}
-                                  inset={true}
+                                  inset
                                   text={(locale === 'en' ? 'New project' : 'Новый проект') + ' №' + idx}
-                                  onClick={onProjectClick(() => console.log(`Project ${idx}`))}
+                                  onClick={onProjectClick(() => console.info(`Project ${idx}`))}
                                 />
                               ))}
                             </SidebarMenuItem>
@@ -288,7 +288,7 @@ export const Demo: Story = {
                                 key={idx}
                                 icon={<IconAt />}
                                 text={(locale === 'en' ? 'Current project' : 'Текущий проект') + ' №' + idx}
-                                onClick={onProjectClick(() => console.log(`Current project ${idx}`))}
+                                onClick={onProjectClick(() => console.info(`Current project ${idx}`))}
                               />
                             ))}
                           </SidebarMenu>
@@ -324,20 +324,20 @@ export const Demo: Story = {
                               icon={<IconAt />}
                               id="1"
                               text={locale === 'en' ? 'All reports' : 'Все отчеты'}
-                              onClick={onReportClick(() => console.log(`All reports`))}
+                              onClick={onReportClick(() => console.info(`All reports`))}
                             />
                             <SidebarMenuItem
                               icon={<IconAt />}
                               id="2"
                               text={locale === 'en' ? 'Saved reports' : 'Сохраненные отчеты'}
-                              onClick={onReportClick(() => console.log(`Saved reports`))}
+                              onClick={onReportClick(() => console.info(`Saved reports`))}
                             >
                               {[...Array(5)].map((_, idx) => (
                                 <SidebarMenuItem
                                   key={idx}
-                                  inset={true}
+                                  inset
                                   text={(locale === 'en' ? 'Saved report' : 'Сохраненный отчет') + ' №' + idx}
-                                  onClick={onReportClick(() => console.log(`Saved report ${idx}`))}
+                                  onClick={onReportClick(() => console.info(`Saved report ${idx}`))}
                                 />
                               ))}
                             </SidebarMenuItem>
@@ -350,9 +350,9 @@ export const Demo: Story = {
                               {[...Array(10)].map((_, idx) => (
                                 <SidebarMenuItem
                                   key={idx}
-                                  inset={true}
+                                  inset
                                   text={(locale === 'en' ? 'Scheduled report' : 'Запланированный отчет') + ' №' + idx}
-                                  onClick={onReportClick(() => console.log(`Report ${idx}`))}
+                                  onClick={onReportClick(() => console.info(`Report ${idx}`))}
                                 />
                               ))}
                             </SidebarMenuItem>
@@ -365,7 +365,7 @@ export const Demo: Story = {
                                 key={idx}
                                 icon={<IconAt />}
                                 text={(locale === 'en' ? 'Current report' : 'Текущий отчет') + ' №' + idx}
-                                onClick={onReportClick(() => console.log(`Current report ${idx}`))}
+                                onClick={onReportClick(() => console.info(`Current report ${idx}`))}
                               />
                             ))}
                           </SidebarMenu>

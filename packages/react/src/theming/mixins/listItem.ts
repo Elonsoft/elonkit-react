@@ -30,7 +30,7 @@ export const listItemMixin = (states: ListItemMixinStates) => {
     },
     ...(color && {
       [`&, & .${listItemTextClasses.root}`]: {
-        color: color
+        color
       }
     }),
     ...(icon && {

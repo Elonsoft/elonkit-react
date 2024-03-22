@@ -183,7 +183,7 @@ export const Autocomplete = <T,>(inProps: AutocompleteProps<T>) => {
     if (ref.current) {
       setMenuWidthState(ref.current.clientWidth);
       setOpen(true);
-      onOpen && onOpen();
+      onOpen?.();
 
       if (!disableAutoFocus) {
         setTimeout(() => {
@@ -216,7 +216,7 @@ export const Autocomplete = <T,>(inProps: AutocompleteProps<T>) => {
     }
 
     setOpen(false);
-    onClose && onClose();
+    onClose?.();
   }, []);
 
   // eslint-disable-next-line
@@ -238,7 +238,7 @@ export const Autocomplete = <T,>(inProps: AutocompleteProps<T>) => {
 
     if (['Escape', 'Tab'].indexOf(event.key) !== -1) {
       setOpen(false);
-      onClose && onClose();
+      onClose?.();
     }
   };
 
@@ -295,7 +295,7 @@ export const Autocomplete = <T,>(inProps: AutocompleteProps<T>) => {
           },
           onFocus: formControl.onFocus,
           onKeyDown,
-          ['aria-describedby']: ariaDescribedby,
+          'aria-describedby': ariaDescribedby,
           ...props.inputProps
         }}
         inputRef={inputNodeRef}
@@ -330,7 +330,7 @@ export const Autocomplete = <T,>(inProps: AutocompleteProps<T>) => {
               value: T[];
             })}
         disableRestoreFocus
-        SearchProps={!inlineSearch ? SearchProps : undefined}
+        SearchProps={inlineSearch ? undefined : SearchProps}
         anchorEl={ref.current}
         className={classes.menu}
         disableAutoFocus={!!inlineSearch}
