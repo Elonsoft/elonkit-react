@@ -15,6 +15,11 @@ export interface CheckboxProps {
   checked?: boolean;
 
   /**
+   * If `true`, the component is error.
+   */
+  error?: boolean;
+
+  /**
    * The icon to display when the component is checked.
    */
   checkedIcon?: ReactNode;
@@ -65,21 +70,9 @@ export interface CheckboxProps {
    * The icon to display when the component is unchecked.
    */
   iconMapping?: {
-    large: {
-      contained: ReactNode;
-      outlined: ReactNode;
-      hybrid: ReactNode;
-    };
-    medium: {
-      contained: ReactNode;
-      outlined: ReactNode;
-      hybrid: ReactNode;
-    };
-    small: {
-      contained: ReactNode;
-      outlined: ReactNode;
-      hybrid: ReactNode;
-    };
+    large: ReactNode;
+    medium: ReactNode;
+    small: ReactNode;
   };
 
   /**

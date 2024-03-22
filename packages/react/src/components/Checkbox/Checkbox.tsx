@@ -12,19 +12,15 @@ import { keyframes } from '@mui/system';
 import { capitalize } from '@mui/material';
 import SwitchBase from '@mui/material/internal/SwitchBase';
 
+import { CheckboxIcon, checkboxIconClasses } from './CheckboxIcon';
+
 import {
-  IconCheckboxLarge,
-  IconCheckboxLargeOutlined,
-  IconCheckboxMedium,
-  IconCheckboxMediumOutlined,
-  IconCheckboxSmall,
-  IconCheckboxSmallOutlined,
+  IconCheckLarge,
+  IconCheckMedium,
+  IconCheckSmall,
   IconIndeterminateLarge,
-  IconIndeterminateLargeOutlined,
   IconIndeterminateMedium,
-  IconIndeterminateMediumOutlined,
-  IconIndeterminateSmall,
-  IconIndeterminateSmallOutlined
+  IconIndeterminateSmall
 } from '../../icons';
 
 const enterKeyframe = keyframes`
@@ -45,12 +41,13 @@ type CheckboxOwnerState = {
   size: NonNullable<CheckboxProps['size']>;
   disableRipple?: CheckboxProps['disableRipple'];
   checked?: CheckboxProps['checked'];
+  error?: CheckboxProps['error'];
   disabled?: CheckboxProps['disabled'];
   variant: NonNullable<CheckboxProps['variant']>;
 };
 
 const useUtilityClasses = (ownerState: CheckboxOwnerState) => {
-  const { classes, indeterminate, color, size, checked, disabled, variant } = ownerState;
+  const { classes, indeterminate, color, size, checked, disabled, variant, error } = ownerState;
 
   const slots = {
     root: [
@@ -58,10 +55,12 @@ const useUtilityClasses = (ownerState: CheckboxOwnerState) => {
       indeterminate && 'indeterminate',
       checked && 'checked',
       disabled && 'disabled',
+      error && 'error',
       `color${capitalize(color)}`,
       `size${capitalize(size)}`,
       `variant${capitalize(variant)}`
-    ]
+    ],
+    container: ['container']
   };
 
   const composedClasses = composeClasses(slots, getCheckboxUtilityClass, classes);
@@ -87,6 +86,7 @@ const CheckboxRoot = styled(SwitchBase, {
       ownerState.indeterminate && styles.indeterminate,
       ownerState.checked && styles.checked,
       ownerState.disabled && styles.disabled,
+      ownerState.error && styles.error,
       styles[`size${capitalize(ownerState.size)}`],
       styles[`color${capitalize(ownerState.color)}`],
       styles[`variant${capitalize(ownerState.variant)}`]
@@ -116,6 +116,11 @@ const CheckboxRoot = styled(SwitchBase, {
     }
   },
   [`&.${checkboxClasses.sizeLarge}`]: {
+    [`& .${checkboxIconClasses.root}`]: {
+      borderRadius: '6px',
+      height: '24px',
+      width: '24px'
+    },
     '& svg': {
       fontSize: '24px',
       height: '24px !important',
@@ -123,6 +128,11 @@ const CheckboxRoot = styled(SwitchBase, {
     }
   },
   [`&.${checkboxClasses.sizeMedium}`]: {
+    [`& .${checkboxIconClasses.root}`]: {
+      borderRadius: '4px',
+      height: '20px',
+      width: '20px'
+    },
     '& svg': {
       borderRadius: '4px',
       fontSize: '20px',
@@ -131,6 +141,11 @@ const CheckboxRoot = styled(SwitchBase, {
     }
   },
   [`&.${checkboxClasses.sizeSmall}`]: {
+    [`& .${checkboxIconClasses.root}`]: {
+      borderRadius: '4px',
+      height: '16px',
+      width: '16px'
+    },
     '& svg': {
       borderRadius: '4px',
       fontSize: '16px',
@@ -138,30 +153,23 @@ const CheckboxRoot = styled(SwitchBase, {
       width: '16px !important'
     }
   },
-  [`&.${checkboxClasses.variantContained}`]: {
-    '& svg': {
-      '& rect': {
-        stroke: theme.palette.monoA.A600
-      }
-    }
-  },
+
   [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
-    '& svg': {
-      '& rect': {
-        stroke: theme.palette.monoA.A500
-      }
+    [`& .${checkboxIconClasses.root}`]: {
+      boxShadow: `inset 0 0 0 1px ${theme.palette.monoA.A500}`
     }
   },
+
   [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
     [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
       '& svg': {
-        '& rect': {
-          fill: 'currentColor',
-          stroke: 'currentColor'
-        },
         '& path': {
           stroke: theme.palette.monoB[500]
         }
+      },
+      [`& .${checkboxIconClasses.root}`]: {
+        background: 'currentColor',
+        boxShadow: 'none'
       }
     },
     [`&.${checkboxClasses.variantOutlined}`]: {
@@ -225,20 +233,13 @@ const CheckboxRoot = styled(SwitchBase, {
         active: theme.palette.monoB.A150
       })
     },
-    [`&.${checkboxClasses.variantContained}`]: {
-      '& svg': {
-        '& rect': {
-          stroke: theme.palette.monoB.A600
-        }
-      }
-    },
-    [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
-      '& svg': {
-        '& rect': {
-          stroke: theme.palette.monoB.A500
-        }
-      }
-    }
+    ...theme.mixins.button({
+      background: 'transparent',
+      color: theme.palette.monoB.A600,
+      hover: theme.palette.monoB.A50,
+      focus: theme.palette.monoB.A200,
+      active: theme.palette.monoB.A150
+    })
   },
   [`&.${checkboxClasses.colorBlack}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
@@ -254,26 +255,18 @@ const CheckboxRoot = styled(SwitchBase, {
       [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
         '& svg': {
           '& path': {
-            strokeDashoffset: '30px',
             stroke: theme.palette.white[500]
           }
         }
       }
     },
-    [`&.${checkboxClasses.variantContained}`]: {
-      '& svg': {
-        '& rect': {
-          stroke: theme.palette.black.A600
-        }
-      }
-    },
-    [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
-      '& svg': {
-        '& rect': {
-          stroke: theme.palette.black.A500
-        }
-      }
-    }
+    ...theme.mixins.button({
+      background: 'transparent',
+      color: theme.palette.black.A600,
+      hover: theme.palette.black.A50,
+      focus: theme.palette.black.A200,
+      active: theme.palette.black.A150
+    })
   },
   [`&.${checkboxClasses.colorWhite}`]: {
     [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
@@ -291,20 +284,6 @@ const CheckboxRoot = styled(SwitchBase, {
           '& path': {
             stroke: theme.palette.black[500]
           }
-        }
-      }
-    },
-    [`&.${checkboxClasses.variantContained}`]: {
-      '& svg': {
-        '& rect': {
-          stroke: theme.palette.white.A600
-        }
-      }
-    },
-    [`&.${checkboxClasses.variantOutlined}, &.${checkboxClasses.variantHybrid}`]: {
-      '& svg': {
-        '& rect': {
-          stroke: theme.palette.white.A500
         }
       }
     }
@@ -372,28 +351,20 @@ const CheckboxRoot = styled(SwitchBase, {
     }
   },
   [`&.${checkboxClasses.colorError}`]: {
-    [`&.${checkboxClasses.variantOutlined}`]: {
-      '& svg': {
-        '& rect': {
-          stroke: 'none'
-        },
-        '& rect:first-of-type': {
-          stroke: 'currentColor'
-        }
+    [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.error[300],
+        hover: theme.palette.error.A50,
+        focus: theme.palette.error.A200,
+        active: theme.palette.error.A150
+      }),
+      '&:focus': {
+        backgroundColor: theme.palette.error.A200
+      },
+      '&:active': {
+        backgroundColor: theme.palette.error.A150
       }
-    },
-    ...theme.mixins.button({
-      background: 'transparent',
-      color: theme.palette.error[300],
-      hover: theme.palette.error.A50,
-      focus: theme.palette.error.A200,
-      active: theme.palette.error.A150
-    }),
-    '&:focus': {
-      backgroundColor: theme.palette.error.A200
-    },
-    '&:active': {
-      backgroundColor: theme.palette.error.A150
     }
   },
   [`&.${checkboxClasses.colorInfo}`]: {
@@ -412,43 +383,77 @@ const CheckboxRoot = styled(SwitchBase, {
         backgroundColor: theme.palette.info.A150
       }
     }
+  },
+  [`&.${checkboxClasses.error}`]: {
+    ...theme.mixins.button({
+      background: 'transparent',
+      color: theme.palette.error[300],
+      hover: theme.palette.error.A50,
+      focus: theme.palette.error.A200,
+      active: theme.palette.error.A150
+    }),
+    [`&.${checkboxClasses.checked}, &.${checkboxClasses.indeterminate}`]: {
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.error[500],
+        hover: theme.palette.error.A50,
+        focus: theme.palette.error.A200,
+        active: theme.palette.error.A150
+      })
+    },
+    [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
+      [`& .${checkboxIconClasses.root}`]: {
+        boxShadow: `inset 0 0 0 2px ${theme.palette.error[300]}`
+      }
+    },
+    [`&.${checkboxClasses.variantOutlined}`]: {
+      [`& .${checkboxIconClasses.root}`]: {
+        boxShadow: `inset 0 0 0 1px ${theme.palette.error[300]}`
+      }
+    },
+    '&:focus': {
+      backgroundColor: theme.palette.error.A200
+    },
+    '&:active': {
+      backgroundColor: theme.palette.error.A150
+    }
   }
 }));
 
 const defaultIcon = {
-  large: {
-    contained: <IconCheckboxLarge />,
-    outlined: <IconCheckboxLargeOutlined />,
-    hybrid: <IconCheckboxLargeOutlined />
-  },
-  medium: {
-    contained: <IconCheckboxMedium />,
-    outlined: <IconCheckboxMediumOutlined />,
-    hybrid: <IconCheckboxMediumOutlined />
-  },
-  small: {
-    contained: <IconCheckboxSmall />,
-    outlined: <IconCheckboxSmallOutlined />,
-    hybrid: <IconCheckboxSmallOutlined />
-  }
+  large: (
+    <CheckboxIcon>
+      <IconCheckLarge />
+    </CheckboxIcon>
+  ),
+  medium: (
+    <CheckboxIcon>
+      <IconCheckMedium />
+    </CheckboxIcon>
+  ),
+  small: (
+    <CheckboxIcon>
+      <IconCheckSmall />
+    </CheckboxIcon>
+  )
 };
 
 const defaultIndeterminateIcon = {
-  large: {
-    contained: <IconIndeterminateLarge />,
-    outlined: <IconIndeterminateLargeOutlined />,
-    hybrid: <IconIndeterminateLargeOutlined />
-  },
-  medium: {
-    contained: <IconIndeterminateMedium />,
-    outlined: <IconIndeterminateMediumOutlined />,
-    hybrid: <IconIndeterminateMediumOutlined />
-  },
-  small: {
-    contained: <IconIndeterminateSmall />,
-    outlined: <IconIndeterminateSmallOutlined />,
-    hybrid: <IconIndeterminateSmallOutlined />
-  }
+  large: (
+    <CheckboxIcon>
+      <IconIndeterminateLarge />
+    </CheckboxIcon>
+  ),
+  medium: (
+    <CheckboxIcon>
+      <IconIndeterminateMedium />
+    </CheckboxIcon>
+  ),
+  small: (
+    <CheckboxIcon>
+      <IconIndeterminateSmall />
+    </CheckboxIcon>
+  )
 };
 
 export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(function Checkbox(inProps, ref) {
@@ -456,11 +461,11 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(funct
   const {
     size = 'large',
     variant = 'contained',
-    checkedIcon,
     color = 'primary',
-    icon: iconProp,
+    checkedIcon = defaultIcon[size],
+    icon: iconProp = defaultIcon[size],
     indeterminate = false,
-    indeterminateIcon: indeterminateIconProp = defaultIndeterminateIcon[size][variant],
+    indeterminateIcon: indeterminateIconProp = defaultIndeterminateIcon[size],
     iconMapping = defaultIcon,
     inputProps,
     className,
@@ -469,8 +474,8 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(funct
     ...other
   } = props;
 
-  const icon = indeterminate ? indeterminateIconProp : iconProp ?? iconMapping[size][variant];
-  const indeterminateIcon = indeterminate ? indeterminateIconProp : checkedIcon ?? iconMapping[size][variant];
+  const icon = indeterminate ? indeterminateIconProp : iconProp ?? iconMapping[size];
+  const indeterminateIcon = indeterminate ? indeterminateIconProp : checkedIcon ?? iconMapping[size];
 
   const ownerState = {
     ...props,
@@ -485,7 +490,7 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(funct
   const classes = useUtilityClasses(ownerState);
 
   return (
-    <div style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}>
+    <div style={{ width: 'fit-content', cursor: disabled ? 'not-allowed' : 'pointer' }}>
       <CheckboxRoot
         ref={ref}
         focusRipple
@@ -495,7 +500,7 @@ export const Checkbox = React.forwardRef<HTMLButtonElement, CheckboxProps>(funct
         disabled={disabled}
         icon={icon}
         inputProps={{
-          // 'data-indeterminate': indeterminate,
+          ...{ 'data-indeterminate': indeterminate },
           ...inputProps
         }}
         ownerState={ownerState}

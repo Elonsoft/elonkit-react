@@ -7,6 +7,8 @@ export type CheckboxClasses = {
   checked: string;
   /** State class applied to the root element if `disabled={true}`. */
   disabled: string;
+  /** State class applied to the root element if `error={true}`. */
+  error: string;
   /** State class applied to the root element if `indeterminate={true}`. */
   indeterminate: string;
   /** State class applied to the root element if `color="primary"`. */
@@ -52,6 +54,7 @@ export const checkboxClasses: CheckboxClasses = generateUtilityClasses('ESCheckb
   'root',
   'checked',
   'disabled',
+  'error',
   'indeterminate',
   'colorPrimary',
   'colorSecondary',
