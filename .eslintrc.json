@@ -1,3 +1,3 @@
 {
-  "extends": "@elonkit/eslint-config"
+  "extends": ["@elonkit/eslint-config", "plugin:storybook/recommended"]
 }

@@ -187,7 +187,7 @@ export const Breadcrumb: OverridableComponent<BreadcrumbTypeMap> = (inProps: Bre
         className={clsx(classes.tooltip)}
         placement="top"
         title={<Typography variant="caption">{children}</Typography>}
-        {...(!position ? { disableHoverListener: true, disableFocusListener: true, disableTouchListener: true } : {})}
+        {...(position ? {} : { disableHoverListener: true, disableFocusListener: true, disableTouchListener: true })}
       >
         {({ ref, childrenRef }) => (
           <div ref={ref as never} style={{ minWidth: 0 }}>

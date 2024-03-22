@@ -75,7 +75,7 @@ export default meta;
 type Story = StoryObj<Args>;
 
 export const Demo: Story = {
-  render: ({ color, behaviour, exclusive, minWidth, maxWidth }, { globals: { locale } }) => {
+  render: function Render({ color, behaviour, exclusive, minWidth, maxWidth }, { globals: { locale } }) {
     const [isOpen, setIsOpen] = useState(false);
     const [width, setWidth] = useState(280);
 
@@ -111,7 +111,7 @@ export const Demo: Story = {
             <SidebarItem
               icon={<IconAt />}
               text={locale === 'en' ? 'Time tracking' : 'Рабочее время'}
-              onClick={() => console.log(`Time tracking`)}
+              onClick={() => console.info(`Time tracking`)}
             />
           </SidebarMenu>
 
@@ -125,7 +125,7 @@ export const Demo: Story = {
                 icon={<IconAt />}
                 id="0"
                 text={locale === 'en' ? 'Projects' : 'Проекты'}
-                onClick={() => console.log(`Projects`)}
+                onClick={() => console.info(`Projects`)}
               >
                 {[...Array(5)].map((_, i) => (
                   <SidebarItem
@@ -133,7 +133,7 @@ export const Demo: Story = {
                     inset
                     selected={i === 2}
                     text={(locale === 'en' ? 'Project' : 'Проект') + ' №' + i}
-                    onClick={() => console.log(`Project ${i}`)}
+                    onClick={() => console.info(`Project ${i}`)}
                   />
                 ))}
               </SidebarItem>
@@ -143,29 +143,29 @@ export const Demo: Story = {
                     key={i}
                     inset
                     text={(locale === 'en' ? 'File' : 'Файл') + ' №' + i}
-                    onClick={() => console.log(`File ${i}`)}
+                    onClick={() => console.info(`File ${i}`)}
                   />
                 ))}
               </SidebarItem>
               <SidebarItem
                 icon={<IconAt />}
                 text={locale === 'en' ? 'Infographic' : 'Инфографика'}
-                onClick={() => console.log(`Infographic`)}
+                onClick={() => console.info(`Infographic`)}
               />
               <SidebarItem
                 icon={<IconAt />}
                 text={locale === 'en' ? 'Schedule' : 'Расписание'}
-                onClick={() => console.log(`Schedule`)}
+                onClick={() => console.info(`Schedule`)}
               />
               <SidebarItem
                 icon={<IconAt />}
                 text={locale === 'en' ? 'Messages' : 'Сообщения'}
-                onClick={() => console.log(`Messages`)}
+                onClick={() => console.info(`Messages`)}
               />
               <SidebarItem
                 icon={<IconAt />}
                 text={locale === 'en' ? 'Inbox' : 'Входящие'}
-                onClick={() => console.log(`Inbox`)}
+                onClick={() => console.info(`Inbox`)}
               />
             </SidebarMenu>
           </SidebarScrollable>
@@ -175,12 +175,12 @@ export const Demo: Story = {
             <SidebarItem
               icon={<IconMagnify />}
               text={locale === 'en' ? 'Search' : 'Поиск'}
-              onClick={() => console.log(`Search`)}
+              onClick={() => console.info(`Search`)}
             />
             <SidebarItem
               icon={<IconBellFill />}
               text={locale === 'en' ? 'Notifications' : 'Уведомления'}
-              onClick={() => console.log(`Notifications`)}
+              onClick={() => console.info(`Notifications`)}
             />
           </SidebarMenu>
 

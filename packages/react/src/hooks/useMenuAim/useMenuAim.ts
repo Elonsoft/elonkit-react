@@ -68,7 +68,7 @@ export const useMenuAim = (
       return 0;
     }
 
-    if (lastDelayLoc.current && loc.x == lastDelayLoc.current.x && loc.y == lastDelayLoc.current.y) {
+    if (lastDelayLoc.current && loc.x === lastDelayLoc.current.x && loc.y === lastDelayLoc.current.y) {
       // If the mouse hasn't moved since the last time we checked
       // for activation status, immediately activate.
       return 0;
@@ -81,13 +81,13 @@ export const useMenuAim = (
     let decreasingCorner = upperRight;
     let increasingCorner = lowerRight;
 
-    if (position == 'left') {
+    if (position === 'left') {
       decreasingCorner = upperRight;
       increasingCorner = lowerRight;
-    } else if (position == 'below') {
+    } else if (position === 'below') {
       decreasingCorner = lowerRight;
       increasingCorner = lowerLeft;
-    } else if (position == 'above') {
+    } else if (position === 'above') {
       decreasingCorner = upperLeft;
       increasingCorner = upperRight;
     }

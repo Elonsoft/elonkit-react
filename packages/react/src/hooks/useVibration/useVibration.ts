@@ -5,5 +5,7 @@ import { useCallback } from 'react';
  */
 export const useVibration = () =>
   useCallback((duration: VibratePattern) => {
-    window.navigator.vibrate && window.navigator.vibrate(duration);
+    if (window.navigator.vibrate) {
+      window.navigator.vibrate(duration);
+    }
   }, []);

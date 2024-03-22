@@ -96,7 +96,7 @@ export const AutocompleteField = <T,>(inProps: AutocompleteFieldProps<T>) => {
       size={size}
       sx={sx}
     >
-      {label != null && label !== '' && (
+      {label !== null && label !== '' && (
         <InputLabel htmlFor={id} id={inputLabelId} required={required} {...InputLabelProps}>
           {label}
         </InputLabel>
@@ -112,11 +112,11 @@ export const AutocompleteField = <T,>(inProps: AutocompleteFieldProps<T>) => {
         required={required}
         onChange={handleChange as never}
         onClose={() => {
-          onClose && onClose();
+          onClose?.();
           toggleOpen(false);
         }}
         onOpen={() => {
-          onOpen && onOpen();
+          onOpen?.();
           toggleOpen(true);
         }}
         {...rest}

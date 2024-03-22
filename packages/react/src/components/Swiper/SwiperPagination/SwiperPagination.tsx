@@ -137,12 +137,12 @@ export const SwiperPagination = (inProps: SwiperPaginationProps) => {
     setActiveSlide(+event.target.value);
   };
 
+  const ownerState = { ...props, direction, position, variant };
+  const classes = useUtilityClasses(ownerState);
+
   if (to <= from) {
     return null;
   }
-
-  const ownerState = { ...props, direction, position, variant };
-  const classes = useUtilityClasses(ownerState);
 
   return (
     <SwiperPaginationRoot className={clsx(classes.root, className)} ownerState={ownerState} sx={sx}>

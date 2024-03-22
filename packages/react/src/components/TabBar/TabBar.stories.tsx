@@ -18,7 +18,7 @@ export default meta;
 type Story = StoryObj<typeof TabBar>;
 
 export const Demo: Story = {
-  render: (_args, { globals: { locale } }) => {
+  render: function Render(_args, { globals: { locale } }) {
     const [index, setIndex] = useState(0);
     const label = locale === 'en' ? 'Menu' : 'Меню';
 
@@ -42,7 +42,7 @@ export const Demo: Story = {
 
 /** We can use `label` prop to add labels to `TabBarItem`. */
 export const WithLabels: Story = {
-  render: (_args, { globals: { locale } }) => {
+  render: function Render(_args, { globals: { locale } }) {
     const [index, setIndex] = useState(0);
     const label = locale === 'en' ? 'Menu' : 'Меню';
 

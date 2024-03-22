@@ -1,8 +1,7 @@
 import { DividerProps } from './Divider.types';
 
 import clsx from 'clsx';
-import { getDividerUtilityClass } from './Divider.classes';
-import { dividerClasses } from './Divider.classes';
+import { dividerClasses, getDividerUtilityClass } from './Divider.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 

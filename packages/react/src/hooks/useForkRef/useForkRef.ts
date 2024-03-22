@@ -18,7 +18,7 @@ export const useForkRef = <Instance>(...refs: Array<Ref<Instance> | undefined>):
    * with the ref. Cleanup naturally emerges from this behavior.
    */
   return useMemo(() => {
-    if (refs.every((ref) => ref == null)) {
+    if (refs.every((ref) => ref === null)) {
       return null;
     }
 

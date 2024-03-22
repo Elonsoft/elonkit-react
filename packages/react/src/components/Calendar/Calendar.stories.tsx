@@ -81,7 +81,7 @@ export default meta;
 type Story = StoryObj<typeof Calendar>;
 
 export const Demo: Story = {
-  render: (args) => {
+  render: function Render(args) {
     const [selection, setSelection] = useState<[Date, Date | null] | null>(null);
 
     const onSelectionChange = useCallback(
@@ -111,7 +111,7 @@ export const Demo: Story = {
 
 /** We can select a range of dates. */
 export const Range: Story = {
-  render: (args) => {
+  render: function Render(args) {
     const { selection, hover, onSelectionChange, onHover, onHoverDelete } = useRangeDatePicker();
 
     return (
@@ -139,7 +139,7 @@ export const Range: Story = {
 
 /** We can use multiple calendars side-by-side. */
 export const DualRange: Story = {
-  render: (args) => {
+  render: function Render(args) {
     const { selection, hover, onSelectionChange, onHover, onHoverDelete } = useRangeDatePicker();
 
     return (
@@ -187,7 +187,7 @@ export const DualRange: Story = {
 
 /** We can disable certain dates and show tooltips. */
 export const DisabledAndTooltips: Story = {
-  render: (args, context) => {
+  render: function Render(args, context) {
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
     const { adapter } = useDateAdapterContext();

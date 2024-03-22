@@ -48,7 +48,7 @@ export default meta;
 type Story = StoryObj<Args>;
 
 export const Demo: Story = {
-  render: (args, { globals: { locale } }) => {
+  render: function Render(args, { globals: { locale } }) {
     const [search, setSearch] = useState('');
 
     const [value, setValue] = useState<SFSSortingValue | null>(null);
@@ -83,14 +83,14 @@ export const Demo: Story = {
             <SFSSorting
               key="1"
               multiple
-              options={locale == 'ru' ? sortingOptionsRu : sortingOptionsEn}
+              options={locale === 'ru' ? sortingOptionsRu : sortingOptionsEn}
               value={values}
               onChange={setValues}
             />
           ) : (
             <SFSSorting
               key="2"
-              options={locale == 'ru' ? sortingOptionsRu : sortingOptionsEn}
+              options={locale === 'ru' ? sortingOptionsRu : sortingOptionsEn}
               value={value}
               onChange={setValue}
             />

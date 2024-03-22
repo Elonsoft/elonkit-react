@@ -35,7 +35,7 @@ export const DemoBase: Story = {
     return (
       <Breadcrumbs>
         {BREADCRUMBS[locale].map((item) => (
-          <Breadcrumb key={item.name} component="button" onClick={() => console.log(item.name)}>
+          <Breadcrumb key={item.name} component="button" onClick={() => console.info(item.name)}>
             {item.name}
           </Breadcrumb>
         ))}

@@ -32,8 +32,8 @@ const useUtilityClasses = (ownerState: SwiperOwnerState) => {
     container: [
       'container',
       snap && 'containerSnap',
-      snap && alignment == 'center' && 'containerSnapAlignCenter',
-      snap && alignment == 'start' && 'containerSnapAlignStart'
+      snap && alignment === 'center' && 'containerSnapAlignCenter',
+      snap && alignment === 'start' && 'containerSnapAlignStart'
     ],
     button: ['button'],
     buttonPrev: ['buttonPrev'],
@@ -97,8 +97,8 @@ const SwiperContainer = styled('div', {
     return [
       styles.container,
       snap && styles.containerSnap,
-      snap && alignment == 'center' && styles.containerSnapAlignCenter,
-      snap && alignment == 'start' && styles.containerSnapAlignStart
+      snap && alignment === 'center' && styles.containerSnapAlignCenter,
+      snap && alignment === 'start' && styles.containerSnapAlignStart
     ];
   }
 })<{ ownerState: SwiperOwnerState }>(({ ownerState }) => ({

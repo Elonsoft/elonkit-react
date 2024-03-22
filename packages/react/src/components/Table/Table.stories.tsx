@@ -109,7 +109,7 @@ export default meta;
 type Story = StoryObj<typeof Table>;
 
 export const Demo: Story = {
-  render: (_args, context) => {
+  render: function Render(_args, context) {
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
     const ref = useRef<HTMLDivElement | null>(null);
@@ -141,109 +141,107 @@ export const Demo: Story = {
     }, []);
 
     return (
-      <>
-        <Table ref={ref} columns={columns}>
-          <TableHead sticky={0}>
-            <TableRow>
-              <TableCell padding="checkbox">
-                <Checkbox
-                  checked={isAllSelected}
-                  color="secondary"
-                  indeterminate={isSomeSelected}
-                  inputProps={{ 'aria-label': isAllSelected ? 'Unselect all' : 'Select all' }}
-                  onChange={() => toggleAll()}
-                />
-              </TableCell>
-              <TableCell colSpan={3} onResize={onResize(1, 3)} onResizeCommit={onResizeCommit(1, 3)}>
-                {locale === 'en' ? 'Group 1' : 'Группа 1'}
-              </TableCell>
-              <TableCell colSpan={2} onResize={onResize(4, 2)} onResizeCommit={onResizeCommit(4, 2)}>
-                {locale === 'en' ? 'Group 2' : 'Группа 2'}
-              </TableCell>
-              <TableCell padding="none" />
-              <TableCell />
-            </TableRow>
-            <TableRow ref={rowRef}>
-              <TableCell padding="checkbox" />
-              {fields.map((field, index) => (
-                <TableCell
-                  key={field}
-                  minWidth={100}
-                  onResize={onResize(index + 1)}
-                  onResizeCommit={onResizeCommit(index + 1)}
-                >
-                  <TableText>{NAMES[locale][field]}</TableText>
-                </TableCell>
-              ))}
-              <TableCell padding="none" />
-              <TableCell />
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {DATA[locale].map((row) => {
-              const isSelected = selected.indexOf(row.id) !== -1;
-              const labelId = `story-usage-checkbox-${row.id}`;
-
-              return (
-                <TableRow key={row.id} hover selected={isSelected} tabIndex={0}>
-                  <TableCell overlap padding="checkbox">
-                    <Checkbox
-                      checked={isSelected}
-                      color="secondary"
-                      inputProps={{ 'aria-labelledby': labelId }}
-                      onChange={() => toggle(row.id)}
-                    />
-                  </TableCell>
-                  {fields.map((field) => (
-                    <TableCell key={field} id={field === 'name' ? labelId : undefined}>
-                      <TableText>{row[field]}</TableText>
-                    </TableCell>
-                  ))}
-                  <TableCell padding="none" />
-                  <TableCell overlap align="flex-end">
-                    <IconButton aria-label={locale === 'en' ? 'More' : 'Ещё'}>
-                      <IconDotsVerticalW500 />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-          <TableFoot sticky={0}>
-            {!!selected.length && (
-              <TableActions
-                count={selected.length}
-                label={locale === 'en' ? 'Selected' : 'Выбрано'}
-                sx={(theme) => ({ borderBottom: `1px solid ${theme.palette.monoA.A100}` })}
+      <Table ref={ref} columns={columns}>
+        <TableHead sticky={0}>
+          <TableRow>
+            <TableCell padding="checkbox">
+              <Checkbox
+                checked={isAllSelected}
+                color="secondary"
+                indeterminate={isSomeSelected}
+                inputProps={{ 'aria-label': isAllSelected ? 'Unselect all' : 'Select all' }}
+                onChange={() => toggleAll()}
+              />
+            </TableCell>
+            <TableCell colSpan={3} onResize={onResize(1, 3)} onResizeCommit={onResizeCommit(1, 3)}>
+              {locale === 'en' ? 'Group 1' : 'Группа 1'}
+            </TableCell>
+            <TableCell colSpan={2} onResize={onResize(4, 2)} onResizeCommit={onResizeCommit(4, 2)}>
+              {locale === 'en' ? 'Group 2' : 'Группа 2'}
+            </TableCell>
+            <TableCell padding="none" />
+            <TableCell />
+          </TableRow>
+          <TableRow ref={rowRef}>
+            <TableCell padding="checkbox" />
+            {fields.map((field, index) => (
+              <TableCell
+                key={field}
+                minWidth={100}
+                onResize={onResize(index + 1)}
+                onResizeCommit={onResizeCommit(index + 1)}
               >
-                <IconButton aria-label={locale === 'en' ? 'Edit' : 'Редактировать'}>
-                  <IconPencilW500 />
-                </IconButton>
-                <Divider flexItem orientation="vertical" />
-                <IconButton aria-label={locale === 'en' ? 'Unselect all' : 'Снять всё выделение'} onClick={onClose}>
-                  <IconCloseW600 />
-                </IconButton>
-              </TableActions>
-            )}
-            <TableScrollbar />
-            <Pagination
-              count={100}
-              itemsPerPage={10}
-              page={1}
-              sx={{ padding: '12px', paddingLeft: '16px' }}
-              onItemsPerPageChange={() => {
-                /* */
-              }}
-              onPageChange={() => {
-                /* */
-              }}
+                <TableText>{NAMES[locale][field]}</TableText>
+              </TableCell>
+            ))}
+            <TableCell padding="none" />
+            <TableCell />
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {DATA[locale].map((row) => {
+            const isSelected = selected.indexOf(row.id) !== -1;
+            const labelId = `story-usage-checkbox-${row.id}`;
+
+            return (
+              <TableRow key={row.id} hover selected={isSelected} tabIndex={0}>
+                <TableCell overlap padding="checkbox">
+                  <Checkbox
+                    checked={isSelected}
+                    color="secondary"
+                    inputProps={{ 'aria-labelledby': labelId }}
+                    onChange={() => toggle(row.id)}
+                  />
+                </TableCell>
+                {fields.map((field) => (
+                  <TableCell key={field} id={field === 'name' ? labelId : undefined}>
+                    <TableText>{row[field]}</TableText>
+                  </TableCell>
+                ))}
+                <TableCell padding="none" />
+                <TableCell overlap align="flex-end">
+                  <IconButton aria-label={locale === 'en' ? 'More' : 'Ещё'}>
+                    <IconDotsVerticalW500 />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+        <TableFoot sticky={0}>
+          {!!selected.length && (
+            <TableActions
+              count={selected.length}
+              label={locale === 'en' ? 'Selected' : 'Выбрано'}
+              sx={(theme) => ({ borderBottom: `1px solid ${theme.palette.monoA.A100}` })}
             >
-              <PaginationRange />
-              <PaginationPages boundaryCount={0} siblingCount={0} />
-            </Pagination>
-          </TableFoot>
-        </Table>
-      </>
+              <IconButton aria-label={locale === 'en' ? 'Edit' : 'Редактировать'}>
+                <IconPencilW500 />
+              </IconButton>
+              <Divider flexItem orientation="vertical" />
+              <IconButton aria-label={locale === 'en' ? 'Unselect all' : 'Снять всё выделение'} onClick={onClose}>
+                <IconCloseW600 />
+              </IconButton>
+            </TableActions>
+          )}
+          <TableScrollbar />
+          <Pagination
+            count={100}
+            itemsPerPage={10}
+            page={1}
+            sx={{ padding: '12px', paddingLeft: '16px' }}
+            onItemsPerPageChange={() => {
+              /* */
+            }}
+            onPageChange={() => {
+              /* */
+            }}
+          >
+            <PaginationRange />
+            <PaginationPages boundaryCount={0} siblingCount={0} />
+          </Pagination>
+        </TableFoot>
+      </Table>
     );
   }
 };
@@ -254,7 +252,7 @@ export const Demo: Story = {
 that the table can accommodate properly, at least, these columns.
  */
 export const ColumnPinning: Story = {
-  render: (_args, context) => {
+  render: function Render(_args, context) {
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
     const ref = useRef<HTMLDivElement | null>(null);

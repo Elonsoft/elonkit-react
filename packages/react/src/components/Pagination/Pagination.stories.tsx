@@ -33,7 +33,7 @@ export default meta;
 type Story = StoryObj<typeof Pagination>;
 
 export const Demo: Story = {
-  render: ({ count }) => {
+  render: function Render({ count }) {
     const [page, setPage] = useState(1);
 
     const [itemsPerPage, setItemsPerPage] = useState(10);

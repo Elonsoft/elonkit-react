@@ -20,12 +20,12 @@ export const useSticky = (
       return;
     }
 
-    if (options.top !== undefined) {
+    if (typeof options.top === 'number') {
       ref.current.style.transform = '';
       const elementTop = ref.current.getBoundingClientRect().top;
       const relativeTop = options.relativeTo ? options.relativeTo.getBoundingClientRect().top : 0;
       ref.current.style.transform = `translate3d(0px, ${Math.max(0, relativeTop - elementTop + options.top)}px, 0px)`;
-    } else if (options.bottom !== undefined) {
+    } else if (typeof options.bottom === 'number') {
       ref.current.style.transform = '';
       const elementBottom = ref.current.getBoundingClientRect().bottom;
       const relativeTop = options.relativeTo ? options.relativeTo.getBoundingClientRect().top : 0;

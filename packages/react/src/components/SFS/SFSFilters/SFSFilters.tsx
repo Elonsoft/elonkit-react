@@ -210,7 +210,7 @@ export const SFSFilters = memo(function SFSFilters(inProps: SFSFiltersProps) {
           )}
         </SFSFiltersButton>
       )}
-      <SFSFiltersDrawer anchor={'right'} className={classes.drawer} open={isOpen} onClose={onClose}>
+      <SFSFiltersDrawer anchor="right" className={classes.drawer} open={isOpen} onClose={onClose}>
         <SFSFiltersHeader className={classes.header} variant="h5">
           {labelHeader}
           <SFSFiltersCloseButton

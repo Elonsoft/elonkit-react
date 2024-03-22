@@ -28,7 +28,8 @@ const useUtilityClasses = (ownerState: LoadingButtonOwnerState) => {
   const composedClasses = composeClasses(slots, getLoadingButtonUtilityClass, classes);
 
   return {
-    ...classes, // forward the outlined, color, etc. classes to Button
+    // forward the outlined, color, etc. classes to Button
+    ...classes,
     ...composedClasses
   };
 };

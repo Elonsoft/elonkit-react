@@ -36,6 +36,6 @@ type Story = StoryObj<Args>;
 
 export const Demo: Story = {
   render: (args) => {
-    return <MadeBy {...args}></MadeBy>;
+    return <MadeBy {...args} />;
   }
 };

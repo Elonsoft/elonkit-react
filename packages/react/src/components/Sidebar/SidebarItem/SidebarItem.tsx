@@ -374,25 +374,35 @@ export const SidebarItem: OverridableComponent<SidebarItemTypeMap> = (inProps: S
       element.focus();
     }
 
-    onKeyDown && onKeyDown(event);
+    onKeyDown?.(event);
   };
 
   const onNestedMenuHover = (e: React.MouseEvent) => {
     if (behaviour === 'hover' && id) {
-      e.type === 'mouseenter' ? onOpen(id) : onClose(id);
+      if (e.type === 'mouseenter') {
+        onOpen(id);
+      } else {
+        onClose(id);
+      }
     }
   };
 
   const onNestedMenuClick = (e: React.MouseEvent) => {
-    children && !isTooltipOpen && e.preventDefault();
+    if (children && !isTooltipOpen) {
+      e.preventDefault();
+    }
 
     if (open && behaviour === 'click' && id) {
-      isNestedMenuOpen ? onClose(id) : onOpen(id);
+      if (isNestedMenuOpen) {
+        onClose(id);
+      } else {
+        onOpen(id);
+      }
     }
   };
 
   const onItemTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    onTouchStart && onTouchStart(e);
+    onTouchStart?.(e);
 
     if (!open && !isTooltipOpen && children) {
       shouldSkipClick.current = true;
@@ -406,8 +416,10 @@ export const SidebarItem: OverridableComponent<SidebarItemTypeMap> = (inProps: S
       return;
     }
 
-    onClick && onClick(e);
-    !component && onNestedMenuClick(e);
+    onClick?.(e);
+    if (!component) {
+      onNestedMenuClick(e);
+    }
   };
 
   const onMouseDown = (event: React.MouseEvent) => {
@@ -419,111 +431,109 @@ export const SidebarItem: OverridableComponent<SidebarItemTypeMap> = (inProps: S
   const classes = useUtilityClasses(ownerState);
 
   return (
-    <>
-      <SidebarItemTooltip
-        arrow={!!text}
-        className={clsx(classes.tooltip)}
-        disableInteractive={!children}
-        enterDelay={100}
-        enterNextDelay={200}
-        enterTouchDelay={0}
-        leaveDelay={120}
-        leaveTouchDelay={Infinity}
-        open={isTooltipOpen}
-        placement={children ? 'right-start' : 'right'}
-        title={
-          <SidebarItemTooltipTitle
-            ref={refTooltip}
-            disablePadding
-            className={clsx(classes.tooltipTitle)}
-            ownerState={ownerState}
-            onKeyDown={onTooltipKeyDown}
-            onMouseDown={onMouseDown}
-          >
-            <SidebarItemTooltipItem
-              className={clsx(classes.tooltipItem)}
-              component={component}
-              disabled={!onClick}
-              tabIndex={-1}
-              onClick={onClick}
-              {...props}
-              selected={false}
-            >
-              <Typography variant="body100">{text}</Typography>
-            </SidebarItemTooltipItem>
-
-            {!!children && <SidebarItemTooltipDivider />}
-            {!!children &&
-              React.Children.map(children, (child: any, idx: number) => {
-                // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                const { text, inset, ...rest } = child.props;
-
-                return (
-                  <SidebarItemTooltipItem key={idx} className={clsx(classes.tooltipItem)} tabIndex={idx} {...rest}>
-                    <Typography variant="body100">{text}</Typography>
-                  </SidebarItemTooltipItem>
-                );
-              })}
-          </SidebarItemTooltipTitle>
-        }
-        onClose={onTooltipClose}
-        onOpen={onTooltipOpen}
-      >
-        <SidebarItemRoot
-          className={clsx(classes.root, className)}
-          sx={sx}
-          onMouseEnter={onNestedMenuHover}
-          onMouseLeave={onNestedMenuHover}
+    <SidebarItemTooltip
+      arrow={!!text}
+      className={clsx(classes.tooltip)}
+      disableInteractive={!children}
+      enterDelay={100}
+      enterNextDelay={200}
+      enterTouchDelay={0}
+      leaveDelay={120}
+      leaveTouchDelay={Infinity}
+      open={isTooltipOpen}
+      placement={children ? 'right-start' : 'right'}
+      title={
+        <SidebarItemTooltipTitle
+          ref={refTooltip}
+          disablePadding
+          className={clsx(classes.tooltipTitle)}
+          ownerState={ownerState}
+          onKeyDown={onTooltipKeyDown}
+          onMouseDown={onMouseDown}
         >
-          <SidebarItemWrapper className={clsx(classes.wrapper)}>
-            <SidebarItemButton
-              ref={refItem}
-              className={clsx(classes.button)}
-              ownerState={ownerState}
-              onClick={onItemClick}
-              onKeyDown={onItemKeyDown}
-              onTouchStart={onItemTouchStart}
-              {...props}
-            >
-              <SidebarItemContainer ref={ref} className={clsx(classes.container)}>
-                {!!icon && <ListItemIcon>{icon}</ListItemIcon>}
+          <SidebarItemTooltipItem
+            className={clsx(classes.tooltipItem)}
+            component={component}
+            disabled={!onClick}
+            tabIndex={-1}
+            onClick={onClick}
+            {...props}
+            selected={false}
+          >
+            <Typography variant="body100">{text}</Typography>
+          </SidebarItemTooltipItem>
 
-                <SidebarItemText
-                  className={clsx(classes.text)}
-                  inset={inset}
-                  ownerState={ownerState}
-                  primary={text}
-                  primaryTypographyProps={{ variant: 'body100' }}
-                />
-                {children && open && !component && (
-                  <SidebarItemIcon className={clsx(classes.icon)} ownerState={ownerState}>
-                    {iconToggle}
-                  </SidebarItemIcon>
-                )}
-              </SidebarItemContainer>
-            </SidebarItemButton>
+          {!!children && <SidebarItemTooltipDivider />}
+          {!!children &&
+            React.Children.map(children, (child: any, idx: number) => {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const { text, inset, ...rest } = child.props;
 
-            {children && open && component && (
-              <SidebarItemSecondaryAction
-                aria-label={!isNestedMenuOpen ? labelOpen : labelHide}
-                className={clsx(classes.secondaryAction)}
-                disabled={behaviour === 'hover'}
+              return (
+                <SidebarItemTooltipItem key={idx} className={clsx(classes.tooltipItem)} tabIndex={idx} {...rest}>
+                  <Typography variant="body100">{text}</Typography>
+                </SidebarItemTooltipItem>
+              );
+            })}
+        </SidebarItemTooltipTitle>
+      }
+      onClose={onTooltipClose}
+      onOpen={onTooltipOpen}
+    >
+      <SidebarItemRoot
+        className={clsx(classes.root, className)}
+        sx={sx}
+        onMouseEnter={onNestedMenuHover}
+        onMouseLeave={onNestedMenuHover}
+      >
+        <SidebarItemWrapper className={clsx(classes.wrapper)}>
+          <SidebarItemButton
+            ref={refItem}
+            className={clsx(classes.button)}
+            ownerState={ownerState}
+            onClick={onItemClick}
+            onKeyDown={onItemKeyDown}
+            onTouchStart={onItemTouchStart}
+            {...props}
+          >
+            <SidebarItemContainer ref={ref} className={clsx(classes.container)}>
+              {!!icon && <ListItemIcon>{icon}</ListItemIcon>}
+
+              <SidebarItemText
+                className={clsx(classes.text)}
+                inset={inset}
                 ownerState={ownerState}
-                size="24"
-                onClick={onNestedMenuClick}
-              >
-                {iconToggle}
-              </SidebarItemSecondaryAction>
-            )}
-          </SidebarItemWrapper>
+                primary={text}
+                primaryTypographyProps={{ variant: 'body100' }}
+              />
+              {children && open && !component && (
+                <SidebarItemIcon className={clsx(classes.icon)} ownerState={ownerState}>
+                  {iconToggle}
+                </SidebarItemIcon>
+              )}
+            </SidebarItemContainer>
+          </SidebarItemButton>
 
-          {open && !!children && (
-            <Collapse unmountOnExit in={!!isNestedMenuOpen} timeout="auto">
-              <SidebarItemNestedMenu className={clsx(classes.nestedMenu)}>{children}</SidebarItemNestedMenu>
-            </Collapse>
+          {children && open && component && (
+            <SidebarItemSecondaryAction
+              aria-label={isNestedMenuOpen ? labelHide : labelOpen}
+              className={clsx(classes.secondaryAction)}
+              disabled={behaviour === 'hover'}
+              ownerState={ownerState}
+              size="24"
+              onClick={onNestedMenuClick}
+            >
+              {iconToggle}
+            </SidebarItemSecondaryAction>
           )}
-        </SidebarItemRoot>
-      </SidebarItemTooltip>
-    </>
+        </SidebarItemWrapper>
+
+        {open && !!children && (
+          <Collapse unmountOnExit in={!!isNestedMenuOpen} timeout="auto">
+            <SidebarItemNestedMenu className={clsx(classes.nestedMenu)}>{children}</SidebarItemNestedMenu>
+          </Collapse>
+        )}
+      </SidebarItemRoot>
+    </SidebarItemTooltip>
   );
 };

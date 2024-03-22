@@ -146,12 +146,13 @@ export default meta;
 type Story = StoryObj<typeof AutocompleteField>;
 
 export const Demo: Story = {
-  render: (args, { globals: { locale } }) => {
+  render: function Render(args, { globals: { locale } }) {
     const [options, setOptions] = useState<User[]>([]);
     const [loading, setLoading] = useState(false);
 
     const [user, setUser] = useState<User | null>(null);
     const [users, setUsers] = useState<User[]>([]);
+    const [search, setSearch] = useState('');
 
     const onChange = (user: User | null) => {
       setUser(user);
@@ -164,8 +165,6 @@ export const Demo: Story = {
     const onChangeUsers = (users: User[]) => {
       setUsers(users);
     };
-
-    const [search, setSearch] = useState('');
 
     useEffect(() => {
       setOptions(USERS[locale as 'en' | 'ru']);
@@ -260,7 +259,7 @@ export const Demo: Story = {
 
 /** We can group the options with the `groupBy` prop. Make sure that the options are also sorted with the same dimension that they are grouped by, otherwise, you will notice duplicate headers. */
 export const Groups: Story = {
-  render: (_args, { globals: { locale } }) => {
+  render: function Render(_args, { globals: { locale } }) {
     const [options, setOptions] = useState<User[]>([]);
     const [users, setUsers] = useState<User[]>([]);
 
@@ -294,7 +293,7 @@ export const Groups: Story = {
 };
 
 export const Customization: Story = {
-  render: (_args, { globals: { locale } }) => {
+  render: function Render(_args, { globals: { locale } }) {
     const [options, setOptions] = useState<User[]>([]);
     const [users, setUsers] = useState<User[]>([]);
 

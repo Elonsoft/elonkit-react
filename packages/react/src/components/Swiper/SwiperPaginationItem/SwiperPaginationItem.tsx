@@ -152,11 +152,7 @@ export const SwiperPaginationItem = ({
         value={index}
         onChange={onSlideChange}
       />
-      <SwiperPaginationItemBullet
-        className={classes.bullet}
-        ownerState={ownerState}
-        style={transition}
-      ></SwiperPaginationItemBullet>
+      <SwiperPaginationItemBullet className={classes.bullet} ownerState={ownerState} style={transition} />
     </SwiperPaginationItemRoot>
   );
 };

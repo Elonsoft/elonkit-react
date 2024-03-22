@@ -53,7 +53,7 @@ export const Demo: Story = {
 /** We can use `audioRef` in order to interact directly with audio element and call it's imperative actions. For example,
 stopping one audio track when another is played. */
 export const ImperativeActions: Story = {
-  render: () => {
+  render: function Render() {
     const firstAudioRef = useRef<HTMLAudioElement | null>(null);
     const secondAudioRef = useRef<HTMLAudioElement | null>(null);
 

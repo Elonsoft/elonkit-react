@@ -80,7 +80,7 @@ const BottomSheetContainer = styled('div', {
   scrollbarGutter: 'stable',
 
   '&, & *': {
-    touchAction: !ownerState.isLastSnapPoint ? 'none' : 'auto'
+    touchAction: ownerState.isLastSnapPoint ? 'auto' : 'none'
   },
 
   '&:after': {
@@ -123,7 +123,7 @@ const BottomSheetContent = styled('div', {
     verticalAlign: 'middle',
     width: '100%',
     marginTop: `calc(100vh - ${ownerState.snapPoint})`,
-    transition: !ownerState.isOpen ? 'none' : `margin-top ${ownerState.transitionDuration}ms`,
+    transition: ownerState.isOpen ? `margin-top ${ownerState.transitionDuration}ms` : 'none',
     willChange: 'auto',
 
     '@media print': {
@@ -383,37 +383,35 @@ export const BottomSheet = forwardRef<HTMLDivElement | null, BottomSheetProps>(f
         } else {
           changeSnapPointIndex(-1);
         }
+      } else if (down) {
+        if (isLastSnapPoint) {
+          if (my <= 0) {
+            my = 0;
+          }
+          if (my > 0) {
+            containerRef.current.style.setProperty('touch-action', `none`);
+            containerRef.current.style.setProperty('overflow', `hidden`);
+          }
+        }
+
+        const point = activeSnapPoints[snapPointIndex].point;
+        const height = point === 'auto' ? `min(100dvh, ${contentRef.current.clientHeight}px)` : point;
+
+        contentRef.current.style.setProperty('transition', `none`);
+        contentRef.current.style.setProperty('margin-top', `max(0px, calc(100dvh - ${height} + ${my}px))`);
       } else {
-        if (down) {
-          if (isLastSnapPoint) {
-            if (my <= 0) {
-              my = 0;
-            }
-            if (my > 0) {
-              containerRef.current.style.setProperty('touch-action', `none`);
-              containerRef.current.style.setProperty('overflow', `hidden`);
-            }
-          }
+        const up = getPixelsFromCssUnits(activeSnapPoints[snapPointIndex].dragThresholds.up);
+        const down = getPixelsFromCssUnits(activeSnapPoints[snapPointIndex].dragThresholds.down);
 
-          const point = activeSnapPoints[snapPointIndex].point;
-          const height = point === 'auto' ? `min(100dvh, ${contentRef.current.clientHeight}px)` : point;
-
-          contentRef.current.style.setProperty('transition', `none`);
-          contentRef.current.style.setProperty('margin-top', `max(0px, calc(100dvh - ${height} + ${my}px))`);
+        if (my < -up) {
+          changeSnapPointIndex(1);
+        } else if (my > down) {
+          changeSnapPointIndex(-1);
         } else {
-          const up = getPixelsFromCssUnits(activeSnapPoints[snapPointIndex].dragThresholds.up);
-          const down = getPixelsFromCssUnits(activeSnapPoints[snapPointIndex].dragThresholds.down);
-
-          if (my < -up) {
-            changeSnapPointIndex(1);
-          } else if (my > down) {
-            changeSnapPointIndex(-1);
-          } else {
-            containerRef.current.style.removeProperty('touch-action');
-            containerRef.current.style.removeProperty('overflow');
-            contentRef.current.style.removeProperty('transition');
-            contentRef.current.style.removeProperty('margin-top');
-          }
+          containerRef.current.style.removeProperty('touch-action');
+          containerRef.current.style.removeProperty('overflow');
+          contentRef.current.style.removeProperty('transition');
+          contentRef.current.style.removeProperty('margin-top');
         }
       }
     },
@@ -448,7 +446,7 @@ export const BottomSheet = forwardRef<HTMLDivElement | null, BottomSheetProps>(f
     isLastSnapPoint,
     isOpen,
     transitionDuration: duration,
-    snapPoint: snapPoint
+    snapPoint
   };
 
   const classes = useUtilityClasses(ownerState);
@@ -493,7 +491,7 @@ export const BottomSheet = forwardRef<HTMLDivElement | null, BottomSheetProps>(f
             >
               <Slide direction="up" in={open} timeout={transitionDuration} onEnter={onEnter} onEntered={onEntered}>
                 <BottomSheetPaper ref={paperRef} className={classes.paper} ownerState={ownerState}>
-                  <div ref={sentinelRef}></div>
+                  <div ref={sentinelRef} />
                   <BottomSheetContext.Provider value={value}>{children}</BottomSheetContext.Provider>
                 </BottomSheetPaper>
               </Slide>

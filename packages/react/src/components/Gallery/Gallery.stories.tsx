@@ -113,7 +113,7 @@ export default meta;
 type Story = StoryObj<typeof Gallery>;
 
 export const Demo: Story = {
-  render: (args, context) => {
+  render: function Render(args, context) {
     const locale = context.globals.locale as 'en' | 'ru';
     const { t } = useI18N(locale);
 

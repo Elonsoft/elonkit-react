@@ -19,7 +19,7 @@ export const useStuckSentinel = () => {
     { threshold: [0] }
   );
 
-  const sentinel = <div ref={ref} data-test="stuckSentinel"></div>;
+  const sentinel = <div ref={ref} data-test="stuckSentinel" />;
 
   return { stuck, sentinel };
 };

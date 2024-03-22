@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../../src/overrides.d.ts" />
 
