@@ -3,8 +3,6 @@ import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
 export type TabScrollButtonClasses = {
   /** Styles applied to the root element. */
   root: string;
-  /** Styles applied to the root element if `orientation="vertical"`. */
-  vertical: string;
   /** State class applied to the root element if `disabled={true}`. */
   disabled: string;
 };
@@ -16,7 +14,5 @@ export function getTabScrollButtonUtilityClass(slot: string) {
 }
 export const tabScrollButtonClasses: TabScrollButtonClasses = generateUtilityClasses('MuiTabScrollButton', [
   'root',
-  'vertical',
-  'horizontal',
   'disabled'
 ]);

@@ -24,7 +24,6 @@ const enterKeyframe = keyframes`
 type TabOwnerState = {
   classes?: TabProps['classes'];
   fullWidth?: boolean;
-  wrapped?: boolean;
   icon?: boolean;
   label?: boolean;
   selected?: boolean;
@@ -34,16 +33,16 @@ type TabOwnerState = {
 };
 
 const useUtilityClasses = (ownerState: TabOwnerState) => {
-  const { classes, fullWidth, wrapped, icon, label, selected, disabled } = ownerState;
+  const { classes, fullWidth, icon, label, selected, disabled } = ownerState;
 
   const slots = {
     root: [
       'root',
       icon && label && 'labelIcon',
       fullWidth && 'fullWidth',
-      wrapped && 'wrapped',
       selected && 'selected',
-      disabled && 'disabled'
+      disabled && 'disabled',
+      'labelWrapper'
     ],
     iconWrapper: ['iconWrapper']
   };
@@ -60,22 +59,18 @@ const TabRoot = styled(ButtonBase, {
     return [
       styles.root,
       ownerState.label && ownerState.icon && styles.labelIcon,
-      ownerState.fullWidth && styles.fullWidth,
-      ownerState.wrapped && styles.wrapped
+      ownerState.fullWidth && styles.fullWidth
     ];
   }
 })<{ ownerState: TabOwnerState }>(({ theme, ownerState }) => ({
-  color: theme.palette.monoA.A700,
   maxWidth: 360,
   minWidth: 90,
   position: 'relative',
   flexShrink: 0,
-  padding: '12px 16px',
+  padding: '12px 8px',
   overflow: 'hidden',
-  whiteSpace: 'normal',
-  textAlign: 'center',
   gap: 8,
-  ...theme.typography.body100,
+  zIndex: 0,
 
   ...theme.mixins.button({
     background: 'initial',
@@ -104,24 +99,27 @@ const TabRoot = styled(ButtonBase, {
     marginTop: 6,
     marginBottom: 6
   }),
-  lineHeight: 1.25,
-  ...(ownerState.icon &&
-    ownerState.label && {
-      paddingTop: 9,
-      paddingBottom: 9
-    }),
   ...(ownerState.fullWidth && {
     flexShrink: 1,
     flexGrow: 1,
     flexBasis: 0,
     maxWidth: 'none'
   }),
-  ...(ownerState.wrapped && {
-    fontSize: theme.typography.pxToRem(12)
-  }),
   '&.Mui-disabled': {
     color: theme.palette.monoA.A400
   }
+}));
+
+const LabelWrapper = styled('span', {
+  name: 'ESTab',
+  slot: 'LabelWrapper',
+  overridesResolver: (props, styles) => styles.labelWrapper
+})(({ theme }) => ({
+  ...theme.typography.body100,
+  textAlign: 'center',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap'
 }));
 
 export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps: TabProps, ref) {
@@ -140,22 +138,21 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
     selected,
     selectionFollowsFocus,
     value,
-    wrapped = false,
-    ...other
+    ...props
   } = useThemeProps({ props: inProps, name: 'ESTab' });
 
   const ownerState = {
-    ...other,
+    ...props,
     disabled,
     disableFocusRipple,
     selected,
     icon: !!startIconProp || !!endIconProp,
     label: !!label,
-    fullWidth,
-    wrapped
+    fullWidth
   };
 
   const classes = useUtilityClasses(ownerState);
+
   const startIcon =
     startIconProp && isValidElement(startIconProp)
       ? cloneElement(startIconProp as ReactElement, {
@@ -169,6 +166,7 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
           className: clsx(classes.iconWrapper, (endIconProp as ReactElement).props.className)
         })
       : endIconProp;
+
   const handleClick = (event: MouseEvent) => {
     if (!selected && onChange) {
       onChange(event, value);
@@ -201,10 +199,10 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
       tabIndex={selected ? 0 : -1}
       onClick={handleClick}
       onFocus={handleFocus}
-      {...other}
+      {...props}
     >
       {startIcon}
-      {label}
+      <LabelWrapper>{label}</LabelWrapper>
       {endIcon}
       {indicator}
     </TabRoot>

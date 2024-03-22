@@ -42,12 +42,6 @@ export type TabProps = {
    */
   rounded?: boolean;
   /**
-   * Tab labels appear in a single row.
-   * They can use a second line if needed.
-   * @default false
-   */
-  wrapped?: boolean;
-  /**
    * CSS class to be applied to the root element of the component.
    */
   className?: string;
