@@ -6,7 +6,22 @@ import { TabsClasses } from './Tabs.classes';
 
 import { SxProps, Theme } from '@mui/material';
 
+export type TabIndicatorSlidingAnimation =
+  | 'expandFromCenter'
+  | 'shortest'
+  | 'shorter'
+  | 'short'
+  | 'standard'
+  | 'complex'
+  | 'enteringScreen'
+  | 'leavingScreen';
+
 export type TabsProps = {
+  customAnimation?: {
+    duration?: number | string;
+    easing?: string;
+    delay?: string | number;
+  };
   /**
    * Callback fired when the component mounts.
    * This is useful when you want to trigger an action programmatically.
@@ -54,6 +69,12 @@ export type TabsProps = {
    */
   component?: ElementType;
   /**
+   * The transition used for TabIndicator sliding between Tabs.
+   *
+   * @default none
+   */
+  TabIndicatorSlidingAnimation?: TabIndicatorSlidingAnimation;
+  /**
    * Determines the color of the indicator.
    * @default 'primary'
    */
@@ -65,11 +86,6 @@ export type TabsProps = {
    * @param {any} value We default to the index of the child (number)
    */
   onChange?: (event: SyntheticEvent, value: any) => void;
-  /**
-   * The component orientation (layout flow direction).
-   * @default 'horizontal'
-   */
-  orientation?: 'horizontal' | 'vertical';
   /**
    * The component used to render the scroll buttons.
    * @default TabScrollButton
@@ -109,19 +125,34 @@ export type TabsProps = {
    */
   rounded?: boolean;
   /**
+   * Determines horizontal alignment of TabIndicator component:
+   *
+   *  - `left` TabIndicator will be at the left side of Tab.
+   *  - `center` TabIndicator will be at the center of the Tab.
+   *  - `right` TabIndicator will be at the right side of the Tab.
+   * @default 'left'
+   */
+  TabIndicatorAlignment?: 'left' | 'center' | 'right';
+  /**
    * Determines position of TabIndicator component:
    *
-   *  - `top` TabIndicator will be at the top of the Tab
-   *  - `bottom` TabIndicator will be at the bottom of the Tab
+   *  - `top` TabIndicator will be at the top of the Tab.
+   *  - `bottom` TabIndicator will be at the bottom of the Tab.
    * @default 'bottom'
    */
   TabIndicatorPosition?: 'top' | 'bottom';
   /**
-  /**
-   * Props applied to the tab indicator element.
-   * @default  {}
+   /**
+    * Props applied to the tab indicator element.
+    * @default  {}
    */
   TabIndicatorProps?: HTMLAttributes<HTMLDivElement>;
+  /**
+   * Determines width of TabIndicator relative to the current Tab. Cannot exceed Tab width.
+   * Value should be a string containg width either in pixels or in percentage.
+   * @default '100%'
+   */
+  TabIndicatorWidth?: string;
   /**
    * Props applied to the [`TabScrollButton`](/api/tab-scroll-button/) element.
    * @default {}
@@ -133,11 +164,11 @@ export type TabsProps = {
    */
   value?: any;
   /**
-   * Determines additional display behavior of the tabs:
+   *  Determines additional display behavior of the tabs:
    *
    *  - `scrollable` will invoke scrolling properties and allow for horizontally
    *  scrolling (or swiping) of the tab bar.
-   *  -`fullWidth` will make the tabs grow to use all the available space,
+   *  - `fullWidth` will make the tabs grow to use all the available space,
    *  which should be used for small views, like on mobile.
    *  - `standard` will render the default state.
    * @default 'standard'

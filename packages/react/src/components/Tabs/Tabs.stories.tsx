@@ -1,8 +1,10 @@
-import { SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { SyntheticEvent, useRef, useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
-import Box from '@mui/material/Box';
+import { tabClasses } from './Tab/Tab.classes';
+
+import { useTheme } from '@mui/material';
 
 import { Tab, Tabs, tabsClasses } from '.';
 
@@ -111,62 +113,52 @@ const tabsData = {
   ]
 };
 
+const gap = 4;
+
 export const Demo: Story = {
   render: (args, context) => {
     const [value, setValue] = useState(0);
-    const [tabsWidth, setTabsWidth] = useState(0);
+
     const tabRefs = useRef<Array<HTMLButtonElement | undefined>>([]);
+    const theme = useTheme();
+
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
-    const gap = 4;
 
     const handleChange = (event: SyntheticEvent, newValue: number) => {
       setValue(newValue);
     };
 
-    useEffect(() => {
-      const newTabsWidth =
-        tabRefs.current.reduce((acc, tabRef) => {
-          return acc + (tabRef ? tabRef.scrollWidth : 0);
-        }, 0) + (args.rounded ? gap * (tabsData[locale].length - 1) : 0);
-
-      setTabsWidth(newTabsWidth);
-    }, [tabRefs, args.rounded, locale]);
-
     return (
-      <Box
+      <Tabs
+        {...args}
         sx={{
-          width: args.orientation === 'vertical' ? '50%' : '100%'
+          [`.${tabsClasses.flexContainer}`]: {
+            gap: `${gap}px`
+          }
         }}
+        value={value}
+        onChange={handleChange}
       >
-        <Box>
-          <Tabs
-            {...args}
+        {(locale === 'en' ? tabsData.en : tabsData.ru).map((label, index) => (
+          <Tab
+            key={index}
+            ref={(el) => {
+              tabRefs.current[index] = el || undefined;
+            }}
+            endIcon={<IconAt size="24px" />}
+            label={label}
+            startIcon={<IconAt size="24px" />}
             sx={{
-              [`.${tabsClasses.flexContainer}`]: {
-                gap: args.rounded ? `${gap}px` : 0,
-                borderBottom: args.orientation === 'vertical' ? undefined : 1,
-                borderColor: args.orientation === 'vertical' ? undefined : 'divider',
-                width: args.orientation === 'vertical' ? undefined : tabsWidth,
-                height: args.orientation === 'vertical' ? '200px' : undefined
+              [`.${tabClasses.iconWrapper}`]: {
+                color: theme.palette.monoA.A600
+              },
+              [`&.${tabClasses.selected} .${tabClasses.iconWrapper}`]: {
+                color: theme.palette.monoA.A800
               }
             }}
-            value={value}
-            onChange={handleChange}
-          >
-            {(locale === 'en' ? tabsData.en : tabsData.ru).map((label, index) => (
-              <Tab
-                key={index}
-                ref={(el) => {
-                  tabRefs.current[index] = el || undefined;
-                }}
-                endIcon={<IconAt size="20px" />}
-                label={label}
-                startIcon={<IconAt size="20px" />}
-              />
-            ))}
-          </Tabs>
-        </Box>
-      </Box>
+          />
+        ))}
+      </Tabs>
     );
   }
 };

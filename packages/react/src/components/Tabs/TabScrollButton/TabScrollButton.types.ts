@@ -27,10 +27,6 @@ export type TabScrollButtonProps = {
    */
   disabled?: boolean;
   /**
-   * The component orientation (layout flow direction).
-   */
-  orientation: 'horizontal' | 'vertical';
-  /**
    * The components used for each slot inside.
    * @default {}
    */
