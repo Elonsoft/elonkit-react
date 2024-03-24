@@ -25,6 +25,7 @@ export * from './FormatDate';
 export * from './FormatSize';
 export * from './Gallery';
 export * from './Kbd';
+export * from './LinearProgress';
 export * from './Link';
 export * from './LoadingButton';
 export * from './locale';

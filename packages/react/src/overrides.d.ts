@@ -154,6 +154,7 @@ import {
   GalleryThumbnailsProps
 } from './components/Gallery';
 import { KbdClassKey, KbdProps } from './components/Kbd';
+import { LinearProgressClassKey, LinearProgressProps } from './components/LinearProgress';
 import { LinkClassKey, LinkProps } from './components/Link';
 import { LoadingButtonClassKey, LoadingButtonProps } from './components/LoadingButton';
 import { MadeByClassKey, MadeByProps } from './components/MadeBy';
@@ -383,6 +384,7 @@ declare module '@mui/material/styles/props' {
     ESGalleryThumbnailsImage: GalleryThumbnailsImageProps;
     ESGalleryThumbnailsItem: GalleryThumbnailsItemProps;
     ESKbd: KbdProps;
+    ESLinearProgress: LinearProgressProps;
     ESLink: LinkProps;
     ESLoadingButton: LoadingButtonProps;
     ESMenuItem: MenuItemProps;
@@ -504,6 +506,7 @@ declare module '@mui/material/styles/overrides' {
     ESGalleryThumbnailsImage: GalleryThumbnailsImageClassKey;
     ESGalleryThumbnailsItem: GalleryThumbnailsItemClassKey;
     ESKbd: KbdClassKey;
+    ESLinearProgress: LinearProgressClassKey;
     ESLink: LinkClassKey;
     ESLoadingButton: LoadingButtonClassKey;
     ESMenuItem: MenuItemClassKey;
@@ -830,6 +833,10 @@ declare module '@mui/material/styles/components' {
     };
     ESKbd?: {
       defaultProps?: ComponentsProps['ESKbd'];
+    };
+    ESLinearProgress?: {
+      defaultProps?: ComponentsProps['ESLinearProgress'];
+      styleOverrides?: ComponentsOverrides['ESLinearProgress'];
     };
     ESLink?: {
       defaultProps?: ComponentsProps['ESLink'];
