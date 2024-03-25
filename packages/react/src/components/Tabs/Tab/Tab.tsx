@@ -25,7 +25,7 @@ type TabOwnerState = {
   classes?: TabProps['classes'];
   fullWidth?: TabProps['fullWidth'];
   icon?: boolean;
-  label?: TabProps['label'];
+  label?: boolean;
   selected?: TabProps['selected'];
   disabled?: TabProps['disabled'];
   disableFocusRipple?: TabProps['disableFocusRipple'];
