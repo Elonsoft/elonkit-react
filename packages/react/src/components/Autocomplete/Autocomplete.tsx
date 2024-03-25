@@ -200,24 +200,27 @@ export const Autocomplete = <T,>(inProps: AutocompleteProps<T>) => {
     }
   }, []);
 
-  const onMenuClose = useCallback((event: unknown, reason: 'escapeKeyDown' | 'clickAway') => {
-    if (reason === 'escapeKeyDown') {
-      isInputFocusRequested.current = true;
+  const onMenuClose = useCallback(
+    (event: unknown, reason: 'escapeKeyDown' | 'clickAway') => {
+      if (reason === 'escapeKeyDown') {
+        isInputFocusRequested.current = true;
 
-      requestAnimationFrame(() => {
-        if (inputRef.current) {
-          inputRef.current.focus();
-        }
-      });
-    }
+        requestAnimationFrame(() => {
+          if (inputRef.current) {
+            inputRef.current.focus();
+          }
+        });
+      }
 
-    if (reason === 'clickAway' && ref.current?.contains((event as any).target)) {
-      return;
-    }
+      if (inlineSearch && reason === 'clickAway' && ref.current?.contains((event as any).target)) {
+        return;
+      }
 
-    setOpen(false);
-    onClose?.();
-  }, []);
+      setOpen(false);
+      onClose?.();
+    },
+    [inlineSearch]
+  );
 
   // eslint-disable-next-line
   // @ts-ignore

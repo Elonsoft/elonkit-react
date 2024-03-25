@@ -431,6 +431,7 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
             >
               <div tabIndex={-1}>
                 <ClickAwayListener
+                  mouseEvent="onMouseDown"
                   onClickAway={(e) => {
                     onClose?.(e, 'clickAway');
                   }}
