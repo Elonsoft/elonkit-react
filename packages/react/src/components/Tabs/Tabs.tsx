@@ -291,9 +291,11 @@ const TabsScroller = styled('div', {
   }),
   ...(ownerState.hideScrollbar && {
     // Hide dimensionless scrollbar on macOS
-    scrollbarWidth: 'none', // Firefox
+    // Firefox
+    scrollbarWidth: 'none',
     '&::-webkit-scrollbar': {
-      display: 'none' // Safari + Chrome
+      // Safari + Chrome
+      display: 'none'
     }
   }),
   ...(ownerState.scrollableX && {
@@ -363,9 +365,11 @@ const TabsScrollbarSize = styled(ScrollbarSize)({
   overflowX: 'auto',
   overflowY: 'hidden',
   // Hide dimensionless scrollbar on macOS
-  scrollbarWidth: 'none', // Firefox
+  // Firefox
+  scrollbarWidth: 'none',
   '&::-webkit-scrollbar': {
-    display: 'none' // Safari + Chrome
+    // Safari + Chrome
+    display: 'none'
   }
 });
 
@@ -593,10 +597,8 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
       animate(scrollStart, tabsRef.current, scrollValue, {
         duration: theme.transitions.duration.standard
       });
-    } else {
-      if (tabsRef.current) {
-        tabsRef.current[scrollStart] = scrollValue;
-      }
+    } else if (tabsRef.current) {
+      tabsRef.current[scrollStart] = scrollValue;
     }
   };
 
@@ -632,9 +634,9 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
       }
 
       return totalSize;
-    } else {
-      return 0;
     }
+
+    return 0;
   };
 
   const handleStartScrollClick = () => {
