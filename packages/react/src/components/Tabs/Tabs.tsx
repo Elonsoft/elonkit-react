@@ -13,7 +13,7 @@ import {
   useState
 } from 'react';
 
-import { TabIndicatorSlidingAnimation, TabsProps } from './Tabs.types';
+import { TabsProps } from './Tabs.types';
 
 import clsx from 'clsx';
 import { getTabsUtilityClass, tabsClasses } from './Tabs.classes';
@@ -40,7 +40,7 @@ const expandFromCenterKeyframe = keyframes`
 type Overflow = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto';
 
 type TabsOwnerState = {
-  centered: boolean;
+  centered: TabsProps['centered'];
   classes?: TabsProps['classes'];
   dividerWidth?: number;
   fixed: boolean;
@@ -49,14 +49,9 @@ type TabsOwnerState = {
   scrollableX: boolean;
   scrollButtonsHideMobile: boolean;
   scrollerStyle: { overflow: Overflow | null; scrollbarWidth: number };
-  TabIndicatorPosition?: 'top' | 'bottom';
-  TabIndicatorSlidingAnimation?: TabIndicatorSlidingAnimation;
-  visibleScrollbar: boolean;
-  customAnimation?: {
-    duration?: number | string;
-    easing?: string;
-    delay?: string | number;
-  };
+  TabIndicatorPosition?: TabsProps['TabIndicatorPosition'];
+  TabIndicatorSlidingAnimation?: TabsProps['TabIndicatorSlidingAnimation'];
+  visibleScrollbar: TabsProps['visibleScrollbar'];
 };
 
 const easeInOutSin = (time: number) => {

@@ -63,6 +63,10 @@ const meta: Meta<typeof Tabs> = {
         disable: true
       }
     },
+    TabIndicatorSlidingAnimation: {
+      control: 'select',
+      options: ['expandFromCenter']
+    },
     TabScrollButtonProps: {
       table: {
         disable: true
