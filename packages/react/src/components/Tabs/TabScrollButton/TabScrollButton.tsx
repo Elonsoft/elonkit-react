@@ -151,10 +151,10 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
       {direction === 'left' ? (
         <>
           <TabScrollButtonIcon className={classes.icon} ownerState={ownerState}>
-            {!slots.StartScrollButtonIcon ? (
-              <IconChevronLeftW400 sx={{ color: theme.palette.monoA.A600 }} />
-            ) : (
+            {slots.StartScrollButtonIcon ? (
               slots.StartScrollButtonIcon
+            ) : (
+              <IconChevronLeftW400 sx={{ color: theme.palette.monoA.A600 }} />
             )}
           </TabScrollButtonIcon>
           <TabScrollButtonDivider flexItem className={classes.divider} orientation="vertical" ownerState={ownerState} />
@@ -165,10 +165,10 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
           <TabScrollButtonGradient className={classes.gradient} ownerState={ownerState} />
           <TabScrollButtonDivider flexItem className={classes.divider} orientation="vertical" ownerState={ownerState} />
           <TabScrollButtonIcon className={classes.icon} ownerState={ownerState}>
-            {!slots.EndScrollButtonIcon ? (
-              <IconChevronRightW400 sx={{ color: theme.palette.monoA.A600 }} />
-            ) : (
+            {slots.EndScrollButtonIcon ? (
               slots.EndScrollButtonIcon
+            ) : (
+              <IconChevronRightW400 sx={{ color: theme.palette.monoA.A600 }} />
             )}
           </TabScrollButtonIcon>
         </>

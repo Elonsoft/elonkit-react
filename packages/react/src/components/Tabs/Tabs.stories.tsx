@@ -114,7 +114,7 @@ const tabsData = {
 const gap = 4;
 
 export const Demo: Story = {
-  render: (args, context) => {
+  render: function Render(args, context) {
     const [value, setValue] = useState(0);
 
     const tabRefs = useRef<Array<HTMLButtonElement | undefined>>([]);
