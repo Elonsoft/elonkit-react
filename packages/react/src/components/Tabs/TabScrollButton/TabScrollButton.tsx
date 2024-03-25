@@ -1,4 +1,4 @@
-import { cloneElement, forwardRef, isValidElement, ReactElement } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 import { TabScrollButtonProps } from './TabScrollButton.types';
 
@@ -8,10 +8,10 @@ import { getTabScrollButtonUtilityClass, tabScrollButtonClasses } from './TabScr
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
 import { keyframes, styled, useTheme, useThemeProps } from '@mui/material/styles';
+import { Divider, dividerClasses } from '@mui/material';
 import ButtonBase, { touchRippleClasses } from '@mui/material/ButtonBase';
 
 import { IconChevronLeftW400, IconChevronRightW400 } from '../../../icons';
-import { Divider as ESDivider, dividerClasses } from '../../Divider';
 
 const enterKeyframe = keyframes`
   0% {
@@ -26,13 +26,17 @@ const enterKeyframe = keyframes`
 
 interface TabScrollButtonOwnerState extends TabScrollButtonProps {
   isRtl?: boolean;
+  backgroundColor?: string;
 }
 
 const useUtilityClasses = (ownerState: TabScrollButtonOwnerState) => {
   const { classes, disabled } = ownerState;
 
   const slots = {
-    root: ['root', disabled && 'disabled']
+    root: ['root', disabled && 'disabled'],
+    icon: ['icon'],
+    gradient: ['gradient'],
+    divider: ['divider']
   };
 
   return composeClasses(slots, getTabScrollButtonUtilityClass, classes);
@@ -52,7 +56,7 @@ const TabScrollButtonRoot = styled(ButtonBase, {
   zIndex: 2,
 
   ...theme.mixins.button({
-    background: theme.palette.monoB.main,
+    background: ownerState.backgroundColor!,
     color: 'initial',
     hover: theme.palette.monoA.A50,
     active: theme.palette.monoA.A150,
@@ -74,7 +78,11 @@ const TabScrollButtonRoot = styled(ButtonBase, {
   }
 }));
 
-const Divider = styled(ESDivider)<{ ownerState: TabScrollButtonOwnerState }>(({ ownerState }) => ({
+const TabScrollButtonDivider = styled(Divider, {
+  name: 'ESTabScrollButton',
+  slot: 'Divider',
+  overridesResolver: (props, styles) => [styles.divider]
+})<{ ownerState: TabScrollButtonOwnerState }>(({ ownerState }) => ({
   [`&.${dividerClasses.vertical}.${dividerClasses.flexItem}`]: {
     position: 'relative',
     alignSelf: 'center',
@@ -83,12 +91,33 @@ const Divider = styled(ESDivider)<{ ownerState: TabScrollButtonOwnerState }>(({ 
   }
 }));
 
-const Gradient = styled('div')<{ ownerState: TabScrollButtonOwnerState }>(({ ownerState, theme }) => ({
+const TabScrollButtonGradient = styled('div', {
+  name: 'ESTabScrollButton',
+  slot: 'Gradient',
+  overridesResolver: (props, styles) => [styles.gradient]
+})<{ ownerState: TabScrollButtonOwnerState }>(({ ownerState }) => ({
   position: 'relative',
   width: 8,
   height: '100%',
-  background: `linear-gradient(${ownerState.direction === 'left' ? 90 : 270}deg, ${theme.palette.monoB.main} 0%, rgba(255, 255, 255, 0) 100%)`,
+  background: `linear-gradient(${ownerState.direction === 'left' ? 90 : 270}deg, ${ownerState.backgroundColor} 0%, rgba(255, 255, 255, 0) 100%)`,
   ...(ownerState.direction === 'left' ? { left: 11.6 } : { right: 11.6 })
+}));
+
+const TabScrollButtonIcon = styled('span', {
+  name: 'ESTabScrollButton',
+  slot: 'Icon',
+  overridesResolver: (props, styles) => [styles.icon]
+})<{ ownerState: TabScrollButtonOwnerState }>(({ ownerState }) => ({
+  display: 'inline-flex',
+  position: 'relative',
+
+  ...(ownerState.direction === 'left'
+    ? {
+        left: '5px'
+      }
+    : {
+        right: '5px'
+      })
 }));
 
 export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProps>(function TabScrollButton(
@@ -100,33 +129,14 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
   const theme = useTheme();
   const isRtl = theme.direction === 'rtl';
 
-  const ownerState = { isRtl, direction, ...props };
+  const [backgroundColor, setBackgroundColor] = useState('');
 
+  useEffect(() => {
+    setBackgroundColor(window.getComputedStyle(document.body).backgroundColor);
+  }, [theme.palette.mode]);
+
+  const ownerState = { isRtl, direction, backgroundColor, ...props };
   const classes = useUtilityClasses(ownerState);
-
-  const StartButtonIcon =
-    slots.StartScrollButtonIcon && isValidElement(slots.StartScrollButtonIcon) ? (
-      cloneElement(slots.StartScrollButtonIcon as ReactElement, {
-        style: {
-          position: 'relative',
-          left: '5px'
-        }
-      })
-    ) : (
-      <IconChevronLeftW400 sx={{ position: 'relative', left: '5px', color: theme.palette.monoA.A600 }} />
-    );
-
-  const EndButtonIcon =
-    slots.EndScrollButtonIcon && isValidElement(slots.EndScrollButtonIcon) ? (
-      cloneElement(slots.EndScrollButtonIcon as ReactElement, {
-        style: {
-          position: 'relative',
-          right: '5px'
-        }
-      })
-    ) : (
-      <IconChevronRightW400 sx={{ position: 'relative', right: '5px', color: theme.palette.monoA.A600 }} />
-    );
 
   return (
     <TabScrollButtonRoot
@@ -136,21 +146,31 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
       // @ts-ignore
       component="div"
       ownerState={ownerState}
-      role={undefined}
-      tabIndex={undefined}
       {...props}
     >
       {direction === 'left' ? (
         <>
-          {StartButtonIcon}
-          <Divider flexItem orientation="vertical" ownerState={ownerState} />
-          <Gradient ownerState={ownerState} />
+          <TabScrollButtonIcon className={classes.icon} ownerState={ownerState}>
+            {!slots.StartScrollButtonIcon ? (
+              <IconChevronLeftW400 sx={{ color: theme.palette.monoA.A600 }} />
+            ) : (
+              slots.StartScrollButtonIcon
+            )}
+          </TabScrollButtonIcon>
+          <TabScrollButtonDivider flexItem className={classes.divider} orientation="vertical" ownerState={ownerState} />
+          <TabScrollButtonGradient className={classes.gradient} ownerState={ownerState} />
         </>
       ) : (
         <>
-          <Gradient ownerState={ownerState} />
-          <Divider flexItem orientation="vertical" ownerState={ownerState} />
-          {EndButtonIcon}
+          <TabScrollButtonGradient className={classes.gradient} ownerState={ownerState} />
+          <TabScrollButtonDivider flexItem className={classes.divider} orientation="vertical" ownerState={ownerState} />
+          <TabScrollButtonIcon className={classes.icon} ownerState={ownerState}>
+            {!slots.EndScrollButtonIcon ? (
+              <IconChevronRightW400 sx={{ color: theme.palette.monoA.A600 }} />
+            ) : (
+              slots.EndScrollButtonIcon
+            )}
+          </TabScrollButtonIcon>
         </>
       )}
     </TabScrollButtonRoot>

@@ -1,4 +1,4 @@
-import { cloneElement, FocusEvent, forwardRef, isValidElement, MouseEvent, ReactElement } from 'react';
+import { FocusEvent, forwardRef, MouseEvent } from 'react';
 
 import { TabProps } from './Tab.types';
 
@@ -30,10 +30,12 @@ type TabOwnerState = {
   disabled?: boolean;
   disableFocusRipple?: boolean;
   rounded?: boolean;
+  startIcon?: TabProps['startIcon'];
+  endIcon?: TabProps['endIcon'];
 };
 
 const useUtilityClasses = (ownerState: TabOwnerState) => {
-  const { classes, fullWidth, icon, label, selected, disabled } = ownerState;
+  const { classes, fullWidth, icon, label, selected, disabled, startIcon, endIcon } = ownerState;
 
   const slots = {
     root: [
@@ -41,7 +43,9 @@ const useUtilityClasses = (ownerState: TabOwnerState) => {
       icon && label && 'labelIcon',
       fullWidth && 'fullWidth',
       selected && 'selected',
+      !!startIcon && 'startIcon',
       disabled && 'disabled',
+      !!endIcon && 'endIcon',
       'labelWrapper'
     ],
     iconWrapper: ['iconWrapper']
@@ -59,7 +63,9 @@ const TabRoot = styled(ButtonBase, {
     return [
       styles.root,
       ownerState.label && ownerState.icon && styles.labelIcon,
-      ownerState.fullWidth && styles.fullWidth
+      ownerState.fullWidth && styles.fullWidth,
+      !!ownerState.startIcon && styles.startIcon,
+      !!ownerState.endIcon && styles.endIcon
     ];
   }
 })<{ ownerState: TabOwnerState }>(({ theme, ownerState }) => ({
@@ -71,6 +77,7 @@ const TabRoot = styled(ButtonBase, {
   overflow: 'hidden',
   gap: 8,
   zIndex: 0,
+  fontFamily: 'inherit',
 
   ...theme.mixins.button({
     background: 'initial',
@@ -110,10 +117,10 @@ const TabRoot = styled(ButtonBase, {
   }
 }));
 
-const LabelWrapper = styled('span', {
+const TabLabelWrapper = styled('span', {
   name: 'ESTab',
   slot: 'LabelWrapper',
-  overridesResolver: (props, styles) => styles.labelWrapper
+  overridesResolver: (props, styles) => [styles.labelWrapper]
 })(({ theme }) => ({
   ...theme.typography.body100,
   textAlign: 'center',
@@ -122,14 +129,23 @@ const LabelWrapper = styled('span', {
   whiteSpace: 'nowrap'
 }));
 
+const TabIcon = styled('span', {
+  name: 'ESTab',
+  slot: 'Icon',
+  overridesResolver: (props, styles) => [styles.icon]
+})(() => ({
+  display: 'inline-flex',
+  alignSelf: 'center'
+}));
+
 export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps: TabProps, ref) {
   const {
     className,
     disabled = false,
     disableFocusRipple = true,
     fullWidth,
-    startIcon: startIconProp,
-    endIcon: endIconProp,
+    startIcon,
+    endIcon,
     indicator,
     label,
     onChange,
@@ -146,26 +162,14 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
     disabled,
     disableFocusRipple,
     selected,
-    icon: !!startIconProp || !!endIconProp,
+    startIcon,
+    endIcon,
+    icon: !!startIcon || !!endIcon,
     label: !!label,
     fullWidth
   };
 
   const classes = useUtilityClasses(ownerState);
-
-  const startIcon =
-    startIconProp && isValidElement(startIconProp)
-      ? cloneElement(startIconProp as ReactElement, {
-          className: clsx(classes.iconWrapper, (startIconProp as ReactElement).props.className)
-        })
-      : startIconProp;
-
-  const endIcon =
-    endIconProp && isValidElement(endIconProp)
-      ? cloneElement(endIconProp as ReactElement, {
-          className: clsx(classes.iconWrapper, (endIconProp as ReactElement).props.className)
-        })
-      : endIconProp;
 
   const handleClick = (event: MouseEvent) => {
     if (!selected && onChange) {
@@ -201,9 +205,9 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
       onFocus={handleFocus}
       {...props}
     >
-      {startIcon}
-      <LabelWrapper>{label}</LabelWrapper>
-      {endIcon}
+      {!!startIcon && <TabIcon className={classes.iconWrapper}>{startIcon}</TabIcon>}
+      <TabLabelWrapper>{label}</TabLabelWrapper>
+      {!!endIcon && <TabIcon className={classes.iconWrapper}>{endIcon}</TabIcon>}
       {indicator}
     </TabRoot>
   );

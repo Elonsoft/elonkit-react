@@ -13,6 +13,10 @@ export type TabClasses = {
   disabled: string;
   /** Styles applied to the root element if `fullWidth={true}` (controlled by the Tabs component). */
   fullWidth: string;
+  /** Styles applied to the root element if it has startIcon. */
+  startIcon: string;
+  /** Styles applied to the root element if it has endIcon. */
+  endIcon: string;
   /** Styles applied to the wrapper element of `icon` if `icon` is provided. */
   iconWrapper: string;
 };
@@ -29,5 +33,7 @@ export const tabClasses: TabClasses = generateUtilityClasses('ESTab', [
   'selected',
   'disabled',
   'fullWidth',
+  'startIcon',
+  'endIcon',
   'iconWrapper'
 ]);

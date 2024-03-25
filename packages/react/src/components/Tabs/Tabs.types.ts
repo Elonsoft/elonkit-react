@@ -14,14 +14,14 @@ export type TabIndicatorSlidingAnimation =
   | 'standard'
   | 'complex'
   | 'enteringScreen'
-  | 'leavingScreen';
+  | 'leavingScreen'
+  | {
+      duration?: number | string;
+      easing?: string;
+      delay?: string | number;
+    };
 
 export type TabsProps = {
-  customAnimation?: {
-    duration?: number | string;
-    easing?: string;
-    delay?: string | number;
-  };
   /**
    * Callback fired when the component mounts.
    * This is useful when you want to trigger an action programmatically.
@@ -70,8 +70,7 @@ export type TabsProps = {
   component?: ElementType;
   /**
    * The transition used for TabIndicator sliding between Tabs.
-   *
-   * @default none
+   * Either string with name of transition or an object with custom properties.
    */
   TabIndicatorSlidingAnimation?: TabIndicatorSlidingAnimation;
   /**
