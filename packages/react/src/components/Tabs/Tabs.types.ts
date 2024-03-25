@@ -8,13 +8,6 @@ import { SxProps, Theme } from '@mui/material';
 
 export type TabIndicatorSlidingAnimation =
   | 'expandFromCenter'
-  | 'shortest'
-  | 'shorter'
-  | 'short'
-  | 'standard'
-  | 'complex'
-  | 'enteringScreen'
-  | 'leavingScreen'
   | {
       duration?: number | string;
       easing?: string;
@@ -69,11 +62,6 @@ export type TabsProps = {
    */
   component?: ElementType;
   /**
-   * The transition used for TabIndicator sliding between Tabs.
-   * Either string with name of transition or an object with custom properties.
-   */
-  TabIndicatorSlidingAnimation?: TabIndicatorSlidingAnimation;
-  /**
    * Determines the color of the indicator.
    * @default 'primary'
    */
@@ -123,6 +111,11 @@ export type TabsProps = {
    * If 'true' each nested Tab component will be smaller and have rounded corners.
    */
   rounded?: boolean;
+  /**
+   * The transition used for TabIndicator sliding between Tabs.
+   * Either standard 'expandFromCenter' transition or an object with custom properties.
+   */
+  TabIndicatorSlidingAnimation?: TabIndicatorSlidingAnimation;
   /**
    * Determines horizontal alignment of TabIndicator component:
    *

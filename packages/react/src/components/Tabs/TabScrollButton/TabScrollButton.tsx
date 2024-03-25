@@ -24,10 +24,14 @@ const enterKeyframe = keyframes`
   }
 `;
 
-interface TabScrollButtonOwnerState extends TabScrollButtonProps {
+type TabScrollButtonOwnerState = {
+  classes?: TabScrollButtonProps['classes'];
+  disabled?: TabScrollButtonProps['disabled'];
+  tabListHeight?: TabScrollButtonProps['tabListHeight'];
+  direction?: TabScrollButtonProps['direction'];
   isRtl?: boolean;
   backgroundColor?: string;
-}
+};
 
 const useUtilityClasses = (ownerState: TabScrollButtonOwnerState) => {
   const { classes, disabled } = ownerState;
@@ -49,7 +53,7 @@ const TabScrollButtonRoot = styled(ButtonBase, {
 })<{ ownerState: TabScrollButtonOwnerState }>(({ ownerState, theme }) => ({
   position: 'absolute',
   width: 40,
-  height: '100%',
+  height: ownerState.tabListHeight,
   flexShrink: 0,
   right: ownerState.direction === 'right' ? 0 : undefined,
   left: ownerState.direction === 'left' ? -1 : undefined,
@@ -124,7 +128,13 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
   inProps: TabScrollButtonProps,
   ref
 ) {
-  const { className, direction, slots = {}, ...props } = useThemeProps({ props: inProps, name: 'ESTabScrollButton' });
+  const {
+    className,
+    direction,
+    slots = {},
+    tabListHeight,
+    ...props
+  } = useThemeProps({ props: inProps, name: 'ESTabScrollButton' });
 
   const theme = useTheme();
   const isRtl = theme.direction === 'rtl';
@@ -135,7 +145,7 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
     setBackgroundColor(window.getComputedStyle(document.body).backgroundColor);
   }, [theme.palette.mode]);
 
-  const ownerState = { isRtl, direction, backgroundColor, ...props };
+  const ownerState = { isRtl, direction, backgroundColor, tabListHeight, ...props };
   const classes = useUtilityClasses(ownerState);
 
   return (

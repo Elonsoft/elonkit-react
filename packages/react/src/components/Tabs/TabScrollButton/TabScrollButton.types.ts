@@ -27,6 +27,10 @@ export type TabScrollButtonProps = {
    */
   disabled?: boolean;
   /**
+   * The height of the list of tabs.
+   */
+  tabListHeight?: number;
+  /**
    * The components used for each slot inside.
    * @default {}
    */

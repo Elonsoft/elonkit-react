@@ -26,7 +26,7 @@ import { debounce, ownerDocument, ownerWindow, useEventCallback } from '@mui/mat
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { detectScrollType, getNormalizedScrollLeft } from '@mui/utils/scrollLeft';
 
-import { TabScrollButton } from './TabScrollButton';
+import { TabScrollButton, tabScrollButtonClasses } from './TabScrollButton';
 
 const expandFromCenterKeyframe = keyframes`
   0% {
@@ -337,13 +337,6 @@ const TabsIndicator = styled('span', {
   }),
 
   ...(ownerState.TabIndicatorSlidingAnimation &&
-    typeof ownerState.TabIndicatorSlidingAnimation !== 'object' &&
-    ownerState.TabIndicatorSlidingAnimation !== 'expandFromCenter' && {
-      transition: theme.transitions.create(['left', 'right'], {
-        duration: theme.transitions.duration[ownerState.TabIndicatorSlidingAnimation]
-      })
-    }),
-  ...(ownerState.TabIndicatorSlidingAnimation &&
     typeof ownerState.TabIndicatorSlidingAnimation === 'object' && {
       transition: theme.transitions.create(['left', 'right'], {
         duration: ownerState.TabIndicatorSlidingAnimation.duration,
@@ -352,7 +345,7 @@ const TabsIndicator = styled('span', {
       })
     }),
 
-  ...(ownerState.TabIndicatorPosition === 'top' ? { top: 0.3 } : { bottom: 0.3 }),
+  ...(ownerState.TabIndicatorPosition === 'top' ? { top: 0 } : { bottom: 0 }),
   ...(ownerState.indicatorColor === 'primary' && {
     backgroundColor: theme.palette.primary.main
   }),
@@ -383,7 +376,7 @@ const TabsDivider = styled(Divider, {
   width: ownerState.dividerWidth,
   borderColor: theme.palette.monoA.A100,
 
-  ...(ownerState.TabIndicatorPosition === 'top' ? { top: 0.3 } : { bottom: 0.3 })
+  ...(ownerState.TabIndicatorPosition === 'top' ? { top: 0 } : { bottom: 0 })
 }));
 
 const defaultIndicatorStyle: { [key: string]: number } = {};
@@ -676,11 +669,14 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     const showScrollButtons =
       scrollable && ((scrollButtons === 'auto' && scrollButtonsActive) || scrollButtons === true);
 
+    const tabListHeight = tabListRef.current?.clientHeight;
+
     conditionalElements.scrollButtonStart = showScrollButtons ? (
       <ScrollButtonComponent
         direction={isRtl ? 'right' : 'left'}
         disabled={!displayStartScroll}
         slots={{ StartScrollButtonIcon: slots.StartScrollButtonIcon }}
+        tabListHeight={tabListHeight}
         onClick={handleStartScrollClick}
         {...TabScrollButtonProps}
         className={clsx(classes.scrollButtons, TabScrollButtonProps.className)}
@@ -692,6 +688,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
         direction={isRtl ? 'left' : 'right'}
         disabled={!displayEndScroll}
         slots={{ EndScrollButtonIcon: slots.EndScrollButtonIcon }}
+        tabListHeight={tabListHeight}
         onClick={handleEndScrollClick}
         {...TabScrollButtonProps}
         className={clsx(classes.scrollButtons, TabScrollButtonProps.className)}
@@ -703,6 +700,9 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
 
   const scrollSelectedIntoView = useEventCallback((animation) => {
     const { tabsMeta, tabMeta } = getTabsMeta();
+    const tabScrollButtonOffset = document
+      .querySelector(`.${tabScrollButtonClasses.root}`)
+      ?.getBoundingClientRect().width;
 
     if (!tabMeta || !tabsMeta) {
       return;
@@ -711,11 +711,11 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     if (tabMeta[start] < tabsMeta[start]) {
       // left side of button is out of view
       const nextScrollStart = tabsMeta[scrollStart] + (tabMeta[start] - tabsMeta[start]);
-      scroll(nextScrollStart, { animation });
+      scroll(nextScrollStart - (tabScrollButtonOffset ? tabScrollButtonOffset : 0), { animation });
     } else if (tabMeta[end] > tabsMeta[end]) {
       // right side of button is out of view
       const nextScrollStart = tabsMeta[scrollStart] + (tabMeta[end] - tabsMeta[end]);
-      scroll(nextScrollStart, { animation });
+      scroll(nextScrollStart + (tabScrollButtonOffset ? tabScrollButtonOffset : 0), { animation });
     }
   });
 
