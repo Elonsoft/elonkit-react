@@ -23,13 +23,13 @@ const enterKeyframe = keyframes`
 
 type TabOwnerState = {
   classes?: TabProps['classes'];
-  fullWidth?: boolean;
+  fullWidth?: TabProps['fullWidth'];
   icon?: boolean;
-  label?: boolean;
-  selected?: boolean;
-  disabled?: boolean;
-  disableFocusRipple?: boolean;
-  rounded?: boolean;
+  label?: TabProps['label'];
+  selected?: TabProps['selected'];
+  disabled?: TabProps['disabled'];
+  disableFocusRipple?: TabProps['disableFocusRipple'];
+  rounded?: TabProps['rounded'];
   startIcon?: TabProps['startIcon'];
   endIcon?: TabProps['endIcon'];
 };
