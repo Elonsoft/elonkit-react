@@ -25,6 +25,8 @@ export type TabsClasses = {
   scrollButtons: string;
   /** Styles applied to the ScrollButtonComponent component if `allowScrollButtonsMobile={true}`. */
   scrollButtonsHideMobile: string;
+  /** Styles applied to the divider element under the tabs. */
+  tabsDivider: string;
   /** Styles applied to the TabIndicator component. */
   indicator: string;
 };
@@ -47,5 +49,6 @@ export const tabsClasses: TabsClasses = generateUtilityClasses('ESTabs', [
   'hideScrollbar',
   'scrollButtons',
   'scrollButtonsHideMobile',
+  'tabsDivider',
   'indicator'
 ]);

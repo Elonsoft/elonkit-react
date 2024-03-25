@@ -2,11 +2,9 @@ import { SyntheticEvent, useRef, useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
-import { tabClasses } from './Tab/Tab.classes';
-
 import { useTheme } from '@mui/material';
 
-import { Tab, Tabs, tabsClasses } from '.';
+import { Tab, tabClasses, Tabs, tabsClasses } from '.';
 
 import { IconAt } from '../../icons';
 

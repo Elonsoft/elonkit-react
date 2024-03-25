@@ -21,13 +21,12 @@ import { getTabsUtilityClass, tabsClasses } from './Tabs.classes';
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
 import { keyframes, styled, useTheme, useThemeProps } from '@mui/material/styles';
+import { Divider } from '@mui/material';
 import { debounce, ownerDocument, ownerWindow, useEventCallback } from '@mui/material/utils';
 import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { detectScrollType, getNormalizedScrollLeft } from '@mui/utils/scrollLeft';
 
 import { TabScrollButton } from './TabScrollButton';
-
-import { Divider } from '../Divider';
 
 const expandFromCenterKeyframe = keyframes`
   0% {
@@ -41,15 +40,18 @@ const expandFromCenterKeyframe = keyframes`
 type Overflow = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto';
 
 type TabsOwnerState = {
+  centered: boolean;
+  classes?: TabsProps['classes'];
+  dividerWidth?: number;
   fixed: boolean;
+  indicatorColor: TabsProps['indicatorColor'];
   hideScrollbar: boolean;
   scrollableX: boolean;
-  centered: boolean;
   scrollButtonsHideMobile: boolean;
-  classes?: TabsProps['classes'];
-  indicatorColor: TabsProps['indicatorColor'];
+  scrollerStyle: { overflow: Overflow | null; scrollbarWidth: number };
   TabIndicatorPosition?: 'top' | 'bottom';
   TabIndicatorSlidingAnimation?: TabIndicatorSlidingAnimation;
+  visibleScrollbar: boolean;
   customAnimation?: {
     duration?: number | string;
     easing?: string;
@@ -224,7 +226,8 @@ const useUtilityClasses = (ownerState: TabsOwnerState) => {
     indicator: ['indicator'],
     scrollButtons: ['scrollButtons', scrollButtonsHideMobile && 'scrollButtonsHideMobile'],
     scrollableX: [scrollableX && 'scrollableX'],
-    hideScrollbar: [hideScrollbar && 'hideScrollbar']
+    hideScrollbar: [hideScrollbar && 'hideScrollbar'],
+    tabsDivider: ['tabsDivider']
   };
 
   return composeClasses(slots, getTabsUtilityClass, classes);
@@ -279,6 +282,9 @@ const TabsScroller = styled('div', {
   display: 'inline-block',
   flex: '1 1 auto',
   whiteSpace: 'nowrap',
+  overflow: ownerState.scrollerStyle.overflow as Overflow,
+  marginBottom: ownerState.visibleScrollbar ? undefined : -ownerState.scrollerStyle.scrollbarWidth,
+
   ...(ownerState.fixed && {
     overflowX: 'hidden',
     width: '100%'
@@ -335,23 +341,14 @@ const TabsIndicator = styled('span', {
         duration: theme.transitions.duration[ownerState.TabIndicatorSlidingAnimation]
       })
     }),
-
-  ...(ownerState.customAnimation &&
-    typeof ownerState.customAnimation === 'object' && {
+  ...(ownerState.TabIndicatorSlidingAnimation &&
+    typeof ownerState.TabIndicatorSlidingAnimation === 'object' && {
       transition: theme.transitions.create(['left', 'right'], {
-        duration: ownerState.customAnimation.duration,
-        easing: ownerState.customAnimation.easing,
-        delay: ownerState.customAnimation.delay
+        duration: ownerState.TabIndicatorSlidingAnimation.duration,
+        easing: ownerState.TabIndicatorSlidingAnimation.easing,
+        delay: ownerState.TabIndicatorSlidingAnimation.delay
       })
     }),
-  // ...(ownerState.TabIndicatorSlidingAnimation &&
-  //   typeof ownerState.TabIndicatorSlidingAnimation === 'object' && {
-  //     transition: theme.transitions.create(['left', 'right'], {
-  //       duration: ownerState.TabIndicatorSlidingAnimation.duration,
-  //       easing: ownerState.TabIndicatorSlidingAnimation.easing,
-  //       delay: ownerState.TabIndicatorSlidingAnimation.delay
-  //     })
-  //   }),
 
   ...(ownerState.TabIndicatorPosition === 'top' ? { top: 0.3 } : { bottom: 0.3 }),
   ...(ownerState.indicatorColor === 'primary' && {
@@ -372,6 +369,19 @@ const TabsScrollbarSize = styled(ScrollbarSize)({
   }
 });
 
+const TabsDivider = styled(Divider, {
+  name: 'ESTabs',
+  slot: 'TabsDivider',
+  overridesResolver: (props, styles) => [styles.tabsDivider]
+})<{ ownerState: TabsOwnerState }>(({ ownerState, theme }) => ({
+  position: 'absolute',
+  zIndex: 3,
+  width: ownerState.dividerWidth,
+  borderColor: theme.palette.monoA.A100,
+
+  ...(ownerState.TabIndicatorPosition === 'top' ? { top: 0.3 } : { bottom: 0.3 })
+}));
+
 const defaultIndicatorStyle: { [key: string]: number } = {};
 let warnedOnceTabPresent = false;
 
@@ -383,7 +393,6 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     centered = false,
     children: childrenProp,
     className,
-    customAnimation,
     component = 'div',
     allowScrollButtonsMobile = false,
     indicatorColor = 'primary',
@@ -413,26 +422,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
   const end = 'right';
   const clientSize = 'clientWidth';
   const size = 'width';
-
-  const ownerState = {
-    ...props,
-    component,
-    allowScrollButtonsMobile,
-    indicatorColor,
-    scrollButtons,
-    variant,
-    visibleScrollbar,
-    fixed: !scrollable,
-    hideScrollbar: scrollable && !visibleScrollbar,
-    scrollableX: !!scrollable,
-    centered: centered && !scrollable,
-    scrollButtonsHideMobile: !allowScrollButtonsMobile,
-    TabIndicatorPosition,
-    TabIndicatorSlidingAnimation,
-    customAnimation
-  };
-
-  const classes = useUtilityClasses(ownerState);
+  const startIndicator: 'right' | 'left' = isRtl ? 'right' : 'left';
 
   if (centered && scrollable) {
     console.error(
@@ -455,6 +445,27 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
   const valueToIndex = new Map();
   const tabsRef = useRef<HTMLDivElement>(null);
   const tabListRef = useRef<HTMLDivElement>(null);
+
+  const ownerState = {
+    ...props,
+    dividerWidth: tabsRef.current?.scrollWidth,
+    component,
+    allowScrollButtonsMobile,
+    indicatorColor,
+    scrollButtons,
+    scrollerStyle,
+    variant,
+    visibleScrollbar,
+    fixed: !scrollable,
+    hideScrollbar: scrollable && !visibleScrollbar,
+    scrollableX: !!scrollable,
+    centered: centered && !scrollable,
+    scrollButtonsHideMobile: !allowScrollButtonsMobile,
+    TabIndicatorPosition,
+    TabIndicatorSlidingAnimation
+  };
+
+  const classes = useUtilityClasses(ownerState);
 
   const getTabsMeta = () => {
     const tabsNode = tabsRef.current;
@@ -526,7 +537,6 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     const { tabsMeta, tabMeta } = getTabsMeta();
     let startValue = 0;
     let modifiedIndicatorWidth = 0;
-    const startIndicator: 'right' | 'left' = isRtl ? 'right' : 'left';
 
     if (tabMeta && tabsMeta) {
       const correction = isRtl
@@ -837,7 +847,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
 
   const indicator = (
     <TabsIndicator
-      key={TabIndicatorSlidingAnimation === 'expandFromCenter' ? indicatorStyle[size] : undefined}
+      key={TabIndicatorSlidingAnimation === 'expandFromCenter' ? indicatorStyle[startIndicator] : undefined}
       {...TabIndicatorProps}
       className={clsx(classes.indicator, TabIndicatorProps.className)}
       ownerState={ownerState}
@@ -920,15 +930,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     <TabsRoot ref={ref} as={component} className={clsx(classes.root, className)} ownerState={ownerState} {...props}>
       {conditionalElements.scrollButtonStart}
       {conditionalElements.scrollbarSizeListener}
-      <TabsScroller
-        ref={tabsRef}
-        className={classes.scroller}
-        ownerState={ownerState}
-        style={{
-          overflow: scrollerStyle.overflow as Overflow,
-          ['marginBottom']: visibleScrollbar ? undefined : -scrollerStyle.scrollbarWidth
-        }}
-      >
+      <TabsScroller ref={tabsRef} className={classes.scroller} ownerState={ownerState}>
         {/* The tablist isn't interactive but the tabs are */}
         <FlexContainer
           ref={tabListRef}
@@ -942,7 +944,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
           {children}
         </FlexContainer>
         {mounted && indicator}
-        <Divider sx={{ position: 'relative', zIndex: 3, width: tabsRef.current?.scrollWidth, bottom: 0.3 }} width={2} />
+        <TabsDivider className={classes.tabsDivider} ownerState={ownerState} />
       </TabsScroller>
       {conditionalElements.scrollButtonEnd}
     </TabsRoot>

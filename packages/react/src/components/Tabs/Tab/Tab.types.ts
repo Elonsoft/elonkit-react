@@ -76,9 +76,9 @@ export type TabProps = {
   /**
    * Element placed before the children.
    */
-  startIcon?: string | ReactElement;
+  startIcon?: ReactNode;
   /**
    * Element placed after the children.
    */
-  endIcon?: string | ReactElement;
+  endIcon?: ReactNode;
 };
