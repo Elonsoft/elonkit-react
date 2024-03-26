@@ -251,6 +251,28 @@ const CheckboxRoot = styled(SwitchBase, {
       [`& .${checkboxIconClasses.root}`]: {
         boxShadow: `inset 0 0 0 1px ${theme.palette.monoB.A600}`
       }
+    },
+    [`&:not(.${checkboxClasses.checked}):not(.${checkboxClasses.disabled}):not(.${checkboxClasses.indeterminate})`]: {
+      '&:hover': {
+        '& svg': {
+          '& path': {
+            stroke: theme.palette.monoB.A400
+          }
+        }
+      },
+      '&:active': {
+        '& svg': {
+          '& path': {
+            stroke: theme.palette.monoB.A600
+          }
+        }
+      }
+    },
+    '&:focus': {
+      backgroundColor: theme.palette.monoB.A200
+    },
+    '&:active': {
+      backgroundColor: theme.palette.monoB.A150
     }
   },
   [`&.${checkboxClasses.colorBlack}`]: {
@@ -261,9 +283,7 @@ const CheckboxRoot = styled(SwitchBase, {
         hover: theme.palette.black.A50,
         focus: theme.palette.black.A200,
         active: theme.palette.black.A150
-      })
-    },
-    [`&.${checkboxClasses.checked}`]: {
+      }),
       [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
         '& svg': {
           '& path': {
@@ -290,6 +310,28 @@ const CheckboxRoot = styled(SwitchBase, {
       [`& .${checkboxIconClasses.root}`]: {
         boxShadow: `inset 0 0 0 1px ${theme.palette.black.A600}`
       }
+    },
+    [`&:not(.${checkboxClasses.checked}):not(.${checkboxClasses.disabled}):not(.${checkboxClasses.indeterminate})`]: {
+      '&:hover': {
+        '& svg': {
+          '& path': {
+            stroke: theme.palette.black.A400
+          }
+        }
+      },
+      '&:active': {
+        '& svg': {
+          '& path': {
+            stroke: theme.palette.black.A600
+          }
+        }
+      }
+    },
+    '&:focus': {
+      backgroundColor: theme.palette.black.A200
+    },
+    '&:active': {
+      backgroundColor: theme.palette.black.A150
     }
   },
   [`&.${checkboxClasses.colorWhite}`]: {
@@ -300,9 +342,7 @@ const CheckboxRoot = styled(SwitchBase, {
         hover: theme.palette.white.A50,
         focus: theme.palette.white.A200,
         active: theme.palette.white.A150
-      })
-    },
-    [`&.${checkboxClasses.checked}`]: {
+      }),
       [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
         '& svg': {
           '& path': {
@@ -322,6 +362,28 @@ const CheckboxRoot = styled(SwitchBase, {
       [`& .${checkboxIconClasses.root}`]: {
         boxShadow: `inset 0 0 0 1px ${theme.palette.white.A600}`
       }
+    },
+    [`&:not(.${checkboxClasses.checked}):not(.${checkboxClasses.disabled}):not(.${checkboxClasses.indeterminate})`]: {
+      '&:hover': {
+        '& svg': {
+          '& path': {
+            stroke: theme.palette.white.A400
+          }
+        }
+      },
+      '&:active': {
+        '& svg': {
+          '& path': {
+            stroke: theme.palette.white.A600
+          }
+        }
+      }
+    },
+    '&:focus': {
+      backgroundColor: theme.palette.white.A200
+    },
+    '&:active': {
+      backgroundColor: theme.palette.white.A150
     }
   },
   [`&.${checkboxClasses.colorMonoA}`]: {
