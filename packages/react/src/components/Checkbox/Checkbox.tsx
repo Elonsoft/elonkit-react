@@ -300,6 +300,13 @@ const CheckboxRoot = styled(SwitchBase, {
       active: theme.palette.black.A150
     }),
     [`&:not(.${checkboxClasses.checked}):not(.${checkboxClasses.indeterminate})`]: {
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.black[500],
+        hover: theme.palette.black.A50,
+        focus: theme.palette.black.A200,
+        active: theme.palette.black.A150
+      }),
       [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
         [`& .${checkboxIconClasses.root}`]: {
           boxShadow: `inset 0 0 0 2px ${theme.palette.black.A600}`
@@ -352,6 +359,13 @@ const CheckboxRoot = styled(SwitchBase, {
       }
     },
     [`&:not(.${checkboxClasses.checked}):not(.${checkboxClasses.indeterminate})`]: {
+      ...theme.mixins.button({
+        background: 'transparent',
+        color: theme.palette.white[500],
+        hover: theme.palette.white.A50,
+        focus: theme.palette.white.A200,
+        active: theme.palette.white.A150
+      }),
       [`&.${checkboxClasses.variantContained}, &.${checkboxClasses.variantHybrid}`]: {
         [`& .${checkboxIconClasses.root}`]: {
           boxShadow: `inset 0 0 0 2px ${theme.palette.white.A600}`
