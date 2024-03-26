@@ -42,5 +42,6 @@ export * from './Swiper';
 export * from './Switch';
 export * from './TabBar';
 export * from './Table';
+export * from './Tabs';
 export * from './TextFieldGroup';
 export * from './TooltipEllipsis';
