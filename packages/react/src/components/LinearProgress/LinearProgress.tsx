@@ -78,7 +78,7 @@ const useUtilityClasses = (ownerState: LinearProgressOwnerState) => {
     bar1: [
       'bar',
       `barColor${capitalize(color)}`,
-      (variant === 'indeterminate' || variant === 'query') && 'bar1Indeterminate',
+      variant === 'indeterminate' && 'bar1Indeterminate',
       variant === 'determinate' && 'bar1Determinate',
       variant === 'buffer' && 'bar1Buffer'
     ],
@@ -86,7 +86,7 @@ const useUtilityClasses = (ownerState: LinearProgressOwnerState) => {
       'bar',
       variant !== 'buffer' && `barColor${capitalize(color)}`,
       variant === 'buffer' && `color${capitalize(color)}`,
-      (variant === 'indeterminate' || variant === 'query') && 'bar2Indeterminate',
+      variant === 'indeterminate' && 'bar2Indeterminate',
       variant === 'buffer' && 'bar2Buffer'
     ]
   };
@@ -102,16 +102,17 @@ const LinearProgressRoot = styled('span', {
 
     return [styles.root, styles[`color${capitalize(ownerState.color)}`], styles[ownerState.variant]];
   }
-})<{ ownerState: LinearProgressOwnerState }>(({ ownerState }) => ({
+})<{ ownerState: LinearProgressOwnerState }>(({ ownerState, theme }) => ({
   position: 'relative',
   overflow: 'hidden',
   display: 'block',
   height: 4,
+  borderRadius: '2px',
   zIndex: 0,
   '@media print': {
     colorAdjust: 'exact'
   },
-  backgroundColor: 'currentColor',
+  backgroundColor: theme.palette.monoA.A200,
   ...(ownerState.color === 'inherit' &&
     ownerState.variant !== 'buffer' && {
       backgroundColor: 'none',
@@ -122,12 +123,11 @@ const LinearProgressRoot = styled('span', {
         top: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'currentColor',
+        backgroundColor: 'transparent',
         opacity: 0.3
       }
     }),
-  ...(ownerState.variant === 'buffer' && { backgroundColor: 'transparent' }),
-  ...(ownerState.variant === 'query' && { transform: 'rotate(180deg)' })
+  ...(ownerState.variant === 'buffer' && { backgroundColor: 'transparent' })
 }));
 
 const LinearProgressDashed = styled('span', {
@@ -139,8 +139,8 @@ const LinearProgressDashed = styled('span', {
     return [styles.dashed, styles[`dashedColor${capitalize(ownerState.color)}`]];
   }
 })<{ ownerState: LinearProgressOwnerState }>(
-  ({ ownerState }) => {
-    const backgroundColor = 'currentColor';
+  ({ ownerState, theme }) => {
+    const backgroundColor = theme.palette.monoA.A200;
 
     return {
       position: 'absolute',
@@ -183,7 +183,8 @@ const LinearProgressBar1 = styled('span', {
     top: 0,
     transition: 'transform 0.2s linear',
     transformOrigin: 'left',
-    backgroundColor: ownerState.color === 'inherit' ? 'currentColor' : theme.palette[ownerState.color].main,
+    borderRadius: '2px',
+    backgroundColor: ownerState.color === 'inherit' ? 'currentColor' : theme.palette[ownerState.color][300],
     ...(ownerState.variant === 'determinate' && {
       transition: `transform .${TRANSITION_DURATION}s linear`
     }),
@@ -193,7 +194,7 @@ const LinearProgressBar1 = styled('span', {
     })
   }),
   ({ ownerState }) =>
-    (ownerState.variant === 'indeterminate' || ownerState.variant === 'query') &&
+    ownerState.variant === 'indeterminate' &&
     css`
       width: auto;
       animation: ${indeterminate1Keyframe} 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
@@ -222,19 +223,22 @@ const LinearProgressBar2 = styled('span', {
     top: 0,
     transition: 'transform 0.2s linear',
     transformOrigin: 'right',
-    ...(ownerState.variant !== 'buffer' && {
-      backgroundColor: ownerState.color === 'inherit' ? 'currentColor' : theme.palette[ownerState.color].main
+    borderRadius: '2px',
+
+    ...(ownerState.variant === 'determinate' && {
+      backgroundColor: ownerState.color === 'inherit' ? 'currentColor' : theme.palette[ownerState.color].A400
     }),
-    ...(ownerState.color === 'inherit' && {
-      opacity: 0.3
-    }),
+
     ...(ownerState.variant === 'buffer' && {
-      backgroundColor: 'currentColor',
+      backgroundColor: theme.palette.monoA.A200
+    }),
+
+    ...(ownerState.variant !== 'indeterminate' && {
       transition: `transform .${TRANSITION_DURATION}s linear`
     })
   }),
   ({ ownerState }) =>
-    (ownerState.variant === 'indeterminate' || ownerState.variant === 'query') &&
+    ownerState.variant === 'indeterminate' &&
     css`
       width: auto;
       animation: ${indeterminate2Keyframe} 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite;
@@ -251,30 +255,29 @@ export const LinearProgress = forwardRef<HTMLButtonElement, LinearProgressProps>
   };
 
   const classes = useUtilityClasses(ownerState);
-  const isRtl = true;
 
   const rootProps = {};
-  const inlineStyles = { bar1: {}, bar2: {} };
+  const inlineStyles = { bar1: {}, bar2: {}, dashed: {} };
 
   if (variant === 'determinate' || variant === 'buffer') {
     if (value !== undefined) {
-      // rootProps['aria-valuenow'] = Math.round(value);
-      // rootProps['aria-valuemin'] = 0;
-      // rootProps['aria-valuemax'] = 100;
-      let transform = value - 100;
-      if (isRtl) {
-        transform = -transform;
-      }
+      const transform = value - 100;
       inlineStyles.bar1 = { transform: `translateX(${transform}%)` };
     }
-  }
-  if (variant === 'buffer') {
     if (valueBuffer !== undefined) {
-      let transform = (valueBuffer || 0) - 100;
-      if (isRtl) {
-        transform = -transform;
-      }
+      const transform = (valueBuffer || 0) - 100;
       inlineStyles.bar2 = { transform: `translateX(${transform}%)` };
+    }
+  }
+
+  if (variant === 'buffer') {
+    if (value !== undefined) {
+      const transform = value;
+      inlineStyles.dashed = { transform: `translateX(${transform}%)` };
+    }
+    if (valueBuffer !== undefined) {
+      const transform = valueBuffer;
+      inlineStyles.dashed = { transform: `translateX(${transform}%)` };
     }
   }
 
@@ -287,11 +290,11 @@ export const LinearProgress = forwardRef<HTMLButtonElement, LinearProgressProps>
       ref={ref}
       {...other}
     >
-      {variant === 'buffer' ? <LinearProgressDashed className={classes.dashed} ownerState={ownerState} /> : null}
+      {variant === 'buffer' ? (
+        <LinearProgressDashed className={classes.dashed} ownerState={ownerState} style={inlineStyles.dashed} />
+      ) : null}
       <LinearProgressBar1 className={classes.bar1} ownerState={ownerState} style={inlineStyles.bar1} />
-      {variant === 'determinate' ? null : (
-        <LinearProgressBar2 className={classes.bar2} ownerState={ownerState} style={inlineStyles.bar2} />
-      )}
+      {valueBuffer && <LinearProgressBar2 className={classes.bar2} ownerState={ownerState} style={inlineStyles.bar2} />}
     </LinearProgressRoot>
   );
 });

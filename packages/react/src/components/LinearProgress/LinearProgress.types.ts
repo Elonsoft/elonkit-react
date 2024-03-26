@@ -41,5 +41,5 @@ export interface LinearProgressProps {
    * Use indeterminate or query when there is no progress value.
    * @default 'indeterminate'
    */
-  variant?: 'determinate' | 'indeterminate' | 'buffer' | 'query';
+  variant?: 'determinate' | 'indeterminate' | 'buffer';
 }
