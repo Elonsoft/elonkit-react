@@ -42,7 +42,6 @@ type Overflow = 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto';
 type TabsOwnerState = {
   centered: TabsProps['centered'];
   classes?: TabsProps['classes'];
-  dividerWidth?: number;
   fixed: boolean;
   indicatorColor: TabsProps['indicatorColor'];
   hideScrollbar: boolean;
@@ -368,7 +367,7 @@ const TabsDivider = styled(Divider, {
 })<{ ownerState: TabsOwnerState }>(({ ownerState, theme }) => ({
   position: 'absolute',
   zIndex: 3,
-  width: ownerState.dividerWidth,
+  width: '100%',
   borderColor: theme.palette.monoA.A100,
 
   ...(ownerState.TabIndicatorPosition === 'top' ? { top: 0 } : { bottom: 0 })
@@ -440,7 +439,6 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
 
   const ownerState = {
     ...props,
-    dividerWidth: tabsRef.current?.scrollWidth,
     component,
     allowScrollButtonsMobile,
     indicatorColor,
@@ -941,8 +939,8 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
           {children}
         </FlexContainer>
         {mounted && indicator}
-        <TabsDivider className={classes.tabsDivider} ownerState={ownerState} />
       </TabsScroller>
+      <TabsDivider className={classes.tabsDivider} ownerState={ownerState} />
       {conditionalElements.scrollButtonEnd}
     </TabsRoot>
   );
