@@ -3,11 +3,13 @@ import React, { memo, useEffect, useRef, useState } from 'react';
 import { TableCellProps } from './TableCell.types';
 
 import clsx from 'clsx';
+import { tableClasses } from '../Table.classes';
 import { getTableCellUtilityClass, tableCellClasses } from './TableCell.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
 import { styled, useThemeProps } from '@mui/material/styles';
+import { Divider, dividerClasses } from '@mui/material';
 
 import { useTableCellContext } from './TableCell.context';
 
@@ -15,6 +17,7 @@ import { useLatest } from '../../../hooks/useLatest';
 
 type TableCellOwnerState = {
   classes?: TableCellProps['classes'];
+  dividerHeight?: number;
   variant: NonNullable<TableCellProps['variant']>;
   padding: NonNullable<TableCellProps['padding']>;
   align?: TableCellProps['align'];
@@ -46,7 +49,8 @@ const useUtilityClasses = (ownerState: TableCellOwnerState) => {
       align === 'center' && 'contentAlignCenter',
       align === 'flex-end' && 'contentAlignFlexEnd'
     ],
-    resize: ['resize', isResizing && 'resizeResizing']
+    resize: ['resize', isResizing && 'resizeResizing'],
+    resizeDivider: ['resizeDivider']
   };
 
   return composeClasses(slots, getTableCellUtilityClass, classes);
@@ -76,10 +80,13 @@ const TableCellRoot = styled('div', {
     color: theme.palette.monoA.A600,
     backgroundColor: theme.palette.surface[100],
     position: 'relative',
-    zIndex: 1,
     userSelect: 'none',
     height: '49px'
   }),
+  ...(ownerState.variant === 'head' &&
+    !ownerState.isResizing && {
+      zIndex: 1
+    }),
 
   ...(ownerState.variant === 'body' && {
     ...theme.typography.body100,
@@ -215,6 +222,24 @@ const TableCellResize = styled('button', {
   }
 }));
 
+const TableCellResizeDivider = styled(Divider, {
+  name: 'ESTableCell',
+  slot: 'ResizeDivider',
+  overridesResolver: (props, styles) => [styles.resizeDivider]
+})<{ ownerState: TableCellOwnerState; isStart?: boolean }>(({ theme, ownerState, isStart }) => ({
+  [`&.${dividerClasses.vertical}.${dividerClasses.flexItem}`]: {
+    position: 'absolute',
+    borderStyle: 'dashed',
+    borderColor: theme.palette.monoA.A300,
+    zIndex: 2,
+    height: isStart ? 12 : (ownerState.dividerHeight ? ownerState.dividerHeight : 0) - 37,
+    marginRight: '1px',
+    right: 0,
+    top: isStart ? 0 : 37,
+    bottom: 0
+  }
+}));
+
 const RESIZE_STEPS: Record<string, number | undefined> = {
   ArrowLeft: -16,
   ArrowRight: 16
@@ -246,6 +271,10 @@ export const TableCell = memo(function TableCell(inProps: TableCellProps) {
   const screenX = useRef<number | null>(null);
 
   const [isResizing, setResizing] = useState(false);
+
+  const tableHead = document.querySelector('.ESTableHead-root') as HTMLDivElement;
+
+  const [dividerHeight, setDividerHeight] = useState<number>(0);
 
   const onResizeLatest = useLatest(onResize);
   const onResizeCommitLatest = useLatest(onResizeCommit);
@@ -294,6 +323,12 @@ export const TableCell = memo(function TableCell(inProps: TableCellProps) {
 
   useEffect(() => {
     if (isResizing) {
+      const tableRootHeight =
+        document.querySelector(`.${tableClasses.root}`)!.getBoundingClientRect().bottom -
+        (ref.current?.getBoundingClientRect().top || 0);
+
+      setDividerHeight(tableRootHeight);
+
       const onMouseMove = (event: MouseEvent) => {
         onMouseMoveLatest.current(event);
       };
@@ -318,11 +353,16 @@ export const TableCell = memo(function TableCell(inProps: TableCellProps) {
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('mouseup', onMouseUp);
         document.head.removeChild(style);
+        tableHead.style.overflow = 'auto';
       };
     }
   }, [isResizing]);
 
-  const ownerState = { variant, padding, align, pin, isResizing, ...props };
+  if (isResizing) {
+    tableHead.style.overflow = 'visible';
+  }
+
+  const ownerState = { variant, padding, align, pin, isResizing, dividerHeight, ...props };
   const classes = useUtilityClasses(ownerState);
 
   return (
@@ -341,14 +381,33 @@ export const TableCell = memo(function TableCell(inProps: TableCellProps) {
           {children}
         </TableCellContent>
         {!!onResize && (
-          <TableCellResize
-            aria-label={labelResize}
-            className={classes.resize}
-            ownerState={ownerState}
-            onKeyDown={onKeyDown}
-            onKeyUp={onKeyUp}
-            onMouseDown={onMouseDown}
-          />
+          <>
+            {isResizing && (
+              <>
+                <TableCellResizeDivider
+                  flexItem
+                  isStart
+                  className={classes.resizeDivider}
+                  orientation="vertical"
+                  ownerState={ownerState}
+                />
+                <TableCellResizeDivider
+                  flexItem
+                  className={classes.resizeDivider}
+                  orientation="vertical"
+                  ownerState={ownerState}
+                />
+              </>
+            )}
+            <TableCellResize
+              aria-label={labelResize}
+              className={classes.resize}
+              ownerState={ownerState}
+              onKeyDown={onKeyDown}
+              onKeyUp={onKeyUp}
+              onMouseDown={onMouseDown}
+            />
+          </>
         )}
       </TableCellContainer>
     </TableCellRoot>

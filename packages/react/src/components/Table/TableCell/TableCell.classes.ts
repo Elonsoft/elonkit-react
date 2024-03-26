@@ -21,6 +21,8 @@ export type TableCellClasses = {
   overlap: string;
   /** Styles applied to the root element if cell is resizing. */
   resizing: string;
+  /** Styles applied to the divider element if cell is resizing. */
+  resizeDivider: string;
   /** Styles applied to the container element. */
   container: string;
   /** Styles applied to the content element. */
@@ -53,6 +55,7 @@ export const tableCellClasses: TableCellClasses = generateUtilityClasses('ESTabl
   'pinRight',
   'overlap',
   'resizing',
+  'resizeDivider',
   'container',
   'content',
   'contentAlignFlexStart',
