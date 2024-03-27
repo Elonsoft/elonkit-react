@@ -95,7 +95,7 @@ const useUtilityClasses = (ownerState: LinearProgressOwnerState) => {
 };
 
 const LinearProgressRoot = styled('span', {
-  name: 'MuiLinearProgress',
+  name: 'ESLinearProgress',
   slot: 'Root',
   overridesResolver: (props, styles) => {
     const { ownerState } = props;
@@ -131,7 +131,7 @@ const LinearProgressRoot = styled('span', {
 }));
 
 const LinearProgressDashed = styled('span', {
-  name: 'MuiLinearProgress',
+  name: 'ESLinearProgress',
   slot: 'Dashed',
   overridesResolver: (props, styles) => {
     const { ownerState } = props;
@@ -161,7 +161,7 @@ const LinearProgressDashed = styled('span', {
 );
 
 const LinearProgressBar1 = styled('span', {
-  name: 'MuiLinearProgress',
+  name: 'ESLinearProgress',
   slot: 'Bar1',
   overridesResolver: (props, styles) => {
     const { ownerState } = props;
@@ -202,7 +202,7 @@ const LinearProgressBar1 = styled('span', {
 );
 
 const LinearProgressBar2 = styled('span', {
-  name: 'MuiLinearProgress',
+  name: 'ESLinearProgress',
   slot: 'Bar2',
   overridesResolver: (props, styles) => {
     const { ownerState } = props;
@@ -246,7 +246,7 @@ const LinearProgressBar2 = styled('span', {
 );
 
 export const LinearProgress = forwardRef<HTMLButtonElement, LinearProgressProps>(function LinearProgress(inProps, ref) {
-  const props = useThemeProps({ props: inProps, name: 'MuiLinearProgress' });
+  const props = useThemeProps({ props: inProps, name: 'ESLinearProgress' });
   const { className, color = 'primary', value, valueBuffer, variant = 'indeterminate', ...other } = props;
   const ownerState = {
     ...props,
