@@ -145,9 +145,7 @@ const SidebarItemSecondaryAction = styled(IconButton, {
     zIndex: '5',
 
     ...(ownerState.behaviour === 'hover' && {
-      [`&.${iconButtonClasses.disabled}`]: {
-        opacity: '1'
-      }
+      pointerEvents: 'none'
     }),
 
     ...((ownerState.color === 'default' || ownerState.color === 'secondary') && {
@@ -392,7 +390,7 @@ export const SidebarItem: OverridableComponent<SidebarItemTypeMap> = (inProps: S
       e.preventDefault();
     }
 
-    if (open && behaviour === 'click' && id) {
+    if (open && (behaviour === 'click' || e.detail === 0) && id) {
       if (isNestedMenuOpen) {
         onClose(id);
       } else {
@@ -518,7 +516,6 @@ export const SidebarItem: OverridableComponent<SidebarItemTypeMap> = (inProps: S
             <SidebarItemSecondaryAction
               aria-label={isNestedMenuOpen ? labelHide : labelOpen}
               className={clsx(classes.secondaryAction)}
-              disabled={behaviour === 'hover'}
               ownerState={ownerState}
               size="24"
               onClick={onNestedMenuClick}
