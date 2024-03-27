@@ -5,17 +5,17 @@ export const createMenu: Component<'MuiMenu'> = (theme) => {
     styleOverrides: {
       root: {
         '& .MuiDivider-root': {
-          borderColor: theme.palette.monoA.A100
+          borderColor: theme.vars.palette.monoA.A100
         }
       },
       paper: {
         '&.MuiMenu-paper': {
           backgroundImage: 'none',
-          backgroundColor: theme.palette.surface[400],
-          boxShadow: theme.palette.shadow.down[600]
+          backgroundColor: theme.vars.palette.surface[400],
+          boxShadow: theme.vars.palette.shadow.down[600]
         },
         '& .MuiListItemIcon-root': {
-          color: theme.palette.monoA.A500
+          color: theme.vars.palette.monoA.A500
         }
       }
     }

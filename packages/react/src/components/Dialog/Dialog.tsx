@@ -57,7 +57,7 @@ const DialogBackdrop = styled(Backdrop, {
 })(({ theme }) => ({
   // Improve scrollable dialog support.
   zIndex: -1,
-  backgroundColor: theme.palette.overlay[700]
+  backgroundColor: theme.vars.palette.overlay[700]
 }));
 
 const DialogContainer = styled('div', {
@@ -164,8 +164,8 @@ const DialogPaper = styled('div', {
   textAlign: 'left',
   borderRadius: 8,
   width: '100%',
-  boxShadow: theme.palette.shadow.down[900],
-  backgroundColor: theme.palette.surface[600],
+  boxShadow: theme.vars.palette.shadow.down[900],
+  backgroundColor: theme.vars.palette.surface[600],
 
   '@media print': {
     boxShadow: 'none'

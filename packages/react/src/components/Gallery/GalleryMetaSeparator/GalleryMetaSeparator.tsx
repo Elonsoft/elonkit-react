@@ -35,7 +35,7 @@ const GalleryMetaSeparatorRoot = styled('div', {
   width: 3,
   height: 3,
   borderRadius: '50%',
-  backgroundColor: theme.palette.white.A700,
+  backgroundColor: theme.vars.palette.white.A700,
   flexShrink: 0
 }));
 

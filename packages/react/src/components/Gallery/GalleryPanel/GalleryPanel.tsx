@@ -77,16 +77,16 @@ const GalleryPanelContent = styled('div', {
   },
 
   [`&.${galleryPanelClasses.contentExpanded}`]: {
-    backgroundColor: theme.palette.overlay[900]
+    backgroundColor: theme.vars.palette.overlay[900]
   },
 
   '@media (max-height: 449px)': {
     backdropFilter: 'blur(40px)',
-    backgroundColor: theme.palette.black.A700,
+    backgroundColor: theme.vars.palette.black.A700,
     opacity: 0,
 
     [`&.${galleryPanelClasses.contentExpanded}`]: {
-      backgroundColor: theme.palette.overlay[900]
+      backgroundColor: theme.vars.palette.overlay[900]
     }
   }
 }));

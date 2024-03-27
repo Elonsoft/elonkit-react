@@ -37,8 +37,8 @@ const TableRoot = styled('div', {
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
-  backgroundColor: theme.palette.surface[100],
-  boxShadow: theme.palette.shadow.down[100],
+  backgroundColor: theme.vars.palette.surface[100],
+  boxShadow: theme.vars.palette.shadow.down[100],
   borderRadius: '6px'
 }));
 

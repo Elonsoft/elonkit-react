@@ -9,19 +9,19 @@ export const GalleryActionsButton = styled(Button, {
   [`&.${buttonClasses.root}`]: {
     ...theme.mixins.button({
       background: 'transparent',
-      color: theme.palette.white.A800,
-      hover: theme.palette.white.A50,
-      focus: theme.palette.white.A200,
-      active: theme.palette.white.A150
+      color: theme.vars.palette.white.A800,
+      hover: theme.vars.palette.white.A50,
+      focus: theme.vars.palette.white.A200,
+      active: theme.vars.palette.white.A150
     }),
 
     [theme.breakpoints.up('tabletXS')]: {
       ...theme.mixins.button({
-        background: theme.palette.white.A200,
-        color: theme.palette.white[500],
-        hover: theme.palette.white.A50,
-        focus: theme.palette.white.A200,
-        active: theme.palette.white.A150
+        background: theme.vars.palette.white.A200,
+        color: theme.vars.palette.white[500],
+        hover: theme.vars.palette.white.A50,
+        focus: theme.vars.palette.white.A200,
+        active: theme.vars.palette.white.A150
       })
     }
   }

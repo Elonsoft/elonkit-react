@@ -66,7 +66,7 @@ const LoadingButtonLoadingIndicator = styled('span', {
   transform: 'translate(-50%, -50%)',
 
   [`& .${spinnerFadingDotsClasses.root}`]: {
-    color: theme.palette.monoA.A500
+    color: theme.vars.palette.monoA.A500
   }
 }));
 

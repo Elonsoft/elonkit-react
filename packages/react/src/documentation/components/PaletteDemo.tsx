@@ -42,7 +42,7 @@ const PaletteDemoRoot = styled('div')(() => ({
 }));
 
 const PaletteDemoPalette = styled(Typography)(({ theme }) => ({
-  backgroundColor: theme.palette.monoA.A50,
+  backgroundColor: theme.vars.palette.monoA.A50,
   borderRadius: 2,
   display: 'block',
   gridColumnEnd: -1,
@@ -55,7 +55,7 @@ const PaletteDemoPalette = styled(Typography)(({ theme }) => ({
 }));
 
 const PaletteDemoColorName = styled(Typography)(({ theme }) => ({
-  backgroundColor: theme.palette.monoA.A50,
+  backgroundColor: theme.vars.palette.monoA.A50,
   borderTopLeftRadius: 2,
   borderTopRightRadius: 2,
   display: 'block',
@@ -63,7 +63,7 @@ const PaletteDemoColorName = styled(Typography)(({ theme }) => ({
 }));
 
 const PaletteDemoColorBackground = styled('div')(({ theme }) => ({
-  border: `1px solid ${theme.palette.monoA.A50}`,
+  border: `1px solid ${theme.vars.palette.monoA.A50}`,
   borderBottomLeftRadius: 2,
   borderBottomRightRadius: 2,
   borderTop: 0,

@@ -26,7 +26,7 @@ export const ErrorPageHeadingRoot = styled(Typography, {
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
-  color: theme.palette.monoA.A900,
+  color: theme.vars.palette.monoA.A900,
   gridArea: 'heading',
   marginTop: '24px'
 })) as typeof Typography;

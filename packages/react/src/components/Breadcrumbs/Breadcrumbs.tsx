@@ -62,7 +62,7 @@ const BreadcrumbsList = styled('ol', {
   ...(ownerState.open && {
     [`.${breadcrumbsClasses.buttonMore}`]: {
       [`.${buttonBaseClasses.root}.${breadcrumbClasses.content}`]: {
-        backgroundColor: theme.palette.monoA.A50
+        backgroundColor: theme.vars.palette.monoA.A50
       }
     }
   })

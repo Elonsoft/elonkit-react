@@ -39,7 +39,7 @@ const MadeByRoot = styled('div', {
   }
 })(({ theme }) => ({
   ...theme.typography.caption,
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
   cursor: 'default',
   display: 'flex',
   gap: '2px',
@@ -49,17 +49,17 @@ const MadeByRoot = styled('div', {
   width: 'fit-content',
 
   [`& .${svgIconClasses.root}`]: {
-    color: theme.palette.monoA.A300
+    color: theme.vars.palette.monoA.A300
   },
 
   [`&.${madeByClasses.clickable}`]: {
     cursor: 'pointer',
 
     [`&:hover .${svgIconClasses.root}, &:focus-visible .${svgIconClasses.root}`]: {
-      color: theme.palette.monoA.A400
+      color: theme.vars.palette.monoA.A400
     },
     [`&:active .${svgIconClasses.root}`]: {
-      color: theme.palette.monoA.A500
+      color: theme.vars.palette.monoA.A500
     }
   }
 }));

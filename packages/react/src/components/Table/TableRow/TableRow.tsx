@@ -42,14 +42,14 @@ const TableRowRoot = styled('div', {
 })<{ ownerState: TableRowOwnerState }>(({ theme, ownerState }) => ({
   ...(ownerState.selected && {
     [`& .${tableCellClasses.container}`]: {
-      backgroundColor: theme.palette.secondary.A100
+      backgroundColor: theme.vars.palette.secondary.A100
     }
   }),
 
   ...(ownerState.hover && {
     '&:hover': {
       [`& .${tableCellClasses.content}`]: {
-        backgroundColor: theme.palette.monoA.A50
+        backgroundColor: theme.vars.palette.monoA.A50
       }
     }
   })
@@ -76,7 +76,7 @@ const TableRowContent = styled(Box, {
     '&:focus-visible': {
       [`&, & + .${tableRowClasses.overlap}`]: {
         [`& .${tableCellClasses.content}.${tableCellClasses.content}`]: {
-          backgroundColor: theme.palette.monoA.A50
+          backgroundColor: theme.vars.palette.monoA.A50
         }
       }
     },
@@ -84,7 +84,7 @@ const TableRowContent = styled(Box, {
     '&:active': {
       [`&, & + .${tableRowClasses.overlap}`]: {
         [`& .${tableCellClasses.content}.${tableCellClasses.content}`]: {
-          backgroundColor: theme.palette.monoA.A100
+          backgroundColor: theme.vars.palette.monoA.A100
         }
       }
     }

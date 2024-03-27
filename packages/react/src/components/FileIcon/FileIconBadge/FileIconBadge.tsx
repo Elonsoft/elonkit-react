@@ -36,7 +36,7 @@ const FileIconBadgeRoot = styled(Typography, {
   alignSelf: 'flex-start',
   borderRadius: '4px',
   display: 'block',
-  color: theme.palette.monoB[500],
+  color: theme.vars.palette.monoB[500],
   left: '-5px',
   position: 'relative',
   textAlign: 'center',

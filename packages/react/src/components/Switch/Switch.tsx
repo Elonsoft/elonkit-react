@@ -49,26 +49,26 @@ const SwitchRoot = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   zIndex: 0,
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
   [`&.${switchClasses.checked}`]: {
-    color: theme.palette[color][300],
+    color: theme.vars.palette[color][300],
     [`& .${switchClasses.input}`]: {
       transform: 'translateX(-12px)'
     },
     [`& .${switchClasses.button}`]: {
       transform: 'translateX(12px)',
       '&:hover': {
-        backgroundColor: theme.palette[color].A50,
+        backgroundColor: theme.vars.palette[color].A50,
 
         '@media (hover: none)': {
           backgroundColor: 'transparent'
         }
       },
       '&:active': {
-        backgroundColor: theme.palette[color].A150
+        backgroundColor: theme.vars.palette[color].A150
       },
       [`&.${buttonBaseClasses.focusVisible}`]: {
-        backgroundColor: theme.palette[color].A200
+        backgroundColor: theme.vars.palette[color].A200
       }
     }
   },
@@ -129,7 +129,7 @@ const SwitchThumb = styled('div', {
   slot: 'Thumb',
   overridesResolver: (props, styles) => styles.thumb
 })(({ theme }) => ({
-  backgroundColor: theme.palette.common.switch,
+  backgroundColor: theme.vars.palette.common.switch,
   border: '2px solid currentColor',
   borderRadius: '50%'
 }));
@@ -148,16 +148,16 @@ const SwitchButton = styled(ButtonBase, {
     duration: theme.transitions.duration.shortest
   }),
   '&:hover': {
-    backgroundColor: theme.palette.monoA.A50,
+    backgroundColor: theme.vars.palette.monoA.A50,
     '@media (hover: none)': {
       backgroundColor: 'transparent'
     }
   },
   '&:active': {
-    backgroundColor: theme.palette.monoA.A150
+    backgroundColor: theme.vars.palette.monoA.A150
   },
   [`&.${buttonBaseClasses.focusVisible}`]: {
-    backgroundColor: theme.palette.monoA.A200
+    backgroundColor: theme.vars.palette.monoA.A200
   }
 })) as typeof ButtonBase;
 

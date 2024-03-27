@@ -63,16 +63,16 @@ const DialogArrowButton = styled(Button, {
 
   [`&.${buttonClasses.root}`]: {
     borderRadius: 0,
-    color: theme.palette.white.A700,
+    color: theme.vars.palette.white.A700,
     padding: 8,
     width: 72,
     height: '100vh',
 
     [`&:not(:disabled):hover, &.${buttonClasses.focusVisible}`]: {
-      color: theme.palette.white.A900
+      color: theme.vars.palette.white.A900
     },
     '&:not(:disabled):active': {
-      color: theme.palette.white[500]
+      color: theme.vars.palette.white[500]
     }
   }
 }));

@@ -122,7 +122,7 @@ const DividerWrapper = styled('span', {
 })(({ theme }) => ({
   ...theme.typography.caption,
   display: 'inline-block',
-  color: theme.palette.monoA.A700
+  color: theme.vars.palette.monoA.A700
 }));
 
 /**

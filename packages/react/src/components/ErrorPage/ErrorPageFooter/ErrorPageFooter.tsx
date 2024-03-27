@@ -27,7 +27,7 @@ export const ErrorPageFooterRoot = styled(Typography, {
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
   alignSelf: 'flex-end',
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
   gridArea: 'footer',
   paddingTop: '64px'
 }));

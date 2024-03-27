@@ -238,11 +238,11 @@ const CustomizationButton = styled(IconButton)<{ prev?: boolean; next?: boolean 
     padding: 4,
 
     ...theme.mixins.button({
-      background: theme.palette.white.A600,
-      color: theme.palette.black[500],
-      hover: theme.palette.black.A50,
-      focus: theme.palette.black.A200,
-      active: theme.palette.black.A150
+      background: theme.vars.palette.white.A600,
+      color: theme.vars.palette.black[500],
+      hover: theme.vars.palette.black.A50,
+      focus: theme.vars.palette.black.A200,
+      active: theme.vars.palette.black.A150
     })
   }
 }));

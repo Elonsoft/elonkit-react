@@ -5,12 +5,12 @@ export const createFormHelperText: Component<'MuiFormHelperText'> = (theme, typo
     styleOverrides: {
       root: {
         ...typography.caption,
-        color: theme.palette.monoA.A700,
+        color: theme.vars.palette.monoA.A700,
         marginTop: 8,
         marginLeft: 12,
         marginRight: 12,
         '&.Mui-error': {
-          color: theme.palette.error[300]
+          color: theme.vars.palette.error[300]
         }
       }
     }

@@ -43,7 +43,7 @@ const SidebarDividerLine = styled(Divider, {
   slot: 'Line',
   overridesResolver: (props, styles) => styles.line
 })<{ ownerState: SidebarDividerOwnerState }>(({ theme, ownerState: { color } }) => ({
-  borderColor: `${color === 'default' || color === 'secondary' ? theme.palette.monoA.A100 : theme.palette.monoB.A200}`
+  borderColor: `${color === 'default' || color === 'secondary' ? theme.vars.palette.monoA.A100 : theme.vars.palette.monoB.A200}`
 }));
 
 export const SidebarDivider = (inProps: SidebarDividerProps) => {

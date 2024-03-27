@@ -59,7 +59,7 @@ const SFSFiltersButton = styled(SFSButton, {
   [`&:hover .${sfsFiltersClasses.buttonBadge}, &:focus-visible .${sfsFiltersClasses.buttonBadge}, & .${sfsFiltersClasses.buttonBadge}`]:
     {
       [`&.${typographyClasses.root}, & .${svgIconClasses.root}`]: {
-        color: `${theme.palette.black.A800}`
+        color: `${theme.vars.palette.black.A800}`
       }
     },
   [theme.breakpoints.up('tabletXS')]: {
@@ -86,7 +86,7 @@ const SFSFiltersButtonBadge = styled(Typography, {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: theme.palette.secondary[300]
+  backgroundColor: theme.vars.palette.secondary[300]
 })) as typeof Typography;
 
 const SFSFiltersDrawer = styled(Drawer, {
@@ -95,15 +95,15 @@ const SFSFiltersDrawer = styled(Drawer, {
   overridesResolver: (_, styles) => styles.drawer
 })(({ theme }) => ({
   [`& .${backdropClasses.root}`]: {
-    backgroundColor: theme.palette.overlay[200]
+    backgroundColor: theme.vars.palette.overlay[200]
   },
   [`& .${paperClasses.root}`]: {
     width: '100%',
     maxWidth: '337px',
-    boxShadow: theme.palette.shadow.left[800],
+    boxShadow: theme.vars.palette.shadow.left[800],
     backgroundImage: 'none',
-    backgroundColor: theme.palette.surface[200],
-    borderLeft: `1px solid ${theme.palette.monoA.A100}`
+    backgroundColor: theme.vars.palette.surface[200],
+    borderLeft: `1px solid ${theme.vars.palette.monoA.A100}`
   }
 }));
 
@@ -117,8 +117,8 @@ const SFSFiltersHeader = styled(Typography, {
   justifyContent: 'space-between',
   padding: '12px',
   paddingLeft: '20px',
-  borderBottom: `1px solid ${theme.palette.monoA.A100}`,
-  color: theme.palette.monoA.A900
+  borderBottom: `1px solid ${theme.vars.palette.monoA.A100}`,
+  color: theme.vars.palette.monoA.A900
 }));
 
 const SFSFiltersFooter = styled('div', {
@@ -126,7 +126,7 @@ const SFSFiltersFooter = styled('div', {
   slot: 'Footer',
   overridesResolver: (_, styles) => styles.footer
 })(({ theme }) => ({
-  borderTop: `1px solid ${theme.palette.monoA.A100}`,
+  borderTop: `1px solid ${theme.vars.palette.monoA.A100}`,
   marginTop: 'auto',
   padding: '16px 20px'
 }));
@@ -145,7 +145,7 @@ const SFSFiltersCloseButton = styled(Button, {
   overridesResolver: (_, styles) => styles.closeButton
 })(({ theme }) => ({
   [`.${svgIconClasses.root}`]: {
-    color: theme.palette.monoA.A500
+    color: theme.vars.palette.monoA.A500
   }
 }));
 

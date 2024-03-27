@@ -75,7 +75,7 @@ const AutocompleteInputPlaceholder = styled('div', {
   slot: 'InputPlaceholder',
   overridesResolver: (_props, styles) => styles.inputPlaceholder
 })(({ theme }) => ({
-  color: theme.palette.monoA.A400,
+  color: theme.vars.palette.monoA.A400,
   minWidth: 0,
   overflow: 'hidden',
   textOverflow: 'ellipsis'

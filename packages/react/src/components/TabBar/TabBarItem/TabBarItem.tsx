@@ -40,11 +40,11 @@ const TabBarItemRoot = styled(Button, {
 
   [`&.${tabBarItemClasses.selected}`]: {
     [`& .${tabBarItemClasses.icon}`]: {
-      color: theme.palette.monoA.A900
+      color: theme.vars.palette.monoA.A900
     },
 
     [`& .${tabBarItemClasses.label}`]: {
-      color: theme.palette.monoA.A800
+      color: theme.vars.palette.monoA.A800
     }
   }
 }));
@@ -55,7 +55,7 @@ const TabBarItemIcon = styled('span', {
   overridesResolver: (_props, styles) => styles.icon
 })(({ theme }) => ({
   display: 'flex',
-  color: theme.palette.monoA.A500
+  color: theme.vars.palette.monoA.A500
 }));
 
 const TabBarItemLabel = styled('span', {
@@ -65,7 +65,7 @@ const TabBarItemLabel = styled('span', {
 })(({ theme }) => ({
   ...theme.typography.micro,
   textTransform: 'none',
-  color: theme.palette.monoA.A700
+  color: theme.vars.palette.monoA.A700
 }));
 
 export const TabBarItem: OverridableComponent<TabBarItemTypeMap> = (inProps: TabBarItemProps) => {

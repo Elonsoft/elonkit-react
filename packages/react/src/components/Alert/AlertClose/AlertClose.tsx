@@ -38,7 +38,7 @@ const AlertCloseRoot = styled(Button, {
     borderRadius: '4px'
   },
   [`& .${svgIconClasses.root}`]: {
-    color: theme.palette.monoA.A500
+    color: theme.vars.palette.monoA.A500
   }
 }));
 

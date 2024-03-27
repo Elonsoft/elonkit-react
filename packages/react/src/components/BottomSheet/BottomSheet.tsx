@@ -62,7 +62,7 @@ const BottomSheetBackdrop = styled(Backdrop, {
 })(({ theme }) => ({
   // Improve scrollable dialog support.
   zIndex: -1,
-  backgroundColor: theme.palette.overlay[700]
+  backgroundColor: theme.vars.palette.overlay[700]
 }));
 
 const BottomSheetContainer = styled('div', {
@@ -150,8 +150,8 @@ const BottomSheetPaper = styled('div', {
   textAlign: 'left',
   width: '100%',
   minHeight: '100%',
-  boxShadow: theme.palette.shadow.up[700],
-  backgroundColor: theme.palette.surface[600],
+  boxShadow: theme.vars.palette.shadow.up[700],
+  backgroundColor: theme.vars.palette.surface[600],
   paddingBottom: '1px',
 
   ...(!ownerState.isFullHeight && {
@@ -168,7 +168,7 @@ const BottomSheetPaper = styled('div', {
     width: '40px',
     height: '4px',
     borderRadius: '4px',
-    backgroundColor: theme.palette.white.A500
+    backgroundColor: theme.vars.palette.white.A500
   },
 
   '@media print': {

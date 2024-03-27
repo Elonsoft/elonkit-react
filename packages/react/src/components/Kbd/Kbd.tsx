@@ -34,22 +34,22 @@ const KbdRoot = styled('kbd', {
 })<{ ownerState: KbdOwnerState }>(({ theme, ownerState }) => ({
   ...theme.typography.body100,
 
-  color: theme.palette.monoA.A900,
+  color: theme.vars.palette.monoA.A900,
   padding: '0 4px',
   display: 'inline-block',
   borderRadius: '4px',
   fontFamily: 'inherit',
 
   ...(ownerState.variant === 'raised' && {
-    backgroundColor: theme.palette.monoA.A75,
-    boxShadow: `0 1px 0 1px ${theme.palette.monoA.A300}`
+    backgroundColor: theme.vars.palette.monoA.A75,
+    boxShadow: `0 1px 0 1px ${theme.vars.palette.monoA.A300}`
   }),
   ...(ownerState.variant === 'contained' && {
-    backgroundColor: theme.palette.monoA.A75,
-    boxShadow: `0 1px 0 ${theme.palette.monoA.A300}, inset 0 0 0 1px ${theme.palette.monoA.A50}`
+    backgroundColor: theme.vars.palette.monoA.A75,
+    boxShadow: `0 1px 0 ${theme.vars.palette.monoA.A300}, inset 0 0 0 1px ${theme.vars.palette.monoA.A50}`
   }),
   ...(ownerState.variant === 'outlined' && {
-    boxShadow: `inset 0 0 0 1px ${theme.palette.monoA.A200}`
+    boxShadow: `inset 0 0 0 1px ${theme.vars.palette.monoA.A200}`
   })
 }));
 

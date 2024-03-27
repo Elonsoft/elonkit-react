@@ -16,7 +16,7 @@ const IconsDemoIcon = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '2px',
-  border: `1px solid ${theme.palette.monoA.A100}`
+  border: `1px solid ${theme.vars.palette.monoA.A100}`
 }));
 
 export const IconsDemo = () => {

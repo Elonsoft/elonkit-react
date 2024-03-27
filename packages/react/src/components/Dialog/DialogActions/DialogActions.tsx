@@ -46,13 +46,13 @@ const DialogActionsRoot = styled('div', {
   ...(ownerState.sticky && {
     position: 'sticky',
     bottom: -8,
-    backgroundColor: theme.palette.surface[600],
+    backgroundColor: theme.vars.palette.surface[600],
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
     zIndex: 1,
 
     ...(ownerState.stuck && {
-      borderTop: `1px solid ${theme.palette.monoA.A100}`,
+      borderTop: `1px solid ${theme.vars.palette.monoA.A100}`,
       borderRadius: 0
     })
   })

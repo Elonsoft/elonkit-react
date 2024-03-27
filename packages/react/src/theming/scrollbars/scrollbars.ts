@@ -121,25 +121,25 @@ export const createScrollbars = (theme: Theme) => {
     };
   };
 
-  const normal = getScrollbar(16, 2, theme.palette.monoA);
-  const thin = getScrollbar(10, 1, theme.palette.monoA);
-  const overlay = getOverlayScrollbar(theme.palette.monoA);
+  const normal = getScrollbar(16, 2, theme.vars.palette.monoA);
+  const thin = getScrollbar(10, 1, theme.vars.palette.monoA);
+  const overlay = getOverlayScrollbar(theme.vars.palette.monoA);
 
   return {
     normal,
     normalMonoA: normal,
-    normalMonoB: getScrollbar(16, 2, theme.palette.monoB),
-    normalWhite: getScrollbar(16, 2, theme.palette.white),
-    normalBlack: getScrollbar(16, 2, theme.palette.black),
+    normalMonoB: getScrollbar(16, 2, theme.vars.palette.monoB),
+    normalWhite: getScrollbar(16, 2, theme.vars.palette.white),
+    normalBlack: getScrollbar(16, 2, theme.vars.palette.black),
     thin,
     thinMonoA: thin,
-    thinMonoB: getScrollbar(10, 1, theme.palette.monoB),
-    thinWhite: getScrollbar(10, 1, theme.palette.white),
-    thinBlack: getScrollbar(10, 1, theme.palette.black),
+    thinMonoB: getScrollbar(10, 1, theme.vars.palette.monoB),
+    thinWhite: getScrollbar(10, 1, theme.vars.palette.white),
+    thinBlack: getScrollbar(10, 1, theme.vars.palette.black),
     overlay,
     overlayMonoA: overlay,
-    overlayMonoB: getOverlayScrollbar(theme.palette.monoB),
-    overlayWhite: getOverlayScrollbar(theme.palette.white),
-    overlayBlack: getOverlayScrollbar(theme.palette.black)
+    overlayMonoB: getOverlayScrollbar(theme.vars.palette.monoB),
+    overlayWhite: getOverlayScrollbar(theme.vars.palette.white),
+    overlayBlack: getOverlayScrollbar(theme.vars.palette.black)
   };
 };

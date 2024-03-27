@@ -29,8 +29,8 @@ const TabBarRoot = styled('div', {
   display: 'flex',
   height: '56px',
   padding: '0px 8px',
-  backgroundColor: theme.palette.surface[100],
-  boxShadow: theme.palette.shadow.up[50]
+  backgroundColor: theme.vars.palette.surface[100],
+  boxShadow: theme.vars.palette.shadow.up[50]
 }));
 
 /**

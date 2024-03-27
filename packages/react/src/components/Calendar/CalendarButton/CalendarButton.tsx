@@ -76,7 +76,7 @@ const CalendarButtonRoot = styled('div', {
   position: 'relative',
 
   '&::before': {
-    border: `0 dashed ${theme.palette.monoA.A300}`,
+    border: `0 dashed ${theme.vars.palette.monoA.A300}`,
     content: '""',
     inset: 0,
     position: 'absolute'
@@ -140,7 +140,7 @@ const CalendarButtonRoot = styled('div', {
   },
 
   [`&.${calendarButtonClasses.selected}.${calendarButtonClasses.positionBetween} .${calendarButtonClasses.wrapper}`]: {
-    background: theme.palette.secondary.A200,
+    background: theme.vars.palette.secondary.A200,
 
     '&::before, &::after': {
       content: '""'
@@ -149,7 +149,7 @@ const CalendarButtonRoot = styled('div', {
 
   [`&.${calendarButtonClasses.selected}.${calendarButtonClasses.positionStart}:has(~ .${calendarButtonClasses.selected}) .${calendarButtonClasses.wrapper}`]:
     {
-      background: `linear-gradient(to right, transparent 50%, ${theme.palette.secondary.A200} 50%)`,
+      background: `linear-gradient(to right, transparent 50%, ${theme.vars.palette.secondary.A200} 50%)`,
       borderBottomLeftRadius: '6px',
       borderTopLeftRadius: '6px',
 
@@ -160,7 +160,7 @@ const CalendarButtonRoot = styled('div', {
 
   [`&.${calendarButtonClasses.selected} ~ .${calendarButtonClasses.selected}.${calendarButtonClasses.positionEnd} .${calendarButtonClasses.wrapper}`]:
     {
-      background: `linear-gradient(to left, transparent 50%, ${theme.palette.secondary.A200} 50%)`,
+      background: `linear-gradient(to left, transparent 50%, ${theme.vars.palette.secondary.A200} 50%)`,
       borderBottomRightRadius: '6px',
       borderTopRightRadius: '6px',
 
@@ -183,7 +183,7 @@ const CalendarButtonWrapper = styled('div', {
   width: '100%',
 
   '&::before, &::after': {
-    background: theme.palette.secondary.A200,
+    background: theme.vars.palette.secondary.A200,
     bottom: 0,
     pointerEvents: 'none',
     position: 'absolute',
@@ -228,7 +228,7 @@ const CalendarButtonButton = styled(ButtonBase, {
 
     [`&.${calendarButtonClasses.buttonToday}`]: {
       ...theme.typography.body100Bold,
-      border: `1px solid ${theme.palette.monoA.A400}`
+      border: `1px solid ${theme.vars.palette.monoA.A400}`
     },
 
     [`&.${calendarButtonClasses.button}`]: {
@@ -244,28 +244,28 @@ const CalendarButtonButton = styled(ButtonBase, {
 
     ...theme.mixins.button({
       background: 'transparent',
-      color: theme.palette.monoA.A900,
-      hover: theme.palette.monoA.A50,
-      focus: theme.palette.monoA.A200,
-      active: theme.palette.monoA.A150
+      color: theme.vars.palette.monoA.A900,
+      hover: theme.vars.palette.monoA.A50,
+      focus: theme.vars.palette.monoA.A200,
+      active: theme.vars.palette.monoA.A150
     }),
 
     [`&.${buttonBaseClasses.root}.${calendarButtonClasses.buttonInactive}`]: {
-      color: theme.palette.monoA.A550
+      color: theme.vars.palette.monoA.A550
     },
 
     [`&.${calendarButtonClasses.buttonSelected}`]: {
       ...theme.mixins.button({
-        background: theme.palette.secondary[300],
-        color: theme.palette.monoA.A900,
-        hover: theme.palette.monoA.A50,
-        focus: theme.palette.monoA.A200,
-        active: theme.palette.monoA.A150
+        background: theme.vars.palette.secondary[300],
+        color: theme.vars.palette.monoA.A900,
+        hover: theme.vars.palette.monoA.A50,
+        focus: theme.vars.palette.monoA.A200,
+        active: theme.vars.palette.monoA.A150
       })
     },
 
     [`&.${buttonBaseClasses.root}.${buttonBaseClasses.disabled}`]: {
-      color: theme.palette.monoA.A400,
+      color: theme.vars.palette.monoA.A400,
       cursor: 'not-allowed',
       pointerEvents: 'auto'
     }

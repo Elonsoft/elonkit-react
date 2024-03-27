@@ -93,7 +93,7 @@ const LinkRoot = styled(Typography, {
 
     ...(!!ownerState.showVisited && {
       '&:visited': {
-        color: theme.palette.common.linkVisited
+        color: theme.vars.palette.common.linkVisited
       }
     }),
 
@@ -128,7 +128,7 @@ const LinkRoot = styled(Typography, {
         bottom: '-1px',
         left: ownerState.startIcon ? '-1px' : '-4px',
         right: ownerState.endIcon ? '-1px' : '-4px',
-        border: `2px solid ${theme.palette.monoA.A700}`,
+        border: `2px solid ${theme.vars.palette.monoA.A700}`,
         zIndex: 1
       },
 
@@ -144,7 +144,7 @@ const LinkRoot = styled(Typography, {
     },
 
     '&:disabled': {
-      color: theme.palette.monoA.A400,
+      color: theme.vars.palette.monoA.A400,
       cursor: 'not-allowed',
       [`& .${linkClasses.children}`]: {
         textDecorationLine: 'none'

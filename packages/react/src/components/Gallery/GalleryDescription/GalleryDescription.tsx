@@ -69,7 +69,7 @@ const GalleryDescriptionContent = styled('div', {
     ...(ownerState.position === 'bottom' && {
       bottom: 0
     }),
-    background: `linear-gradient(to ${ownerState.position}, ${theme.palette.overlay[900]} calc(100% - 32px), transparent calc(100% - 32px))`
+    background: `linear-gradient(to ${ownerState.position}, ${theme.vars.palette.overlay[900]} calc(100% - 32px), transparent calc(100% - 32px))`
   })
 }));
 
@@ -78,7 +78,7 @@ const GalleryDescriptionText = styled('div', {
   slot: 'Text',
   overridesResolver: (props, styles) => styles.text
 })<{ ownerState: GalleryDescriptionOwnerState }>(({ theme, ownerState }) => ({
-  color: theme.palette.white.A800,
+  color: theme.vars.palette.white.A800,
   overflow: 'hidden',
   flexGrow: 1,
   minWidth: 0,
@@ -105,10 +105,10 @@ const GalleryDescriptionButton = styled(Button, {
   '&.MuiButton-root': {
     ...theme.mixins.button({
       background: 'transparent',
-      color: theme.palette.white.A500,
-      hover: theme.palette.white.A50,
-      focus: theme.palette.white.A200,
-      active: theme.palette.white.A150
+      color: theme.vars.palette.white.A500,
+      hover: theme.vars.palette.white.A50,
+      focus: theme.vars.palette.white.A200,
+      active: theme.vars.palette.white.A150
     })
   },
   ...(ownerState.position === 'top' && {

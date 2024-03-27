@@ -1,6 +1,11 @@
 import { ThemeOptions } from './ThemeProvider.types';
 
-import { alpha as generateAlpha, createTheme as createMUITheme, Palette, PaletteOptions } from '@mui/material/styles';
+import {
+  alpha as generateAlpha,
+  experimental_extendTheme as extendMUITheme,
+  Palette,
+  PaletteOptions
+} from '@mui/material/styles';
 import { enUS } from '@mui/material/locale';
 
 import { en } from '../../components/locale';
@@ -47,7 +52,8 @@ const createPalette = ({
  */
 export const createTheme = (
   {
-    palette,
+    paletteLight,
+    paletteDark,
     components: createComponents,
     scrollbars: createScrollbars,
     typography: createTypography,
@@ -55,16 +61,23 @@ export const createTheme = (
   }: ThemeOptions,
   ...args: any
 ) => {
-  const palettes = createPalette(palette);
   const mixins = { button: buttonMixin, listItem: listItemMixin };
 
-  const theme = createMUITheme({
+  const theme = extendMUITheme({
+    cssVarPrefix: 'any',
+    colorSchemes: {
+      light: {
+        palette: createPalette(paletteLight)
+      },
+      dark: {
+        palette: createPalette(paletteDark)
+      }
+    },
     breakpoints: {
       values: {
         ...breakpoints
       }
     },
-    palette: palettes,
     mixins
   });
 
@@ -75,14 +88,22 @@ export const createTheme = (
     ...(createComponents ? createComponents(theme, typography) : {})
   };
 
-  return createMUITheme(
+  return extendMUITheme(
     {
+      cssVarPrefix: 'any',
+      colorSchemes: {
+        light: {
+          palette: createPalette(paletteLight)
+        },
+        dark: {
+          palette: createPalette(paletteDark)
+        }
+      },
       breakpoints: {
         values: {
           ...theme.breakpoints.values
         }
       },
-      palette: palettes,
       components,
       scrollbars,
       mixins,

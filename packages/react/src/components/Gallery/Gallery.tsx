@@ -42,7 +42,7 @@ const GalleryRoot = styled(Dialog, {
     backgroundColor: 'transparent'
   },
   '.MuiDialog-paper': {
-    backgroundColor: theme.palette.overlay[900],
+    backgroundColor: theme.vars.palette.overlay[900],
     backgroundImage: 'none',
     boxShadow: 'none'
   }

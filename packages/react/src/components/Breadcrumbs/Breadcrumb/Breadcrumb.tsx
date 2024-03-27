@@ -117,19 +117,19 @@ const BreadcrumbContent = styled(Button, {
 
     ...theme.mixins.button({
       background: 'transparent',
-      color: theme.palette.monoA.A900,
-      hover: theme.palette.monoA.A50,
-      focus: theme.palette.monoA.A200,
-      active: theme.palette.monoA.A150
+      color: theme.vars.palette.monoA.A900,
+      hover: theme.vars.palette.monoA.A50,
+      focus: theme.vars.palette.monoA.A200,
+      active: theme.vars.palette.monoA.A150
     }),
 
     [`&.${buttonBaseClasses.disabled}`]: {
-      color: theme.palette.monoA.A500,
+      color: theme.vars.palette.monoA.A500,
       pointerEvents: 'none'
     },
 
     [`& .${svgIconClasses.root}`]: {
-      color: theme.palette.monoA.A500
+      color: theme.vars.palette.monoA.A500
     },
 
     ...theme.typography.caption
@@ -144,7 +144,7 @@ const BreadcrumbSeparator = styled('div', {
   display: 'flex',
   alignItems: 'center',
   userSelect: 'none',
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
 
   [`& .${svgIconClasses.root}`]: {
     width: '16px'

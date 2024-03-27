@@ -27,7 +27,7 @@ const FileInfoMetaRoot = styled(Typography, {
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
   display: 'flex',
   alignItems: 'center'
 }));

@@ -32,7 +32,7 @@ const FileIconRoot = styled('div', {
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
   display: 'flex',
   fontWeight: 700,
   height: 'auto',

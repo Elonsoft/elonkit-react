@@ -26,7 +26,7 @@ export const ErrorPageRoot = styled('div', {
   overridesResolver: (props, styles) => styles.root
 })(
   ({ theme }) => ({
-    backgroundColor: theme.palette.surface[50],
+    backgroundColor: theme.vars.palette.surface[50],
     backgroundSize: 'contain',
     backgroundPosition: 'center right',
     backgroundRepeat: 'no-repeat',

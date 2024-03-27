@@ -48,7 +48,7 @@ const PaginationRangeLabel = styled(Typography, {
   overridesResolver: (props, styles) => styles.label
 })(({ theme }) => ({
   display: 'inline-block',
-  color: theme.palette.monoA.A600
+  color: theme.vars.palette.monoA.A600
 }));
 
 const PaginationRangeButton = styled(Button, {
@@ -61,11 +61,11 @@ const PaginationRangeButton = styled(Button, {
       padding: '0 6px 0 4px',
 
       '&, &:not(:disabled):hover, &:not(:disabled):active': {
-        color: theme.palette.monoA.A900
+        color: theme.vars.palette.monoA.A900
       }
     },
     [`& .${buttonClasses.endIcon}`]: {
-      color: theme.palette.monoA.A500,
+      color: theme.vars.palette.monoA.A500,
       marginLeft: '2px'
     }
   }
@@ -77,7 +77,7 @@ const PaginationRangeValue = styled(Typography, {
   overridesResolver: (props, styles) => styles.value
 })(({ theme }) => ({
   marginLeft: '16px',
-  color: theme.palette.monoA.A600
+  color: theme.vars.palette.monoA.A600
 }));
 
 const OPTIONS = [10, 25, 100];

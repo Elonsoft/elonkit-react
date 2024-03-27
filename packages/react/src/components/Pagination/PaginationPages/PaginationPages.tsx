@@ -84,11 +84,11 @@ const PaginationPagesButton = styled(IconButton, {
 })(({ theme }) => ({
   [`&.${iconButtonClasses.root}`]: {
     '&, &:not(:disabled):hover, &:not(:disabled):active': {
-      color: theme.palette.monoA.A500
+      color: theme.vars.palette.monoA.A500
     }
   },
   [`&.${iconButtonClasses.disabled}`]: {
-    color: theme.palette.monoA.A300
+    color: theme.vars.palette.monoA.A300
   }
 }));
 
@@ -102,7 +102,7 @@ const PaginationPagesEllipsis = styled('div', {
   justifyContent: 'center',
   width: 32,
   height: 32,
-  color: theme.palette.monoA.A500
+  color: theme.vars.palette.monoA.A500
 }));
 
 const PaginationPagesPaginationItem = styled(PaginationItem, {
@@ -129,21 +129,21 @@ const PaginationPagesPaginationItem = styled(PaginationItem, {
 
     ...theme.mixins.button({
       background: 'transparent',
-      color: theme.palette.monoA.A600,
-      hover: theme.palette.monoA.A50,
-      focus: theme.palette.monoA.A200,
-      active: theme.palette.monoA.A150
+      color: theme.vars.palette.monoA.A600,
+      hover: theme.vars.palette.monoA.A50,
+      focus: theme.vars.palette.monoA.A200,
+      active: theme.vars.palette.monoA.A150
     }),
 
     [`&.${paginationItemClasses.selected}`]: {
       fontWeight: 700,
 
       ...theme.mixins.button({
-        background: theme.palette.secondary.A100,
-        color: theme.palette.monoA.A800,
-        hover: theme.palette.secondary.A100,
-        focus: theme.palette.secondary.A200,
-        active: theme.palette.secondary.A150
+        background: theme.vars.palette.secondary.A100,
+        color: theme.vars.palette.monoA.A800,
+        hover: theme.vars.palette.secondary.A100,
+        focus: theme.vars.palette.secondary.A200,
+        active: theme.vars.palette.secondary.A150
       })
     }
   }
@@ -160,10 +160,10 @@ const PaginationPagesTextField = styled(TextField, {
     [`& .${outlinedInputClasses.input}`]: {
       ...theme.typography.caption,
 
-      color: theme.palette.monoA.A600,
+      color: theme.vars.palette.monoA.A600,
       padding: '7px 8px',
       '&::placeholder': {
-        color: theme.palette.monoA.A600
+        color: theme.vars.palette.monoA.A600
       },
       '&::-webkit-outer-spin-button, &::-webkit-inner-spin-button': {
         appearance: 'none',

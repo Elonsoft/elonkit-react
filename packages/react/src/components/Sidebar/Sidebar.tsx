@@ -65,17 +65,17 @@ const SidebarContent = styled('aside', {
   order: '1',
   flexDirection: 'column',
   width: '57px',
-  backgroundColor: theme.palette.surface.background,
-  borderRight: `1px solid ${theme.palette.monoA.A100}`,
+  backgroundColor: theme.vars.palette.surface.background,
+  borderRight: `1px solid ${theme.vars.palette.monoA.A100}`,
   maxWidth: `${ownerState.maxWidth}px`,
   transition: 'width 0.2s',
 
   ...(ownerState.color === 'primary' && {
-    backgroundColor: theme.palette.primary[300]
+    backgroundColor: theme.vars.palette.primary[300]
   }),
 
   ...(ownerState.color === 'secondary' && {
-    backgroundColor: theme.palette.surface.background2
+    backgroundColor: theme.vars.palette.surface.background2
   }),
 
   ...(ownerState.open && {
@@ -108,10 +108,10 @@ const SidebarHandler = styled('div', {
     cursor: 'col-resize',
 
     '&:hover': {
-      backgroundColor: theme.palette.monoA.A50,
+      backgroundColor: theme.vars.palette.monoA.A50,
 
       [`& .${sidebarClasses.handlerLine}`]: {
-        backgroundColor: theme.palette.monoA.A150
+        backgroundColor: theme.vars.palette.monoA.A150
       }
     },
 
@@ -124,7 +124,7 @@ const SidebarHandler = styled('div', {
 
       [`& .${sidebarClasses.handlerLine}`]: {
         width: '3px',
-        backgroundColor: `${theme.palette.info.A600} !important`,
+        backgroundColor: `${theme.vars.palette.info.A600} !important`,
         backdropFilter: 'blur(20px)'
       }
     })

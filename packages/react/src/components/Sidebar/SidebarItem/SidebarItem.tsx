@@ -93,39 +93,39 @@ const SidebarItemButton = styled(ListItemButton, {
     ...((ownerState.color === 'default' || ownerState.color === 'secondary') && {
       ...theme.mixins.listItem({
         background: 'transparent',
-        color: theme.palette.monoA.A800,
-        hover: theme.palette.monoA.A50,
-        icon: theme.palette.monoA.A500,
-        focus: theme.palette.monoA.A200,
-        active: theme.palette.monoA.A150
+        color: theme.vars.palette.monoA.A800,
+        hover: theme.vars.palette.monoA.A50,
+        icon: theme.vars.palette.monoA.A500,
+        focus: theme.vars.palette.monoA.A200,
+        active: theme.vars.palette.monoA.A150
       }),
       [`&.${listItemButtonClasses.selected}`]: {
         ...theme.mixins.listItem({
-          background: theme.palette.monoA.A100,
-          hover: theme.palette.monoA.A50,
-          icon: theme.palette.monoA.A600,
-          focus: theme.palette.monoA.A75,
-          active: theme.palette.monoA.A150
+          background: theme.vars.palette.monoA.A100,
+          hover: theme.vars.palette.monoA.A50,
+          icon: theme.vars.palette.monoA.A600,
+          focus: theme.vars.palette.monoA.A75,
+          active: theme.vars.palette.monoA.A150
         })
       }
     }),
     ...(ownerState.color === 'primary' && {
       ...theme.mixins.listItem({
         background: 'transparent',
-        color: theme.palette.monoB.A800,
-        icon: theme.palette.monoB.A800,
-        hover: theme.palette.monoB.A50,
-        focus: theme.palette.monoB.A200,
-        active: theme.palette.monoB.A150
+        color: theme.vars.palette.monoB.A800,
+        icon: theme.vars.palette.monoB.A800,
+        hover: theme.vars.palette.monoB.A50,
+        focus: theme.vars.palette.monoB.A200,
+        active: theme.vars.palette.monoB.A150
       }),
       [`&.${listItemButtonClasses.selected}`]: {
         ...theme.mixins.listItem({
-          background: theme.palette.monoB.A100,
-          color: theme.palette.monoB[500],
-          icon: theme.palette.monoB[500],
-          hover: theme.palette.monoB.A50,
-          focus: theme.palette.monoB.A75,
-          active: theme.palette.monoB.A150
+          background: theme.vars.palette.monoB.A100,
+          color: theme.vars.palette.monoB[500],
+          icon: theme.vars.palette.monoB[500],
+          hover: theme.vars.palette.monoB.A50,
+          focus: theme.vars.palette.monoB.A75,
+          active: theme.vars.palette.monoB.A150
         })
       }
     })
@@ -153,20 +153,20 @@ const SidebarItemSecondaryAction = styled(IconButton, {
     ...((ownerState.color === 'default' || ownerState.color === 'secondary') && {
       ...theme.mixins.button({
         background: 'transparent',
-        color: theme.palette.monoA.A500,
-        hover: theme.palette.monoA.A50,
-        focus: theme.palette.monoA.A200,
-        active: theme.palette.monoA.A150
+        color: theme.vars.palette.monoA.A500,
+        hover: theme.vars.palette.monoA.A50,
+        focus: theme.vars.palette.monoA.A200,
+        active: theme.vars.palette.monoA.A150
       })
     }),
 
     ...(ownerState.color === 'primary' && {
       ...theme.mixins.button({
         background: 'transparent',
-        color: theme.palette.monoB.A800,
-        hover: theme.palette.monoB.A50,
-        focus: theme.palette.monoB.A200,
-        active: theme.palette.monoB.A150
+        color: theme.vars.palette.monoB.A800,
+        hover: theme.vars.palette.monoB.A50,
+        focus: theme.vars.palette.monoB.A200,
+        active: theme.vars.palette.monoB.A150
       })
     }),
 
@@ -242,14 +242,14 @@ const SidebarItemTooltip = styled(
   [`&[data-popper-placement*="right"] .${tooltipClasses.tooltip}`]: {
     padding: '0',
     maxWidth: '288px',
-    background: theme.palette.surface[400],
-    boxShadow: theme.palette.shadow.down[600],
+    background: theme.vars.palette.surface[400],
+    boxShadow: theme.vars.palette.shadow.down[600],
     marginLeft: '10px !important',
-    color: theme.palette.monoA.A900,
+    color: theme.vars.palette.monoA.A900,
     borderRadius: '4px',
 
     [`& .${tooltipClasses.arrow}`]: {
-      color: theme.palette.surface[400],
+      color: theme.vars.palette.surface[400],
       backdropFilter: 'none'
     }
   },
@@ -299,7 +299,7 @@ const SidebarItemTooltipDivider = styled('div', {
 })(({ theme }) => ({
   height: '1px',
   marginBottom: '8px',
-  backgroundColor: theme.palette.monoA.A100
+  backgroundColor: theme.vars.palette.monoA.A100
 }));
 
 export const SidebarItem: OverridableComponent<SidebarItemTypeMap> = (inProps: SidebarItemProps) => {

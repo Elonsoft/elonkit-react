@@ -51,7 +51,7 @@ const EmptyStateIcon = styled('div', {
   overridesResolver: (props, styles) => styles.icon
 })<{ ownerState: EmptyStateOwnerState }>(({ theme, ownerState }) => ({
   display: 'flex',
-  color: theme.palette.monoA.A150,
+  color: theme.vars.palette.monoA.A150,
   marginBottom: ownerState.size === 'medium' ? '12px' : '8px'
 }));
 
@@ -70,7 +70,7 @@ const EmptyStateHeading = styled(Typography, {
   slot: 'Heading',
   overridesResolver: (props, styles) => styles.heading
 })(({ theme }) => ({
-  color: theme.palette.monoA.A900,
+  color: theme.vars.palette.monoA.A900,
   display: 'block',
   '&:not(:last-child)': {
     marginBottom: '2px'
@@ -82,7 +82,7 @@ const EmptyStateSubheading = styled(Typography, {
   slot: 'Subheading',
   overridesResolver: (props, styles) => styles.subheading
 })(({ theme }) => ({
-  color: theme.palette.monoA.A600,
+  color: theme.vars.palette.monoA.A600,
   display: 'block'
 }));
 

@@ -10,12 +10,12 @@ export const GalleryTooltip = styled(
   }
 )(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
-    background: theme.palette.white.A600,
-    color: theme.palette.black.A900,
+    background: theme.vars.palette.white.A600,
+    color: theme.vars.palette.black.A900,
     borderRadius: '4px',
 
     [`& .${tooltipClasses.arrow}`]: {
-      color: theme.palette.white.A600
+      color: theme.vars.palette.white.A600
     }
   },
   '&[data-popper-reference-hidden]': {

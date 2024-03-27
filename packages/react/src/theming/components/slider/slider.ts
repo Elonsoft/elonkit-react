@@ -29,37 +29,37 @@ export const createSlider: Component<'MuiSlider'> = (theme, typography) => {
           }
         },
         '&.MuiSlider-colorPrimary': {
-          color: theme.palette.primary[300],
+          color: theme.vars.palette.primary[300],
           '& .MuiSlider-thumb': {
             '&:hover': {
-              boxShadow: `0 0 0 8px ${theme.palette.primary.A150}`
+              boxShadow: `0 0 0 8px ${theme.vars.palette.primary.A150}`
             },
             '&.Mui-focusVisible': {
-              boxShadow: `0 0 0 8px ${theme.palette.primary.A400}`
+              boxShadow: `0 0 0 8px ${theme.vars.palette.primary.A400}`
             },
             '&.Mui-active': {
-              boxShadow: `0 0 0 6px ${theme.palette.primary.A300}`
+              boxShadow: `0 0 0 6px ${theme.vars.palette.primary.A300}`
             }
           }
         },
         '&.MuiSlider-colorSecondary': {
-          color: theme.palette.secondary[300],
+          color: theme.vars.palette.secondary[300],
           '& .MuiSlider-thumb': {
             '&:hover': {
-              boxShadow: `0 0 0 8px ${theme.palette.secondary.A150}`
+              boxShadow: `0 0 0 8px ${theme.vars.palette.secondary.A150}`
             },
             '&.Mui-focusVisible': {
-              boxShadow: `0 0 0 7px ${theme.palette.secondary.A400}`
+              boxShadow: `0 0 0 7px ${theme.vars.palette.secondary.A400}`
             },
             '&.Mui-active': {
-              boxShadow: `0 0 0 6px ${theme.palette.secondary.A300}`
+              boxShadow: `0 0 0 6px ${theme.vars.palette.secondary.A300}`
             }
           }
         },
         '&.Mui-disabled': {
-          color: theme.palette.monoA.A200,
+          color: theme.vars.palette.monoA.A200,
           '& .MuiSlider-rail': {
-            backgroundColor: theme.palette.monoA.A200
+            backgroundColor: theme.vars.palette.monoA.A200
           },
           '& .MuiSlider-track': {
             display: 'none'
@@ -68,7 +68,7 @@ export const createSlider: Component<'MuiSlider'> = (theme, typography) => {
             width: '10px',
             height: '10px',
             backdropFilter: 'blur(100px)',
-            boxShadow: `0 0 0 2px ${theme.palette.monoB[500]}`
+            boxShadow: `0 0 0 2px ${theme.vars.palette.monoB[500]}`
           }
         }
       },
@@ -103,7 +103,7 @@ export const createSlider: Component<'MuiSlider'> = (theme, typography) => {
         }
       },
       rail: {
-        backgroundColor: theme.palette.monoA.A400,
+        backgroundColor: theme.vars.palette.monoA.A400,
         opacity: 1
       },
       track: {
@@ -111,17 +111,17 @@ export const createSlider: Component<'MuiSlider'> = (theme, typography) => {
         transitionTimingFunction: 'linear'
       },
       mark: {
-        backgroundColor: theme.palette.monoA.A400,
+        backgroundColor: theme.vars.palette.monoA.A400,
         opacity: 1
       },
       markActive: {
-        backgroundColor: theme.palette.monoA.A400
+        backgroundColor: theme.vars.palette.monoA.A400
       },
       valueLabel: {
         ...typography.caption,
-        backgroundColor: theme.palette.monoA.A600,
+        backgroundColor: theme.vars.palette.monoA.A600,
         borderRadius: '4px',
-        color: theme.palette.monoB[500],
+        color: theme.vars.palette.monoB[500],
         fontWeight: 400,
         minWidth: '22px',
         padding: '4px',
@@ -132,7 +132,7 @@ export const createSlider: Component<'MuiSlider'> = (theme, typography) => {
 
         '&:before': {
           background: 'none',
-          borderColor: `${theme.palette.monoA.A600} transparent transparent transparent`,
+          borderColor: `${theme.vars.palette.monoA.A600} transparent transparent transparent`,
           borderStyle: 'solid',
           borderWidth: '5px 5px 0 5px',
           height: 0,

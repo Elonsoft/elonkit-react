@@ -84,7 +84,7 @@ const AudioPlayerRoot = styled('div', {
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
   alignItems: 'center',
-  backgroundColor: theme.palette.monoA.A50,
+  backgroundColor: theme.vars.palette.monoA.A50,
   borderRadius: 44,
   display: 'flex',
   padding: '0 4px',
@@ -102,7 +102,7 @@ const AudioPlayerIconButton = styled(IconButton, {
   overridesResolver: (props, styles) => styles.iconButton
 })(({ theme }) => ({
   [`&.${iconButtonClasses.root}`]: {
-    color: theme.palette.monoA.A600
+    color: theme.vars.palette.monoA.A600
   }
 }));
 
@@ -147,7 +147,7 @@ const AudioPlayerCurrentTooltip = styled(
 
   [`& .${tooltipClasses.tooltip}`]: {
     ...theme.typography.caption,
-    color: theme.palette.monoB[500],
+    color: theme.vars.palette.monoB[500],
 
     '&::after': {
       content: '""',
@@ -158,9 +158,9 @@ const AudioPlayerCurrentTooltip = styled(
       borderRadius: 4,
       backgroundColor: ownerState.isOverTrack
         ? ownerState.isPlaying
-          ? theme.palette.black.A400
-          : theme.palette.monoA.A600
-        : theme.palette.monoA.A150,
+          ? theme.vars.palette.black.A400
+          : theme.vars.palette.monoA.A600
+        : theme.vars.palette.monoA.A150,
       left: '50%',
       transform: 'translateX(-2.3px)',
       top: 'calc(100% + 12px)'
@@ -185,22 +185,22 @@ const AudioPlayerCurrentSlider = styled(Slider, {
       '&:hover': {
         height: 8,
         width: 8,
-        boxShadow: `0 0 0 10px ${theme.palette.primary.A150}`
+        boxShadow: `0 0 0 10px ${theme.vars.palette.primary.A150}`
       },
       [`&.${sliderClasses.focusVisible}`]: {
         opacity: 1,
         height: 10,
         width: 10,
-        boxShadow: `0 0 0 9px ${theme.palette.primary.A400}`
+        boxShadow: `0 0 0 9px ${theme.vars.palette.primary.A400}`
       },
       [`&.${sliderClasses.active}`]: {
         height: 10,
         width: 10,
-        boxShadow: `0 0 0 9px ${theme.palette.primary.A300}`
+        boxShadow: `0 0 0 9px ${theme.vars.palette.primary.A300}`
       }
     },
     ...(!ownerState.isPlaying && {
-      color: theme.palette.monoA.A600,
+      color: theme.vars.palette.monoA.A600,
       [`& .${sliderClasses.thumb}`]: {
         opacity: 0,
         backdropFilter: 'blur(40px)',
@@ -209,7 +209,7 @@ const AudioPlayerCurrentSlider = styled(Slider, {
           opacity: 1,
           height: 10,
           width: 10,
-          boxShadow: `0 0 0 9px ${theme.palette.monoA.A75}`
+          boxShadow: `0 0 0 9px ${theme.vars.palette.monoA.A75}`
         }
       }
     })
@@ -226,7 +226,7 @@ const AudioPlayerCurrentSlider = styled(Slider, {
     }
   },
   [`& .${sliderClasses.rail}`]: {
-    backgroundColor: theme.palette.monoA.A100
+    backgroundColor: theme.vars.palette.monoA.A100
   }
 }));
 
@@ -235,7 +235,7 @@ const AudioPlayerTime = styled(Typography, {
   slot: 'Time',
   overridesResolver: (props, styles) => styles.time
 })(({ theme }) => ({
-  color: theme.palette.monoA.A800,
+  color: theme.vars.palette.monoA.A800,
   fontVariantNumeric: 'tabular-nums',
   whiteSpace: 'nowrap'
 })) as typeof Typography;
@@ -263,21 +263,21 @@ const AudioPlayerMenu = styled(
 )(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
     padding: 0,
-    backgroundColor: theme.palette.surface[400],
-    boxShadow: theme.palette.shadow.down[600],
+    backgroundColor: theme.vars.palette.surface[400],
+    boxShadow: theme.vars.palette.shadow.down[600],
     backdropFilter: 'none',
     borderRadius: '6px',
 
     [`& .${tooltipClasses.arrow}`]: {
-      color: theme.palette.surface[400],
+      color: theme.vars.palette.surface[400],
       backdropFilter: 'none'
     }
   },
   [`&[data-popper-placement*="top"] .${tooltipClasses.tooltip}`]: {
-    boxShadow: theme.palette.shadow.down[600]
+    boxShadow: theme.vars.palette.shadow.down[600]
   },
   [`&[data-popper-placement*="bottom"] .${tooltipClasses.tooltip}`]: {
-    boxShadow: theme.palette.shadow.up[600]
+    boxShadow: theme.vars.palette.shadow.up[600]
   }
 }));
 
@@ -317,7 +317,7 @@ const AudioPlayerListItemIcon = styled(ListItemIcon, {
   slot: 'ListItemIcon',
   overridesResolver: (props, styles) => styles.listItemIcon
 })(({ theme }) => ({
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
 
   '&, &:first-of-type': {
     marginRight: '12px'
@@ -331,12 +331,12 @@ const AudioPlayerListItemText = styled(ListItemText, {
 })(({ theme }) => ({
   margin: 0,
   [`& .${listItemTextClasses.primary}`]: {
-    color: theme.palette.monoA.A900,
+    color: theme.vars.palette.monoA.A900,
     fontWeight: 400,
     ...theme.typography.body100
   },
   [`& .${listItemTextClasses.secondary}`]: {
-    color: theme.palette.monoA.A600,
+    color: theme.vars.palette.monoA.A600,
     marginTop: 2,
     ...theme.typography.caption
   }
@@ -348,7 +348,7 @@ const AudioPlayerListDivider = styled(Divider, {
   overridesResolver: (props, styles) => styles.listDivider
 })(({ theme }) => ({
   [`&.${dividerClasses.root}`]: {
-    borderColor: theme.palette.monoA.A100,
+    borderColor: theme.vars.palette.monoA.A100,
     margin: '8px 0'
   }
 }));
@@ -360,7 +360,7 @@ const AudioPlayerRateOpen = styled('div', {
 })(({ theme }) => ({
   display: 'inline-flex',
   marginLeft: 12,
-  color: theme.palette.monoA.A500
+  color: theme.vars.palette.monoA.A500
 }));
 
 const AudioPlayerRateCheck = styled('div', {
@@ -369,7 +369,7 @@ const AudioPlayerRateCheck = styled('div', {
   overridesResolver: (props, styles) => styles.rateCheck
 })(({ theme }) => ({
   display: 'flex',
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
   marginRight: '-4px'
 }));
 
@@ -383,7 +383,7 @@ const AudioPlayerVolume = styled(Typography, {
   width: 40,
   paddingTop: 12,
   paddingBottom: 10,
-  color: theme.palette.monoB[500],
+  color: theme.vars.palette.monoB[500],
   justifyContent: 'center',
   textAlign: 'center',
   fontWeight: 400
@@ -408,22 +408,22 @@ const AudioPlayerVolumeSlider = styled(Slider, {
   margin: '3px 0',
   height: 86,
   [`&.${sliderClasses.colorPrimary}`]: {
-    color: theme.palette.monoB[500],
+    color: theme.vars.palette.monoB[500],
 
     [`& .${sliderClasses.thumb}`]: {
       '&:hover': {
-        boxShadow: `0 0 0 8px ${theme.palette.monoB.A50}`
+        boxShadow: `0 0 0 8px ${theme.vars.palette.monoB.A50}`
       },
       [`&.${sliderClasses.focusVisible}`]: {
-        boxShadow: `0 0 0 7px ${theme.palette.monoB.A150}`
+        boxShadow: `0 0 0 7px ${theme.vars.palette.monoB.A150}`
       },
       [`&.${sliderClasses.active}`]: {
-        boxShadow: `0 0 0 6px ${theme.palette.monoB.A200}`
+        boxShadow: `0 0 0 6px ${theme.vars.palette.monoB.A200}`
       }
     }
   },
   [`& .${sliderClasses.rail}`]: {
-    backgroundColor: theme.palette.monoB.A400
+    backgroundColor: theme.vars.palette.monoB.A400
   }
 }));
 

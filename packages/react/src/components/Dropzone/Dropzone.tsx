@@ -69,8 +69,8 @@ const DropzoneDropzone = styled(ButtonBase, {
   }
 })<{ ownerState: DropzoneOwnerState }>(({ theme, ownerState }) => ({
   width: '100%',
-  backgroundColor: theme.palette.monoA.A50,
-  border: `1px dashed ${theme.palette.monoA.A200}`,
+  backgroundColor: theme.vars.palette.monoA.A50,
+  border: `1px dashed ${theme.vars.palette.monoA.A200}`,
   borderRadius: 4,
   display: 'flex',
   flexDirection: 'column',
@@ -79,23 +79,23 @@ const DropzoneDropzone = styled(ButtonBase, {
   transitionProperty: 'background-color, border',
   transitionTimingFunction: theme.transitions.easing.easeInOut,
   ...(ownerState.isDragOverDocument && {
-    backgroundColor: theme.palette.primary.A50,
-    border: `1px dashed ${theme.palette.primary.A500}`
+    backgroundColor: theme.vars.palette.primary.A50,
+    border: `1px dashed ${theme.vars.palette.primary.A500}`
   }),
   [`& .${touchRippleClasses.root}`]: {
     transitionDuration: `${theme.transitions.duration.short}ms`,
     transitionProperty: 'background-color, border',
     transitionTimingFunction: theme.transitions.easing.easeInOut,
     ...(ownerState.isDragOver && {
-      backgroundColor: theme.palette.primary.A100
+      backgroundColor: theme.vars.palette.primary.A100
     }),
     ...(ownerState.error && {
-      backgroundColor: theme.palette.error.A50,
-      border: `1px dashed ${theme.palette.error.A800}`
+      backgroundColor: theme.vars.palette.error.A50,
+      border: `1px dashed ${theme.vars.palette.error.A800}`
     })
   },
   [`&:hover .${touchRippleClasses.root}, &:focus-visible .${touchRippleClasses.root}`]: {
-    backgroundColor: theme.palette.monoA.A50
+    backgroundColor: theme.vars.palette.monoA.A50
   }
 }));
 
@@ -105,7 +105,7 @@ const DropzoneHeading = styled('div', {
   overridesResolver: (props, styles) => styles.heading
 })(({ theme }) => ({
   alignItems: 'center',
-  color: theme.palette.primary[300],
+  color: theme.vars.palette.primary[300],
   display: 'grid',
   gap: 4,
   gridAutoFlow: 'column',
@@ -127,7 +127,7 @@ const DropzoneSubheading = styled(Typography, {
   slot: 'Subheading',
   overridesResolver: (props, styles) => styles.subheading
 })(({ theme }) => ({
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
   marginTop: 4
 }));
 
@@ -159,9 +159,9 @@ const DropzoneHelperText = styled(Typography, {
     return [styles.helperText, error && styles.helperTextError];
   }
 })<{ ownerState: DropzoneOwnerState }>(({ theme, ownerState }) => ({
-  color: theme.palette.monoA.A700,
+  color: theme.vars.palette.monoA.A700,
   ...(ownerState.error && {
-    color: theme.palette.error.A800
+    color: theme.vars.palette.error.A800
   })
 }));
 

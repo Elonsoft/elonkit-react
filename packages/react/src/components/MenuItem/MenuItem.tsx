@@ -33,11 +33,11 @@ const MenuItemRoot = styled(MuiMenuItem, {
     [`&.${menuItemClasses.root}`]: {
       ...theme.mixins.listItem({
         background: 'transparent',
-        color: theme.palette.error[300],
-        icon: theme.palette.error[300],
-        hover: theme.palette.error.A50,
-        active: theme.palette.error.A150,
-        focus: theme.palette.error.A75
+        color: theme.vars.palette.error[300],
+        icon: theme.vars.palette.error[300],
+        hover: theme.vars.palette.error.A50,
+        active: theme.vars.palette.error.A150,
+        focus: theme.vars.palette.error.A75
       })
     }
   })

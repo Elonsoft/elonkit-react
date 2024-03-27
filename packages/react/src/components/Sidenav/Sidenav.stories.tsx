@@ -32,14 +32,14 @@ const SearchField = styled(TextField)(({ theme }) => ({
       padding: '0 4px',
 
       [`& .${iconButtonClasses.root}`]: {
-        color: theme.palette.monoA.A500
+        color: theme.vars.palette.monoA.A500
       },
 
       [`& .${inputAdornmentClasses.positionStart}`]: {
         marginRight: '4px',
 
         [`& .${svgIconClasses.root}`]: {
-          color: theme.palette.monoA.A400
+          color: theme.vars.palette.monoA.A400
         }
       }
     }

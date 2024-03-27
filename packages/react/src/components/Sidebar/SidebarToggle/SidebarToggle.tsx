@@ -69,7 +69,7 @@ const SidebarToggleButton = styled(IconButton, {
     width: '20px',
     height: '20px',
     marginLeft: ownerState.open ? '7px' : 0,
-    boxShadow: `inset 0 0 0 1px ${theme.palette.monoA.A100}`,
+    boxShadow: `inset 0 0 0 1px ${theme.vars.palette.monoA.A100}`,
     borderRadius: '20px',
     zIndex: '4',
     overflow: 'hidden',
@@ -83,21 +83,21 @@ const SidebarToggleButton = styled(IconButton, {
 
     ...((ownerState.color === 'default' || ownerState.color === 'secondary') && {
       ...theme.mixins.button({
-        background: theme.palette.surface.background2,
-        color: theme.palette.monoA.A500,
-        hover: theme.palette.monoA.A50,
-        focus: theme.palette.monoA.A150,
-        active: theme.palette.monoA.A150
+        background: theme.vars.palette.surface.background2,
+        color: theme.vars.palette.monoA.A500,
+        hover: theme.vars.palette.monoA.A50,
+        focus: theme.vars.palette.monoA.A150,
+        active: theme.vars.palette.monoA.A150
       })
     }),
 
     ...(ownerState.color === 'primary' && {
       ...theme.mixins.button({
-        background: theme.palette.primary[300],
-        color: theme.palette.monoB[500],
-        hover: theme.palette.monoB.A50,
-        focus: theme.palette.monoA.A150,
-        active: theme.palette.monoA.A150
+        background: theme.vars.palette.primary[300],
+        color: theme.vars.palette.monoB[500],
+        hover: theme.vars.palette.monoB.A50,
+        focus: theme.vars.palette.monoA.A150,
+        active: theme.vars.palette.monoA.A150
       })
     })
   }

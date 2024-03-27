@@ -48,11 +48,11 @@ const AppBarRoot = styled('div', {
   display: 'flex',
   alignItems: 'center',
   padding: '8px',
-  backgroundColor: theme.palette.surface[50],
-  color: theme.palette.monoA.A900,
+  backgroundColor: theme.vars.palette.surface[50],
+  color: theme.vars.palette.monoA.A900,
 
   [`&.${appBarClasses.stuck}`]: {
-    borderBottom: `1px solid ${theme.palette.monoA.A100}`
+    borderBottom: `1px solid ${theme.vars.palette.monoA.A100}`
   }
 }));
 
