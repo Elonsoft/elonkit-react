@@ -18,7 +18,6 @@ import { TableHead } from './TableHead';
 import { TableRow } from './TableRow';
 import { TableScrollbar } from './TableScrollbar';
 import { TableText } from './TableText';
-import { useShiftSelected } from './useShiftSelected';
 import { useTableResize } from './useTableResize';
 import { useTableSelection } from './useTableSelection';
 
@@ -130,23 +129,16 @@ export const Demo: Story = {
 
     const { onResize, onResizeCommit } = useTableResize(ref, rowRef, columns, setColumns);
 
-    const { selected, setSelected, isAllSelected, isSomeSelected, toggleAll } = useTableSelection(DATA[locale], {
-      key: 'id'
-    });
+    const { selected, setSelected, isAllSelected, isSomeSelected, toggleAll, onChange } = useTableSelection(
+      DATA[locale],
+      {
+        key: 'id'
+      }
+    );
 
     const onClose = useCallback(() => {
       setSelected([]);
     }, []);
-
-    const handleChange = useShiftSelected(DATA[locale], (isChecked, items) => {
-      if (isChecked) {
-        setSelected((prevSelected) => [...prevSelected, ...items.map((item) => item.id)]);
-      } else {
-        setSelected((prevSelected) =>
-          prevSelected.filter((selectedId) => !items.some((item) => item.id === selectedId))
-        );
-      }
-    });
 
     return (
       <Table ref={ref} columns={columns}>
@@ -191,66 +183,65 @@ export const Demo: Story = {
             const isSelected = selected.indexOf(row.id) !== -1;
             const labelId = `story-usage-checkbox-${row.id}`;
 
-              return (
-                <TableRow key={row.id} hover selected={isSelected} tabIndex={0}>
-                  <TableCell overlap padding="checkbox">
-                    <Checkbox
-                      checked={isSelected}
-                      color="secondary"
-                      inputProps={{ 'aria-labelledby': labelId }}
-                      onChange={(event) => handleChange(event, row)}
-                    />
+            return (
+              <TableRow key={row.id} hover selected={isSelected} tabIndex={0}>
+                <TableCell overlap padding="checkbox">
+                  <Checkbox
+                    checked={isSelected}
+                    color="secondary"
+                    inputProps={{ 'aria-labelledby': labelId }}
+                    onChange={(event) => onChange(event, row)}
+                  />
+                </TableCell>
+                {fields.map((field) => (
+                  <TableCell key={field} id={field === 'name' ? labelId : undefined}>
+                    <TableText>{row[field]}</TableText>
                   </TableCell>
-                  {fields.map((field) => (
-                    <TableCell key={field} id={field === 'name' ? labelId : undefined}>
-                      <TableText>{row[field]}</TableText>
-                    </TableCell>
-                  ))}
-                  <TableCell padding="none" />
-                  <TableCell overlap align="flex-end">
-                    <IconButton aria-label={locale === 'en' ? 'More' : 'Ещё'}>
-                      <IconDotsVerticalW500 />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-          <TableFoot sticky={0}>
-            {!!selected.length && (
-              <TableActions
-                count={selected.length}
-                label={locale === 'en' ? 'Selected' : 'Выбрано'}
-                sx={(theme) => ({ borderBottom: `1px solid ${theme.palette.monoA.A100}` })}
-              >
-                <IconButton aria-label={locale === 'en' ? 'Edit' : 'Редактировать'}>
-                  <IconPencilW500 />
-                </IconButton>
-                <Divider flexItem orientation="vertical" />
-                <IconButton aria-label={locale === 'en' ? 'Unselect all' : 'Снять всё выделение'} onClick={onClose}>
-                  <IconCloseW600 />
-                </IconButton>
-              </TableActions>
-            )}
-            <TableScrollbar />
-            <Pagination
-              count={100}
-              itemsPerPage={10}
-              page={1}
-              sx={{ padding: '12px', paddingLeft: '16px' }}
-              onItemsPerPageChange={() => {
-                /* */
-              }}
-              onPageChange={() => {
-                /* */
-              }}
+                ))}
+                <TableCell padding="none" />
+                <TableCell overlap align="flex-end">
+                  <IconButton aria-label={locale === 'en' ? 'More' : 'Ещё'}>
+                    <IconDotsVerticalW500 />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+        <TableFoot sticky={0}>
+          {!!selected.length && (
+            <TableActions
+              count={selected.length}
+              label={locale === 'en' ? 'Selected' : 'Выбрано'}
+              sx={(theme) => ({ borderBottom: `1px solid ${theme.palette.monoA.A100}` })}
             >
-              <PaginationRange />
-              <PaginationPages boundaryCount={0} siblingCount={0} />
-            </Pagination>
-          </TableFoot>
-        </Table>
-      </>
+              <IconButton aria-label={locale === 'en' ? 'Edit' : 'Редактировать'}>
+                <IconPencilW500 />
+              </IconButton>
+              <Divider flexItem orientation="vertical" />
+              <IconButton aria-label={locale === 'en' ? 'Unselect all' : 'Снять всё выделение'} onClick={onClose}>
+                <IconCloseW600 />
+              </IconButton>
+            </TableActions>
+          )}
+          <TableScrollbar />
+          <Pagination
+            count={100}
+            itemsPerPage={10}
+            page={1}
+            sx={{ padding: '12px', paddingLeft: '16px' }}
+            onItemsPerPageChange={() => {
+              /* */
+            }}
+            onPageChange={() => {
+              /* */
+            }}
+          >
+            <PaginationRange />
+            <PaginationPages boundaryCount={0} siblingCount={0} />
+          </Pagination>
+        </TableFoot>
+      </Table>
     );
   }
 };
@@ -318,7 +309,6 @@ export const ColumnPinning: Story = {
       }
       return undefined;
     };
-
     return (
       <Box>
         <Box
@@ -402,7 +392,6 @@ export const ColumnPinning: Story = {
             {DATA[locale].map((row) => {
               const isSelected = selected.indexOf(row.id) !== -1;
               const labelId = `story-usage-checkbox-${row.id}`;
-
               return (
                 <TableRow key={row.id} hover={false} selected={isSelected}>
                   <TableCell overlap padding="checkbox" pin={getPin('checkbox')}>
