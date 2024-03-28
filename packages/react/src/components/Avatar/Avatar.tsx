@@ -8,13 +8,12 @@ import { avatarClasses, getAvatarUtilityClass } from './Avatar.classes';
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
 import { styled, useThemeProps } from '@mui/material/styles';
-import { capitalize } from '@mui/material';
+import { capitalize, svgIconClasses } from '@mui/material';
 
 type AvatarOwnerState = {
   classes?: AvatarProps['classes'];
-  size?: AvatarProps['size'];
-  variant?: AvatarProps['variant'];
-  src?: AvatarProps['src'];
+  size: NonNullable<AvatarProps['size']>;
+  variant: NonNullable<AvatarProps['variant']>;
 };
 
 const useUtilityClasses = (ownerState: AvatarOwnerState) => {
@@ -83,10 +82,16 @@ const AvatarRoot = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   overflow: 'hidden',
+  color: theme.palette.monoA.A500,
+
+  [`& .${svgIconClasses.root}`]: {
+    color: theme.palette.monoA.A400
+  },
 
   [`&.${avatarClasses.variantSquare}`]: {
     borderRadius: '8px'
   },
+
   [`&.${avatarClasses.variantCircle}`]: {
     borderRadius: '50%'
   }
@@ -104,11 +109,19 @@ const AvatarImage = styled('img', {
 });
 
 export const Avatar = (inProps: AvatarProps) => {
-  const { className, children, variant, src, alt, ...props } = useThemeProps({
+  const {
+    className,
+    children,
+    variant = 'square',
+    src,
+    alt,
+    size = 40,
+    ...props
+  } = useThemeProps({
     props: inProps,
     name: 'ESAvatar'
   });
-  const ownerState = { ...props, src, alt, variant };
+  const ownerState = { ...props, variant, size };
   const classes = useUtilityClasses(ownerState);
   const hasImgLoaded = useLoaded(src || '') === 'loaded';
   const hasImgNotFailing = src ? hasImgLoaded : false;
@@ -124,10 +137,8 @@ export const Avatar = (inProps: AvatarProps) => {
   }
 
   return (
-    <>
-      <AvatarRoot className={clsx(className, classes.root)} ownerState={ownerState} {...props}>
-        {child}
-      </AvatarRoot>
-    </>
+    <AvatarRoot className={clsx(className, classes.root)} ownerState={ownerState} {...props}>
+      {child}
+    </AvatarRoot>
   );
 };

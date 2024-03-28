@@ -22,8 +22,8 @@ export interface AvatarProps {
    * @default 40
    */
   size?: number;
-  /** Path to avatar. */
+  /** The `src` attribute for the `img` element. */
   src?: string;
-  /** Avatar alt. */
+  /** The `alt` attribute for the `img` element. */
   alt?: string;
 }
