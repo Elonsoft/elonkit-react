@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 
 import { Breakpoint, Components, PaletteOptions, Theme } from '@mui/material/styles';
 import { TypographyOptions } from '@mui/material/styles/createTypography';
-import type {} from '@mui/material/themeCssVarsAugmentation';
 
 export interface ThemeProviderProps {
   children: ReactNode;
   /** A theme object, usually the result of `createTheme()`. */
   theme: Theme;
+  isDarkMode?: boolean;
 }
 
 export interface ThemeOptions {

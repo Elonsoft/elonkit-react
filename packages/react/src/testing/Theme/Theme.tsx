@@ -5,7 +5,6 @@ import { IThemeProps } from './Theme.types';
 import DateFnsAdapter from '@date-io/date-fns';
 import { enUS as dateEN, ru as dateRU } from 'date-fns/locale';
 
-//import { useColorScheme } from '@mui/material/styles';
 import { enUS, ruRU } from '@mui/material/locale';
 
 import { DateAdapterProvider, en, ru } from '../../components';
@@ -13,7 +12,6 @@ import { DialogStackProvider } from '../../components/DialogStack';
 import { createTheme, palettes, ThemeProvider } from '../../theming';
 
 export const Theme = ({ children, isDarkMode, locale }: IThemeProps) => {
-  //const mode = isDarkMode ? 'dark' : 'light';
   const theme = useMemo(() => {
     return createTheme(
       {
@@ -28,10 +26,10 @@ export const Theme = ({ children, isDarkMode, locale }: IThemeProps) => {
       },
       locale === 'ru' ? { ...ruRU, ...ru } : { ...enUS, ...en }
     );
-  }, [isDarkMode, locale]);
+  }, [locale]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider isDarkMode={isDarkMode} theme={theme}>
       <DialogStackProvider>
         <DateAdapterProvider adapter={DateFnsAdapter} locale={locale === 'ru' ? dateRU : dateEN}>
           {children}

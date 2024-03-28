@@ -7,7 +7,7 @@ import { getSwitchUtilityClass, switchClasses } from './Switch.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { styled, useThemeProps } from '@mui/material/styles';
+import { styled, Theme, useThemeProps } from '@mui/material/styles';
 import ButtonBase, { buttonBaseClasses } from '@mui/material/ButtonBase';
 
 import { useControlled } from '../../hooks/useControlled';
@@ -43,7 +43,7 @@ const SwitchRoot = styled('div', {
     } = props;
     return [styles.root, disabled && styles.disabled, checked && styles.checked, styles[size]];
   }
-})<{ ownerState: SwitchOwnerState }>(({ ownerState: { color }, theme }) => ({
+})<{ ownerState: SwitchOwnerState; theme: Theme }>(({ ownerState: { color }, theme }) => ({
   position: 'relative',
   display: 'inline-flex',
   alignItems: 'center',
@@ -127,8 +127,8 @@ const SwitchTrack = styled('div', {
 const SwitchThumb = styled('div', {
   name: 'ESSwitch',
   slot: 'Thumb',
-  overridesResolver: (props, styles) => styles.thumb
-})(({ theme }) => ({
+  overridesResolver: (_props, styles) => styles.thumb
+})<{ theme?: Theme }>(({ theme }) => ({
   backgroundColor: theme.vars.palette.common.switch,
   border: '2px solid currentColor',
   borderRadius: '50%'
@@ -137,8 +137,8 @@ const SwitchThumb = styled('div', {
 const SwitchButton = styled(ButtonBase, {
   name: 'ESSwitch',
   slot: 'Button',
-  overridesResolver: (props, styles) => styles.button
-})(({ theme }) => ({
+  overridesResolver: (_props, styles) => styles.button
+})<{ theme: Theme }>(({ theme }) => ({
   borderRadius: '50%',
   padding: '8px',
   left: 0,
@@ -159,7 +159,7 @@ const SwitchButton = styled(ButtonBase, {
   [`&.${buttonBaseClasses.focusVisible}`]: {
     backgroundColor: theme.vars.palette.monoA.A200
   }
-})) as typeof ButtonBase;
+})) as unknown as typeof ButtonBase;
 
 const SwitchInput = styled('input', {
   name: 'ESSwitch',

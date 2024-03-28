@@ -14,9 +14,9 @@ export const Demo: Story = () => {
       component="div"
       sx={(theme) => ({
         padding: '16px',
-        border: `1px dashed ${theme.palette.monoA.A500}`,
+        border: `1px dashed ${theme.vars.palette.monoA.A500}`,
         borderRadius: '2px',
-        backgroundColor: isDragOver ? theme.palette.monoA.A50 : 'transparent'
+        backgroundColor: isDragOver ? theme.vars.palette.monoA.A50 : 'transparent'
       })}
       variant="body100"
       {...props}

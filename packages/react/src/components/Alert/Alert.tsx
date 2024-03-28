@@ -5,8 +5,7 @@ import { alertClasses, getAlertUtilityClass } from './Alert.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { styled, useThemeProps } from '@mui/material/styles';
-import type {} from '@mui/material/themeCssVarsAugmentation';
+import { styled, Theme, useThemeProps } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { capitalize } from '@mui/material/utils';
 
@@ -43,13 +42,13 @@ const AlertRoot = styled('div', {
 
     return [styles.root, styles[variant], styles[`${variant}${capitalize(color || severity)}`]];
   }
-})<{ ownerState: AlertOwnerState }>(({ ownerState: { isWithActions }, theme }) => ({
+})<{ ownerState: AlertOwnerState; theme: Theme }>(({ ownerState: { isWithActions }, theme }) => ({
   display: 'flex',
   borderRadius: '4px',
   padding: `${isWithActions ? '11px' : '7px'} 15px`,
 
   [`&.${alertClasses.standardSuccess}`]: {
-    backgroundColor: theme.vars.palette.success.A100, //theme.vars.palette???
+    backgroundColor: theme.vars.palette.success.A100,
     border: `1px solid ${theme.vars.palette.success.A200}`,
     color: theme.vars.palette.success[300]
   },
