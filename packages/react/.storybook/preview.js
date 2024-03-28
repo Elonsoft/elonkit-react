@@ -17,7 +17,7 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/
     },
-    exclude: /^(classes|className|sx|(on|icon|label)[A-Z].*)$/
+    exclude: /^(classes|className|component|ref|sx|(on|icon|label)[A-Z].*)$/
   },
   darkMode: {
     light: themeLight,
