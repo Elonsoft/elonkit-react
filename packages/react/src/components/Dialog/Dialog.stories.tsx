@@ -194,6 +194,47 @@ export const Alignment: Story = {
   }
 };
 
+/** Dialogs can be sized as fullScreen. */
+export const FullScreen: Story = {
+  render: (_args, context) => {
+    const dialogStack = useDialogStack();
+
+    const onOpen = () => {
+      dialogStack
+        .open(({ close }) => (
+          <Dialog fullScreen align="flex-start" onClose={() => close()}>
+            <DialogTitle>{getHeadingText(context)}</DialogTitle>
+            <DialogContent>
+              <Typography variant="body200">
+                Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
+                quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit
+                amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
+                consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button color="tertiary" size="40" variant="outlined" onClick={() => close()}>
+                {getCancelButtonText(context)}
+              </Button>
+              <Button color="primary" size="40" variant="contained" onClick={() => close(true)}>
+                {getCreateButtonText(context)}
+              </Button>
+            </DialogActions>
+          </Dialog>
+        ))
+        .afterClosed.then((data) => {
+          console.log(data);
+        });
+    };
+
+    return (
+      <Button variant="contained" onClick={onOpen}>
+        {getOpenButtonText(context)}
+      </Button>
+    );
+  }
+};
+
 /** Dialogs can be easily stacked on top of each other with the help of the `DialogStackProvider`. */
 export const Stack: Story = {
   render: function Render(_args, context) {
