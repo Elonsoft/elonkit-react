@@ -46,27 +46,11 @@ const indeterminate2Keyframe = keyframes`
   }
 `;
 
-const bufferKeyframe = keyframes`
-  0% {
-    opacity: 1;
-    background-position: 0 -23px;
-  }
-
-  60% {
-    opacity: 0;
-    background-position: 0 -23px;
-  }
-
-  100% {
-    opacity: 1;
-    background-position: -200px -23px;
-  }
-`;
-
 type LinearProgressOwnerState = {
   classes?: LinearProgressProps['classes'];
   variant: NonNullable<LinearProgressProps['variant']>;
   color: NonNullable<LinearProgressProps['color']>;
+  width: NonNullable<LinearProgressProps['width']>;
 };
 
 const useUtilityClasses = (ownerState: LinearProgressOwnerState) => {
@@ -106,8 +90,8 @@ const LinearProgressRoot = styled('span', {
   position: 'relative',
   overflow: 'hidden',
   display: 'block',
-  height: 4,
-  borderRadius: '2px',
+  height: `${ownerState.width}px`,
+  borderRadius: `${ownerState.width / 2}px`,
   zIndex: 0,
   '@media print': {
     colorAdjust: 'exact'
@@ -138,27 +122,22 @@ const LinearProgressDashed = styled('span', {
 
     return [styles.dashed, styles[`dashedColor${capitalize(ownerState.color)}`]];
   }
-})<{ ownerState: LinearProgressOwnerState }>(
-  ({ ownerState, theme }) => {
-    const backgroundColor = theme.palette.monoA.A200;
+})<{ ownerState: LinearProgressOwnerState }>(({ ownerState, theme }) => {
+  const backgroundColor = theme.palette.monoA.A200;
 
-    return {
-      position: 'absolute',
-      marginTop: 0,
-      height: '100%',
-      width: '100%',
-      ...(ownerState.color === 'inherit' && {
-        opacity: 0.3
-      }),
-      backgroundImage: `radial-gradient(${backgroundColor} 0%, ${backgroundColor} 16%, transparent 42%)`,
-      backgroundSize: '10px 10px',
-      backgroundPosition: '0 -23px'
-    };
-  },
-  css`
-    animation: ${bufferKeyframe} 3s infinite linear;
-  `
-);
+  return {
+    position: 'absolute',
+    marginTop: 0,
+    height: '100%',
+    width: '100%',
+    ...(ownerState.color === 'inherit' && {
+      opacity: 0.3
+    }),
+    backgroundImage: `radial-gradient(${backgroundColor} 0%, ${backgroundColor} 20%, transparent 0%)`,
+    backgroundSize: `${ownerState.width * 3}px ${ownerState.width * 3}px`,
+    backgroundPosition: `0 ${ownerState.width * 2}px`
+  };
+});
 
 const LinearProgressBar1 = styled('span', {
   name: 'ESLinearProgress',
@@ -183,7 +162,7 @@ const LinearProgressBar1 = styled('span', {
     top: 0,
     transition: 'transform 0.2s linear',
     transformOrigin: 'left',
-    borderRadius: '2px',
+    borderRadius: `${ownerState.width / 2}px`,
     backgroundColor: ownerState.color === 'inherit' ? 'currentColor' : theme.palette[ownerState.color][300],
     ...(ownerState.variant === 'determinate' && {
       transition: `transform .${TRANSITION_DURATION}s linear`
@@ -223,7 +202,7 @@ const LinearProgressBar2 = styled('span', {
     top: 0,
     transition: 'transform 0.2s linear',
     transformOrigin: 'right',
-    borderRadius: '2px',
+    borderRadius: `${ownerState.width / 2}px`,
 
     ...(ownerState.variant === 'determinate' && {
       backgroundColor: ownerState.color === 'inherit' ? 'currentColor' : theme.palette[ownerState.color].A400
@@ -247,11 +226,12 @@ const LinearProgressBar2 = styled('span', {
 
 export const LinearProgress = forwardRef<HTMLButtonElement, LinearProgressProps>(function LinearProgress(inProps, ref) {
   const props = useThemeProps({ props: inProps, name: 'ESLinearProgress' });
-  const { className, color = 'primary', value, valueBuffer, variant = 'indeterminate', ...other } = props;
+  const { className, width = 4, color = 'primary', value, valueBuffer, variant = 'indeterminate', ...other } = props;
   const ownerState = {
     ...props,
     color,
-    variant
+    variant,
+    width
   };
 
   const classes = useUtilityClasses(ownerState);
@@ -261,12 +241,16 @@ export const LinearProgress = forwardRef<HTMLButtonElement, LinearProgressProps>
 
   if (variant === 'determinate' || variant === 'buffer') {
     if (value !== undefined) {
-      const transform = value - 100;
-      inlineStyles.bar1 = { transform: `translateX(${transform}%)` };
+      if (value <= 100) {
+        const transform = value - 100;
+        inlineStyles.bar1 = { transform: `translateX(${transform}%)` };
+      }
     }
     if (valueBuffer !== undefined) {
-      const transform = (valueBuffer || 0) - 100;
-      inlineStyles.bar2 = { transform: `translateX(${transform}%)` };
+      if (valueBuffer <= 100) {
+        const transform = (valueBuffer || 0) - 100;
+        inlineStyles.bar2 = { transform: `translateX(${transform}%)` };
+      }
     }
   }
 

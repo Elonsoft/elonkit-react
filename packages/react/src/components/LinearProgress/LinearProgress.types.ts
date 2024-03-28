@@ -42,4 +42,10 @@ export interface LinearProgressProps {
    * @default 'indeterminate'
    */
   variant?: 'determinate' | 'indeterminate' | 'buffer';
+
+  /**
+   * The width of the progress line.
+   * @default 4
+   */
+  width?: number;
 }
