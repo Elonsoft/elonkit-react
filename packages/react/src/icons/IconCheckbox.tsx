@@ -1,4 +1,4 @@
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import { SvgIcon, SvgIconProps } from '../components/SvgIcon';
 
 export const IconCheckbox = (props: SvgIconProps) => {
   return (

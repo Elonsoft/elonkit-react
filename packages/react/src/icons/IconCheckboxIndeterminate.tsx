@@ -1,5 +1,6 @@
 import { useTheme } from '@mui/material/styles';
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+
+import { SvgIcon, SvgIconProps } from '../components/SvgIcon';
 
 export const IconCheckboxIndeterminate = (props: SvgIconProps) => {
   const theme = useTheme();
@@ -14,7 +15,8 @@ export const IconCheckboxIndeterminate = (props: SvgIconProps) => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       {...props}
     >
-      <rect fill="currentColor" height="18" rx="4" width="18" />
+      <rect fill="currentColor" height="18" rx="3" width="18" />
+      <rect height="16" rx="3" stroke={theme.palette.monoA.A500} strokeWidth="1" width="16" x="1" y="1" />
       <rect fill={theme.palette.monoB[500]} height="2" rx="1" width="10" x="4" y="8" />
     </SvgIcon>
   );
