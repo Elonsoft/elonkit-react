@@ -22,6 +22,7 @@ import Typography, { TypographyProps } from '@mui/material/Typography';
 
 import { useResizeObserver } from '../../../hooks';
 import { IconChevronLeftW200 } from '../../../icons';
+import { Divider } from '../../Divider';
 import { svgIconClasses } from '../../SvgIcon';
 import { useSidebarContext } from '../Sidebar.context';
 import { useSidebarMenuContext } from '../SidebarMenu/SidebarMenu.context';
@@ -292,14 +293,12 @@ const SidebarItemTooltipItem = styled(MenuItem, {
   }
 })) as typeof MenuItem;
 
-const SidebarItemTooltipDivider = styled('div', {
+const SidebarItemTooltipDivider = styled(Divider, {
   name: 'ESSidebarItem',
   slot: 'TooltipDivider',
   overridesResolver: (props, styles) => styles.tooltipDivider
-})(({ theme }) => ({
-  height: '1px',
-  marginBottom: '8px',
-  backgroundColor: theme.palette.monoA.A100
+})(() => ({
+  marginBottom: '8px'
 }));
 
 export const SidebarItem: OverridableComponent<SidebarItemTypeMap> = (inProps: SidebarItemProps) => {
@@ -369,7 +368,7 @@ export const SidebarItem: OverridableComponent<SidebarItemTypeMap> = (inProps: S
     if (children && refTooltip.current && event.key === 'ArrowRight') {
       let element = refTooltip.current.firstChild as HTMLElement;
       if (element.getAttribute('aria-disabled')) {
-        element = element.nextSibling as HTMLElement;
+        element = element.nextSibling?.nextSibling as HTMLElement;
       }
       element.focus();
     }
