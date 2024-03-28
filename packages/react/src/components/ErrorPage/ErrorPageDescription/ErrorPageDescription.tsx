@@ -26,7 +26,7 @@ export const ErrorPageDescriptionRoot = styled(Typography, {
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
-  color: theme.palette.monoA.A550,
+  color: theme.vars.palette.monoA.A550,
   gridArea: 'description',
   maxWidth: '524px',
   marginTop: '16px'

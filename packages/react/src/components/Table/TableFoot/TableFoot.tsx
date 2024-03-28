@@ -37,8 +37,8 @@ const TableFootRoot = styled('div', {
     return [styles.root, sticky !== undefined && styles.sticky, sticky !== undefined && isStuck && styles.stuck];
   }
 })<{ ownerState: TableFootOwnerState }>(({ theme, ownerState }) => ({
-  backgroundColor: theme.palette.surface[100],
-  borderTop: `1px solid ${theme.palette.monoA.A100}`,
+  backgroundColor: theme.vars.palette.surface[100],
+  borderTop: `1px solid ${theme.vars.palette.monoA.A100}`,
   position: 'relative',
   zIndex: 2,
   borderBottomLeftRadius: ownerState.isStuck ? 0 : '6px',

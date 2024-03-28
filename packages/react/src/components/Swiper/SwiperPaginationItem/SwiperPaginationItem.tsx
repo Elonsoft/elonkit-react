@@ -62,15 +62,15 @@ const SwiperPaginationItemRoot = styled('label', {
     outline: 'none'
   },
   [`&:hover .${swiperPaginationClasses.bullet}`]: {
-    backgroundColor: theme.palette.secondary.A600
+    backgroundColor: theme.vars.palette.secondary.A600
   },
   [`&:active .${swiperPaginationClasses.bullet}`]: {
-    backgroundColor: theme.palette.secondary.A800
+    backgroundColor: theme.vars.palette.secondary.A800
   },
 
   ...(ownerState.index === ownerState.active && {
     [`&:hover .${swiperPaginationClasses.bullet}, &:active .${swiperPaginationClasses.bullet}`]: {
-      backgroundColor: theme.palette.secondary[300]
+      backgroundColor: theme.vars.palette.secondary[300]
     }
   })
 }));
@@ -85,7 +85,7 @@ const SwiperPaginationItemBullet = styled('div', {
     return [styles.bullet, index === active && styles.bulletActive, small && styles.bulletSmall];
   }
 })<{ ownerState: SwiperPaginationItemOwnerState }>(({ theme, ownerState }) => ({
-  backgroundColor: theme.palette.secondary.A400,
+  backgroundColor: theme.vars.palette.secondary.A400,
   borderRadius: '16px',
   height: 8,
   transitionDuration: `${theme.transitions.duration.shortest}ms`,
@@ -93,7 +93,7 @@ const SwiperPaginationItemBullet = styled('div', {
   width: 8,
 
   ...(ownerState.index === ownerState.active && {
-    backgroundColor: theme.palette.secondary[300]
+    backgroundColor: theme.vars.palette.secondary[300]
   }),
 
   ...(ownerState.small && {
@@ -116,7 +116,7 @@ const SwiperPaginationItemInput = styled('input', {
   top: 0,
   width: 0,
   [`&:focus-visible + .${swiperPaginationClasses.bulletActive}`]: {
-    boxShadow: `0 0 0 7px ${theme.palette.secondary.A500}`
+    boxShadow: `0 0 0 7px ${theme.vars.palette.secondary.A500}`
   }
 }));
 

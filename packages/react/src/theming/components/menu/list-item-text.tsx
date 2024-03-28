@@ -9,7 +9,7 @@ export const createListItemText: Component<'MuiListItemText'> = (theme) => {
     },
     styleOverrides: {
       root: {
-        color: theme.palette.monoA.A900
+        color: theme.vars.palette.monoA.A900
       },
       inset: {
         '&.MuiListItemText-inset': {

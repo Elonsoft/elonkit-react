@@ -44,7 +44,7 @@ const PasswordFieldRoot = styled(TextField, {
       paddingRight: '7px',
 
       [`& .${iconButtonClasses.root}`]: {
-        color: theme.palette.monoA.A500
+        color: theme.vars.palette.monoA.A500
       }
     }
   }

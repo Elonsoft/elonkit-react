@@ -19,7 +19,11 @@ in `ThemeProvider`:
 import { createTheme, palettes } from '@elonkit/react';
 
 const theme = createTheme({
-  palette: {
+  paletteDark: {
+    ...palettes.common,
+    ...palettes.dark
+  },
+  paletteLight: {
     ...palettes.common,
     ...palettes.light
   }
@@ -43,7 +47,11 @@ has a font-size, line-height, font-weight and letter-spacing. Typography can be 
 import { createTypography } from '@elonkit/react';
 
 const theme = createTheme({
-  palette: {
+  paletteDark: {
+    ...palettes.common,
+    ...palettes.dark
+  },
+  paletteLight: {
     ...palettes.common,
     ...palettes.light
   },

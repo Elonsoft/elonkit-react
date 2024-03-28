@@ -64,7 +64,7 @@ const SidenavOverlay = styled('div', {
   position: 'fixed',
   height: '100%',
   width: '100%',
-  backgroundColor: theme.palette.overlay[200],
+  backgroundColor: theme.vars.palette.overlay[200],
   transition: 'opacity 0.3s',
 
   ...(ownerState.hover && {

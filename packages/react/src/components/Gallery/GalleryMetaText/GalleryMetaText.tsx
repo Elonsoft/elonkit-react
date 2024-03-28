@@ -33,13 +33,13 @@ const GalleryMetaTextRoot = styled(Typography, {
     return [styles.root, primary && styles.primary];
   }
 })<{ ownerState: GalleryMetaTextOwnerState }>(({ theme }) => ({
-  color: theme.palette.white.A800,
+  color: theme.vars.palette.white.A800,
   display: 'flex',
   alignItems: 'center',
 
   [`&.${galleryMetaTextClasses.primary}`]: {
     ...theme.typography.body200,
-    color: theme.palette.white[500],
+    color: theme.vars.palette.white[500],
 
     [theme.breakpoints.up('tabletXS')]: {
       ...theme.typography.body100,

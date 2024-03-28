@@ -20,6 +20,7 @@ import { FormControlPropsSizeOverrides } from '@mui/material/FormControl';
 import { IconButtonPropsSizeOverrides } from '@mui/material/IconButton';
 import { InputBasePropsSizeOverrides } from '@mui/material/InputBase';
 import { TextFieldPropsSizeOverrides } from '@mui/material/TextField';
+import type {} from '@mui/material/themeCssVarsAugmentation';
 import { TypographyPropsVariantOverrides } from '@mui/material/Typography';
 
 import {

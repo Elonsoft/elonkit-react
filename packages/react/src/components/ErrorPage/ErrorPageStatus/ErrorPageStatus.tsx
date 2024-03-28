@@ -25,7 +25,7 @@ export const ErrorPageStatusRoot = styled('div', {
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
-  color: theme.palette.monoA.A900,
+  color: theme.vars.palette.monoA.A900,
   gridArea: 'status',
   height: '64px',
 

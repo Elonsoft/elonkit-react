@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from '@mui/material';
 
 export type PaginationPagesClasses = {
   /** Styles applied to the root element. */

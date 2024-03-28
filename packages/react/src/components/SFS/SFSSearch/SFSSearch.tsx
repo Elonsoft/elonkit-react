@@ -59,7 +59,7 @@ const SFSSearchInput = styled(TextField, {
 
       '&.Mui-focused': {
         '& .MuiInputAdornment-positionStart .ESSvgIcon-root': {
-          color: theme.palette.monoA.A600
+          color: theme.vars.palette.monoA.A600
         }
       }
     },
@@ -90,11 +90,11 @@ const SFSSearchInput = styled(TextField, {
   },
 
   '& .MuiInputAdornment-positionStart .ESSvgIcon-root': {
-    color: theme.palette.monoA.A500
+    color: theme.vars.palette.monoA.A500
   },
 
   '&:hover .MuiInputAdornment-positionStart .ESSvgIcon-root': {
-    color: theme.palette.monoA.A600
+    color: theme.vars.palette.monoA.A600
   }
 }));
 
@@ -110,7 +110,7 @@ const SFSSearchClear = styled(Button, {
 
     '&:hover ': {
       '& .ESSvgIcon-root': {
-        color: theme.palette.monoA.A500
+        color: theme.vars.palette.monoA.A500
       },
 
       '& .MuiTouchRipple-root': {
@@ -119,16 +119,16 @@ const SFSSearchClear = styled(Button, {
     },
 
     '&:active .ESSvgIcon-root': {
-      color: theme.palette.monoA.A600
+      color: theme.vars.palette.monoA.A600
     }
   },
 
   '& .ESSvgIcon-root': {
-    color: theme.palette.monoA.A400
+    color: theme.vars.palette.monoA.A400
   },
 
   '&.Mui-focusVisible': {
-    backgroundColor: theme.palette.monoA.A200
+    backgroundColor: theme.vars.palette.monoA.A200
   }
 }));
 

@@ -33,8 +33,8 @@ const EmptyStateCompactRoot = styled(Typography, {
   textAlign: 'center',
   padding: '11px',
   borderRadius: '6px',
-  border: `1px dashed ${theme.palette.monoA.A300}`,
-  color: theme.palette.monoA.A550
+  border: `1px dashed ${theme.vars.palette.monoA.A300}`,
+  color: theme.vars.palette.monoA.A550
 })) as typeof Typography;
 
 /**

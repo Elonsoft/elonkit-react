@@ -5,7 +5,7 @@ export const createInputAdornment: Component<'MuiInputAdornment'> = (theme) => {
     styleOverrides: {
       root: {
         '& .MuiIcon-root': {
-          color: theme.palette.monoA.A600
+          color: theme.vars.palette.monoA.A600
         }
       }
     }

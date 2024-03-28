@@ -15,18 +15,21 @@ export const Theme = ({ children, isDarkMode, locale }: IThemeProps) => {
   const theme = useMemo(() => {
     return createTheme(
       {
-        palette: {
-          mode: isDarkMode ? ('dark' as const) : ('light' as const),
+        paletteDark: {
           ...palettes.common,
-          ...(isDarkMode ? palettes.dark : palettes.light)
+          ...palettes.dark
+        },
+        paletteLight: {
+          ...palettes.common,
+          ...palettes.light
         }
       },
       locale === 'ru' ? { ...ruRU, ...ru } : { ...enUS, ...en }
     );
-  }, [isDarkMode, locale]);
+  }, [locale]);
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider isDarkMode={isDarkMode} theme={theme}>
       <DialogStackProvider>
         <DateAdapterProvider adapter={DateFnsAdapter} locale={locale === 'ru' ? dateRU : dateEN}>
           {children}

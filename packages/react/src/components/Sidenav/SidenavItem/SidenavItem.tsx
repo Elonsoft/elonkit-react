@@ -48,39 +48,39 @@ const SidenavItemRoot = styled(ListItemButton, {
     ...((ownerState.color === 'default' || ownerState.color === 'secondary') && {
       ...theme.mixins.listItem({
         background: 'transparent',
-        color: theme.palette.monoA.A800,
-        hover: theme.palette.monoA.A50,
-        icon: theme.palette.monoA.A500,
-        focus: theme.palette.monoA.A200,
-        active: theme.palette.monoA.A150
+        color: theme.vars.palette.monoA.A800,
+        hover: theme.vars.palette.monoA.A50,
+        icon: theme.vars.palette.monoA.A500,
+        focus: theme.vars.palette.monoA.A200,
+        active: theme.vars.palette.monoA.A150
       }),
       [`&.${listItemButtonClasses.selected}`]: {
         ...theme.mixins.listItem({
-          background: theme.palette.monoA.A100,
-          hover: theme.palette.monoA.A50,
-          icon: theme.palette.monoA.A600,
-          focus: theme.palette.monoA.A75,
-          active: theme.palette.monoA.A150
+          background: theme.vars.palette.monoA.A100,
+          hover: theme.vars.palette.monoA.A50,
+          icon: theme.vars.palette.monoA.A600,
+          focus: theme.vars.palette.monoA.A75,
+          active: theme.vars.palette.monoA.A150
         })
       }
     }),
     ...(ownerState.color === 'primary' && {
       ...theme.mixins.listItem({
         background: 'transparent',
-        color: theme.palette.monoB.A800,
-        icon: theme.palette.monoB.A800,
-        hover: theme.palette.monoB.A50,
-        focus: theme.palette.monoB.A200,
-        active: theme.palette.monoB.A150
+        color: theme.vars.palette.monoB.A800,
+        icon: theme.vars.palette.monoB.A800,
+        hover: theme.vars.palette.monoB.A50,
+        focus: theme.vars.palette.monoB.A200,
+        active: theme.vars.palette.monoB.A150
       }),
       [`&.${listItemButtonClasses.selected}`]: {
         ...theme.mixins.listItem({
-          background: theme.palette.monoB.A100,
-          color: theme.palette.monoB[500],
-          icon: theme.palette.monoB[500],
-          hover: theme.palette.monoB.A50,
-          focus: theme.palette.monoB.A75,
-          active: theme.palette.monoB.A150
+          background: theme.vars.palette.monoB.A100,
+          color: theme.vars.palette.monoB[500],
+          icon: theme.vars.palette.monoB[500],
+          hover: theme.vars.palette.monoB.A50,
+          focus: theme.vars.palette.monoB.A75,
+          active: theme.vars.palette.monoB.A150
         })
       }
     })

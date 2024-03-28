@@ -35,7 +35,7 @@ const PageHGroupHeadingRoot = styled('h1', {
   padding: 0,
   maxHeight: '100%',
   margin: 0,
-  color: theme.palette.monoA.A900,
+  color: theme.vars.palette.monoA.A900,
   wordBreak: 'break-word',
   minWidth: 0,
   overflow: 'hidden',

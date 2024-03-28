@@ -103,8 +103,8 @@ export const DemoList: Story = (args, context) => {
     <Box
       sx={(theme) => ({
         maxWidth: '360px',
-        boxShadow: theme.palette.shadow.down[500],
-        backgroundColor: theme.palette.surface[400],
+        boxShadow: theme.vars.palette.shadow.down[500],
+        backgroundColor: theme.vars.palette.surface[400],
         borderRadius: '4px'
       })}
     >
@@ -147,8 +147,8 @@ export const DemoListButton: Story = (args, context) => {
     <Box
       sx={(theme) => ({
         maxWidth: '360px',
-        boxShadow: theme.palette.shadow.down[500],
-        backgroundColor: theme.palette.surface[400],
+        boxShadow: theme.vars.palette.shadow.down[500],
+        backgroundColor: theme.vars.palette.surface[400],
         borderRadius: '4px'
       })}
     >

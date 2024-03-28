@@ -44,7 +44,7 @@ const GallerySwiperImageImage = styled('img', {
   maxHeight: 'calc(100% - 16px)',
   maxWidth: 'calc(100% - 16px)',
   borderRadius: '6px',
-  boxShadow: theme.palette.shadow.down[900],
+  boxShadow: theme.vars.palette.shadow.down[900],
 
   [theme.breakpoints.up('tabletXS')]: {
     maxWidth: 'calc(100% - 32px)'

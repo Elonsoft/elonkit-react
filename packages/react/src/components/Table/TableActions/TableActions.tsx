@@ -33,7 +33,7 @@ const TableActionsRoot = styled('div', {
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
   alignItems: 'center',
-  backgroundColor: theme.palette.secondary.A100,
+  backgroundColor: theme.vars.palette.secondary.A100,
   display: 'flex',
   padding: 8,
   paddingLeft: 24
@@ -44,7 +44,7 @@ const TableActionsText = styled(Typography, {
   slot: 'Text',
   overridesResolver: (props, styles) => styles.text
 })(({ theme }) => ({
-  color: theme.palette.monoA.A900,
+  color: theme.vars.palette.monoA.A900,
   fontWeight: 500,
   marginRight: 'auto'
 }));
@@ -61,10 +61,10 @@ const TableActionsChildren = styled('div', {
   gridAutoFlow: 'column',
 
   [`& .${iconButtonClasses.root}`]: {
-    color: theme.palette.monoA.A700
+    color: theme.vars.palette.monoA.A700
   },
   [`& .${dividerClasses.root}`]: {
-    backgroundColor: theme.palette.monoA.A200,
+    backgroundColor: theme.vars.palette.monoA.A200,
     margin: '0 6px'
   }
 }));

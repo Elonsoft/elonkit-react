@@ -26,9 +26,9 @@ const AutocompleteMenuHeaderRoot = styled('div', {
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
   ...theme.typography.caption,
-  color: theme.palette.monoA.A600,
+  color: theme.vars.palette.monoA.A600,
   padding: '6px 16px 5px',
-  borderBottom: `1px solid ${theme.palette.monoA.A100}`
+  borderBottom: `1px solid ${theme.vars.palette.monoA.A100}`
 }));
 
 export const AutocompleteMenuHeader = (inProps: AutocompleteMenuHeaderProps) => {

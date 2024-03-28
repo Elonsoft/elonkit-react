@@ -213,7 +213,7 @@ export const Demo: Story = {
             <TableActions
               count={selected.length}
               label={locale === 'en' ? 'Selected' : 'Выбрано'}
-              sx={(theme) => ({ borderBottom: `1px solid ${theme.palette.monoA.A100}` })}
+              sx={(theme) => ({ borderBottom: `1px solid ${theme.vars.palette.monoA.A100}` })}
             >
               <IconButton aria-label={locale === 'en' ? 'Edit' : 'Редактировать'}>
                 <IconPencilW500 />
@@ -434,7 +434,7 @@ export const ColumnPinning: Story = {
               <TableActions
                 count={selected.length}
                 label={locale === 'en' ? 'Selected' : 'Выбрано'}
-                sx={(theme) => ({ borderBottom: `1px solid ${theme.palette.monoA.A100}` })}
+                sx={(theme) => ({ borderBottom: `1px solid ${theme.vars.palette.monoA.A100}` })}
               >
                 <IconButton aria-label={locale === 'en' ? 'Edit' : 'Редактировать'}>
                   <IconPencilW500 />

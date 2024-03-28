@@ -73,8 +73,8 @@ const TableCellRoot = styled('div', {
 
   ...(ownerState.variant === 'head' && {
     ...theme.typography.caption,
-    color: theme.palette.monoA.A600,
-    backgroundColor: theme.palette.surface[100],
+    color: theme.vars.palette.monoA.A600,
+    backgroundColor: theme.vars.palette.surface[100],
     position: 'relative',
     zIndex: 1,
     userSelect: 'none',
@@ -83,14 +83,14 @@ const TableCellRoot = styled('div', {
 
   ...(ownerState.variant === 'body' && {
     ...theme.typography.body100,
-    color: theme.palette.monoA.A900,
-    backgroundColor: theme.palette.surface[100],
+    color: theme.vars.palette.monoA.A900,
+    backgroundColor: theme.vars.palette.surface[100],
     height: '57px'
   }),
 
   ...(ownerState.pin && {
     position: 'sticky',
-    boxShadow: `${ownerState.pin === 'left' ? '2px' : '-2px'} 0 0 0 ${theme.palette.monoA.A100}`,
+    boxShadow: `${ownerState.pin === 'left' ? '2px' : '-2px'} 0 0 0 ${theme.vars.palette.monoA.A100}`,
     zIndex: ownerState.variant === 'body' ? 2 : 3
   }),
 
@@ -127,22 +127,22 @@ const TableCellRoot = styled('div', {
 
   [`&:hover .${tableCellClasses.resize}::after`]: {
     width: '1px',
-    backgroundColor: theme.palette.monoA.A200
+    backgroundColor: theme.vars.palette.monoA.A200
   },
 
   [`.${tableCellClasses.resize}:hover::after`]: {
     width: '3px',
-    backgroundColor: theme.palette.monoA.A400
+    backgroundColor: theme.vars.palette.monoA.A400
   },
 
   [`.${tableCellClasses.resize}:focus-visible::after`]: {
     width: '3px',
-    backgroundColor: theme.palette.info.A600
+    backgroundColor: theme.vars.palette.info.A600
   },
   ...(ownerState.isResizing && {
     [`.${tableCellClasses.resize}.${tableCellClasses.resize}::after`]: {
       width: '3px',
-      backgroundColor: theme.palette.info.A600
+      backgroundColor: theme.vars.palette.info.A600
     }
   })
 }));
@@ -152,7 +152,7 @@ const TableCellContainer = styled('div', {
   slot: 'Container',
   overridesResolver: (props, styles) => styles.container
 })(({ theme }) => ({
-  borderBottom: `1px solid ${theme.palette.monoA.A100}`,
+  borderBottom: `1px solid ${theme.vars.palette.monoA.A100}`,
   transition: `${theme.transitions.duration.short}ms`,
   width: '100%',
   height: '100%',

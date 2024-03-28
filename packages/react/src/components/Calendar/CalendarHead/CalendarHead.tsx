@@ -31,7 +31,7 @@ const CalendarHeadRoot = styled('div', {
 })(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(7, 1fr)',
-  borderBottom: `1px solid ${theme.palette.monoA.A100}`,
+  borderBottom: `1px solid ${theme.vars.palette.monoA.A100}`,
   padding: '0 12px'
 }));
 
@@ -40,7 +40,7 @@ const CalenderHeadDay = styled(Typography, {
   slot: 'Day',
   overridesResolver: (_props, styles) => styles.day
 })(({ theme }) => ({
-  color: theme.palette.monoA.A500,
+  color: theme.vars.palette.monoA.A500,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

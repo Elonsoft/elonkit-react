@@ -11,6 +11,6 @@ export const FlagRoot = styled(SvgIcon, {
   width: '24px',
   height: '16px',
   fontSize: '24px',
-  outline: `1px solid ${theme.palette.monoA.A50}`,
+  outline: `1px solid ${theme.vars.palette.monoA.A50}`,
   outlineOffset: '-1px'
 }));

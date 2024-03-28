@@ -39,19 +39,19 @@ export const createListItemButton: Component<'MuiListItemButton'> = (theme) => {
 
           ...theme.mixins.listItem({
             background: 'transparent',
-            color: theme.palette.monoA.A900,
-            hover: theme.palette.monoA.A50,
-            focus: theme.palette.monoA.A75,
-            active: theme.palette.monoA.A150
+            color: theme.vars.palette.monoA.A900,
+            hover: theme.vars.palette.monoA.A50,
+            focus: theme.vars.palette.monoA.A75,
+            active: theme.vars.palette.monoA.A150
           }),
 
           '&.Mui-selected': {
             ...theme.mixins.listItem({
-              background: theme.palette.secondary.A100,
-              color: theme.palette.monoA.A700,
-              hover: theme.palette.monoA.A50,
-              focus: theme.palette.monoA.A75,
-              active: theme.palette.monoA.A150
+              background: theme.vars.palette.secondary.A100,
+              color: theme.vars.palette.monoA.A700,
+              hover: theme.vars.palette.monoA.A50,
+              focus: theme.vars.palette.monoA.A75,
+              active: theme.vars.palette.monoA.A150
             })
           }
         }

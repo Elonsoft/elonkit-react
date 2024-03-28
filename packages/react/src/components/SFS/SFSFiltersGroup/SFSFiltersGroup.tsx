@@ -35,7 +35,7 @@ const SFSFiltersGroupRoot = styled('div', {
   flexDirection: 'column',
   gap: '16px',
   padding: '20px',
-  color: theme.palette.monoA.A900,
+  color: theme.vars.palette.monoA.A900,
 
   '&:not(:last-of-type)': {
     paddingBottom: 0

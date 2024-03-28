@@ -30,8 +30,8 @@ const SFSRoot = styled('div', {
   overridesResolver: (_, styles) => styles.root
 })(({ theme }) => ({
   padding: '8px',
-  backgroundColor: theme.palette.surface[100],
-  boxShadow: theme.palette.shadow.down[100],
+  backgroundColor: theme.vars.palette.surface[100],
+  boxShadow: theme.vars.palette.shadow.down[100],
   borderRadius: '6px'
 }));
 

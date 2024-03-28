@@ -27,7 +27,7 @@ const PageHGroupStatusRoot = styled('div', {
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
   ...theme.typography.body100,
-  color: theme.palette.monoA.A600
+  color: theme.vars.palette.monoA.A600
 }));
 
 export const PageHGroupStatus = (inProps: PageHGroupStatusProps) => {

@@ -7,13 +7,16 @@ export interface ThemeProviderProps {
   children: ReactNode;
   /** A theme object, usually the result of `createTheme()`. */
   theme: Theme;
+  isDarkMode?: boolean;
 }
 
 export interface ThemeOptions {
   /** Breakpoints provided to the theme. */
   breakpoints?: { [key in Breakpoint]: number };
   /** Palette provided to the theme. */
-  palette?: PaletteOptions;
+  paletteLight?: PaletteOptions;
+  /** Palette provided to the theme. */
+  paletteDark?: PaletteOptions;
   /** Function to create a components object from the typography and the theme with breakpoints and palette. */
   components?: (theme: Theme, typography: TypographyOptions) => Components;
   /** Function to create a scrollbars object from the theme with breakpoints and palette. */

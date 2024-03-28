@@ -73,8 +73,8 @@ const AutocompleteMenuPaper = styled('div', {
 })(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: theme.palette.surface[400],
-  boxShadow: theme.palette.shadow.down[600],
+  backgroundColor: theme.vars.palette.surface[400],
+  boxShadow: theme.vars.palette.shadow.down[600],
   borderRadius: '6px',
   userSelect: 'none',
   overflow: 'hidden',
@@ -96,11 +96,11 @@ const AutocompleteMenuMenuGroup = styled('div', {
   overridesResolver: (_props, styles) => styles.group
 })(({ theme }) => ({
   ...theme.typography.caption,
-  color: theme.palette.monoA.A600,
+  color: theme.vars.palette.monoA.A600,
   padding: '8px 16px 4px',
 
   '&:not(:first-child)': {
-    borderTop: `1px solid ${theme.palette.monoA.A100}`,
+    borderTop: `1px solid ${theme.vars.palette.monoA.A100}`,
     paddingTop: '16px',
     marginTop: '8px'
   }
@@ -152,7 +152,7 @@ const AutocompleteMenuEmptyState = styled('div', {
   justifyContent: 'center',
   gap: '8px',
   padding: '12px 16px',
-  color: theme.palette.monoA.A600
+  color: theme.vars.palette.monoA.A600
 }));
 
 const AutocompleteMenuSearch = styled(TextField, {
@@ -160,7 +160,7 @@ const AutocompleteMenuSearch = styled(TextField, {
   slot: 'Search',
   overridesResolver: (_props, styles) => styles.search
 })(({ theme }) => ({
-  borderBottom: `1px solid ${theme.palette.monoA.A100}`,
+  borderBottom: `1px solid ${theme.vars.palette.monoA.A100}`,
 
   [`& .${outlinedInputClasses.root}.${inputBaseClasses.adornedEnd}`]: {
     paddingRight: '8px'
@@ -171,11 +171,11 @@ const AutocompleteMenuSearch = styled(TextField, {
   },
 
   [`& .${inputAdornmentClasses.positionStart}`]: {
-    color: theme.palette.monoA.A500
+    color: theme.vars.palette.monoA.A500
   },
 
   [`&:hover .${inputAdornmentClasses.positionStart} .${svgIconClasses.root}`]: {
-    color: theme.palette.monoA.A600
+    color: theme.vars.palette.monoA.A600
   },
 
   [`& .${inputAdornmentClasses.positionEnd}`]: {
@@ -188,7 +188,7 @@ const AutocompleteMenuSearch = styled(TextField, {
 
       '&:hover ': {
         [`& .${svgIconClasses.root}`]: {
-          color: theme.palette.monoA.A500
+          color: theme.vars.palette.monoA.A500
         },
 
         [`& .${touchRippleClasses.root}`]: {
@@ -197,15 +197,15 @@ const AutocompleteMenuSearch = styled(TextField, {
       },
 
       [`& .${svgIconClasses.root}`]: {
-        color: theme.palette.monoA.A400
+        color: theme.vars.palette.monoA.A400
       },
 
       '&.Mui-focusVisible': {
-        backgroundColor: theme.palette.monoA.A200
+        backgroundColor: theme.vars.palette.monoA.A200
       },
 
       [`&:active .${svgIconClasses.root}`]: {
-        color: theme.palette.monoA.A600
+        color: theme.vars.palette.monoA.A600
       }
     }
   },

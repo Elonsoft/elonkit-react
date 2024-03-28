@@ -26,7 +26,7 @@ const FileInfoMetaSeparatorRoot = styled('div', {
   slot: 'Root',
   overridesResolver: (props, styles) => styles.root
 })(({ theme }) => ({
-  color: theme.palette.monoA.A600,
+  color: theme.vars.palette.monoA.A600,
   margin: '0 8px'
 }));
 

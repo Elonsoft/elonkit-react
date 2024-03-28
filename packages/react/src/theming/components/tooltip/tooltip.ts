@@ -21,13 +21,13 @@ export const createTooltip: Component<'MuiTooltip'> = (theme, typography) => {
       },
       tooltip: {
         ...typography.caption,
-        color: theme.palette.monoB[500],
-        backgroundColor: theme.palette.monoA.A600,
+        color: theme.vars.palette.monoB[500],
+        backgroundColor: theme.vars.palette.monoA.A600,
         backdropFilter: 'blur(40px)',
         padding: '4px 8px',
 
         '& .MuiTooltip-arrow': {
-          color: theme.palette.monoA.A600,
+          color: theme.vars.palette.monoA.A600,
           backdropFilter: 'blur(40px)'
         }
       }

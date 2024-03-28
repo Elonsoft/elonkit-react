@@ -5,7 +5,7 @@ import { alertClasses, getAlertUtilityClass } from './Alert.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { styled, useThemeProps } from '@mui/material/styles';
+import { styled, Theme, useThemeProps } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { capitalize } from '@mui/material/utils';
 
@@ -42,35 +42,35 @@ const AlertRoot = styled('div', {
 
     return [styles.root, styles[variant], styles[`${variant}${capitalize(color || severity)}`]];
   }
-})<{ ownerState: AlertOwnerState }>(({ ownerState: { isWithActions }, theme }) => ({
+})<{ ownerState: AlertOwnerState; theme: Theme }>(({ ownerState: { isWithActions }, theme }) => ({
   display: 'flex',
   borderRadius: '4px',
   padding: `${isWithActions ? '11px' : '7px'} 15px`,
 
   [`&.${alertClasses.standardSuccess}`]: {
-    backgroundColor: theme.palette.success.A100,
-    border: `1px solid ${theme.palette.success.A200}`,
-    color: theme.palette.success[300]
+    backgroundColor: theme.vars.palette.success.A100,
+    border: `1px solid ${theme.vars.palette.success.A200}`,
+    color: theme.vars.palette.success[300]
   },
   [`&.${alertClasses.standardWarning}`]: {
-    backgroundColor: theme.palette.warning.A100,
-    border: `1px solid ${theme.palette.warning.A200}`,
-    color: theme.palette.warning[300]
+    backgroundColor: theme.vars.palette.warning.A100,
+    border: `1px solid ${theme.vars.palette.warning.A200}`,
+    color: theme.vars.palette.warning[300]
   },
   [`&.${alertClasses.standardError}`]: {
-    backgroundColor: theme.palette.error.A100,
-    border: `1px solid ${theme.palette.error.A200}`,
-    color: theme.palette.error[300]
+    backgroundColor: theme.vars.palette.error.A100,
+    border: `1px solid ${theme.vars.palette.error.A200}`,
+    color: theme.vars.palette.error[300]
   },
   [`&.${alertClasses.standardInfo}`]: {
-    backgroundColor: theme.palette.info.A100,
-    border: `1px solid ${theme.palette.info.A200}`,
-    color: theme.palette.info[300]
+    backgroundColor: theme.vars.palette.info.A100,
+    border: `1px solid ${theme.vars.palette.info.A200}`,
+    color: theme.vars.palette.info[300]
   },
   [`&.${alertClasses.standardMonoA}`]: {
-    backgroundColor: theme.palette.monoA.A50,
-    border: `1px solid ${theme.palette.monoA.A100}`,
-    color: theme.palette.monoA.A500
+    backgroundColor: theme.vars.palette.monoA.A50,
+    border: `1px solid ${theme.vars.palette.monoA.A100}`,
+    color: theme.vars.palette.monoA.A500
   }
 }));
 

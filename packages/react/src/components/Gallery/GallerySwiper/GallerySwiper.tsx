@@ -78,7 +78,7 @@ const GallerySwiperButton = styled('div')<{ ownerState: { step: number } }>(({ t
 
   '&:hover': {
     '& .MuiTouchRipple-root': {
-      backgroundColor: theme.palette.white.A50
+      backgroundColor: theme.vars.palette.white.A50
     }
   },
 
@@ -102,11 +102,11 @@ const GallerySwiperButton = styled('div')<{ ownerState: { step: number } }>(({ t
     padding: 8,
 
     ...theme.mixins.button({
-      background: theme.palette.black.A500,
-      color: theme.palette.white[500],
-      hover: theme.palette.white.A50,
-      focus: theme.palette.white.A200,
-      active: theme.palette.white.A150
+      background: theme.vars.palette.black.A500,
+      color: theme.vars.palette.white[500],
+      hover: theme.vars.palette.white.A50,
+      focus: theme.vars.palette.white.A200,
+      active: theme.vars.palette.white.A150
     })
   }
 }));

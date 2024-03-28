@@ -8,8 +8,8 @@ const ScrollbarsDemoName = styled(Typography)(({ theme }) => ({
   padding: '3px 5px',
   borderRadius: '3px',
   fontSize: '13px',
-  backgroundColor: theme.palette.monoA.A50,
-  border: `1px solid ${theme.palette.monoA.A75}`
+  backgroundColor: theme.vars.palette.monoA.A50,
+  border: `1px solid ${theme.vars.palette.monoA.A75}`
 })) as typeof Typography;
 
 export const ScrollbarsDemo = () => {

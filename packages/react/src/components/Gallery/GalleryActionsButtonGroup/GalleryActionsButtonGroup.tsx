@@ -33,7 +33,7 @@ const GalleryActionsButtonGroupRoot = styled('div', {
   },
 
   [`& .${buttonClasses.root}:not(:last-of-type)`]: {
-    borderRight: `1px solid ${theme.palette.white.A200}`,
+    borderRight: `1px solid ${theme.vars.palette.white.A200}`,
     borderBottomRightRadius: 0,
     borderTopRightRadius: 0
   }

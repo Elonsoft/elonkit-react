@@ -20,7 +20,11 @@ import { ruRU } from '@mui/material/locale';
 const Application = () => {
   const theme = createTheme(
     {
-      palette: {
+      paletteDark: {
+        ...palettes.common,
+        ...palettes.dark
+      },
+      paletteLight: {
         ...palettes.common,
         ...palettes.light
       }

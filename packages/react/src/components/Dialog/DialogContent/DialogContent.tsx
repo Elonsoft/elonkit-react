@@ -30,7 +30,7 @@ const DialogContentRoot = styled('div', {
   WebkitOverflowScrolling: 'touch',
   flex: '1 1 auto',
   overflowY: 'auto',
-  color: theme.palette.monoA.A700,
+  color: theme.vars.palette.monoA.A700,
   padding: '0 24px'
 }));
 

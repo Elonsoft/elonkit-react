@@ -64,10 +64,10 @@ export const createCheckbox: Component<'MuiCheckbox'> = (theme) => {
         },
         ...theme.mixins.button({
           background: 'transparent',
-          color: theme.palette.monoA.A600,
-          hover: theme.palette.monoA.A50,
-          focus: theme.palette.monoA.A200,
-          active: theme.palette.monoA.A150
+          color: theme.vars.palette.monoA.A600,
+          hover: theme.vars.palette.monoA.A50,
+          focus: theme.vars.palette.monoA.A200,
+          active: theme.vars.palette.monoA.A150
         }),
         '&.MuiCheckbox-root.Mui-disabled': {
           cursor: 'not-allowed',
@@ -77,15 +77,15 @@ export const createCheckbox: Component<'MuiCheckbox'> = (theme) => {
           '&.MuiCheckbox-indeterminate, &.Mui-checked': {
             '&.Mui-disabled': {
               '&, &:hover': {
-                color: theme.palette.primary.A500
+                color: theme.vars.palette.primary.A500
               }
             },
             ...theme.mixins.button({
               background: 'transparent',
-              color: theme.palette.primary[300],
-              hover: theme.palette.primary.A50,
-              focus: theme.palette.primary.A200,
-              active: theme.palette.primary.A150
+              color: theme.vars.palette.primary[300],
+              hover: theme.vars.palette.primary.A50,
+              focus: theme.vars.palette.primary.A200,
+              active: theme.vars.palette.primary.A150
             })
           }
         },
@@ -93,15 +93,15 @@ export const createCheckbox: Component<'MuiCheckbox'> = (theme) => {
           '&.MuiCheckbox-indeterminate, &.Mui-checked': {
             '&.Mui-disabled': {
               '&, &:hover': {
-                color: theme.palette.secondary.A500
+                color: theme.vars.palette.secondary.A500
               }
             },
             ...theme.mixins.button({
               background: 'transparent',
-              color: theme.palette.secondary[300],
-              hover: theme.palette.secondary.A50,
-              focus: theme.palette.secondary.A200,
-              active: theme.palette.secondary.A150
+              color: theme.vars.palette.secondary[300],
+              hover: theme.vars.palette.secondary.A50,
+              focus: theme.vars.palette.secondary.A200,
+              active: theme.vars.palette.secondary.A150
             })
           }
         },
@@ -109,21 +109,21 @@ export const createCheckbox: Component<'MuiCheckbox'> = (theme) => {
           '&.MuiCheckbox-indeterminate, &.Mui-checked': {
             '&.Mui-disabled': {
               '&, &:hover': {
-                color: theme.palette.error.A500
+                color: theme.vars.palette.error.A500
               }
             }
           },
           ...theme.mixins.button({
             background: 'transparent',
-            color: theme.palette.error[300],
-            hover: theme.palette.error.A50,
-            focus: theme.palette.error.A200,
-            active: theme.palette.error.A150
+            color: theme.vars.palette.error[300],
+            hover: theme.vars.palette.error.A50,
+            focus: theme.vars.palette.error.A200,
+            active: theme.vars.palette.error.A150
           })
         },
         '&.Mui-disabled': {
           '&, &:hover': {
-            color: theme.palette.monoA.A400
+            color: theme.vars.palette.monoA.A400
           }
         }
       }

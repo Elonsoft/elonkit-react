@@ -9,9 +9,9 @@ export const useSpinnerColor = (color: SpinnerColor) => {
     case 'inherit':
       return 'currentColor';
     case 'monoA':
-      return theme.palette[color][500];
+      return theme.vars.palette[color][500];
     case 'primary':
     case 'secondary':
-      return theme.palette[color][300];
+      return theme.vars.palette[color][300];
   }
 };

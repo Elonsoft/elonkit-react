@@ -58,10 +58,10 @@ const GalleryThumbnailsItemRoot = styled(ButtonBase, {
     borderRadius: 6,
 
     ...(ownerState.isActive && {
-      boxShadow: `inset 0 0 0 2px ${theme.palette.white.A800}`
+      boxShadow: `inset 0 0 0 2px ${theme.vars.palette.white.A800}`
     }),
     ...(!ownerState.isActive && {
-      backgroundColor: theme.palette.black.A500
+      backgroundColor: theme.vars.palette.black.A500
     })
   },
 
@@ -69,12 +69,12 @@ const GalleryThumbnailsItemRoot = styled(ButtonBase, {
     backgroundColor: 'transparent'
   },
   '&:focus-visible::after': {
-    boxShadow: `inset 0 0 0 3px ${theme.palette.white[500]}`
+    boxShadow: `inset 0 0 0 3px ${theme.vars.palette.white[500]}`
   },
 
   '& .MuiTouchRipple-root': {
     transitionDuration: `${theme.transitions.duration.short}ms`,
-    color: theme.palette.black.A150
+    color: theme.vars.palette.black.A150
   },
   '& .MuiTouchRipple-rippleVisible': {
     animationName: `${enterKeyframe} !important`,
