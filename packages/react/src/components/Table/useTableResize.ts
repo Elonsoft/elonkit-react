@@ -19,7 +19,7 @@ export const useTableResize = (
 ) => {
   const onResize =
     (index: number, colSpan = 1) =>
-    (width: number, element: HTMLElement) => {
+    (width: number, element: HTMLElement, setResizeDividerOffsetLeft: Dispatch<SetStateAction<number | null>>) => {
       if (ref.current && rowRef.current) {
         const rows = ref.current.querySelectorAll(`.${tableRowClasses.content},.${tableRowClasses.overlap}`);
 
@@ -27,6 +27,8 @@ export const useTableResize = (
 
         const cells = Array.from(rowRef.current.querySelectorAll(`.${tableCellClasses.root}`));
         const currentWidth = element.getBoundingClientRect().width;
+
+        setResizeDividerOffsetLeft(currentWidth);
 
         cells.forEach((cell, i) => {
           if (i < index) {
