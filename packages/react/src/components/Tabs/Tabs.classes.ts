@@ -3,8 +3,6 @@ import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
 export type TabsClasses = {
   /** Styles applied to the root element. */
   root: string;
-  /** Styles applied to the root element if `orientation="vertical"`. */
-  vertical: string;
   /** Styles applied to the flex container element. */
   flexContainer: string;
   /** Styles applied to the flex container element if `orientation="vertical"`. */
@@ -38,7 +36,6 @@ export function getTabsUtilityClass(slot: string) {
 }
 export const tabsClasses: TabsClasses = generateUtilityClasses('ESTabs', [
   'root',
-  'vertical',
   'flexContainer',
   'flexContainerVertical',
   'centered',

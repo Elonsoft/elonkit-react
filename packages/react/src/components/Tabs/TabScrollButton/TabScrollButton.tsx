@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef } from 'react';
 
 import { TabScrollButtonProps } from './TabScrollButton.types';
 
@@ -30,7 +30,6 @@ type TabScrollButtonOwnerState = {
   tabListHeight?: TabScrollButtonProps['tabListHeight'];
   direction?: TabScrollButtonProps['direction'];
   isRtl?: boolean;
-  backgroundColor?: string;
 };
 
 const useUtilityClasses = (ownerState: TabScrollButtonOwnerState) => {
@@ -60,7 +59,7 @@ const TabScrollButtonRoot = styled(ButtonBase, {
   zIndex: 2,
 
   ...theme.mixins.button({
-    background: ownerState.backgroundColor!,
+    background: theme.palette.monoB.main,
     color: 'initial',
     hover: theme.palette.monoA.A50,
     active: theme.palette.monoA.A150,
@@ -99,11 +98,11 @@ const TabScrollButtonGradient = styled('div', {
   name: 'ESTabScrollButton',
   slot: 'Gradient',
   overridesResolver: (props, styles) => [styles.gradient]
-})<{ ownerState: TabScrollButtonOwnerState }>(({ ownerState }) => ({
+})<{ ownerState: TabScrollButtonOwnerState }>(({ ownerState, theme }) => ({
   position: 'relative',
   width: 8,
   height: '100%',
-  background: `linear-gradient(${ownerState.direction === 'left' ? 90 : 270}deg, ${ownerState.backgroundColor} 0%, rgba(255, 255, 255, 0) 100%)`,
+  background: `linear-gradient(${ownerState.direction === 'left' ? 90 : 270}deg, ${theme.palette.monoB.main} 0%, rgba(255, 255, 255, 0) 100%)`,
   ...(ownerState.direction === 'left' ? { left: 11.6 } : { right: 11.6 })
 }));
 
@@ -139,13 +138,7 @@ export const TabScrollButton = forwardRef<HTMLButtonElement, TabScrollButtonProp
   const theme = useTheme();
   const isRtl = theme.direction === 'rtl';
 
-  const [backgroundColor, setBackgroundColor] = useState('');
-
-  useEffect(() => {
-    setBackgroundColor(window.getComputedStyle(document.body).backgroundColor);
-  }, [theme.palette.mode]);
-
-  const ownerState = { isRtl, direction, backgroundColor, tabListHeight, ...props };
+  const ownerState = { isRtl, direction, tabListHeight, ...props };
   const classes = useUtilityClasses(ownerState);
 
   return (
