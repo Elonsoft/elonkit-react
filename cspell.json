@@ -12,6 +12,7 @@
   "words": [
     "autodocs",
     "behaviour",
+    "bink",
     "ccircle",
     "clsx",
     "colspans",
@@ -26,6 +27,7 @@
     "fullscreen",
     "geolocation",
     "greyscale",
+    "hystersis",
     "jsnext",
     "kanban",
     "kbd",
@@ -53,6 +55,7 @@
     "swiper",
     "testid",
     "toggleable",
+    "transitioncomponent",
     "unmute",
     "инпут",
     "мультисортировка",
