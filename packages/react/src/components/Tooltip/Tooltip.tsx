@@ -14,7 +14,7 @@ import {
   useState
 } from 'react';
 
-import { DefaultColors, TooltipProps } from './Tooltip.types';
+import { TooltipProps } from './Tooltip.types';
 
 import clsx from 'clsx';
 import { getTooltipUtilityClass, tooltipClasses } from './Tooltip.classes';
@@ -32,7 +32,7 @@ import useEventCallback from '@mui/utils/useEventCallback';
 import useId from '@mui/utils/useId';
 import useIsFocusVisible from '@mui/utils/useIsFocusVisible';
 
-import { useForkRef } from './useForkRef';
+import { useForkRef } from '../../hooks';
 
 type TooltipOwnerState = {
   classes: TooltipProps['classes'];
@@ -50,7 +50,7 @@ function round(value: number) {
 }
 
 const useUtilityClasses = (ownerState: TooltipOwnerState) => {
-  const { classes, disableInteractive, arrow, touch, placement } = ownerState;
+  const { classes, disableInteractive, arrow, touch, placement, color } = ownerState;
 
   const slots = {
     popper: ['popper', !disableInteractive && 'popperInteractive', arrow && 'popperArrow'],
@@ -58,7 +58,8 @@ const useUtilityClasses = (ownerState: TooltipOwnerState) => {
       'tooltip',
       arrow && 'tooltipArrow',
       touch && 'touch',
-      placement && `tooltipPlacement${capitalize(placement.split('-')[0])}`
+      placement && `tooltipPlacement${capitalize(placement.split('-')[0])}`,
+      color && `color${capitalize(color)}`
     ],
     arrow: ['arrow']
   };
@@ -171,29 +172,44 @@ const TooltipTooltip = styled('div', {
     wordWrap: 'break-word',
     ...theme.typography.caption,
 
-    ...(ownerState.color === 'secondary' && {
+    [`&.${tooltipClasses.colorPrimary}`]: {
+      backgroundColor: theme.palette.primary[300]
+    },
+    [`&.${tooltipClasses.colorSecondary}`]: {
+      backgroundColor: theme.palette.secondary[300],
       color: theme.palette.monoA.A900
-    }),
-    ...((ownerState.color as DefaultColors) in theme.palette &&
-      ownerState.color !== 'monoB' && {
-        backgroundColor: theme.palette[ownerState.color as DefaultColors][300]
-      }),
-    ...(ownerState.color === 'monoA.A600' && {
+    },
+    [`&.${tooltipClasses.colorError}`]: {
+      backgroundColor: theme.palette.error[300]
+    },
+    [`&.${tooltipClasses.colorInfo}`]: {
+      backgroundColor: theme.palette.info[300]
+    },
+    [`&.${tooltipClasses.colorSuccess}`]: {
+      backgroundColor: theme.palette.success[300]
+    },
+    [`&.${tooltipClasses.colorWarning}`]: {
+      backgroundColor: theme.palette.warning[300]
+    },
+    [`&.${tooltipClasses.colorPrimary}`]: {
+      backgroundColor: theme.palette.primary[300]
+    },
+    [`&.${tooltipClasses.colorMonoAA600}`]: {
       backgroundColor: theme.palette.monoA.A600
-    }),
-    ...(ownerState.color === 'monoB' && {
+    },
+    [`&.${tooltipClasses.colorMonoB}`]: {
       backgroundColor: theme.palette.monoB[500],
       color: theme.palette.monoA.A900,
       boxShadow: `${theme.palette.shadow.down[500]}`
-    }),
-    ...(ownerState.color === 'monoB.A600' && {
+    },
+    [`&.${tooltipClasses.colorMonoBA600}`]: {
       backgroundColor: theme.palette.monoB.A600,
       color: theme.palette.monoA.A900
-    }),
-    ...(ownerState.color === 'white.A600' && {
+    },
+    [`&.${tooltipClasses.colorWhiteA600}`]: {
       backgroundColor: theme.palette.white.A600,
       color: theme.palette.monoA.A900
-    }),
+    },
 
     ...(ownerState.arrow && {
       position: 'relative',
@@ -258,7 +274,7 @@ const TooltipArrow = styled('span', {
   name: 'ESTooltip',
   slot: 'Arrow',
   overridesResolver: (props, styles) => styles.arrow
-})<{ ownerState: TooltipOwnerState }>(({ ownerState, theme }) => ({
+})<{ ownerState: TooltipOwnerState }>(({ theme }) => ({
   overflow: 'hidden',
   position: 'absolute',
   width: '1em',
@@ -267,25 +283,39 @@ const TooltipArrow = styled('span', {
   boxSizing: 'border-box',
   backdropFilter: 'blur(40px)',
 
-  ...(ownerState.color === 'secondary' && {
-    color: theme.palette.monoA.A900
-  }),
-  ...((ownerState.color as DefaultColors) in theme.palette &&
-    ownerState.color !== 'monoB' && {
-      color: theme.palette[ownerState.color as DefaultColors][300]
-    }),
-  ...(ownerState.color === 'monoA.A600' && {
+  [`.${tooltipClasses.colorPrimary} &.${tooltipClasses.arrow}`]: {
+    color: theme.palette.primary[300]
+  },
+  [`.${tooltipClasses.colorSecondary} &.${tooltipClasses.arrow}`]: {
+    color: theme.palette.secondary[300]
+  },
+  [`.${tooltipClasses.colorError} &.${tooltipClasses.arrow}`]: {
+    color: theme.palette.error[300]
+  },
+  [`.${tooltipClasses.colorInfo} &.${tooltipClasses.arrow}`]: {
+    color: theme.palette.info[300]
+  },
+  [`.${tooltipClasses.colorSuccess} &.${tooltipClasses.arrow}`]: {
+    color: theme.palette.success[300]
+  },
+  [`.${tooltipClasses.colorWarning} &.${tooltipClasses.arrow}`]: {
+    color: theme.palette.warning[300]
+  },
+  [`.${tooltipClasses.colorPrimary} &.${tooltipClasses.arrow}`]: {
+    color: theme.palette.primary[300]
+  },
+  [`.${tooltipClasses.colorMonoAA600} &.${tooltipClasses.arrow}`]: {
     color: theme.palette.monoA.A600
-  }),
-  ...(ownerState.color === 'monoB' && {
+  },
+  [`.${tooltipClasses.colorMonoB} &.${tooltipClasses.arrow}`]: {
     color: theme.palette.monoB[500]
-  }),
-  ...(ownerState.color === 'monoB.A600' && {
+  },
+  [`.${tooltipClasses.colorMonoBA600} &.${tooltipClasses.arrow}`]: {
     color: theme.palette.monoB.A600
-  }),
-  ...(ownerState.color === 'white.A600' && {
+  },
+  [`.${tooltipClasses.colorWhiteA600} &.${tooltipClasses.arrow}`]: {
     color: theme.palette.white.A600
-  }),
+  },
 
   '&::before': {
     content: '""',
@@ -327,7 +357,7 @@ export const Tooltip = forwardRef(function Tooltip(inProps: TooltipProps, ref) {
     arrow = true,
     children: childrenProp,
     classes: classesProp,
-    color = 'monoA.A600',
+    color = 'monoAA600',
     components = {},
     componentsProps = {},
     describeChild = false,

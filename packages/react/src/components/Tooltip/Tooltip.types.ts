@@ -1,19 +1,27 @@
-import { ElementType, HTMLAttributes, HTMLProps, JSXElementConstructor, ReactNode, SyntheticEvent } from 'react';
+import { ElementType, HTMLProps, JSXElementConstructor, ReactNode, SyntheticEvent } from 'react';
 
 import { TooltipClasses } from './Tooltip.classes';
 
 import { MUIStyledCommonProps, SxProps } from '@mui/system';
-import { InternalStandardProps as StandardProps, Theme } from '@mui/material';
+import { Theme } from '@mui/material';
 import { PopperProps } from '@mui/material/Popper';
 import { TransitionProps } from '@mui/material/transitions';
 
-export type DefaultColors = 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success' | 'error';
-
-export type CustomColors = 'monoA.A600' | 'monoB' | 'monoB.A600' | 'white.A600';
+export type TooltipColor =
+  | 'primary'
+  | 'secondary'
+  | 'error'
+  | 'info'
+  | 'success'
+  | 'warning'
+  | 'monoAA600'
+  | 'monoB'
+  | 'monoBA600'
+  | 'whiteA600';
 
 export interface TooltipComponentsPropsOverrides {}
 
-export interface TooltipProps extends StandardProps<HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface TooltipProps {
   /**
    * If `true`, adds an arrow to the tooltip.
    * @default true
@@ -31,9 +39,9 @@ export interface TooltipProps extends StandardProps<HTMLAttributes<HTMLDivElemen
   className?: string;
   /**
    * The color of the component.
-   * @default 'monoA.A600'
+   * @default 'monoAA600'
    */
-  color?: DefaultColors | CustomColors;
+  color?: TooltipColor;
   /**
    * The components used for each slot inside.
    *

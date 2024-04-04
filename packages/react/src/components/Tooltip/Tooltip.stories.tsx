@@ -84,7 +84,7 @@ type Story = StoryObj<Args>;
 
 export const Demo: Story = {
   render: function Render(args, { globals: { locale } }) {
-    const isCustomColor = args.color === 'monoB' || args.color === 'monoB.A600' || args.color === 'white.A600';
+    const isCustomColor = args.color === 'monoB' || args.color === 'monoBA600' || args.color === 'whiteA600';
 
     const [isOpen, setOpen] = useState(false);
 

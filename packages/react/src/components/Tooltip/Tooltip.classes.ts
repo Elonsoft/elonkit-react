@@ -1,6 +1,26 @@
 import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
 
 export interface TooltipClasses {
+  /** Styles applied to the root element if `color="primary"`. */
+  colorPrimary: string;
+  /** Styles applied to the root element if `color="secondary"`. */
+  colorSecondary: string;
+  /** Styles applied to the root element if `color="error"`. */
+  colorError: string;
+  /** Styles applied to the root element if `color="info"`. */
+  colorInfo: string;
+  /** Styles applied to the root element if `color="success"`. */
+  colorSuccess: string;
+  /** Styles applied to the root element if `color="warning"`. */
+  colorWarning: string;
+  /** Styles applied to the root element if `color="monoAA600"`. */
+  colorMonoAA600: string;
+  /** Styles applied to the root element if `color="monoB"`. */
+  colorMonoB: string;
+  /** Styles applied to the root element if `color="monoBA600"`. */
+  colorMonoBA600: string;
+  /** Styles applied to the root element if `color="whiteA600"`. */
+  colorWhiteA600: string;
   /** Styles applied to the Popper component. */
   popper: string;
   /** Styles applied to the Popper component unless `disableInteractive={true}`. */
@@ -34,6 +54,16 @@ export function getTooltipUtilityClass(slot: string): string {
 }
 
 export const tooltipClasses: TooltipClasses = generateUtilityClasses('ESTooltip', [
+  'colorPrimary',
+  'colorSecondary',
+  'colorError',
+  'colorInfo',
+  'colorSuccess',
+  'colorWarning',
+  'colorMonoAA600',
+  'colorMonoB',
+  'colorMonoBA600',
+  'colorWhiteA600',
   'popper',
   'popperInteractive',
   'popperArrow',

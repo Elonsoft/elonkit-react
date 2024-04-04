@@ -55,5 +55,6 @@ export * from './SwitchBase';
 export * from './TabBar';
 export * from './Table';
 export * from './TextFieldGroup';
+export * from './Tooltip';
 export * from './TooltipEllipsis';
 export * from './TouchRipple';
