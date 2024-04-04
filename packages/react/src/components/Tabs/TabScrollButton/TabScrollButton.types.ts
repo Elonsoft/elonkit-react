@@ -5,7 +5,7 @@ import { TabScrollButtonClasses } from './TabScrollButton.classes';
 import { Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
 
-export type TabScrollButtonProps = {
+export interface TabScrollButtonProps {
   /**
    * The content of the component.
    */
@@ -42,4 +42,4 @@ export type TabScrollButtonProps = {
    * The system prop that allows defining system overrides as well as additional CSS styles.
    */
   sx?: SxProps<Theme>;
-};
+}

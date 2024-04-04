@@ -2,8 +2,6 @@
 import type {} from '@mui/material/themeCssVarsAugmentation';
 
 /* eslint-disable @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars */
-import { TabScrollButtonProps } from './components/Tabs/TabScrollButton/TabScrollButton.types';
-
 import {
   BreakpointOverrides,
   Palette,
@@ -21,7 +19,7 @@ import { CommonColors } from '@mui/material/styles/createPalette';
 import { ThemeVars } from '@mui/material/styles/experimental_extendTheme';
 import { ComponentNameToClassKey, ComponentsOverrides } from '@mui/material/styles/overrides';
 import { ComponentsProps, ComponentsPropsList } from '@mui/material/styles/props';
-import { Color, ComponentsVariants, TabProps } from '@mui/material';
+import { Color, ComponentsVariants } from '@mui/material';
 import { ButtonPropsSizeOverrides } from '@mui/material/Button';
 import { FormControlPropsSizeOverrides } from '@mui/material/FormControl';
 import { IconButtonPropsSizeOverrides } from '@mui/material/IconButton';
@@ -267,6 +265,14 @@ import {
   TableTextClassKey,
   TableTextProps
 } from './components/Table';
+import {
+  TabClassKey,
+  TabProps,
+  TabsClassKey,
+  TabScrollButtonClassKey,
+  TabScrollButtonProps,
+  TabsProps
+} from './components/Tabs';
 import { TextFieldGroupClassKey, TextFieldGroupProps } from './components/TextFieldGroup';
 import { TouchRippleClassKey, TouchRippleProps } from './components/TouchRipple';
 import { buttonMixin, listItemMixin } from './theming/mixins';
@@ -567,6 +573,9 @@ declare module '@mui/material/styles/overrides' {
     ESSwiperPagination: SwiperPaginationClassKey;
     ESTabBar: TabBarClassKey;
     ESTabBarItem: TabBarItemClassKey;
+    ESTabs: TabsClassKey;
+    ESTab: TabClassKey;
+    ESTabScrollButton: TabScrollButtonClassKey;
     ESTable: TableClassKey;
     ESTableActions: TableActionsClassKey;
     ESTableItem: TableItemClassKey;

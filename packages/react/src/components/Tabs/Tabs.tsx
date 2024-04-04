@@ -135,8 +135,7 @@ const TabsRoot = styled('div', {
       {
         [`& .${tabsClasses.scrollButtons}`]: ownerState.scrollButtonsHideMobile && styles.scrollButtonsHideMobile
       },
-      styles.root,
-      ownerState.vertical && styles.vertical
+      styles.root
     ];
   }
 })<{ ownerState: TabsOwnerState }>(({ ownerState, theme }) => ({
@@ -200,11 +199,7 @@ const FlexContainer = styled('div', {
   slot: 'FlexContainer',
   overridesResolver: (props, styles) => {
     const { ownerState } = props;
-    return [
-      styles.flexContainer,
-      ownerState.vertical && styles.flexContainerVertical,
-      ownerState.centered && styles.centered
-    ];
+    return [styles.flexContainer, ownerState.centered && styles.centered];
   }
 })<{ ownerState: TabsOwnerState }>(({ ownerState }) => ({
   display: 'flex',

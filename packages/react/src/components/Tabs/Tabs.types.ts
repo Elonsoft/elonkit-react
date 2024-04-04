@@ -14,7 +14,7 @@ export type TabIndicatorSlidingAnimation =
       delay?: string | number;
     };
 
-export type TabsProps = {
+export interface TabsProps {
   /**
    * Callback fired when the component mounts.
    * This is useful when you want to trigger an action programmatically.
@@ -172,4 +172,4 @@ export type TabsProps = {
    * @default false
    */
   visibleScrollbar?: boolean;
-};
+}

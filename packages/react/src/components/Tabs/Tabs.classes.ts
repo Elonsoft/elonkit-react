@@ -5,8 +5,6 @@ export type TabsClasses = {
   root: string;
   /** Styles applied to the flex container element. */
   flexContainer: string;
-  /** Styles applied to the flex container element if `orientation="vertical"`. */
-  flexContainerVertical: string;
   /** Styles applied to the flex container element if `centered={true}` & `!variant="scrollable"`. */
   centered: string;
   /** Styles applied to the tablist element. */
@@ -15,8 +13,6 @@ export type TabsClasses = {
   fixed: string;
   /** Styles applied to the tablist element if `variant="scrollable"` and `orientation="horizontal"`. */
   scrollableX: string;
-  /** Styles applied to the tablist element if `variant="scrollable"` and `orientation="vertical"`. */
-  scrollableY: string;
   /** Styles applied to the tablist element if `variant="scrollable"` and `visibleScrollbar={false}`. */
   hideScrollbar: string;
   /** Styles applied to the ScrollButtonComponent component. */
@@ -37,12 +33,10 @@ export function getTabsUtilityClass(slot: string) {
 export const tabsClasses: TabsClasses = generateUtilityClasses('ESTabs', [
   'root',
   'flexContainer',
-  'flexContainerVertical',
   'centered',
   'scroller',
   'fixed',
   'scrollableX',
-  'scrollableY',
   'hideScrollbar',
   'scrollButtons',
   'scrollButtonsHideMobile',

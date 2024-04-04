@@ -5,7 +5,7 @@ import { TabClasses } from './Tab.classes';
 import { Theme } from '@mui/material/styles';
 import { SxProps } from '@mui/system';
 
-export type TabProps = {
+export interface TabProps {
   /**
    * This prop isn't supported.
    * Use the `component` prop if you need to change the children structure.
@@ -81,4 +81,4 @@ export type TabProps = {
    * Element placed after the children.
    */
   endIcon?: ReactNode;
-};
+}
