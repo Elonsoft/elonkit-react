@@ -174,7 +174,7 @@ export interface TooltipProps {
    */
   PopperComponent?: JSXElementConstructor<PopperProps>;
   /**
-   * Props applied to the [`Popper`](/material-ui/api/popper/) element.
+   * Props applied to the Popper element.
    * @default {}
    */
   PopperProps?: Partial<PopperProps>;
@@ -215,13 +215,11 @@ export interface TooltipProps {
   title: ReactNode;
   /**
    * The component used for the transition.
-   * [Follow this guide](/material-ui/transitions/#transitioncomponent-prop) to learn more about the requirements for this component.
    * @default Fade
    */
   TransitionComponent?: JSXElementConstructor<TransitionProps & { children: ReactNode }>;
   /**
    * Props applied to the transition element.
-   * By default, the element is based on this [`Transition`](https://reactcommunity.org/react-transition-group/transition/) component.
    */
   TransitionProps?: TransitionProps;
 }

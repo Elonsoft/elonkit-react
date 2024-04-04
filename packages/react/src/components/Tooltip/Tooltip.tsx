@@ -328,15 +328,15 @@ const TooltipArrow = styled('span', {
   }
 }));
 
-let hystersisOpen = false;
-let hystersisTimer: ReturnType<typeof setTimeout>;
+let hysteresisOpen = false;
+let hysteresisTimer: ReturnType<typeof setTimeout>;
 let cursorPosition = { x: 0, y: 0 };
 
 export function testReset() {
-  hystersisOpen = false;
+  hysteresisOpen = false;
 
-  if (hystersisTimer) {
-    clearTimeout(hystersisTimer);
+  if (hysteresisTimer) {
+    clearTimeout(hysteresisTimer);
   }
 }
 
@@ -464,8 +464,8 @@ export const Tooltip = forwardRef(function Tooltip(inProps: TooltipProps, ref) {
   }, [stopTouchInteraction]);
 
   const handleOpen = (event: MouseEvent | FocusEvent | TouchEvent) => {
-    clearTimeout(hystersisTimer);
-    hystersisOpen = true;
+    clearTimeout(hysteresisTimer);
+    hysteresisOpen = true;
 
     // The mouseover event will trigger for every nested element in the tooltip.
     // We can skip rerendering when the tooltip is already open.
@@ -478,9 +478,9 @@ export const Tooltip = forwardRef(function Tooltip(inProps: TooltipProps, ref) {
   };
 
   const handleClose = useEventCallback((event: MouseEvent | FocusEvent | TouchEvent | KeyboardEvent) => {
-    clearTimeout(hystersisTimer);
-    hystersisTimer = setTimeout(() => {
-      hystersisOpen = false;
+    clearTimeout(hysteresisTimer);
+    hysteresisTimer = setTimeout(() => {
+      hysteresisOpen = false;
     }, 800 + leaveDelay);
     setOpenState(false);
 
@@ -514,12 +514,12 @@ export const Tooltip = forwardRef(function Tooltip(inProps: TooltipProps, ref) {
       clearTimeout(leaveTimer.current);
     }
 
-    if (enterDelay || (hystersisOpen && enterNextDelay)) {
+    if (enterDelay || (hysteresisOpen && enterNextDelay)) {
       enterTimer.current = setTimeout(
         () => {
           handleOpen(event);
         },
-        hystersisOpen ? enterNextDelay : enterDelay
+        hysteresisOpen ? enterNextDelay : enterDelay
       );
     } else {
       handleOpen(event);
@@ -555,7 +555,6 @@ export const Tooltip = forwardRef(function Tooltip(inProps: TooltipProps, ref) {
   };
 
   const handleFocus = (event: FocusEvent) => {
-    // Workaround for https://github.com/facebook/react/issues/7769
     // The autoFocus of React might trigger the event before the componentDidMount.
     // We need to account for this eventuality.
     if (!childNode && event.currentTarget instanceof HTMLElement) {
@@ -628,7 +627,7 @@ export const Tooltip = forwardRef(function Tooltip(inProps: TooltipProps, ref) {
      * @param {KeyboardEvent} nativeEvent
      */
     function handleKeyDown(nativeEvent: KeyboardEvent) {
-      // IE11, Edge (prior to using Bink?) use 'Esc'
+      // IE11, Edge (prior to using blink?) use 'Esc'
       if (nativeEvent.key === 'Escape' || nativeEvent.key === 'Esc') {
         handleClose(nativeEvent);
       }
