@@ -248,6 +248,7 @@ import {
   TableTextProps
 } from './components/Table';
 import { TextFieldGroupClassKey, TextFieldGroupProps } from './components/TextFieldGroup';
+import { TypographyClassKey, TypographyProps } from './components/Typography';
 import { buttonMixin, listItemMixin } from './theming/mixins';
 
 export interface ISurfacePalette {
@@ -419,6 +420,7 @@ declare module '@mui/material/styles/props' {
     ESTableScrollbar: TableScrollbarProps;
     ESTableText: TableTextProps;
     ESTextFieldGroup: TextFieldGroupProps;
+    ESTypography: TypographyProps;
   }
 }
 
@@ -536,6 +538,7 @@ declare module '@mui/material/styles/overrides' {
     ESTableScrollbar: TableScrollbarClassKey;
     ESTableText: TableTextClassKey;
     ESTextFieldGroup: TextFieldGroupClassKey;
+    ESTypography: TypographyClassKey;
   }
 }
 
@@ -992,6 +995,10 @@ declare module '@mui/material/styles/components' {
     ESTextFieldGroup?: {
       defaultProps?: ComponentsProps['ESTextFieldGroup'];
       styleOverrides?: ComponentsOverrides['ESTextFieldGroup'];
+    };
+    ESTypography?: {
+      defaultProps?: ComponentsProps['ESTypography'];
+      styleOverrides?: ComponentsOverrides['ESTypography'];
     };
   }
 }
