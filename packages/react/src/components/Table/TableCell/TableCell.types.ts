@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
 
 import { TableCellClasses } from './TableCell.classes';
 
@@ -36,7 +36,11 @@ export interface TableCellProps {
   id?: string;
 
   /** Callback function that is fired when the cell's width changed. */
-  onResize?: (width: number, element: HTMLElement) => void;
+  onResize?: (
+    width: number,
+    element: HTMLElement,
+    setResizeDividerOffsetLeft: Dispatch<SetStateAction<number | null>>
+  ) => void;
   /** Callback function that is fired when the cell's width finished changing. */
   onResizeCommit?: (width: number, element: HTMLElement) => void;
   /**

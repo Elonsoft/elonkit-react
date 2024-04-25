@@ -12,7 +12,7 @@ import { styled, useThemeProps } from '@mui/material/styles';
 import { useTableHeadContext } from './TableHead.context';
 
 import { useIntersectionObserver } from '../../../hooks';
-import { TableCellContext } from '../TableCell';
+import { TableCellContext, TableCellContextValue } from '../TableCell';
 
 type TableHeadOwnerState = {
   classes?: TableHeadProps['classes'];
@@ -70,7 +70,7 @@ const TableHeadContainer = styled('div', {
   width: 'fit-content'
 }));
 
-const TABLE_CELL_CONTEXT_VALUE = { variant: 'head' as const };
+const TABLE_CELL_CONTEXT_VALUE = { variant: 'head' as const, tableRef: null };
 
 export const TableHead = memo(function TableHead(inProps: TableHeadProps) {
   const { children, className, sticky, sx, ...props } = useThemeProps({
@@ -80,7 +80,7 @@ export const TableHead = memo(function TableHead(inProps: TableHeadProps) {
 
   const [isStuck, setStuck] = useState(false);
 
-  const { ref, setRef } = useTableHeadContext();
+  const { ref, setRef, tableRef } = useTableHeadContext();
 
   useIntersectionObserver(
     { current: ref },
@@ -89,6 +89,10 @@ export const TableHead = memo(function TableHead(inProps: TableHeadProps) {
     },
     { threshold: [1], rootMargin: `-${(sticky || 0) + 1}px 0px 0px` }
   );
+
+  if (tableRef) {
+    (TABLE_CELL_CONTEXT_VALUE as TableCellContextValue).tableRef = tableRef;
+  }
 
   const ownerState = { sticky, isStuck: sticky !== undefined && isStuck, ...props };
   const classes = useUtilityClasses(ownerState);

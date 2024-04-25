@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react';
 
 export interface TableCellContextValue {
   variant: 'head' | 'body';
+  tableRef?: HTMLDivElement | null;
 }
 
 export const TableCellContext = createContext<TableCellContextValue | null>(null);

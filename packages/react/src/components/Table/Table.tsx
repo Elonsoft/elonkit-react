@@ -12,8 +12,8 @@ import { useForkRef } from '@mui/material/utils';
 
 import { TableContext } from './Table.context';
 import { TableBodyContext } from './TableBody';
-import { TableCellContext } from './TableCell';
-import { TableHeadContext } from './TableHead';
+import { TableCellContext, TableCellContextValue } from './TableCell';
+import { TableHeadContext, TableHeadContextValue } from './TableHead';
 import { TableScrollbarContext } from './TableScrollbar';
 import { useTableScrollSync } from './useTableScrollSync';
 import { useTableStickyOffset } from './useTableStickyOffset';
@@ -42,7 +42,7 @@ const TableRoot = styled('div', {
   borderRadius: '6px'
 }));
 
-const TABLE_CELL_CONTEXT_VALUE = { variant: 'body' as const };
+const TABLE_CELL_CONTEXT_VALUE = { variant: 'body' as const, tableRef: null };
 
 /** Tables display information in a way that's easy to scan, so that users can look for patterns and insights. */
 export const Table = memo(
@@ -62,6 +62,11 @@ export const Table = memo(
     const { bodyContextValue, headContextValue, scrollbarContextValue } = useTableScrollSync();
     useTableStickyOffset(ref);
 
+    if (ref.current) {
+      (TABLE_CELL_CONTEXT_VALUE as TableCellContextValue).tableRef = ref.current;
+      (headContextValue as TableHeadContextValue).tableRef = ref.current;
+    }
+
     const ownerState = { ...props };
     const classes = useUtilityClasses(ownerState);
 
@@ -69,7 +74,7 @@ export const Table = memo(
       <TableContext.Provider value={value}>
         <TableCellContext.Provider value={TABLE_CELL_CONTEXT_VALUE}>
           <TableBodyContext.Provider value={bodyContextValue}>
-            <TableHeadContext.Provider value={headContextValue}>
+            <TableHeadContext.Provider value={headContextValue as TableHeadContextValue}>
               <TableScrollbarContext.Provider value={scrollbarContextValue}>
                 <TableRoot ref={rootRef} className={clsx(classes.root, className)} role="table" sx={sx}>
                   {children}

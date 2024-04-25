@@ -8,13 +8,18 @@ import { getTableCellUtilityClass, tableCellClasses } from './TableCell.classes'
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
 import { styled, useThemeProps } from '@mui/material/styles';
+import { Divider, dividerClasses } from '@mui/material';
 
 import { useTableCellContext } from './TableCell.context';
 
 import { useLatest } from '../../../hooks/useLatest';
+import { tableFootClasses } from '../TableFoot';
 
 type TableCellOwnerState = {
   classes?: TableCellProps['classes'];
+  dividerHeight?: number;
+  dividerPosition?: { top: number; left: number };
+  isDividerHidden?: boolean;
   variant: NonNullable<TableCellProps['variant']>;
   padding: NonNullable<TableCellProps['padding']>;
   align?: TableCellProps['align'];
@@ -22,6 +27,24 @@ type TableCellOwnerState = {
   colSpan?: number;
   overlap?: boolean;
   isResizing?: boolean;
+};
+
+const getClosestPinnedCell = (el: HTMLElement) => {
+  let nextSibling = el.nextSibling;
+
+  while (nextSibling !== null) {
+    if (nextSibling.nodeType === 1) {
+      const nextElement = nextSibling as HTMLElement;
+
+      if (nextElement.classList.contains('ESTableCell-pinRight')) {
+        return nextElement;
+      }
+
+      nextSibling = nextSibling.nextSibling;
+    }
+  }
+
+  return null;
 };
 
 const useUtilityClasses = (ownerState: TableCellOwnerState) => {
@@ -46,7 +69,8 @@ const useUtilityClasses = (ownerState: TableCellOwnerState) => {
       align === 'center' && 'contentAlignCenter',
       align === 'flex-end' && 'contentAlignFlexEnd'
     ],
-    resize: ['resize', isResizing && 'resizeResizing']
+    resize: ['resize', isResizing && 'resizeResizing'],
+    resizeDivider: ['resizeDivider']
   };
 
   return composeClasses(slots, getTableCellUtilityClass, classes);
@@ -76,10 +100,13 @@ const TableCellRoot = styled('div', {
     color: theme.palette.monoA.A600,
     backgroundColor: theme.palette.surface[100],
     position: 'relative',
-    zIndex: 1,
     userSelect: 'none',
     height: '49px'
   }),
+  ...(ownerState.variant === 'head' &&
+    !ownerState.isResizing && {
+      zIndex: 1
+    }),
 
   ...(ownerState.variant === 'body' && {
     ...theme.typography.body100,
@@ -216,6 +243,23 @@ const TableCellResize = styled('button', {
   }
 }));
 
+const TableCellResizeDivider = styled(Divider, {
+  name: 'ESTableCell',
+  slot: 'ResizeDivider',
+  overridesResolver: (props, styles) => [styles.resizeDivider]
+})<{ ownerState: TableCellOwnerState }>(({ theme, ownerState }) => ({
+  [`&.${dividerClasses.vertical}.${dividerClasses.flexItem}`]: {
+    position: 'fixed',
+    borderStyle: 'dashed',
+    zIndex: 2,
+    borderColor: theme.palette.monoA.A300,
+    height: (ownerState.dividerHeight ? ownerState.dividerHeight : 0) - 37,
+    top: ownerState.dividerPosition?.top,
+    left: ownerState.dividerPosition?.left,
+    opacity: ownerState.isDividerHidden ? 0 : 1
+  }
+}));
+
 const RESIZE_STEPS: Record<string, number | undefined> = {
   ArrowLeft: -16,
   ArrowRight: 16
@@ -248,6 +292,11 @@ export const TableCell = memo(function TableCell(inProps: TableCellProps) {
 
   const [isResizing, setResizing] = useState(false);
 
+  const [dividerHeight, setDividerHeight] = useState<number>(0);
+  const [dividerPosition, setDividerPosition] = useState<{ top: number; left: number }>();
+  const [resizeDividerOffsetLeft, setResizeDividerOffsetLeft] = useState<number | null>(null);
+  const [isDividerHidden, setDividerHidden] = useState(false);
+
   const onResizeLatest = useLatest(onResize);
   const onResizeCommitLatest = useLatest(onResizeCommit);
 
@@ -258,7 +307,7 @@ export const TableCell = memo(function TableCell(inProps: TableCellProps) {
           minWidth || 0,
           ref.current.getBoundingClientRect().width + (event.screenX - screenX.current)
         );
-        onResizeLatest.current(width, ref.current);
+        onResizeLatest.current(width, ref.current, setResizeDividerOffsetLeft);
       }
 
       screenX.current = event.screenX;
@@ -279,7 +328,7 @@ export const TableCell = memo(function TableCell(inProps: TableCellProps) {
         minWidth || 0,
         ref.current.getBoundingClientRect().width + (event.shiftKey ? step * 3 : step)
       );
-      onResizeLatest.current(width, ref.current);
+      onResizeLatest.current(width, ref.current, setResizeDividerOffsetLeft);
     }
   };
 
@@ -325,7 +374,64 @@ export const TableCell = memo(function TableCell(inProps: TableCellProps) {
     }
   }, [isResizing]);
 
-  const ownerState = { variant, padding, align, pin, isResizing, ...props };
+  useEffect(() => {
+    const resizeButtonOffsetTop = 37;
+    const resizeButtonOffsetLeft = 2;
+
+    const tableFoot = document.querySelector(`.${tableFootClasses.root}`);
+    const tableCellRect = ref.current?.getBoundingClientRect();
+
+    if (tableCellRect && !resizeDividerOffsetLeft) {
+      setResizeDividerOffsetLeft(tableCellRect.width);
+    }
+
+    if (tableCellRect && resizeDividerOffsetLeft !== tableCellRect.width) {
+      setResizeDividerOffsetLeft(tableCellRect.width);
+    }
+
+    if (tableCellRect && tableFoot) {
+      setDividerHeight(tableFoot.getBoundingClientRect().top - tableCellRect.top);
+    } else if (tableCellRect && context.tableRef) {
+      setDividerHeight(context.tableRef.getBoundingClientRect().bottom - tableCellRect.top);
+    }
+
+    if (tableCellRect && resizeDividerOffsetLeft && ref.current && context.tableRef) {
+      const closestPinnedCell = getClosestPinnedCell(ref.current);
+
+      const isDividerIntersectsPinnedCell =
+        closestPinnedCell &&
+        tableCellRect.left + resizeDividerOffsetLeft - resizeButtonOffsetLeft >=
+          closestPinnedCell.getBoundingClientRect().left;
+
+      const isDividerIntersectsTable =
+        !closestPinnedCell &&
+        tableCellRect.left + resizeDividerOffsetLeft - resizeButtonOffsetLeft >=
+          context.tableRef.getBoundingClientRect().width;
+
+      if (isDividerIntersectsPinnedCell || isDividerIntersectsTable) {
+        setDividerHidden(true);
+      } else {
+        setDividerHidden(false);
+      }
+
+      setDividerPosition({
+        top: tableCellRect.top + resizeButtonOffsetTop,
+        left: tableCellRect.left + resizeDividerOffsetLeft - resizeButtonOffsetLeft
+      });
+    }
+  }, [isResizing, resizeDividerOffsetLeft]);
+
+  const ownerState = {
+    variant,
+    padding,
+    align,
+    pin,
+    isResizing,
+    dividerHeight,
+    dividerPosition,
+    isDividerHidden,
+    ...props
+  };
   const classes = useUtilityClasses(ownerState);
 
   return (
@@ -344,14 +450,36 @@ export const TableCell = memo(function TableCell(inProps: TableCellProps) {
           {children}
         </TableCellContent>
         {!!onResize && (
-          <TableCellResize
-            aria-label={labelResize}
-            className={classes.resize}
-            ownerState={ownerState}
-            onKeyDown={onKeyDown}
-            onKeyUp={onKeyUp}
-            onMouseDown={onMouseDown}
-          />
+          <>
+            {isResizing && (
+              <>
+                <TableCellResizeDivider
+                  flexItem
+                  className={classes.resizeDivider}
+                  orientation="vertical"
+                  ownerState={ownerState}
+                  style={{
+                    top: ref.current?.getBoundingClientRect().top,
+                    height: 12
+                  }}
+                />
+                <TableCellResizeDivider
+                  flexItem
+                  className={classes.resizeDivider}
+                  orientation="vertical"
+                  ownerState={ownerState}
+                />
+              </>
+            )}
+            <TableCellResize
+              aria-label={labelResize}
+              className={classes.resize}
+              ownerState={ownerState}
+              onKeyDown={onKeyDown}
+              onKeyUp={onKeyUp}
+              onMouseDown={onMouseDown}
+            />
+          </>
         )}
       </TableCellContainer>
     </TableCellRoot>
