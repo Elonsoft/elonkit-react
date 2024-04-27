@@ -1,9 +1,6 @@
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-type ScrollDirection = {
-  scrollDirection: 'up' | 'down' | null;
-  elementRef: RefObject<HTMLDivElement>;
-};
+type ScrollDirection = 'up' | 'down' | null;
 
 const throttle = (callback: () => void, timeout: number) => {
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -25,43 +22,44 @@ const throttle = (callback: () => void, timeout: number) => {
 };
 
 /**
- * The hook that tracks scrolling direction of the window or selected element.
- * @param throttleTimeout A number that is used as timeout for internal throttle function.
- * @returns A string with value 'up', 'down', null if the page hasn't been scrolled
- * and ref to be set on element whose scrolling direction should be tracked.
+ * The hook that tracks scrolling direction of the window or passed container.
+ * @param {Object} params The params object.
+ * @param [params.throttleTimeout] A number that is used as a timeout for internal throttle function.
+ * @param [params.container] The container whose scrolling direction should be tracked.
+ * @returns A string 'up', 'down' or null if the page hasn't been scrolled.
  */
-export const useScrollDirection = (throttleTimeout = 0): ScrollDirection => {
-  const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(null);
+export const useScrollDirection = (params?: { throttleTimeout?: number; container?: HTMLElement }): ScrollDirection => {
+  const [scrollDirection, setScrollDirection] = useState<ScrollDirection>(null);
 
-  const elementRef = useRef<HTMLDivElement>(null);
-
-  let isTicking = false;
-  let lastScroll = 0;
+  const isTicking = useRef(false);
+  const lastScroll = useRef(0);
 
   const updateScrollDirection = useCallback(() => {
-    const scroll = elementRef.current ? elementRef.current.scrollTop : window.scrollY;
+    const scroll = params?.container ? params.container.scrollTop : window.scrollY;
 
-    setScrollDirection(scroll > lastScroll ? 'down' : 'up');
-    lastScroll = Math.max(0, scroll);
+    setScrollDirection(scroll > lastScroll.current ? 'down' : 'up');
+    lastScroll.current = Math.max(0, scroll);
 
-    isTicking = false;
-  }, [elementRef.current]);
+    isTicking.current = false;
+  }, [params]);
 
   useEffect(() => {
-    lastScroll = elementRef.current ? elementRef.current.scrollTop : window.scrollY;
+    lastScroll.current = params?.container ? params.container.scrollTop : window.scrollY;
 
     const onScroll = () => {
-      if (!isTicking) {
-        window.requestAnimationFrame(throttle(updateScrollDirection, throttleTimeout));
+      if (!isTicking.current) {
+        window.requestAnimationFrame(
+          throttle(updateScrollDirection, params && params.throttleTimeout ? params.throttleTimeout : 0)
+        );
 
-        isTicking = true;
+        isTicking.current = true;
       }
     };
 
-    (elementRef.current ? elementRef.current : window).addEventListener('scroll', onScroll);
+    (params && params.container ? params.container : window).addEventListener('scroll', onScroll);
 
     return () => window.removeEventListener('scroll', onScroll);
-  }, [updateScrollDirection, elementRef.current]);
+  }, [updateScrollDirection, params]);
 
-  return { scrollDirection, elementRef };
+  return scrollDirection;
 };
