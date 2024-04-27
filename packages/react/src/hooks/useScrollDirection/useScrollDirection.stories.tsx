@@ -21,7 +21,7 @@ type Story = StoryObj;
 
 export const Demo: Story = {
   render: function Render() {
-    const scrollDirection = useScrollDirection();
+    const { scrollDirection } = useScrollDirection();
 
     return (
       <>
