@@ -7,7 +7,7 @@ import { getAutocompleteMenuUtilityClass } from './AutocompleteMenu.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { styled, useThemeProps } from '@mui/material/styles';
+import { duration, styled, useThemeProps } from '@mui/material/styles';
 import Checkbox from '@mui/material/Checkbox';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
@@ -218,6 +218,8 @@ const AutocompleteMenuSearch = styled(TextField, {
   },
 }));
 
+const defaultTransitionDuration = { enter: duration.enteringScreen, exit: duration.enteringScreen };
+
 export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, ref) {
   const {
     paperRef,
@@ -258,7 +260,7 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
     PopperProps,
     SearchProps,
 
-    transitionDuration,
+    transitionDuration = defaultTransitionDuration,
     TransitionProps: inTransitionProps,
 
     onClose,
@@ -330,12 +332,18 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
         }
       }
     },
-    [props.multiple, props.value, props.onChange]
+    [props.multiple, props.value, props.onChange, getOptionValue]
   );
 
   const ownerState = { classes: inClasses };
   const classes = useUtilityClasses(ownerState);
-
+  const menuRef = useRef<HTMLLIElement>(null);
+  const duration =
+    typeof transitionDuration === 'number'
+      ? transitionDuration
+      : typeof transitionDuration === 'object'
+        ? transitionDuration.enter ?? 0
+        : 0;
   const groupedOptions: ReactNode[] = [];
 
   for (let index = 0; index < options.length; index++) {
@@ -359,6 +367,7 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
     groupedOptions.push(
       <AutocompleteMenuMenuItem
         key={value}
+        ref={selected ? menuRef : null}
         autoFocus={index === 0 && !SearchProps && !disableAutoFocus}
         className={classes.menuItem}
         disabled={disabled}
@@ -371,6 +380,12 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
       </AutocompleteMenuMenuItem>
     );
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      menuRef?.current?.scrollIntoView({ block: 'center' });
+    }, duration);
+  }, [open, duration]);
 
   return (
     <AutocompleteMenuRoot
