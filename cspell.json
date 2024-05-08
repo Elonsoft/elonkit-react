@@ -10,12 +10,17 @@
     "lerna.json"
   ],
   "words": [
+    "Alekhina",
+    "Arbeo",
+    "Daria",
+    "Svyatoslav",
     "autodocs",
     "behaviour",
     "ccircle",
     "clsx",
     "colspans",
     "commitlint",
+    "compat",
     "csvg",
     "depcruise",
     "describedby",
@@ -53,13 +58,11 @@
     "swiper",
     "testid",
     "toggleable",
+    "tseslint",
     "unmute",
     "инпут",
     "мультисортировка",
     "мультисортировки",
-    "селект",
-    "Svyatoslav",
-    "Daria",
-    "Alekhina"
+    "селект"
   ]
 }

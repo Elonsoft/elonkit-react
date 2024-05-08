@@ -1,1 +1,1 @@
-module.exports = require('@elonkit/prettier-config');
+export { default } from '@elonkit/prettier-config';
