@@ -47,6 +47,16 @@ const PasswordFieldRoot = styled(TextField, {
         color: theme.vars.palette.monoA.A500
       }
     }
+  },
+  'input[type="password"]': {
+    fontFamily: 'Roboto-Custom',
+    fontWeight: '400',
+    lineHeight: '20px',
+    textAlign: 'left',
+
+    '@supports (-moz-appearance:none)': {
+      marginRight: '1.666px'
+    }
   }
 }));
 
