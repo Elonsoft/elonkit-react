@@ -1,0 +1,1 @@
+export { ZoomPanPinchWrapper } from './ZoomPanPinchWrapper';
