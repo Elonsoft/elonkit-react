@@ -24,6 +24,7 @@ export * from './Flags';
 export * from './FormatDate';
 export * from './FormatSize';
 export * from './Gallery';
+export * from './InlineTextField';
 export * from './Kbd';
 export * from './LinearProgress';
 export * from './Link';
