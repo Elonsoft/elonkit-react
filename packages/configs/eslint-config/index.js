@@ -84,6 +84,16 @@ module.exports = {
     // ],
     'react/jsx-boolean-value': 'error',
     'react/jsx-fragments': 'error',
+    'react/jsx-no-bind': [
+      'warn',
+      {
+        ignoreDOMComponents: true,
+        ignoreRefs: true,
+        allowArrowFunctions: false,
+        allowFunctions: false,
+        allowBind: false
+      }
+    ],
     'react/jsx-no-constructed-context-values': 'error',
     'react/no-object-type-as-default-prop': 'error',
     'react/prop-types': 'off',
