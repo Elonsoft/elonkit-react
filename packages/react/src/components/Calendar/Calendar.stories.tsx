@@ -10,29 +10,44 @@ import { useDateAdapterContext } from '../DateAdapter';
 
 const useRangeDatePicker = () => {
   const [selection, setSelection] = useState<[Date, Date | null] | null>(null);
-  const [hover, setHover] = useState<Date | null>(null);
+  const [hover, setHover] = useState<[Date, Date] | null>(null);
 
   const onSelectionChange = useCallback(
     (date: Date) => {
-      if (!selection || !selection[0] || selection[1]) {
-        setSelection([date, null]);
-      } else {
-        const s = new Date(selection[0]);
-        setHover(null);
-
-        if (s < date) {
-          setSelection([s, date]);
-        } else {
-          setSelection([date, s]);
+      if (selection) {
+        if (selection[0] < date) {
+          setSelection([selection[0], date]);
         }
+
+        if (selection[0] > date) {
+          if (selection[1]) {
+            setSelection([date, selection[1]]);
+          } else {
+            setSelection([date, selection[0]]);
+          }
+        }
+      } else {
+        setSelection([date, null]);
       }
     },
     [selection]
   );
 
   const onHover = (hover: Date | null) => {
-    if (selection && selection[0] && !selection[1]) {
-      setHover(hover);
+    if (selection && (selection[0] || selection[1])) {
+      if (hover) {
+        if (selection[0] < hover) {
+          setHover([selection[0], hover]);
+        }
+
+        if (selection[0] > hover) {
+          if (selection[1]) {
+            setHover([hover, selection[1]]);
+          } else {
+            setHover([hover, selection[0]]);
+          }
+        }
+      }
     }
   };
 
@@ -221,7 +236,7 @@ export const DisabledAndTooltips: Story = {
               };
             }
 
-            if (selection && selection[0] && !selection[1] && hover && adapter?.isSameDay(date, hover)) {
+            if (selection && selection[0] && !selection[1] && hover && adapter?.isSameDay(hover[0], hover[1])) {
               return {
                 title: locale === 'ru' ? 'N суток' : 'N days'
               };

@@ -30,7 +30,7 @@ export interface CalendarProps {
   onSelectionChange?: (value: Date) => void;
 
   /** The current hovered date. */
-  hover?: Date | null;
+  hover?: [Date, Date] | null;
   /** Callback fired when the date button is hovered or focused. */
   onHover?: (date: Date | null) => void;
 
