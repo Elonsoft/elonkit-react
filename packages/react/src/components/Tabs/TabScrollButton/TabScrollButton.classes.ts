@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from '@mui/material';
 
 export type TabScrollButtonClasses = {
   /** Styles applied to the root element. */
@@ -18,6 +18,7 @@ export type TabScrollButtonClassKey = keyof TabScrollButtonClasses;
 export function getTabScrollButtonUtilityClass(slot: string) {
   return generateUtilityClass('ESTabScrollButton', slot);
 }
+
 export const tabScrollButtonClasses: TabScrollButtonClasses = generateUtilityClasses('ESTabScrollButton', [
   'root',
   'disabled',

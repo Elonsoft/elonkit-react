@@ -1,6 +1,7 @@
 import {
   Children,
   cloneElement,
+  CSSProperties,
   forwardRef,
   isValidElement,
   KeyboardEvent,
@@ -22,10 +23,10 @@ import { unstable_composeClasses as composeClasses } from '@mui/base';
 import { keyframes, styled, useTheme, useThemeProps } from '@mui/material/styles';
 import { Divider } from '@mui/material';
 import { debounce, ownerDocument, ownerWindow, useEventCallback } from '@mui/material/utils';
+import useEnhancedEffect from '@mui/material/utils/useEnhancedEffect';
 import { detectScrollType, getNormalizedScrollLeft } from '@mui/utils/scrollLeft';
 
 import { animate } from './animate';
-import { ScrollbarSize } from './ScrollbarSize';
 import { TabScrollButton, tabScrollButtonClasses } from './TabScrollButton';
 
 const expandFromCenterKeyframe = keyframes`
@@ -51,6 +52,66 @@ type TabsOwnerState = {
   TabIndicatorPosition?: TabsProps['TabIndicatorPosition'];
   TabIndicatorSlidingAnimation?: TabsProps['TabIndicatorSlidingAnimation'];
   visibleScrollbar: TabsProps['visibleScrollbar'];
+};
+
+const ScrollbarSize = ({
+  onChange,
+  style,
+  ...props
+}: {
+  onChange: (height: number) => void;
+  style?: CSSProperties;
+  [key: string]: any;
+}) => {
+  const scrollbarHeight = useRef<number>(0);
+  const nodeRef = useRef<HTMLDivElement>(null);
+
+  const setMeasurements = () => {
+    if (nodeRef.current) {
+      scrollbarHeight.current = nodeRef.current.offsetHeight - nodeRef.current.clientHeight;
+    }
+  };
+
+  useEnhancedEffect(() => {
+    if (nodeRef.current && scrollbarHeight.current) {
+      const handleResize = debounce(() => {
+        const prevHeight = scrollbarHeight.current;
+        setMeasurements();
+
+        if (prevHeight !== scrollbarHeight.current) {
+          onChange(scrollbarHeight.current);
+        }
+      });
+
+      const containerWindow = ownerWindow(nodeRef.current);
+      containerWindow.addEventListener('resize', handleResize);
+
+      return () => {
+        handleResize.clear();
+        containerWindow.removeEventListener('resize', handleResize);
+      };
+    }
+  }, [onChange]);
+
+  useEffect(() => {
+    setMeasurements();
+    onChange(scrollbarHeight.current);
+  }, [onChange]);
+
+  return (
+    <div
+      ref={nodeRef}
+      style={{
+        width: 99,
+        height: 99,
+        position: 'absolute',
+        top: -9999,
+        overflow: 'scroll',
+        ...style
+      }}
+      {...props}
+    />
+  );
 };
 
 const nextItem = (list: HTMLDivElement, item: HTMLElement) => {
@@ -355,6 +416,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
 
     if (tabsNode) {
       const rect = tabsNode.getBoundingClientRect();
+
       // create a new object with ClientRect class props + scrollLeft
       tabsMeta = {
         clientWidth: tabsNode.clientWidth,
@@ -370,11 +432,13 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     }
 
     let tabMeta;
+
     if (tabListRef.current && tabsNode && value !== false) {
       const children = tabListRef.current.children;
 
       if (children.length > 0) {
         const tab = children[valueToIndex.get(value)];
+
         if (process.env.NODE_ENV !== 'production') {
           if (!tab) {
             console.error(
@@ -388,6 +452,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
             );
           }
         }
+
         tabMeta = tab ? tab.getBoundingClientRect() : null;
 
         if (
@@ -400,6 +465,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
           tabsMeta.clientWidth !== 0
         ) {
           tabsMeta = null;
+
           console.error(
             [
               'The `value` provided to the Tabs component is invalid.',
@@ -412,6 +478,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
         }
       }
     }
+
     return { tabsMeta, tabMeta };
   };
 
@@ -451,6 +518,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
           ? indicatorWidthOfTabWidth
           : +TabIndicatorWidth;
     }
+
     const newIndicatorStyle = {
       [startIndicator]: startValue,
       // May be wrong until the font is loaded.
@@ -500,14 +568,17 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
 
       for (let i = 0; i < children.length; i += 1) {
         const tab = children[i];
+
         if (totalSize + tab[clientSize] > containerSize) {
           // If the first item is longer than the container size, then only scroll
           // by the container size.
           if (i === 0) {
             totalSize = containerSize;
           }
+
           break;
         }
+
         totalSize += tab[clientSize];
       }
 
@@ -525,7 +596,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
     moveTabsScroll(getScrollSize());
   };
 
-  const handleScrollbarSizeChange = useCallback((scrollbarWidth) => {
+  const handleScrollbarSizeChange = useCallback((scrollbarWidth: number) => {
     setScrollerStyle({
       overflow: null,
       scrollbarWidth
@@ -632,12 +703,14 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
             resizeObserver?.unobserve(item as HTMLElement);
           }
         });
+
         record.addedNodes.forEach((item) => {
           if (item.nodeType === Node.ELEMENT_NODE) {
             resizeObserver?.observe(item as HTMLElement);
           }
         });
       });
+
       handleResize();
       updateScrollButtonState();
     };
@@ -650,6 +723,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
 
       if (typeof ResizeObserver !== 'undefined') {
         resizeObserver = new ResizeObserver(handleResize);
+
         Array.from(tabListRef.current.children).forEach((child) => {
           resizeObserver.observe(child);
         });
@@ -657,6 +731,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
 
       if (typeof MutationObserver !== 'undefined') {
         mutationObserver = new MutationObserver(handleMutation);
+
         mutationObserver.observe(tabListRef.current, {
           childList: true
         });
@@ -691,12 +766,14 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
         const handleScrollButtonStart = (entries: IntersectionObserverEntry[]) => {
           setDisplayStartScroll(!entries[0].isIntersecting);
         };
+
         const firstObserver = new IntersectionObserver(handleScrollButtonStart, observerOptions);
         firstObserver.observe(firstTab);
 
         const handleScrollButtonEnd = (entries: IntersectionObserverEntry[]) => {
           setDisplayEndScroll(!entries[0].isIntersecting);
         };
+
         const lastObserver = new IntersectionObserver(handleScrollButtonEnd, observerOptions);
         lastObserver.observe(lastTab);
 
@@ -776,12 +853,14 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(inProps:
       // though we might warn in the future about nested, interactive elements
       // as a a11y violation
       const role = currentFocus.getAttribute('role');
+
       if (role !== 'tab') {
         return;
       }
 
       let previousItemKey = 'ArrowLeft';
       let nextItemKey = 'ArrowRight';
+
       if (isRtl) {
         // swap previousItemKey with nextItemKey
         previousItemKey = 'ArrowRight';

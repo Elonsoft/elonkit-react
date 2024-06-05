@@ -1,4 +1,4 @@
-import { ElementType, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { TabScrollButtonClasses } from './TabScrollButton.classes';
 
@@ -35,8 +35,8 @@ export interface TabScrollButtonProps {
    * @default {}
    */
   slots?: {
-    StartScrollButtonIcon?: ElementType;
-    EndScrollButtonIcon?: ElementType;
+    StartScrollButtonIcon?: ReactNode;
+    EndScrollButtonIcon?: ReactNode;
   };
   /**
    * The system prop that allows defining system overrides as well as additional CSS styles.

@@ -7,22 +7,11 @@ import { getTabScrollButtonUtilityClass, tabScrollButtonClasses } from './TabScr
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { keyframes, styled, useTheme, useThemeProps } from '@mui/material/styles';
+import { styled, useTheme, useThemeProps } from '@mui/material/styles';
 import { Divider, dividerClasses } from '@mui/material';
-import ButtonBase, { touchRippleClasses } from '@mui/material/ButtonBase';
 
 import { IconChevronLeftW400, IconChevronRightW400 } from '../../../icons';
-
-const enterKeyframe = keyframes`
-  0% {
-    transform: scale(0);
-    opacity: 0.1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-`;
+import { ButtonBase } from '../../ButtonBase';
 
 type TabScrollButtonOwnerState = {
   classes?: TabScrollButtonProps['classes'];
@@ -58,23 +47,10 @@ const TabScrollButtonRoot = styled(ButtonBase, {
   left: ownerState.direction === 'left' ? -1 : undefined,
   zIndex: 2,
 
-  ...theme.mixins.button({
-    background: theme.palette.monoB.main,
-    color: 'initial',
-    hover: theme.palette.monoA.A50,
-    active: theme.palette.monoA.A150,
-    focus: theme.palette.monoA.A200
-  }),
-
-  [`& .${touchRippleClasses.rippleVisible}`]: {
-    animationName: `${enterKeyframe} !important`,
-    opacity: '1 !important'
-  },
-  [`&.${tabScrollButtonClasses.root}`]: {
-    [`& .${touchRippleClasses.root}`]: {
-      transitionDuration: `${theme.transitions.duration.standard}ms`
-    }
-  },
+  '--background': theme.palette.monoB.main,
+  '--hovered': theme.palette.monoA.A50,
+  '--pressed': theme.palette.monoA.A150,
+  '--focused': theme.palette.monoA.A200,
 
   [`&.${tabScrollButtonClasses.disabled}`]: {
     opacity: 0

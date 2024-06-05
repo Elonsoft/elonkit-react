@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from '@mui/material';
 
 export type TabClasses = {
   /** Styles applied to the root element. */
@@ -13,12 +13,12 @@ export type TabClasses = {
   disabled: string;
   /** Styles applied to the root element if `fullWidth={true}` (controlled by the Tabs component). */
   fullWidth: string;
-  /** Styles applied to the root element if it has startIcon. */
+  /** Styles applied to the root element if `rounded={true}` (controlled by the Tabs component). */
+  rounded: string;
+  /** Styles applied to the startIcon element. */
   startIcon: string;
-  /** Styles applied to the root element if it has endIcon. */
+  /** Styles applied to the endIcon element. */
   endIcon: string;
-  /** Styles applied to the wrapper element of `icon` if `icon` is provided. */
-  iconWrapper: string;
 };
 
 export type TabClassKey = keyof TabClasses;
@@ -26,6 +26,7 @@ export type TabClassKey = keyof TabClasses;
 export function getTabUtilityClass(slot: string) {
   return generateUtilityClass('ESTab', slot);
 }
+
 export const tabClasses: TabClasses = generateUtilityClasses('ESTab', [
   'root',
   'labelIcon',
@@ -33,7 +34,7 @@ export const tabClasses: TabClasses = generateUtilityClasses('ESTab', [
   'selected',
   'disabled',
   'fullWidth',
+  'rounded',
   'startIcon',
-  'endIcon',
-  'iconWrapper'
+  'endIcon'
 ]);

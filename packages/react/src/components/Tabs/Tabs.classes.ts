@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from '@mui/material';
 
 export type TabsClasses = {
   /** Styles applied to the root element. */
@@ -30,6 +30,7 @@ export type TabsClassKey = keyof TabsClasses;
 export function getTabsUtilityClass(slot: string) {
   return generateUtilityClass('ESTabs', slot);
 }
+
 export const tabsClasses: TabsClasses = generateUtilityClasses('ESTabs', [
   'root',
   'flexContainer',

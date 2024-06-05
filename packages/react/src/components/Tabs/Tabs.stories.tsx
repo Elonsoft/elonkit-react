@@ -2,9 +2,7 @@ import { SyntheticEvent, useRef, useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
-import { useTheme } from '@mui/material';
-
-import { Tab, tabClasses, Tabs, tabsClasses } from '.';
+import { Tab, Tabs, tabsClasses } from '.';
 
 import { IconAt } from '../../icons';
 
@@ -122,7 +120,6 @@ export const Demo: Story = {
     const [value, setValue] = useState(0);
 
     const tabRefs = useRef<Array<HTMLButtonElement | undefined>>([]);
-    const theme = useTheme();
 
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
 
@@ -150,14 +147,6 @@ export const Demo: Story = {
             endIcon={<IconAt size="24px" />}
             label={label}
             startIcon={<IconAt size="24px" />}
-            sx={{
-              [`.${tabClasses.iconWrapper}`]: {
-                color: theme.palette.monoA.A600
-              },
-              [`&.${tabClasses.selected} .${tabClasses.iconWrapper}`]: {
-                color: theme.palette.monoA.A800
-              }
-            }}
           />
         ))}
       </Tabs>

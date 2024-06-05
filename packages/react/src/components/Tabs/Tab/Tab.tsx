@@ -7,19 +7,9 @@ import { getTabUtilityClass, tabClasses } from './Tab.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { keyframes, styled, useThemeProps } from '@mui/material/styles';
-import ButtonBase, { touchRippleClasses } from '@mui/material/ButtonBase';
+import { styled, useThemeProps } from '@mui/material/styles';
 
-const enterKeyframe = keyframes`
-  0% {
-    transform: scale(0);
-    opacity: 0.1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-`;
+import { ButtonBase, buttonBaseClasses } from '../../ButtonBase';
 
 type TabOwnerState = {
   classes?: TabProps['classes'];
@@ -30,25 +20,23 @@ type TabOwnerState = {
   disabled?: TabProps['disabled'];
   disableFocusRipple?: TabProps['disableFocusRipple'];
   rounded?: TabProps['rounded'];
-  startIcon?: TabProps['startIcon'];
-  endIcon?: TabProps['endIcon'];
 };
 
 const useUtilityClasses = (ownerState: TabOwnerState) => {
-  const { classes, fullWidth, icon, label, selected, disabled, startIcon, endIcon } = ownerState;
+  const { classes, fullWidth, icon, label, rounded, selected, disabled } = ownerState;
 
   const slots = {
     root: [
       'root',
       icon && label && 'labelIcon',
       fullWidth && 'fullWidth',
+      rounded && 'rounded',
       selected && 'selected',
-      !!startIcon && 'startIcon',
       disabled && 'disabled',
-      !!endIcon && 'endIcon',
       'labelWrapper'
     ],
-    iconWrapper: ['iconWrapper']
+    startIcon: ['startIcon'],
+    endIcon: ['endIcon']
   };
 
   return composeClasses(slots, getTabUtilityClass, classes);
@@ -64,57 +52,60 @@ const TabRoot = styled(ButtonBase, {
       styles.root,
       ownerState.label && ownerState.icon && styles.labelIcon,
       ownerState.fullWidth && styles.fullWidth,
-      !!ownerState.startIcon && styles.startIcon,
-      !!ownerState.endIcon && styles.endIcon
+      ownerState.rounded && styles.rounded
     ];
   }
-})<{ ownerState: TabOwnerState }>(({ theme, ownerState }) => ({
+})<{ ownerState: TabOwnerState }>(({ theme }) => ({
   maxWidth: 360,
   minWidth: 90,
+  minHeight: 48,
   position: 'relative',
   flexShrink: 0,
-  padding: '12px 8px',
+  padding: '8px 8px',
   overflow: 'hidden',
-  gap: 8,
-  zIndex: 0,
   fontFamily: 'inherit',
 
-  ...theme.mixins.button({
-    background: 'initial',
-    color: ownerState.selected ? theme.palette.monoA.A900 : theme.palette.monoA.A700,
-    hover: theme.palette.monoA.A50,
-    active: theme.palette.monoA.A150,
-    focus: theme.palette.monoA.A200
-  }),
+  '--text': theme.palette.monoA.A700,
+  '--hovered': theme.palette.monoA.A50,
+  '--pressed': theme.palette.monoA.A150,
+  '--focused': theme.palette.monoA.A200,
 
-  [`& .${touchRippleClasses.rippleVisible}`]: {
-    animationName: `${enterKeyframe} !important`,
-    opacity: '1 !important'
-  },
-  [`&.${tabClasses.root}`]: {
-    [`& .${touchRippleClasses.root}`]: {
-      transitionDuration: `${theme.transitions.duration.standard}ms`
-    }
+  [`& .${buttonBaseClasses.wrapper}`]: {
+    gap: 8
   },
 
-  ...(!ownerState.rounded && {
-    minHeight: 48
-  }),
-  ...(ownerState.rounded && {
-    borderRadius: '4px',
+  [`&.${tabClasses.selected}`]: {
+    '--text': theme.palette.monoA.A900,
+
+    [`& .${buttonBaseClasses.wrapper} .${tabClasses.startIcon}, & .${buttonBaseClasses.wrapper} .${tabClasses.endIcon}`]:
+      {
+        color: theme.palette.monoA.A800
+      }
+  },
+
+  [`&.${tabClasses.rounded}`]: {
+    minHeight: 'inherit',
     maxHeight: 36,
+    borderRadius: 4,
     marginTop: 6,
     marginBottom: 6
-  }),
-  ...(ownerState.fullWidth && {
+  },
+
+  [`&.${tabClasses.fullWidth}`]: {
     flexShrink: 1,
     flexGrow: 1,
     flexBasis: 0,
     maxWidth: 'none'
-  }),
-  '&.Mui-disabled': {
-    color: theme.palette.monoA.A400
-  }
+  },
+
+  [`&.${buttonBaseClasses.disabled}`]: {
+    '--text': theme.palette.monoA.A400
+  },
+
+  [`& .${buttonBaseClasses.wrapper} .${tabClasses.startIcon}, & .${buttonBaseClasses.wrapper} .${tabClasses.endIcon}`]:
+    {
+      color: theme.palette.monoA.A600
+    }
 }));
 
 const TabLabelWrapper = styled('span', {
@@ -122,20 +113,27 @@ const TabLabelWrapper = styled('span', {
   slot: 'LabelWrapper',
   overridesResolver: (props, styles) => [styles.labelWrapper]
 })(({ theme }) => ({
-  ...theme.typography.body100,
   textAlign: 'center',
   textOverflow: 'ellipsis',
   overflow: 'hidden',
-  whiteSpace: 'nowrap'
+  whiteSpace: 'nowrap',
+  ...theme.typography.body100
 }));
 
-const TabIcon = styled('span', {
+const TabStartIcon = styled('span', {
   name: 'ESTab',
-  slot: 'Icon',
-  overridesResolver: (props, styles) => [styles.icon]
+  slot: 'StartIcon',
+  overridesResolver: (props, styles) => [styles.startIcon]
 })(() => ({
-  display: 'inline-flex',
-  alignSelf: 'center'
+  display: 'inherit'
+}));
+
+const TabEndIcon = styled('span', {
+  name: 'ESTab',
+  slot: 'EndIcon',
+  overridesResolver: (props, styles) => [styles.endIcon]
+})(() => ({
+  display: 'inherit'
 }));
 
 export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps: TabProps, ref) {
@@ -151,6 +149,7 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
     onChange,
     onClick,
     onFocus,
+    rounded,
     selected,
     selectionFollowsFocus,
     value,
@@ -161,6 +160,7 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
     ...props,
     disabled,
     disableFocusRipple,
+    rounded,
     selected,
     startIcon,
     endIcon,
@@ -197,7 +197,6 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
       aria-selected={selected}
       className={clsx(classes.root, className)}
       disabled={disabled}
-      focusRipple={!disableFocusRipple}
       ownerState={ownerState}
       role="tab"
       tabIndex={selected ? 0 : -1}
@@ -205,9 +204,9 @@ export const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab(inProps:
       onFocus={handleFocus}
       {...props}
     >
-      {!!startIcon && <TabIcon className={classes.iconWrapper}>{startIcon}</TabIcon>}
+      {!!startIcon && <TabStartIcon className={classes.startIcon}>{startIcon}</TabStartIcon>}
       <TabLabelWrapper>{label}</TabLabelWrapper>
-      {!!endIcon && <TabIcon className={classes.iconWrapper}>{endIcon}</TabIcon>}
+      {!!endIcon && <TabEndIcon className={classes.endIcon}>{endIcon}</TabEndIcon>}
       {indicator}
     </TabRoot>
   );
