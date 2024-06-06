@@ -72,22 +72,30 @@ const CircularProgressRoot = styled('span', {
 })<{ ownerState: CircularProgressOwnerState }>(({ ownerState: { color, variant }, theme }) => ({
   display: 'inline-block',
   color: theme.vars.palette[color][300],
-  transform: 'rotate(-90deg)',
+  position: 'relative',
+
   ...(variant === 'determinate' && {
     transition: theme.transitions.create('transform')
   }),
-  ...(variant === 'indeterminate' && {
-    animation: `${circularRotateKeyframe} 1.4s linear infinite`
-  })
+  ...(variant === 'indeterminate' &&
+    {
+      //animation: `${circularRotateKeyframe} 1.4s linear infinite`
+    })
 }));
 
 const CircularProgressSVG = styled('svg', {
   name: 'ESCircularProgress',
   slot: 'Svg',
-  overridesResolver: (props, styles) => styles.svg
-})({
-  display: 'block'
-});
+  overridesResolver: (props, styles) => {
+    return styles.svg;
+  }
+})<{ ownerState: CircularProgressOwnerState }>(({ ownerState: { variant } }) => ({
+  transform: 'rotate(-90deg)',
+  display: 'block',
+  ...(variant === 'indeterminate' && {
+    animation: `${circularRotateKeyframe} 1.4s linear infinite`
+  })
+}));
 
 const CircularProgressCircle = styled('circle', {
   name: 'ESCircularProgress',
@@ -139,10 +147,26 @@ const CircularProgressCircleBackground = styled('circle', {
   transition: theme.transitions.create('stroke-dashoffset')
 }));
 
+const CircularProgressContent = styled('div', {
+  name: 'ESCircularProgress',
+  slot: 'Content',
+  overridesResolver: (props, styles) => styles.circle
+})(() => ({
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
+  position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center'
+}));
+
 export const CircularProgress = forwardRef<HTMLButtonElement, CircularProgressProps>(
   function CircularProgress(inProps, ref) {
     const props = useThemeProps({ props: inProps, name: 'ESCircularProgress' });
     const {
+      children,
       className,
       color = 'primary',
       disableShrink = false,
@@ -185,7 +209,11 @@ export const CircularProgress = forwardRef<HTMLButtonElement, CircularProgressPr
         style={{ width: size, height: size }}
         {...other}
       >
-        <CircularProgressSVG className={classes.svg} viewBox={`${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`}>
+        <CircularProgressSVG
+          className={classes.svg}
+          ownerState={ownerState}
+          viewBox={`${SIZE / 2} ${SIZE / 2} ${SIZE} ${SIZE}`}
+        >
           <CircularProgressCircle
             className={classes.circle}
             cx={SIZE}
@@ -205,6 +233,8 @@ export const CircularProgress = forwardRef<HTMLButtonElement, CircularProgressPr
             strokeWidth={thickness}
           />
         </CircularProgressSVG>
+
+        {!!children && <CircularProgressContent>{children}</CircularProgressContent>}
       </CircularProgressRoot>
     );
   }

@@ -1,5 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 
+import { Typography } from '@mui/material';
+
 import { CircularProgress } from '.';
 
 const meta: Meta<typeof CircularProgress> = {
@@ -34,6 +36,14 @@ type Story = StoryObj<typeof CircularProgress>;
 
 export const Demo: Story = {
   render: (args) => {
-    return <CircularProgress {...args} />;
+    return (
+      <CircularProgress {...args}>
+        <Typography
+          color="monoA.A700"
+          component="div"
+          variant="caption"
+        >{`${Math.round(args.value ?? 0)}%`}</Typography>
+      </CircularProgress>
+    );
   }
 };

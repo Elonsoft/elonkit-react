@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { CircularProgressClasses } from './CircularProgress.classes';
 
 import { SxProps, Theme } from '@mui/material';
@@ -7,6 +9,7 @@ import { OverridableStringUnion } from '@mui/types';
 export interface CircularProgressPropsColorOverrides {}
 
 export interface CircularProgressProps {
+  children: ReactNode;
   /**
    * Override or extend the styles applied to the component.
    */
