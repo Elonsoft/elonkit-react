@@ -25,6 +25,10 @@ export interface CircularProgressClasses {
   circleIndeterminate: string;
   /** Styles applied to the `circle` svg path if `disableShrink={true}`. */
   circleDisableShrink: string;
+  /** Styles applied to the background `circle` svg path. */
+  background: string;
+  /** Styles applied to the content. */
+  content: string;
 }
 
 export type CircularProgressClassKey = keyof CircularProgressClasses;
@@ -43,5 +47,7 @@ export const circularProgressClasses: CircularProgressClasses = generateUtilityC
   'circle',
   'circleDeterminate',
   'circleIndeterminate',
-  'circleDisableShrink'
+  'circleDisableShrink',
+  'background',
+  'content'
 ]);
