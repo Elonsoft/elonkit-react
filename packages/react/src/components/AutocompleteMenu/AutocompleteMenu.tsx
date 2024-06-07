@@ -7,14 +7,14 @@ import { getAutocompleteMenuUtilityClass } from './AutocompleteMenu.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
-import { duration, styled, useThemeProps } from '@mui/material/styles';
+import { styled, useThemeProps } from '@mui/material/styles';
 import Checkbox from '@mui/material/Checkbox';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import InputAdornment, { inputAdornmentClasses } from '@mui/material/InputAdornment';
 import { inputBaseClasses } from '@mui/material/InputBase';
 import { inputLabelClasses } from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import Popper from '@mui/material/Popper';
@@ -218,8 +218,6 @@ const AutocompleteMenuSearch = styled(TextField, {
   },
 }));
 
-const defaultTransitionDuration = { enter: duration.enteringScreen, exit: duration.enteringScreen };
-
 export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, ref) {
   const {
     paperRef,
@@ -260,7 +258,7 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
     PopperProps,
     SearchProps,
 
-    transitionDuration = defaultTransitionDuration,
+    transitionDuration,
     TransitionProps: inTransitionProps,
 
     onClose,
@@ -275,8 +273,8 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
     name: 'ESAutocompleteMenu',
   });
 
-  // const paperRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const menuListRef = useRef<HTMLUListElement | null>(null);
   const [sentinelRef, setSentinelRef] = useState<HTMLElement | null>(null);
 
   const onCloseLatest = useLatest(onClose);
@@ -337,13 +335,6 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
 
   const ownerState = { classes: inClasses };
   const classes = useUtilityClasses(ownerState);
-  const menuRef = useRef<HTMLLIElement>(null);
-  const duration =
-    typeof transitionDuration === 'number'
-      ? transitionDuration
-      : typeof transitionDuration === 'object'
-        ? transitionDuration.enter ?? 0
-        : 0;
   const groupedOptions: ReactNode[] = [];
 
   for (let index = 0; index < options.length; index++) {
@@ -367,7 +358,6 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
     groupedOptions.push(
       <AutocompleteMenuMenuItem
         key={value}
-        ref={selected ? menuRef : null}
         autoFocus={index === 0 && !SearchProps && !disableAutoFocus}
         className={classes.menuItem}
         disabled={disabled}
@@ -382,10 +372,19 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      menuRef?.current?.scrollIntoView({ block: 'center' });
-    }, duration);
-  }, [open, duration]);
+    if (open) {
+      requestAnimationFrame(() => {
+        if (menuListRef.current) {
+          const element = menuListRef.current.querySelector(`.${menuItemClasses.selected}`) as HTMLElement;
+
+          if (element) {
+            menuListRef.current.scrollTop =
+              element.offsetTop + element.clientHeight / 2 - menuListRef.current.clientHeight / 2;
+          }
+        }
+      });
+    }
+  }, [open]);
 
   return (
     <AutocompleteMenuRoot
@@ -493,7 +492,7 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
                         <SpinnerRing color="monoA" size={16} /> {labelLoading}
                       </AutocompleteMenuEmptyState>
                     ) : options.length ? (
-                      <AutocompleteMenuMenuList className={classes.menuList}>
+                      <AutocompleteMenuMenuList ref={menuListRef} className={classes.menuList}>
                         {groupedOptions}
                         {!!onLoadMore && (
                           <AutocompleteMenuSentinel
