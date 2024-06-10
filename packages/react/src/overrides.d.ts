@@ -70,6 +70,7 @@ import {
   CalendarHeadProps,
   CalendarProps,
 } from './components/Calendar';
+import { CircularProgressClassKey, CircularProgressProps } from './components/CircularProgress';
 import {
   DialogActionsClassKey,
   DialogActionsProps,
@@ -350,6 +351,7 @@ declare module '@mui/material/styles/props' {
     ESCalendar: CalendarProps;
     ESCalendarButton: CalendarButtonProps;
     ESCalendarHead: CalendarHeadProps;
+    ESCircularProgress: CircularProgressProps;
     ESDialog: DialogProps;
     ESDialogActions: DialogActionsProps;
     ESDialogArrow: DialogArrowProps;
@@ -477,6 +479,7 @@ declare module '@mui/material/styles/overrides' {
     ESCalendar: CalendarClassKey;
     ESCalendarButton: CalendarButtonClassKey;
     ESCalendarHead: CalendarHeadClassKey;
+    ESCircularProgress: CircularProgressClassKey;
     ESDialog: DialogClassKey;
     ESDialogActions: DialogActionsClassKey;
     ESDialogArrow: DialogArrowClassKey;
@@ -674,6 +677,10 @@ declare module '@mui/material/styles/components' {
     ESCalendarHead?: {
       defaultProps?: ComponentsProps['ESCalendarHead'];
       styleOverrides?: ComponentsOverrides['ESCalendarHead'];
+    };
+    ESCircularProgress?: {
+      defaultProps?: ComponentsProps['ESCircularProgress'];
+      styleOverrides?: ComponentsOverrides['ESCircularProgress'];
     };
     ESDialog?: {
       defaultProps?: ComponentsProps['ESDialog'];

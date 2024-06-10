@@ -12,6 +12,7 @@ export * from './Breadcrumbs';
 export * from './Button';
 export * from './ButtonBase';
 export * from './Calendar';
+export * from './CircularProgress';
 export * from './DateAdapter';
 export * from './Dialog';
 export * from './DialogStack';
