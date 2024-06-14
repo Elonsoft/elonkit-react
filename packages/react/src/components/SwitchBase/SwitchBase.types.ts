@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-
 import { SwitchBaseClasses } from './SwitchBase.classes';
 
 import { ButtonBaseProps } from '../ButtonBase';

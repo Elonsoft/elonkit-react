@@ -193,7 +193,7 @@ const getPixelsFromCssUnits = (cssValue: string) => {
     vh: (value: number) => (value / 100) * window.innerHeight,
   };
 
-  const pattern = new RegExp(`^([\-\+]?(?:\\d+(?:\\.\\d+)?))(${Object.keys(supportedUnits).join('|')})$`, 'i');
+  const pattern = new RegExp(`^([-+]?(?:\\d+(?:\\.\\d+)?))(${Object.keys(supportedUnits).join('|')})$`, 'i');
   const matches = String.prototype.toString.apply(cssValue).trim().match(pattern);
 
   if (matches) {

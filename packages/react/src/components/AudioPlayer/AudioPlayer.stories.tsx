@@ -65,7 +65,7 @@ export const ImperativeActions: Story = {
 
     const onFirstEnded = () => {
       if (secondAudioRef.current) {
-        // eslint-disable-next-line storybook/context-in-play-function
+        // // eslint-disable-next-line storybook/context-in-play-function
         secondAudioRef.current.play();
       }
     };

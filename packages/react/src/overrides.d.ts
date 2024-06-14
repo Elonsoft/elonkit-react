@@ -1,7 +1,7 @@
 // eslint-disable-next-line simple-import-sort/imports
 import type {} from '@mui/material/themeCssVarsAugmentation';
 
-/* eslint-disable @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   BreakpointOverrides,
   Palette,

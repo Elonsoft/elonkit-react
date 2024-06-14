@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-imports */
-
 import { memo, useState } from 'react';
 
 import { PaginationPagesProps } from './PaginationPages.types';

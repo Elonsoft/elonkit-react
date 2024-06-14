@@ -24,10 +24,14 @@ module.exports = {
       from: {
         orphan: true,
         pathNot: [
-          '(^|/)[.][^/]+[.](?:js|cjs|mjs|ts|cts|mts|json)$', // dot files
-          '[.]d[.]ts$', // TypeScript declaration files
-          '(^|/)tsconfig[.]json$', // TypeScript config
-          '(^|/)(?:babel|webpack)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$', // other configs
+          // dot files
+          '(^|/)[.][^/]+[.](?:js|cjs|mjs|ts|cts|mts|json)$',
+          // TypeScript declaration files
+          '[.]d[.]ts$',
+          // TypeScript config
+          '(^|/)tsconfig[.]json$',
+          // other configs
+          '(^|/)(?:babel|webpack)[.]config[.](?:js|cjs|mjs|ts|cts|mts|json)$',
         ],
       },
       to: {},

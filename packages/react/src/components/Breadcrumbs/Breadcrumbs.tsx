@@ -224,7 +224,6 @@ export const Breadcrumbs = (inProps: BreadcrumbsProps) => {
             return null;
           }
 
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { children, ...rest } = child.props;
 
           if (idx >= 1 && idx < lastIndex) {
