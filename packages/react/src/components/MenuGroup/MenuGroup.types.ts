@@ -12,8 +12,10 @@ export interface MenuGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   /** The system prop that allows defining system overrides as well as additional CSS styles. */
   sx?: SxProps<Theme>;
-
+  /** The size of the component. */
   size?: '32' | '28' | '24';
+  /** Whether the actions should be sticky. */
   sticky?: boolean;
+  /** Whether the actions should be with divider. */
   divider?: boolean;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { ComponentProps, useEffect, useRef, useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { AutocompleteField, AutocompleteFieldProps } from '.';
 
 import { AutocompleteMenuFooter, AutocompleteMenuHeader } from '../AutocompleteMenu';
+import { MenuGroupProps } from '../MenuGroup';
 
 interface User {
   id: number;
@@ -44,13 +45,45 @@ const getUsersDisplayValue = (users: User[]) => (
   </span>
 );
 
-const meta: Meta<typeof AutocompleteField> = {
+type Args = ComponentProps<typeof AutocompleteField> & {
+  MenuGroupSize?: MenuGroupProps['size'];
+  MenuGroupSticky?: MenuGroupProps['sticky'];
+  MenuGroupDivider?: MenuGroupProps['divider'];
+};
+
+const meta: Meta<Args> = {
   tags: ['autodocs'],
   component: AutocompleteField,
   parameters: {
-    references: ['Autocomplete', 'AutocompleteField'],
+    references: ['Autocomplete', 'AutocompleteField', 'MenuGroup'],
   },
   argTypes: {
+    MenuGroupSize: {
+      name: 'MenuGroup.size',
+      description: 'The size of the `MenuGroup` component.',
+      table: {
+        category: 'MenuGroup',
+        defaultValue: { summary: '32' },
+      },
+      options: ['32', '28', '24'],
+      control: { type: 'select' },
+    },
+    MenuGroupSticky: {
+      name: 'MenuGroup.sticky',
+      description: 'The sticky of the `MenuGroup` component.',
+      table: {
+        category: 'MenuGroup',
+      },
+      control: { type: 'boolean' },
+    },
+    MenuGroupDivider: {
+      name: 'MenuGroup.divider',
+      description: 'The divider of the `MenuGroup` component.',
+      table: {
+        category: 'MenuGroup',
+      },
+      control: { type: 'boolean' },
+    },
     multiple: {
       control: { type: 'boolean' },
     },

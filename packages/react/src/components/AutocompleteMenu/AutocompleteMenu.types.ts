@@ -69,7 +69,7 @@ export type AutocompleteMenuProps<T> = {
   PopperProps?: Omit<Partial<PopperProps>, 'anchorEl' | 'open'>;
   /** Props applied to the search field component. If present, shows the component. */
   SearchProps?: Partial<TextFieldProps>;
-
+  /** Props applied to the MenuGroup components. */
   MenuGroupProps?: Partial<MenuGroupProps>;
 
   /**

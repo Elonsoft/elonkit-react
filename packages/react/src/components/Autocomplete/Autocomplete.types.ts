@@ -5,7 +5,6 @@ import { AutocompleteClasses } from './Autocomplete.classes';
 import { OutlinedInputProps, SxProps, TextFieldProps, Theme } from '@mui/material';
 
 import { AutocompleteMenuProps } from '../AutocompleteMenu';
-import { MenuGroupProps } from '../MenuGroup';
 
 export type AutocompleteProps<T> = {
   /** Override or extend the styles applied to the component. */
@@ -17,8 +16,6 @@ export type AutocompleteProps<T> = {
 
   /** If true, it is possible to enter a search string in the input itself. */
   inlineSearch?: boolean;
-
-  MenuGroupProps?: Partial<MenuGroupProps>;
 
   /** If true, the popper is opened. */
   open?: boolean;
@@ -68,6 +65,7 @@ export type AutocompleteProps<T> = {
     | 'getOptionValue'
     | 'getOptionDisabled'
     | 'groupBy'
+    | 'MenuGroupProps'
     | 'loading'
     | 'header'
     | 'footer'

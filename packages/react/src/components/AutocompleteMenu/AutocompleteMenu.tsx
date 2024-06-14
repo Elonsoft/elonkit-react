@@ -91,22 +91,6 @@ const AutocompleteMenuMenuList = styled(MenuList, {
   maxHeight: '228px',
 }));
 
-// const AutocompleteMenuMenuGroup = styled('div', {
-//   name: 'ESAutocompleteMenu',
-//   slot: 'MenuGroup',
-//   overridesResolver: (_props, styles) => styles.group,
-// })(({ theme }) => ({
-//   ...theme.typography.caption,
-//   color: theme.vars.palette.monoA.A600,
-//   padding: '8px 16px 4px',
-
-//   '&:not(:first-child)': {
-//     borderTop: `1px solid ${theme.vars.palette.monoA.A100}`,
-//     paddingTop: '16px',
-//     marginTop: '8px',
-//   },
-// }));
-
 const AutocompleteMenuMenuItem = styled(MenuItem, {
   name: 'ESAutocompleteMenu',
   slot: 'MenuItem',

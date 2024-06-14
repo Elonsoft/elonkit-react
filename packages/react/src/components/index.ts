@@ -34,6 +34,7 @@ export * from './Link';
 export * from './LoadingButton';
 export * from './locale';
 export * from './MadeBy';
+export * from './MenuGroup';
 export * from './MenuItem';
 export * from './PageHGroup';
 export * from './Pagination';
