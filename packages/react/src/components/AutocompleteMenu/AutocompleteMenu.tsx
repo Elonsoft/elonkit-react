@@ -25,6 +25,7 @@ import { useIntersectionObserver, useLatest, useScrollLock } from '../../hooks';
 import { IconCloseW350, IconMagnify2W400 } from '../../icons';
 import { Button, buttonClasses } from '../Button';
 import { buttonBaseClasses } from '../ButtonBase';
+import { MenuGroup } from '../MenuGroup';
 import { SpinnerRing } from '../Spinner';
 import { svgIconClasses } from '../SvgIcon';
 
@@ -90,21 +91,21 @@ const AutocompleteMenuMenuList = styled(MenuList, {
   maxHeight: '228px',
 }));
 
-const AutocompleteMenuMenuGroup = styled('div', {
-  name: 'ESAutocompleteMenu',
-  slot: 'MenuGroup',
-  overridesResolver: (_props, styles) => styles.group,
-})(({ theme }) => ({
-  ...theme.typography.caption,
-  color: theme.vars.palette.monoA.A600,
-  padding: '8px 16px 4px',
+// const AutocompleteMenuMenuGroup = styled('div', {
+//   name: 'ESAutocompleteMenu',
+//   slot: 'MenuGroup',
+//   overridesResolver: (_props, styles) => styles.group,
+// })(({ theme }) => ({
+//   ...theme.typography.caption,
+//   color: theme.vars.palette.monoA.A600,
+//   padding: '8px 16px 4px',
 
-  '&:not(:first-child)': {
-    borderTop: `1px solid ${theme.vars.palette.monoA.A100}`,
-    paddingTop: '16px',
-    marginTop: '8px',
-  },
-}));
+//   '&:not(:first-child)': {
+//     borderTop: `1px solid ${theme.vars.palette.monoA.A100}`,
+//     paddingTop: '16px',
+//     marginTop: '8px',
+//   },
+// }));
 
 const AutocompleteMenuMenuItem = styled(MenuItem, {
   name: 'ESAutocompleteMenu',
@@ -237,6 +238,7 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
     getOptionLabel,
     getOptionDisabled,
     groupBy,
+    MenuGroupProps,
 
     loading,
 
@@ -350,9 +352,15 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
 
     if (!!groupBy && (index === 0 || group !== groupBy(options[index - 1]))) {
       groupedOptions.push(
-        <AutocompleteMenuMenuGroup key={`${value}-${group}`} aria-disabled className={classes.menuGroup} tabIndex={-1}>
+        <MenuGroup
+          key={`${value}-${group}`}
+          aria-disabled
+          className={classes.menuGroup}
+          tabIndex={-1}
+          {...MenuGroupProps}
+        >
           {group}
-        </AutocompleteMenuMenuGroup>
+        </MenuGroup>
       );
     }
 
