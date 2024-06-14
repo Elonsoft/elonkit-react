@@ -5,6 +5,8 @@ import { AutocompleteMenuClasses } from './AutocompleteMenu.classes';
 import { PopperProps, SxProps, TextFieldProps, Theme } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 
+import { MenuGroupProps } from '../MenuGroup';
+
 export type AutocompleteMenuProps<T> = {
   paperRef?: ForwardedRef<HTMLDivElement>;
 
@@ -67,6 +69,8 @@ export type AutocompleteMenuProps<T> = {
   PopperProps?: Omit<Partial<PopperProps>, 'anchorEl' | 'open'>;
   /** Props applied to the search field component. If present, shows the component. */
   SearchProps?: Partial<TextFieldProps>;
+
+  MenuGroupProps?: Partial<MenuGroupProps>;
 
   /**
    * Set to 'auto' to automatically calculate transition time based on height.

@@ -57,6 +57,7 @@ export const AutocompleteField = <T,>(inProps: AutocompleteFieldProps<T>) => {
     InputProps,
     InputLabelProps,
     FormHelperTextProps,
+    MenuGroupProps,
 
     onChange,
 
@@ -103,6 +104,7 @@ export const AutocompleteField = <T,>(inProps: AutocompleteFieldProps<T>) => {
         </InputLabel>
       )}
       <Autocomplete
+        MenuGroupProps={MenuGroupProps}
         aria-describedby={helperTextId}
         autoFocus={autoFocus}
         disabled={disabled}

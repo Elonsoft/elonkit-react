@@ -68,6 +68,7 @@ export type AutocompleteFieldProps<T> = {
     | 'getOptionLabel'
     | 'getOptionValue'
     | 'groupBy'
+    | 'MenuGroupProps'
     | 'header'
     | 'id'
     | 'inlineSearch'
