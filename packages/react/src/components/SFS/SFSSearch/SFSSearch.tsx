@@ -52,7 +52,7 @@ const SFSSearchInput = styled(TextField, {
 
   '& .MuiOutlinedInput-root': {
     '&.MuiInputBase-adornedEnd': {
-      paddingRight: '3px',
+      paddingRight: 0,
     },
 
     '&.MuiInputBase-adornedStart': {
@@ -73,12 +73,13 @@ const SFSSearchInput = styled(TextField, {
       paddingLeft: '0',
       ...theme.typography.body100,
       lineHeight: '23px',
+      color: theme.vars.palette.monoA.A900,
     },
   },
 
   '& .MuiInputAdornment-positionEnd': {
     marginLeft: 0,
-    width: '32px',
+    width: '28px',
     cursor: 'pointer',
     flexShrink: 0,
   },
@@ -106,7 +107,7 @@ const SFSSearchClear = styled(Button, {
 })(({ theme }) => ({
   [`&.${buttonClasses.root}`]: {
     padding: '0 4px',
-    margin: '0 6px 0 2px',
+    margin: '0 2px',
     flexShrink: 0,
     width: '24px',
     '--icon': theme.vars.palette.monoA.A400,
