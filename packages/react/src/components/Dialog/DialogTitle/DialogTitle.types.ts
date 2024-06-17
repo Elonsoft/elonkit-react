@@ -14,4 +14,16 @@ export interface DialogTitleProps {
   sx?: SxProps<Theme>;
   /** Whether the title should be sticky. */
   sticky?: boolean;
+  /**
+   * The size of the component.
+   * @default 'medium'
+   */
+  size?: 'large' | 'medium' | 'small';
+  /** Element placed before the children. */
+  startAdornment?: ReactNode;
+  /** Element placed after the children. */
+  endAdornment?: ReactNode;
+
+  /** If true, the children will be show below the root element. */
+  prominent?: boolean;
 }
