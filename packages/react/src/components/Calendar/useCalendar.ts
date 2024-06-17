@@ -1,9 +1,12 @@
 import { useMemo } from 'react';
 
+const MAX_ROWS_DAYS_AMOUNT = 42;
+
 export const useCalendar = (
   year: number,
   month: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11,
-  weekStart: 0 | 1 | 2 | 3 | 4 | 5 | 6
+  weekStart: 0 | 1 | 2 | 3 | 4 | 5 | 6,
+  isShowMaxRows?: boolean
 ) => {
   const result = useMemo(() => {
     const dates = [];
@@ -28,6 +31,15 @@ export const useCalendar = (
     }
 
     i = 1;
+
+    if (isShowMaxRows) {
+      const nextDatesLength = MAX_ROWS_DAYS_AMOUNT - prevDates.length - dates.length;
+
+      while (i <= nextDatesLength) {
+        nextDates.push(i++);
+        date.setDate(i);
+      }
+    }
 
     while (date.getDay() !== weekStart) {
       nextDates.push(i++);

@@ -78,7 +78,9 @@ export const Calendar = (inProps: CalendarProps) => {
     throw new Error('No provider for DateAdapterContext.');
   }
 
-  const { dates, prevDates, nextDates } = useCalendar(year, month, weekStart);
+  const isShowMaxRows = showNextMonth && rows === 'max';
+
+  const { dates, prevDates, nextDates } = useCalendar(year, month, weekStart, isShowMaxRows);
 
   const ownerState = { rows, ...props };
   const classes = useUtilityClasses(ownerState);
