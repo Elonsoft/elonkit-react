@@ -10,6 +10,7 @@
     "lerna.json"
   ],
   "words": [
+    "valuetext",
     "autodocs",
     "behaviour",
     "ccircle",
