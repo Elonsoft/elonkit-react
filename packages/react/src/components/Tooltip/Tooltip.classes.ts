@@ -1,4 +1,4 @@
-import { generateUtilityClass, generateUtilityClasses } from '@mui/base';
+import { generateUtilityClass, generateUtilityClasses } from '@mui/material';
 
 export interface TooltipClasses {
   /** Styles applied to the root element if `color="primary"`. */
@@ -35,6 +35,12 @@ export interface TooltipClasses {
   tooltipArrow: string;
   /** Styles applied to the arrow element. */
   arrow: string;
+  /** Styles applied to the arrow element if 'size="6"'. */
+  arrowSize6: string;
+  /** Styles applied to the arrow element if 'size="8"'. */
+  arrowSize8: string;
+  /** Styles applied to the arrow element if 'size="10"'. */
+  arrowSize10: string;
   /** Styles applied to the tooltip (label wrapper) element if the tooltip is opened by touch. */
   touch: string;
   /** Styles applied to the tooltip (label wrapper) element if `placement` contains "left". */
@@ -75,5 +81,8 @@ export const tooltipClasses: TooltipClasses = generateUtilityClasses('ESTooltip'
   'tooltipPlacementRight',
   'tooltipPlacementTop',
   'tooltipPlacementBottom',
-  'arrow'
+  'arrow',
+  'arrowSize6',
+  'arrowSize8',
+  'arrowSize10',
 ]);

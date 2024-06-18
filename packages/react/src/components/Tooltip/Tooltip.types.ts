@@ -179,6 +179,11 @@ export interface TooltipProps {
    */
   PopperProps?: Partial<PopperProps>;
   /**
+   * Size of the arrow element. Applied only when default arrow is used.
+   * @default '6'
+   */
+  arrowSize?: '6' | '8' | '10';
+  /**
    * The extra props for the slot components.
    * You can override the existing props or add new ones.
    *
