@@ -144,6 +144,12 @@ const SortingMenuItem = styled(MenuItem, {
       margin: '8px -16px',
     },
   },
+
+  [`& .${listItemTextClasses.root} .${typographyClasses.root}`]: {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
 }));
 
 const SortingDirectionButton = styled(Button, {
@@ -154,6 +160,7 @@ const SortingDirectionButton = styled(Button, {
   '--icon': theme.vars.palette.monoA.A600,
 
   [`&.${buttonClasses.root}`]: {
+    flexShrink: 0,
     textTransform: 'unset',
     position: 'relative',
     zIndex: 10,
