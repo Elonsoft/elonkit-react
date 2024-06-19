@@ -140,7 +140,7 @@ const SortingMenuItem = styled(MenuItem, {
     minHeight: 0,
     height: 'auto',
     opacity: 1,
-    '& .MuiDivider-root': {
+    '& .ESDivider-root': {
       margin: '8px -16px',
     },
   },
