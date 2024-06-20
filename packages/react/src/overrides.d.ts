@@ -245,6 +245,7 @@ import {
   SwiperPaginationProps,
   SwiperProps,
 } from './components/Swiper';
+import { SliderClassKey, SLiderProps } from './components/Slider';
 import { SwitchClassKey, SwitchProps } from './components/Switch';
 import { SwitchBaseClassKey, SwitchBaseProps } from './components/SwitchBase';
 import { TabBarClassKey, TabBarItemClassKey, TabBarItemProps, TabBarProps } from './components/TabBar';
@@ -442,6 +443,7 @@ declare module '@mui/material/styles/props' {
     ESSpinnerRing: SpinnerRingProps;
     ESSortingMenu: SortingMenuProps;
     ESSvgIcon: SvgIconProps;
+    ESSlider: SliderProps;
     ESSwiper: SwiperProps;
     ESSwitch: SwitchProps;
     ESSwitchBase: SwitchBaseProps;
@@ -576,6 +578,7 @@ declare module '@mui/material/styles/overrides' {
     ESSpinnerRing: SpinnerRingClassKey;
     ESSortingMenu: SortingMenuClassKey;
     ESSvgIcon: SvgIconClassKey;
+    ESSlider: SliderClassKey;
     ESSwiper: SwiperClassKey;
     ESSwitch: SwitchClassKey;
     ESSwitchBase: SwitchBaseClassKey;
@@ -823,6 +826,10 @@ declare module '@mui/material/styles/components' {
     ESGalleryThumbnailsItem?: {
       defaultProps?: ComponentsProps['ESGalleryThumbnailsItem'];
       styleOverrides?: ComponentsOverrides['ESGalleryThumbnailsItem'];
+    };
+    ESSlider?: {
+      defaultProps?: ComponentsProps['ESSlider'];
+      styleOverrides?: ComponentsOverrides['ESSlider'];
     };
     ESSwiper?: {
       defaultProps?: ComponentsProps['ESSwiper'];

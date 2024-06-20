@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Meta, StoryObj } from '@storybook/react';
 
+// eslint-disable-next-line no-restricted-imports
 import Slider, { SliderProps } from '@mui/material/Slider';
 
 const MARKS = [{ value: 0 }, { value: 10 }, { value: 20 }, { value: 30 }, { value: 40 }, { value: 50 }];

@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { forwardRef } from 'react';
 
 import { SliderOwnerState, SliderProps } from './Slider.types';
 
@@ -600,9 +600,7 @@ export const SliderMarkLabel = styled('span', {
   ],
 }));
 
-const Forward = ({ children }: { children: ReactNode }) => children;
-
-export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Slider(inputProps, ref) {
+export const Slider = forwardRef<HTMLSpanElement | null, SliderProps>(function Slider(inputProps, ref) {
   const props = useThemeProps({ props: inputProps, name: 'ESSlider' });
 
   const {
@@ -610,8 +608,7 @@ export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Sl
     'aria-valuetext': ariaValuetext,
     'aria-labelledby': ariaLabelledby,
     component = 'span',
-    components = {},
-    componentsProps = {},
+
     color = 'primary',
     classes: classesProp,
     className,
@@ -634,6 +631,7 @@ export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Sl
     step,
     shiftStep,
     value: valueProp,
+    defaultValue,
     ...other
   } = props;
 
@@ -663,7 +661,16 @@ export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Sl
     trackOffset,
     trackLeap,
     getThumbStyle,
-  } = useSlider({ ...ownerState, marks: marksProp, rootRef: ref, disableSwap, step, shiftStep, value: valueProp });
+  } = useSlider({
+    ...ownerState,
+    marks: marksProp,
+    rootRef: ref,
+    disableSwap,
+    step,
+    shiftStep,
+    defaultValue,
+    value: valueProp,
+  });
 
   ownerState.marked = marks.length > 0 && marks.some((mark) => mark.label);
   ownerState.dragging = dragging;
@@ -671,23 +678,23 @@ export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Sl
 
   const classes = useUtilityClasses(ownerState);
 
-  const RootSlot = slots?.root ?? components.Root ?? SliderRoot;
-  const RailSlot = slots?.rail ?? components.Rail ?? SliderRail;
-  const TrackSlot = slots?.track ?? components.Track ?? SliderTrack;
-  const ThumbSlot = slots?.thumb ?? components.Thumb ?? SliderThumb;
-  const ValueLabelSlot = slots?.valueLabel ?? components.ValueLabel ?? SliderValueLabel;
-  const MarkSlot = slots?.mark ?? components.Mark ?? SliderMark;
-  const MarkLabelSlot = slots?.markLabel ?? components.MarkLabel ?? SliderMarkLabel;
-  const InputSlot = slots?.input ?? components.Input ?? 'input';
+  const RootSlot = slots?.root ?? SliderRoot;
+  const RailSlot = slots?.rail ?? SliderRail;
+  const TrackSlot = slots?.track ?? SliderTrack;
+  const ThumbSlot = slots?.thumb ?? SliderThumb;
+  const ValueLabelSlot = slots?.valueLabel ?? SliderValueLabel;
+  const MarkSlot = slots?.mark ?? SliderMark;
+  const MarkLabelSlot = slots?.markLabel ?? SliderMarkLabel;
+  const InputSlot = slots?.input ?? 'input';
 
-  const rootSlotProps = slotProps?.root ?? componentsProps.root;
-  const railSlotProps = slotProps?.rail ?? componentsProps.rail;
-  const trackSlotProps = slotProps?.track ?? componentsProps.track;
-  const thumbSlotProps = slotProps?.thumb ?? componentsProps.thumb;
-  const valueLabelSlotProps = slotProps?.valueLabel ?? componentsProps.valueLabel;
-  const markSlotProps = slotProps?.mark ?? componentsProps.mark;
-  const markLabelSlotProps = slotProps?.markLabel ?? componentsProps.markLabel;
-  const inputSlotProps = slotProps?.input ?? componentsProps.input;
+  const rootSlotProps = slotProps?.root;
+  const railSlotProps = slotProps?.rail;
+  const trackSlotProps = slotProps?.track;
+  const thumbSlotProps = slotProps?.thumb;
+  const valueLabelSlotProps = slotProps?.valueLabel;
+  const markSlotProps = slotProps?.mark;
+  const markLabelSlotProps = slotProps?.markLabel;
+  const inputSlotProps = slotProps?.input;
 
   const rootProps = useSlotProps({
     elementType: RootSlot,
@@ -832,13 +839,10 @@ export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Sl
         const percent = valueToPercent(value, min, max);
         const style = axisProps[axis].offset(percent);
 
-        const ValueLabelComponent = valueLabelDisplay === 'off' ? Forward : ValueLabelSlot;
-
         return (
-          /* TODO v6: Change component structure. It will help in avoiding the complicated React.cloneElement API added in SliderValueLabel component. Should be: Thumb -> Input, ValueLabel. Follow Joy UI's Slider structure. */
-          <ValueLabelComponent
+          <ValueLabelSlot
             key={index}
-            {...(!isHostComponent(ValueLabelComponent) && {
+            {...(valueLabelDisplay !== 'off' && {
               valueLabelFormat,
               valueLabelDisplay,
               value: typeof valueLabelFormat === 'function' ? valueLabelFormat(scale(value), index) : valueLabelFormat,
@@ -871,7 +875,7 @@ export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Sl
                 {...inputSliderProps}
               />
             </ThumbSlot>
-          </ValueLabelComponent>
+          </ValueLabelSlot>
         );
       })}
     </RootSlot>

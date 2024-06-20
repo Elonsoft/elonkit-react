@@ -44,6 +44,7 @@ export * from './RibbonBadge';
 export * from './SFS';
 export * from './Sidebar';
 export * from './Sidenav';
+export * from './Slider';
 export * from './SortingMenu';
 export * from './Spinner';
 export * from './Spinner';

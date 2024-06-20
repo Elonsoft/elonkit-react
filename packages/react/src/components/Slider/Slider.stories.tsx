@@ -44,16 +44,6 @@ const meta: Meta<typeof Slider> = {
         disable: true,
       },
     },
-    components: {
-      table: {
-        disable: true,
-      },
-    },
-    componentsProps: {
-      table: {
-        disable: true,
-      },
-    },
     getAriaLabel: {
       table: {
         disable: true,
@@ -81,7 +71,7 @@ const meta: Meta<typeof Slider> = {
     },
   },
   args: {
-    value: 50,
+    defaultValue: 50,
   },
 };
 

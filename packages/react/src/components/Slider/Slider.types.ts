@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { Mark } from './useSlider.types';
 
 import { SliderClasses } from './Slider.classes';
@@ -52,41 +53,7 @@ export interface SliderOwnProps {
     'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning',
     SliderPropsColorOverrides
   >;
-  /**
-   * The components used for each slot inside.
-   *
-   * @deprecated use the `slots` prop instead. This prop will be removed in v7. See [Migrating from deprecated APIs](/material-ui/migration/migrating-from-deprecated-apis/) for more details.
-   *
-   * @default {}
-   */
-  components?: {
-    Root?: React.ElementType;
-    Track?: React.ElementType;
-    Rail?: React.ElementType;
-    Thumb?: React.ElementType;
-    Mark?: React.ElementType;
-    MarkLabel?: React.ElementType;
-    ValueLabel?: React.ElementType;
-    Input?: React.ElementType;
-  };
-  /**
-   * The extra props for the slot components.
-   * You can override the existing props or add new ones.
-   *
-   * @deprecated use the `slotProps` prop instead. This prop will be removed in v7. See [Migrating from deprecated APIs](/material-ui/migration/migrating-from-deprecated-apis/) for more details.
-   *
-   * @default {}
-   */
-  componentsProps?: {
-    root?: SlotComponentProps<'span', SliderComponentsPropsOverrides, SliderOwnerState>;
-    track?: SlotComponentProps<'span', SliderComponentsPropsOverrides, SliderOwnerState>;
-    rail?: SlotComponentProps<'span', SliderComponentsPropsOverrides, SliderOwnerState>;
-    thumb?: SlotComponentProps<'span', SliderComponentsPropsOverrides, SliderOwnerState>;
-    mark?: SlotComponentProps<'span', SliderComponentsPropsOverrides, SliderOwnerState>;
-    markLabel?: SlotComponentProps<'span', SliderComponentsPropsOverrides, SliderOwnerState>;
-    valueLabel?: SlotComponentProps<typeof SliderValueLabelComponent, SliderComponentsPropsOverrides, SliderOwnerState>;
-    input?: SlotComponentProps<'input', SliderComponentsPropsOverrides, SliderOwnerState>;
-  };
+
   /**
    * Override or extend the styles applied to the component.
    */
@@ -271,11 +238,13 @@ export interface SliderOwnProps {
    * }
    */
   valueLabelFormat?: string | ((value: number, index: number) => React.ReactNode);
-
+  /**
+   * The width of the slider.
+   */
   width?: number;
 }
 
-export interface SliderTypeMap<RootComponent extends React.ElementType = 'span', AdditionalProps = any> {
+export interface SliderTypeMap<RootComponent extends React.ElementType = 'span', AdditionalProps = {}> {
   props: AdditionalProps & SliderOwnProps;
   defaultComponent: RootComponent;
 }
@@ -287,12 +256,12 @@ export interface SliderValueLabelProps extends React.HTMLAttributes<HTMLSpanElem
   value: number;
 }
 
-type SliderRootProps = NonNullable<SliderTypeMap['props']['componentsProps']>['root'];
-type SliderMarkProps = NonNullable<SliderTypeMap['props']['componentsProps']>['mark'];
-type SliderMarkLabelProps = NonNullable<SliderTypeMap['props']['componentsProps']>['markLabel'];
-type SliderRailProps = NonNullable<SliderTypeMap['props']['componentsProps']>['rail'];
-type SliderTrackProps = NonNullable<SliderTypeMap['props']['componentsProps']>['track'];
-type SliderThumbProps = NonNullable<SliderTypeMap['props']['componentsProps']>['thumb'];
+type SliderRootProps = NonNullable<SliderTypeMap['props']['slotProps']>['root'];
+type SliderMarkProps = NonNullable<SliderTypeMap['props']['slotProps']>['mark'];
+type SliderMarkLabelProps = NonNullable<SliderTypeMap['props']['slotProps']>['markLabel'];
+type SliderRailProps = NonNullable<SliderTypeMap['props']['slotProps']>['rail'];
+type SliderTrackProps = NonNullable<SliderTypeMap['props']['slotProps']>['track'];
+type SliderThumbProps = NonNullable<SliderTypeMap['props']['slotProps']>['thumb'];
 
 export declare const SliderRoot: React.FC<SliderRootProps>;
 export declare const SliderMark: React.FC<SliderMarkProps>;
@@ -304,7 +273,7 @@ export declare const SliderValueLabel: React.FC<SliderValueLabelProps>;
 
 export type SliderProps<
   RootComponent extends React.ElementType = SliderTypeMap['defaultComponent'],
-  AdditionalProps = any,
+  AdditionalProps = {},
 > = OverrideProps<SliderTypeMap<RootComponent, AdditionalProps>, RootComponent> & {
   component?: React.ElementType;
 };
