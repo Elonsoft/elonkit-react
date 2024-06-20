@@ -8,11 +8,11 @@ import { getSortingMenuUtilityClass } from './SortingMenu.classes';
 
 import { styled, useThemeProps } from '@mui/material/styles';
 import { unstable_composeClasses, useMediaQuery } from '@mui/material';
-import ListItemText from '@mui/material/ListItemText';
+import ListItemText, { listItemTextClasses } from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
+import Typography, { typographyClasses } from '@mui/material/Typography';
 
 import { IconSortAscending, IconSortDescending } from '../../icons';
 import { Button, buttonClasses } from '../Button';
@@ -65,8 +65,7 @@ const SortingMenuRoot = styled(Popover, {
     overflowX: 'hidden',
 
     '& .MuiList-root': {
-      minWidth: '320px',
-      maxWidth: '100%',
+      width: '320px',
       padding: '0 16px',
     },
   },
@@ -145,6 +144,12 @@ const SortingMenuItem = styled(MenuItem, {
       margin: '8px -16px',
     },
   },
+
+  [`& .${listItemTextClasses.root} .${typographyClasses.root}`]: {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
 }));
 
 const SortingDirectionButton = styled(Button, {
@@ -155,6 +160,7 @@ const SortingDirectionButton = styled(Button, {
   '--icon': theme.vars.palette.monoA.A600,
 
   [`&.${buttonClasses.root}`]: {
+    flexShrink: 0,
     textTransform: 'unset',
     position: 'relative',
     zIndex: 10,
