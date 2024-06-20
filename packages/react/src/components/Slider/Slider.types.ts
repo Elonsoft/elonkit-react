@@ -24,6 +24,7 @@ export type SliderOwnerState = {
   track: 'normal' | false | 'inverted';
   color: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   size: 'small' | 'medium';
+  width?: number;
   dragging?: boolean;
   marked?: boolean;
   focusedThumbIndex?: number;
@@ -45,7 +46,6 @@ export interface SliderOwnProps {
   /**
    * The color of the component.
    * It supports both default and custom theme colors, which can be added as shown in the
-   * [palette customization guide](https://mui.com/material-ui/customization/palette/#custom-colors).
    * @default 'primary'
    */
   color?: OverridableStringUnion<
@@ -271,6 +271,8 @@ export interface SliderOwnProps {
    * }
    */
   valueLabelFormat?: string | ((value: number, index: number) => React.ReactNode);
+
+  width?: number;
 }
 
 export interface SliderTypeMap<RootComponent extends React.ElementType = 'span', AdditionalProps = any> {

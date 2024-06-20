@@ -71,7 +71,7 @@ export const SliderRoot = styled('span', {
       ownerState.track === false && styles.trackFalse,
     ];
   },
-})(({ theme }) => ({
+})<{ ownerState: SliderOwnerState }>(({ theme, ownerState: { width } }) => ({
   borderRadius: '8px',
   boxSizing: 'content-box',
   display: 'inline-block',
@@ -172,15 +172,12 @@ export const SliderRoot = styled('span', {
     cursor: 'default',
     color: theme.vars.palette.monoA.A200,
     [`& .${sliderClasses.rail}`]: {
-      // '& .MuiSlider-rail': {
       backgroundColor: theme.vars.palette.monoA.A200,
     },
     [`& .${sliderClasses.track}`]: {
-      //'& .MuiSlider-track': {
       display: 'none',
     },
     [`& .${sliderClasses.thumb}`]: {
-      //'& .MuiSlider-thumb': {
       width: '10px',
       height: '10px',
       backdropFilter: 'blur(100px)',
@@ -196,7 +193,7 @@ export const SliderRoot = styled('span', {
     {
       props: { orientation: 'horizontal' },
       style: {
-        height: 4,
+        height: `${width ?? 4}px`,
         width: '100%',
         padding: '13px 0',
         // The primary input mechanism of the device includes a pointing device of limited accuracy.
@@ -209,7 +206,7 @@ export const SliderRoot = styled('span', {
     {
       props: { orientation: 'horizontal', size: 'small' },
       style: {
-        height: 2,
+        height: `${width ?? 2}px`,
       },
     },
     {
@@ -222,7 +219,7 @@ export const SliderRoot = styled('span', {
       props: { orientation: 'vertical' },
       style: {
         height: '100%',
-        width: 4,
+        width: `${width ?? 4}px`,
         padding: '0 13px',
         // The primary input mechanism of the device includes a pointing device of limited accuracy.
         '@media (pointer: coarse)': {
@@ -234,7 +231,7 @@ export const SliderRoot = styled('span', {
     {
       props: { orientation: 'vertical', size: 'small' },
       style: {
-        width: 2,
+        width: `${width ?? 2}px`,
       },
     },
     {
@@ -255,7 +252,6 @@ export const SliderRail = styled('span', {
     display: 'block',
     position: 'absolute',
     borderRadius: 'inherit',
-    //backgroundColor: 'currentColor',
     backgroundColor: theme.vars.palette.monoA.A400,
     variants: [
       {
@@ -274,12 +270,6 @@ export const SliderRail = styled('span', {
           width: 'inherit',
           left: '50%',
           transform: 'translateX(-50%)',
-        },
-      },
-      {
-        props: { track: 'inverted' },
-        style: {
-          opacity: 1,
         },
       },
     ],
@@ -330,28 +320,6 @@ export const SliderTrack = styled('span', {
           display: 'none',
         },
       },
-      // ...Object.entries(theme.palette)
-      //   .filter(([, palette]) => palette && palette.main)
-      //   .map(([color]) => ({
-      //     props: { color, track: 'inverted' },
-      //     style: {
-      //       ...(theme.vars
-      //         ? {
-      //             backgroundColor: theme.vars.palette.Slider[`${color}Track`],
-      //             borderColor: theme.vars.palette.Slider[`${color}Track`],
-      //           }
-      //         : {
-      //             backgroundColor: lighten(theme.palette[color].main, 0.62),
-      //             borderColor: lighten(theme.palette[color].main, 0.62),
-      //             ...theme.applyStyles('dark', {
-      //               backgroundColor: darken(theme.palette[color].main, 0.5),
-      //             }),
-      //             ...theme.applyStyles('dark', {
-      //               borderColor: darken(theme.palette[color].main, 0.5),
-      //             }),
-      //           }),
-      //     },
-      //   })),
     ],
   };
 });
@@ -369,8 +337,6 @@ export const SliderThumb = styled('span', {
   },
 })(({ theme }) => ({
   position: 'absolute',
-  // width: 20,
-  // height: 20,
   boxSizing: 'border-box',
   borderRadius: '50%',
   outline: 0,
@@ -412,7 +378,6 @@ export const SliderThumb = styled('span', {
     },
   },
   [`&.${sliderClasses.focusVisible}`]: {
-    //'&.Mui-focusVisible': {
     width: '14px',
     height: '14px',
 
@@ -421,7 +386,6 @@ export const SliderThumb = styled('span', {
     },
   },
   [`&.${sliderClasses.active}`]: {
-    //'&.Mui-active': {
     width: '16px',
     height: '16px',
 
@@ -455,22 +419,6 @@ export const SliderThumb = styled('span', {
         transform: 'translate(-50%, 50%)',
       },
     },
-    // ...Object.entries(theme.palette)
-    //   .filter(([, palette]) => palette && palette.main)
-    //   .map(([color]) => ({
-    //     props: { color },
-    //     style: {
-    //       [`&:hover, &.${sliderClasses.focusVisible}`]: {
-    //         boxShadow: `0px 0px 0px 14px ${theme.vars.palette[color].A400}`,
-    //         '@media (hover: none)': {
-    //           boxShadow: 'none',
-    //         },
-    //       },
-    //       [`&.${sliderClasses.active}`]: {
-    //         boxShadow: `0px 0px 0px 14px ${theme.vars.palette[color].A300}`,
-    //       },
-    //     },
-    //   })),
   ],
 }));
 
@@ -657,41 +605,35 @@ const Forward = ({ children }: { children: ReactNode }) => children;
 export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Slider(inputProps, ref) {
   const props = useThemeProps({ props: inputProps, name: 'ESSlider' });
 
-  //const isRtl = useRtl();
-
   const {
     'aria-label': ariaLabel,
     'aria-valuetext': ariaValuetext,
     'aria-labelledby': ariaLabelledby,
-    // // eslint-disable-next-line react/prop-types
     component = 'span',
     components = {},
     componentsProps = {},
     color = 'primary',
     classes: classesProp,
     className,
-    //disableSwap = false,
     disabled = false,
     getAriaLabel,
     getAriaValueText,
     marks: marksProp = false,
     max = 100,
     min = 0,
-    // name,
-    // onChange,
-    // onChangeCommitted,
     orientation = 'horizontal',
-    // shiftStep = 10,
     size = 'medium',
-    //step = 1,
+    width,
     scale = Identity,
     slotProps,
     slots,
-    //tabIndex,
     track = 'normal',
-    //value: valueProp,
     valueLabelDisplay = 'off',
     valueLabelFormat = Identity,
+    disableSwap,
+    step,
+    shiftStep,
+    value: valueProp,
     ...other
   } = props;
 
@@ -702,6 +644,7 @@ export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Sl
     track,
     color,
     size,
+    width,
   };
 
   const {
@@ -720,7 +663,7 @@ export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Sl
     trackOffset,
     trackLeap,
     getThumbStyle,
-  } = useSlider({ ...ownerState, marks: marksProp, rootRef: ref });
+  } = useSlider({ ...ownerState, marks: marksProp, rootRef: ref, disableSwap, step, shiftStep, value: valueProp });
 
   ownerState.marked = marks.length > 0 && marks.some((mark) => mark.label);
   ownerState.dragging = dragging;
@@ -826,6 +769,7 @@ export const Slider = forwardRef<HTMLDivElement | null, SliderProps>(function Sl
     getSlotProps: getHiddenInputProps,
     externalSlotProps: inputSlotProps,
     ownerState,
+    ...other,
   });
 
   return (

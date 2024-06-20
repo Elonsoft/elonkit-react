@@ -8,36 +8,81 @@ const meta: Meta<typeof Slider> = {
   parameters: {
     references: ['Slider'],
   },
-  // argTypes: {
-  //   value: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  //   name: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  //   id: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  //   autoFocus: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  //   checked: {
-  //     control: { type: 'boolean' },
-  //   },
-  //   defaultChecked: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  // },
+  argTypes: {
+    name: {
+      table: {
+        disable: true,
+      },
+    },
+    id: {
+      table: {
+        disable: true,
+      },
+    },
+    autoFocus: {
+      table: {
+        disable: true,
+      },
+    },
+    tabIndex: {
+      table: {
+        disable: true,
+      },
+    },
+    'aria-label': {
+      table: {
+        disable: true,
+      },
+    },
+    'aria-labelledby': {
+      table: {
+        disable: true,
+      },
+    },
+    'aria-valuetext': {
+      table: {
+        disable: true,
+      },
+    },
+    components: {
+      table: {
+        disable: true,
+      },
+    },
+    componentsProps: {
+      table: {
+        disable: true,
+      },
+    },
+    getAriaLabel: {
+      table: {
+        disable: true,
+      },
+    },
+    getAriaValueText: {
+      table: {
+        disable: true,
+      },
+    },
+    step: {
+      control: { type: 'number' },
+    },
+    marks: {
+      control: { type: 'boolean' },
+    },
+    defaultValue: {
+      control: { type: 'number' },
+    },
+    value: {
+      control: { type: 'number' },
+    },
+    width: {
+      control: { type: 'number' },
+    },
+  },
+  args: {
+    value: 50,
+  },
 };
 
 export default meta;
