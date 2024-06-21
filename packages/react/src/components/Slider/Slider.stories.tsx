@@ -80,6 +80,32 @@ type Story = StoryObj<typeof Slider>;
 
 export const Demo: Story = {
   render: (args) => {
-    return <Slider {...args} />;
+    return (
+      <div style={{ height: '200px' }}>
+        <Slider {...args} />
+      </div>
+    );
+  },
+};
+
+export const Range: Story = {
+  render: (args) => {
+    return (
+      <div style={{ height: '200px' }}>
+        <Slider {...args} defaultValue={[10, 50]} />
+      </div>
+    );
+  },
+  argTypes: {
+    defaultValue: {
+      table: {
+        disable: true,
+      },
+    },
+    value: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };

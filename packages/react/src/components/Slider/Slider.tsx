@@ -16,7 +16,7 @@ import { useSlider, valueToPercent } from './useSlider';
 import { shouldSpreadAdditionalProps } from './utils';
 
 const useUtilityClasses = (ownerState: SliderOwnerState) => {
-  const { disabled, dragging, marked, orientation, track, classes, color, size } = ownerState;
+  const { disabled, dragging, marked, orientation, track, classes, color } = ownerState;
 
   const slots = {
     root: [
@@ -28,7 +28,6 @@ const useUtilityClasses = (ownerState: SliderOwnerState) => {
       track === 'inverted' && 'trackInverted',
       track === false && 'trackFalse',
       color && `color${capitalize(color)}`,
-      size && `size${capitalize(size)}`,
     ],
     rail: ['rail'],
     track: ['track'],
@@ -37,12 +36,7 @@ const useUtilityClasses = (ownerState: SliderOwnerState) => {
     markLabel: ['markLabel'],
     markLabelActive: ['markLabelActive'],
     valueLabel: ['valueLabel'],
-    thumb: [
-      'thumb',
-      disabled && 'disabled',
-      size && `thumbSize${capitalize(size)}`,
-      color && `thumbColor${capitalize(color)}`,
-    ],
+    thumb: ['thumb', disabled && 'disabled', color && `thumbColor${capitalize(color)}`],
     active: ['active'],
     disabled: ['disabled'],
     focusVisible: ['focusVisible'],
@@ -64,7 +58,6 @@ export const SliderRoot = styled('span', {
     return [
       styles.root,
       styles[`color${capitalize(ownerState.color)}`],
-      ownerState.size !== 'medium' && styles[`size${capitalize(ownerState.size)}`],
       ownerState.marked && styles.marked,
       ownerState.orientation === 'vertical' && styles.vertical,
       ownerState.track === 'inverted' && styles.trackInverted,
@@ -204,12 +197,6 @@ export const SliderRoot = styled('span', {
       },
     },
     {
-      props: { orientation: 'horizontal', size: 'small' },
-      style: {
-        height: `${width ?? 2}px`,
-      },
-    },
-    {
       props: { orientation: 'horizontal', marked: true },
       style: {
         marginBottom: 20,
@@ -226,12 +213,6 @@ export const SliderRoot = styled('span', {
           // Reach 42px touch target, about ~8mm on screen.
           padding: '0 20px',
         },
-      },
-    },
-    {
-      props: { orientation: 'vertical', size: 'small' },
-      style: {
-        width: `${width ?? 2}px`,
       },
     },
     {
@@ -293,12 +274,6 @@ export const SliderTrack = styled('span', {
 
     variants: [
       {
-        props: { size: 'small' },
-        style: {
-          border: 'none',
-        },
-      },
-      {
         props: { orientation: 'horizontal' },
         style: {
           height: 'inherit',
@@ -329,11 +304,7 @@ export const SliderThumb = styled('span', {
   slot: 'Thumb',
   overridesResolver: (props, styles) => {
     const { ownerState } = props;
-    return [
-      styles.thumb,
-      styles[`thumbColor${capitalize(ownerState.color)}`],
-      ownerState.size !== 'medium' && styles[`thumbSize${capitalize(ownerState.size)}`],
-    ];
+    return [styles.thumb, styles[`thumbColor${capitalize(ownerState.color)}`]];
   },
 })(({ theme }) => ({
   position: 'absolute',
@@ -395,16 +366,6 @@ export const SliderThumb = styled('span', {
   },
 
   variants: [
-    {
-      props: { size: 'small' },
-      style: {
-        width: 12,
-        height: 12,
-        '&::before': {
-          boxShadow: 'none',
-        },
-      },
-    },
     {
       props: { orientation: 'horizontal' },
       style: {
@@ -504,14 +465,7 @@ export const SliderValueLabel = styled(BaseSliderValueLabel, {
       },
     },
     {
-      props: { size: 'small' },
-      style: {
-        fontSize: theme.typography.pxToRem(12),
-        padding: '0.25rem 0.5rem',
-      },
-    },
-    {
-      props: { orientation: 'vertical', size: 'small' },
+      props: { orientation: 'vertical' },
       style: {
         right: '20px',
       },
@@ -619,8 +573,8 @@ export const Slider = forwardRef<HTMLSpanElement | null, SliderProps>(function S
     max = 100,
     min = 0,
     orientation = 'horizontal',
-    size = 'medium',
-    width,
+
+    width = 4,
     scale = Identity,
     slotProps,
     slots,
@@ -641,7 +595,6 @@ export const Slider = forwardRef<HTMLSpanElement | null, SliderProps>(function S
     orientation,
     track,
     color,
-    size,
     width,
   };
 

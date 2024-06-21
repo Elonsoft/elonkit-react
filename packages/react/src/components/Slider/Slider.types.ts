@@ -14,8 +14,6 @@ import { OverridableStringUnion } from '@mui/types';
 
 export interface SliderPropsColorOverrides {}
 
-export interface SliderPropsSizeOverrides {}
-
 export interface SliderComponentsPropsOverrides {}
 
 export type SliderOwnerState = {
@@ -24,8 +22,7 @@ export type SliderOwnerState = {
   orientation: 'horizontal' | 'vertical';
   track: 'normal' | false | 'inverted';
   color: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
-  size: 'small' | 'medium';
-  width?: number;
+  width: number;
   dragging?: boolean;
   marked?: boolean;
   focusedThumbIndex?: number;
@@ -150,11 +147,7 @@ export interface SliderOwnProps {
    * @default 10
    */
   shiftStep?: number;
-  /**
-   * The size of the slider.
-   * @default 'medium'
-   */
-  size?: OverridableStringUnion<'small' | 'medium', SliderPropsSizeOverrides>;
+
   /**
    * The props used for each slot inside the Slider.
    * @default {}
