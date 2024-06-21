@@ -12,7 +12,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText, { listItemTextClasses } from '@mui/material/ListItemText';
 import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
-import Slider, { sliderClasses } from '@mui/material/Slider';
 import Tooltip, { tooltipClasses, TooltipProps } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import TrapFocus from '@mui/material/Unstable_TrapFocus';
@@ -35,6 +34,7 @@ import {
 } from '../../icons';
 import { Button } from '../Button';
 import { Divider, dividerClasses } from '../Divider';
+import { Slider, sliderClasses } from '../Slider';
 
 import { Instance } from '@popperjs/core';
 
