@@ -27,7 +27,7 @@ export type ChipClasses = {
   selectedColorDefault: string;
   /** Styles applied to the root element if selectedColor="colored". */
   selectedColorColored: string;
-  /** Styles applied to the root element if clicable="true". */
+  /** Styles applied to the root element if clickable="true". */
   clickable: string;
   /** Styles applied to the root element if disabled="true". */
   disabled: string;
