@@ -54,7 +54,9 @@ export interface ChipTypeMap<P = {}, D extends React.ElementType = 'div'> {
 
     /** If `true`, the chip will appear clickable, even if the onClick prop is not defined. If `false`, the chip will not appear clickable, even if onClick prop is defined. */
     clickable?: boolean;
-    /** If `true`, allows the disabled chip to receive focus. */
+    /** If `true`, allows the disabled chip to receive focus.
+     * @default true
+     */
     focusableWhenDisabled?: boolean;
 
     /** Element placed before the children. */

@@ -1,40 +1,39 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import Avatar from '@mui/material/Avatar';
-
 import { Chip } from './Chip';
 
 import { IconAt } from '../../icons';
+import { Avatar } from '../Avatar';
 
 const ICON_SIZE_MAP = {
   '24': 20,
   '32': 24,
-  '40': 32
+  '40': 32,
 };
 
 const meta: Meta<typeof Chip> = {
   tags: ['autodocs'],
   component: Chip,
   parameters: {
-    references: ['Chip']
+    references: ['Chip'],
   },
   argTypes: {
     component: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     startIcon: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     endIcon: {
       table: {
-        disable: true
-      }
-    }
-  }
+        disable: true,
+      },
+    },
+  },
 };
 
 export default meta;
@@ -48,18 +47,22 @@ export const Demo: Story = {
     return (
       <div style={{ display: 'flex', gap: '16px' }}>
         <Chip component="button" {...args}>
-          Иванов Иван Иванович
+          {locale === 'ru' ? 'Иванов Иван Иванович' : 'John Doe'}
         </Chip>
         <Chip component="button" {...args}>
-          Петров Петр Петрович
+          {locale === 'ru' ? 'Петров Петр Петрович' : 'John Smith'}
         </Chip>
-        <Chip component="button" startIcon={<Avatar sx={{ width: size, height: size }} />} {...args}>
-          Петров Петр Петрович
+        <Chip
+          component="button"
+          startIcon={<Avatar src="./avatar/6.png" sx={{ width: size, height: size }} variant="circle" />}
+          {...args}
+        >
+          {locale === 'ru' ? 'Сергеев Сергей Сергеевич' : 'John Wick'}
         </Chip>
         <Chip component="button" startIcon={<IconAt size={`${size}px`} />} {...args}>
-          Петров Петр Петрович
+          {locale === 'ru' ? 'Алексеев Алексей Алексеевич' : 'John Lennon'}
         </Chip>
       </div>
     );
-  }
+  },
 };

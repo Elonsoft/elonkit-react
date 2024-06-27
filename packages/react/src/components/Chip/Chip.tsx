@@ -1,31 +1,19 @@
-import { cloneElement, forwardRef, isValidElement, ReactNode, useRef } from 'react';
+import { cloneElement, forwardRef, isValidElement, ReactElement, ReactNode, useRef } from 'react';
 
 import { ChipProps, ChipTypeMap } from './Chip.types';
 
 import clsx from 'clsx';
-import { getChipUtilityClass } from './Chip.classes';
+import { chipClasses, getChipUtilityClass } from './Chip.classes';
 
 import { unstable_composeClasses as composeClasses } from '@mui/base';
 
 import { styled, useThemeProps } from '@mui/material/styles';
-import { keyframes } from '@mui/system';
-import { IconButton } from '@mui/material';
-import ButtonBase, { buttonBaseClasses, touchRippleClasses } from '@mui/material/ButtonBase';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { capitalize, useForkRef } from '@mui/material/utils';
 
 import { IconChipsClose } from '../../icons';
-
-const enterKeyframe = keyframes`
-  0% {
-    transform: scale(0);
-    opacity: 0.1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-`;
+import { Button, buttonClasses } from '../Button';
+import { ButtonBase } from '../ButtonBase';
 
 type ChipOwnerState = {
   classes?: ChipProps['classes'];
@@ -48,12 +36,12 @@ const useUtilityClasses = (ownerState: ChipOwnerState) => {
       selected && 'selected',
       selected && `selectedColor${capitalize(selectedColor)}`,
       `size${capitalize(size)}`,
-      `variant${capitalize(variant)}`
+      `variant${capitalize(variant)}`,
     ],
     label: ['label'],
     startIcon: ['startIcon'],
     endIcon: ['endIcon'],
-    deleteIcon: ['deleteIcon']
+    deleteIcon: ['deleteIcon'],
   };
 
   return composeClasses(slots, getChipUtilityClass, classes);
@@ -62,8 +50,8 @@ const useUtilityClasses = (ownerState: ChipOwnerState) => {
 export const ChipRoot = styled('div', {
   name: 'ESChip',
   slot: 'Root',
-  overridesResolver: (props, styles) => styles.root
-})<{ ownerState: ChipOwnerState }>(({ theme, ownerState }) => ({
+  overridesResolver: (props, styles) => styles.root,
+})(({ theme }) => ({
   transition: theme.transitions.create(['background-color', 'color']),
   maxWidth: '100%',
   display: 'inline-flex',
@@ -78,83 +66,117 @@ export const ChipRoot = styled('div', {
   verticalAlign: 'middle',
   boxSizing: 'border-box',
   borderRadius: '100px',
+  color: theme.vars.palette.monoA.A400,
 
-  [`&.${buttonBaseClasses.root}`]: {
-    [`& .${touchRippleClasses.root}`]: {
-      transitionDuration: `${theme.transitions.duration.short}ms`
-    }
+  [`&.${chipClasses.clickable}`]: {
+    cursor: 'pointer',
   },
 
-  [`& .${touchRippleClasses.rippleVisible}`]: {
-    animationName: `${enterKeyframe} !important`,
-    opacity: '1 !important'
+  [`&.${chipClasses.variantFilled}`]: {
+    '--background': theme.vars.palette.monoA.A75,
+    '--hovered': theme.vars.palette.monoA.A50,
+    '--pressed': theme.vars.palette.monoA.A150,
+
+    [`&:not(.${chipClasses.clickable})`]: {
+      backgroundColor: theme.vars.palette.monoA.A75,
+    },
+
+    [`&.${chipClasses.disabled}`]: {
+      '--background': theme.vars.palette.monoA.A50,
+    },
+
+    [`&.${chipClasses.selected}`]: {
+      [`&.${chipClasses.selectedColorDefault}`]: {
+        '--background': theme.vars.palette.monoA.A100,
+
+        [`&.${chipClasses.disabled}`]: {
+          '--background': theme.vars.palette.monoA.A75,
+        },
+      },
+
+      [`&.${chipClasses.selectedColorColored}`]: {
+        '--background': theme.vars.palette.secondary.A300,
+
+        [`&.${chipClasses.disabled}`]: {
+          '--background': theme.vars.palette.secondary.A100,
+        },
+      },
+    },
   },
 
-  ...theme.mixins.button({
-    background: ownerState.variant === 'filled' ? theme.palette.monoA.A75 : 'transparent',
-    color: theme.palette.monoA.A400,
-    hover: theme.palette.monoA.A50,
-    focus: theme.palette.monoA.A200,
-    active: theme.palette.monoA.A150
-  }),
+  [`&.${chipClasses.variantOutlined}`]: {
+    '--hovered': theme.vars.palette.monoA.A50,
+    '--pressed': theme.vars.palette.monoA.A150,
+    border: `1px solid ${theme.vars.palette.monoA.A150}`,
 
-  ...(ownerState.clickable && {
-    cursor: 'pointer'
-  }),
+    [`&:not(.${chipClasses.clickable})`]: {
+      backgroundColor: 'transparent',
+    },
 
-  ...(ownerState.variant === 'filled' && {
-    backgroundColor: theme.palette.monoA.A75
-  }),
+    [`&.${chipClasses.selected}`]: {
+      [`&.${chipClasses.selectedColorDefault}`]: {
+        '--background': theme.vars.palette.monoA.A75,
 
-  ...(ownerState.variant === 'outlined' && {
-    backgroundColor: 'transparent',
-    border: `1px solid ${theme.palette.monoA.A150}`
-  }),
+        [`&.${chipClasses.disabled}`]: {
+          '--background': theme.vars.palette.monoA.A50,
+        },
+      },
 
-  ...(ownerState.selected && {
-    ...(ownerState.selectedColor === 'default' && {
-      '&, &:not(:disabled):hover, &:not(:disabled):active': {
-        backgroundColor: theme.palette.monoA.A100
-      }
-    }),
-    ...(ownerState.selectedColor === 'colored' && {
-      '&, &:not(:disabled):hover, &:not(:disabled):active': {
-        backgroundColor: theme.palette.secondary.A300
-      }
-    })
-  }),
+      [`&.${chipClasses.selectedColorColored}`]: {
+        '--background': theme.vars.palette.secondary.A300,
 
-  ...(ownerState.disabled && {
+        [`&.${chipClasses.disabled}`]: {
+          '--background': theme.vars.palette.secondary.A50,
+        },
+      },
+    },
+  },
+
+  [`&.${chipClasses.disabled}`]: {
     pointerEvents: 'none',
-    opacity: 0.4
-  }),
+    opacity: 0.4,
 
-  ...(ownerState.size === '24' && {
+    '&[aria-disabled="true"]:focus-visible': {
+      outline: 'none',
+    },
+  },
+
+  [`&.${chipClasses.size24}`]: {
     height: '24px',
-    paddingLeft: '2px'
-  }),
-  ...(ownerState.size === '32' && {
+    paddingLeft: '2px',
+  },
+  [`&.${chipClasses.size32}`]: {
     height: '32px',
-    padding: '0 4px'
-  }),
-  ...(ownerState.size === '40' && {
+    padding: '0 4px',
+  },
+  [`&.${chipClasses.size40}`]: {
     height: '40px',
-    padding: '0 8px 0 4px'
-  })
+    padding: '0 8px 0 4px',
+  },
+
+  [`& .${chipClasses.deleteIcon}.${buttonClasses.variantText}.${buttonClasses.colorTertiary}`]: {
+    '--icon': theme.vars.palette.monoA.A400,
+    '--hovered': 'transparent',
+    '--pressed': 'transparent',
+
+    '&:active': {
+      '--icon': theme.vars.palette.monoA.A600,
+    },
+  },
 }));
 
 export const ChipLabel = styled('span', {
   name: 'ESChip',
   slot: 'Label',
-  overridesResolver: (props, styles) => styles.label
+  overridesResolver: (props, styles) => styles.label,
 })<{ ownerState: ChipOwnerState }>(({ theme }) => ({
   ...theme.typography.body100,
-  color: theme.palette.monoA.A900,
+  color: theme.vars.palette.monoA.A900,
   display: 'block',
   padding: '0 6px',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap'
+  whiteSpace: 'nowrap',
 }));
 
 function isDeleteKeyboardEvent(event: React.KeyboardEvent) {
@@ -190,7 +212,7 @@ export const Chip = forwardRef(function Chip(inProps: ChipProps, ref) {
     ...props
   } = useThemeProps({
     props: inProps,
-    name: 'ESChip'
+    name: 'ESChip',
   });
 
   const clickable = inClickable !== false && onClick ? true : inClickable;
@@ -202,6 +224,9 @@ export const Chip = forwardRef(function Chip(inProps: ChipProps, ref) {
   const ownerState = { classes: inClasses, size, variant, selected, selectedColor, disabled, clickable };
   const classes = useUtilityClasses(ownerState);
 
+  const disabledProp =
+    clickable && disabled ? (focusableWhenDisabled ? { 'aria-disabled': true } : { disabled: true }) : {};
+
   const onStopRipple = (e: React.MouseEvent | React.TouchEvent) => {
     e.stopPropagation();
   };
@@ -209,12 +234,18 @@ export const Chip = forwardRef(function Chip(inProps: ChipProps, ref) {
   const handleDeleteIconClick = (event: React.MouseEvent) => {
     // Stop the event from bubbling up to the `Chip`
     event.stopPropagation();
+
     if (onDelete) {
       onDelete();
     }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    // Ignore key press if aria-disabled is used
+    if (focusableWhenDisabled && disabled && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+    }
+
     // Ignore events from children of `Chip`.
     if (event.currentTarget === event.target && isDeleteKeyboardEvent(event)) {
       // Will be handled in keyUp, otherwise some browsers
@@ -245,48 +276,49 @@ export const Chip = forwardRef(function Chip(inProps: ChipProps, ref) {
   const moreProps =
     component === ButtonBase
       ? {
-          component: InComponent || 'div'
-          // focusVisibleClassName: classes.focusVisible,
-          // ...(!clickable && { disableRipple: true })
+          component: InComponent || 'div',
         }
       : {};
 
   let deleteIcon = null;
+
   if (onDelete) {
     deleteIcon =
       inIconDelete && isValidElement(inIconDelete) ? (
-        cloneElement(inIconDelete, {
+        cloneElement(inIconDelete as ReactElement, {
           className: clsx(inIconDelete.props.className, classes.deleteIcon),
           onClick: handleDeleteIconClick,
           onMouseDown: onStopRipple,
-          onTouchStart: onStopRipple
+          onTouchStart: onStopRipple,
         })
       ) : (
-        <IconButton
+        <Button
           className={clsx(classes.deleteIcon)}
           component="div"
-          size="24"
+          size="200"
           tabIndex={-1}
           onClick={handleDeleteIconClick}
           onMouseDown={onStopRipple}
           onTouchStart={onStopRipple}
         >
           <IconChipsClose />
-        </IconButton>
+        </Button>
       );
   }
 
   let startIcon: ReactNode | null = null;
+
   if (inStartIcon && isValidElement(inStartIcon)) {
-    startIcon = cloneElement(inStartIcon, {
-      className: clsx(inStartIcon.props.className, classes.startIcon)
+    startIcon = cloneElement(inStartIcon as ReactElement, {
+      className: clsx(inStartIcon.props.className, classes.startIcon),
     });
   }
 
   let endIcon: ReactNode | null = null;
+
   if (inEndIcon && isValidElement(inEndIcon)) {
-    endIcon = cloneElement(inEndIcon, {
-      className: clsx(inEndIcon.props.className, classes.endIcon)
+    endIcon = cloneElement(inEndIcon as ReactElement, {
+      className: clsx(inEndIcon.props.className, classes.endIcon),
     });
   }
 
@@ -295,8 +327,7 @@ export const Chip = forwardRef(function Chip(inProps: ChipProps, ref) {
       ref={handleRef}
       as={component}
       className={clsx(classes.root, className)}
-      disabled={clickable && disabled ? true : undefined}
-      ownerState={ownerState}
+      {...disabledProp}
       sx={sx}
       tabIndex={!focusableWhenDisabled && disabled ? -1 : tabIndex}
       onClick={onClick}
