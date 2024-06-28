@@ -13,7 +13,7 @@ import { capitalize, useForkRef } from '@mui/material/utils';
 
 import { IconChipsClose } from '../../icons';
 import { Button, buttonClasses } from '../Button';
-import { ButtonBase } from '../ButtonBase';
+import { ButtonBase, buttonBaseClasses } from '../ButtonBase';
 
 type ChipOwnerState = {
   classes?: ChipProps['classes'];
@@ -83,6 +83,20 @@ export const ChipRoot = styled('div', {
 
     [`&.${chipClasses.disabled}`]: {
       '--background': theme.vars.palette.monoA.A50,
+
+      [`& .${buttonBaseClasses.wrapper}`]: {
+        [`& .${chipClasses.label}`]: {
+          color: theme.vars.palette.monoA.A400,
+        },
+
+        [`& .${chipClasses.startIcon}, & .${chipClasses.endIcon}`]: {
+          opacity: 0.4,
+        },
+      },
+
+      [`&:not(.${chipClasses.clickable})`]: {
+        backgroundColor: theme.vars.palette.monoA.A50,
+      },
     },
 
     [`&.${chipClasses.selected}`]: {
@@ -107,10 +121,24 @@ export const ChipRoot = styled('div', {
   [`&.${chipClasses.variantOutlined}`]: {
     '--hovered': theme.vars.palette.monoA.A50,
     '--pressed': theme.vars.palette.monoA.A150,
-    border: `1px solid ${theme.vars.palette.monoA.A150}`,
+    boxShadow: `inset 0px 0px 0px 1px ${theme.vars.palette.monoA.A150}`,
 
     [`&:not(.${chipClasses.clickable})`]: {
       backgroundColor: 'transparent',
+    },
+
+    [`&.${chipClasses.disabled}`]: {
+      boxShadow: `inset 0px 0px 0px 1px  ${theme.vars.palette.monoA.A100}`,
+
+      [`& .${buttonBaseClasses.wrapper}`]: {
+        [`& .${chipClasses.label}`]: {
+          color: theme.vars.palette.monoA.A400,
+        },
+
+        [`& .${chipClasses.startIcon}, & .${chipClasses.endIcon}`]: {
+          opacity: 0.4,
+        },
+      },
     },
 
     [`&.${chipClasses.selected}`]: {
@@ -134,24 +162,161 @@ export const ChipRoot = styled('div', {
 
   [`&.${chipClasses.disabled}`]: {
     pointerEvents: 'none',
-    opacity: 0.4,
 
     '&[aria-disabled="true"]:focus-visible': {
       outline: 'none',
     },
+
+    [`& .${chipClasses.label}`]: {
+      color: theme.vars.palette.monoA.A400,
+    },
+
+    [`& .${chipClasses.startIcon}, & .${chipClasses.endIcon}`]: {
+      opacity: 0.4,
+    },
   },
 
-  [`&.${chipClasses.size24}`]: {
-    height: '24px',
-    paddingLeft: '2px',
+  [`&.${chipClasses.size100}`]: {
+    height: 24,
+
+    [`&:has(.${chipClasses.startIcon})`]: {
+      paddingLeft: 2,
+
+      [`& .${chipClasses.label}`]: {
+        paddingLeft: 6,
+      },
+    },
+
+    [`&:has(.${chipClasses.endIcon})`]: {
+      paddingRight: 2,
+
+      [`& .${chipClasses.label}`]: {
+        paddingRight: 6,
+      },
+      [`& .${chipClasses.deleteIcon}`]: {
+        paddingLeft: 4,
+      },
+    },
+
+    [`&:has(.${chipClasses.deleteIcon})`]: {
+      paddingRight: 0,
+
+      [`& .${chipClasses.label}`]: {
+        paddingRight: 4,
+      },
+    },
+
+    [`&:has(.${chipClasses.endIcon} + .${chipClasses.deleteIcon})`]: {
+      [`& .${chipClasses.label}`]: {
+        paddingRight: 6,
+      },
+    },
+
+    [`& .${chipClasses.deleteIcon}`]: {
+      [`& .${buttonBaseClasses.wrapper}`]: {
+        padding: '0 4px',
+      },
+    },
   },
-  [`&.${chipClasses.size32}`]: {
-    height: '32px',
-    padding: '0 4px',
+
+  [`&.${chipClasses.size200}`]: {
+    height: 32,
+
+    [`& .${chipClasses.label}`]: {
+      padding: '0 12px',
+    },
+
+    [`&:has(.${chipClasses.startIcon})`]: {
+      paddingLeft: 4,
+
+      [`& .${chipClasses.label}`]: {
+        paddingLeft: 8,
+      },
+    },
+
+    [`&:has(.${chipClasses.endIcon})`]: {
+      paddingRight: 4,
+
+      [`& .${chipClasses.label}`]: {
+        paddingRight: 8,
+      },
+      [`& .${chipClasses.deleteIcon}`]: {
+        paddingLeft: 6,
+      },
+    },
+
+    [`&:has(.${chipClasses.deleteIcon})`]: {
+      paddingRight: 4,
+
+      [`& .${chipClasses.label}`]: {
+        paddingRight: 6,
+      },
+    },
+
+    [`&:has(.${chipClasses.endIcon} + .${chipClasses.deleteIcon})`]: {
+      [`& .${chipClasses.label}`]: {
+        paddingRight: 8,
+      },
+    },
+
+    [`& .${chipClasses.deleteIcon}`]: {
+      paddingRight: 1,
+
+      [`& .${buttonBaseClasses.wrapper}`]: {
+        padding: '0 4px',
+      },
+    },
   },
-  [`&.${chipClasses.size40}`]: {
-    height: '40px',
-    padding: '0 8px 0 4px',
+
+  [`&.${chipClasses.size300}`]: {
+    height: 40,
+
+    [`& .${chipClasses.label}`]: {
+      padding: '0 12px',
+    },
+
+    [`&:has(.${chipClasses.startIcon})`]: {
+      paddingLeft: 4,
+
+      [`& .${chipClasses.label}`]: {
+        paddingLeft: 8,
+      },
+    },
+
+    [`&:has(.${chipClasses.endIcon})`]: {
+      paddingRight: 4,
+
+      [`& .${chipClasses.label}`]: {
+        paddingRight: 8,
+      },
+      [`& .${chipClasses.deleteIcon}`]: {
+        paddingLeft: 6,
+      },
+    },
+
+    [`&:has(.${chipClasses.deleteIcon})`]: {
+      paddingRight: 4,
+
+      [`& .${chipClasses.label}`]: {
+        paddingRight: 6,
+      },
+    },
+
+    [`&:has(.${chipClasses.endIcon} + .${chipClasses.deleteIcon})`]: {
+      [`& .${chipClasses.label}`]: {
+        paddingRight: 8,
+      },
+    },
+
+    [`& .${chipClasses.deleteIcon}`]: {
+      height: 32,
+      paddingRight: 5,
+      paddingLeft: 4,
+
+      [`& .${buttonBaseClasses.wrapper}`]: {
+        padding: '0 4px',
+      },
+    },
   },
 
   [`& .${chipClasses.deleteIcon}.${buttonClasses.variantText}.${buttonClasses.colorTertiary}`]: {
@@ -173,7 +338,7 @@ export const ChipLabel = styled('span', {
   ...theme.typography.body100,
   color: theme.vars.palette.monoA.A900,
   display: 'block',
-  padding: '0 6px',
+  padding: '0 8px',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
@@ -193,7 +358,7 @@ export const Chip = forwardRef(function Chip(inProps: ChipProps, ref) {
     classes: inClasses,
     children,
     sx,
-    size = '24',
+    size = '100',
     variant = 'filled',
     disabled,
     selected,
@@ -295,7 +460,7 @@ export const Chip = forwardRef(function Chip(inProps: ChipProps, ref) {
         <Button
           className={clsx(classes.deleteIcon)}
           component="div"
-          size="200"
+          size="300"
           tabIndex={-1}
           onClick={handleDeleteIconClick}
           onMouseDown={onStopRipple}

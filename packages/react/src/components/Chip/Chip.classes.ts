@@ -16,11 +16,11 @@ export type ChipClasses = {
   /** Styles applied to the root element if variant="outlined". */
   variantOutlined: string;
   /** Styles applied to the root element if size="24". */
-  size24: string;
+  size100: string;
   /** Styles applied to the root element if size="32". */
-  size32: string;
+  size200: string;
   /** Styles applied to the root element if size="40". */
-  size40: string;
+  size300: string;
   /** Styles applied to the root element if selected="true". */
   selected: string;
   /** Styles applied to the root element if selectedColor="default". */
@@ -47,9 +47,9 @@ export const chipClasses: ChipClasses = generateUtilityClasses('ESChip', [
   'deleteIcon',
   'variantFilled',
   'variantOutlined',
-  'size24',
-  'size32',
-  'size40',
+  'size100',
+  'size200',
+  'size300',
   'selected',
   'selectedColorDefault',
   'selectedColorColored',

@@ -6,9 +6,9 @@ import { IconAt } from '../../icons';
 import { Avatar } from '../Avatar';
 
 const ICON_SIZE_MAP = {
-  '24': 20,
-  '32': 24,
-  '40': 32,
+  '100': 20,
+  '200': 24,
+  '300': 32,
 };
 
 const meta: Meta<typeof Chip> = {
@@ -42,14 +42,19 @@ type Story = StoryObj<typeof Chip>;
 export const Demo: Story = {
   render: (args, context) => {
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
-    const size = ICON_SIZE_MAP[args.size || '24'];
+    const size = ICON_SIZE_MAP[args.size || '100'];
 
     return (
       <div style={{ display: 'flex', gap: '16px' }}>
         <Chip component="button" {...args}>
           {locale === 'ru' ? 'Иванов Иван Иванович' : 'John Doe'}
         </Chip>
-        <Chip component="button" {...args}>
+        <Chip
+          component="button"
+          startIcon={<Avatar src="./avatar/6.png" sx={{ width: size, height: size }} variant="circle" />}
+          onDelete={() => {}}
+          {...args}
+        >
           {locale === 'ru' ? 'Петров Петр Петрович' : 'John Smith'}
         </Chip>
         <Chip
