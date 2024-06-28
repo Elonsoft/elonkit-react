@@ -30,9 +30,9 @@ export interface ChipTypeMap<P = {}, D extends React.ElementType = 'div'> {
 
     /**
      * The size of the component.
-     * @default '24'
+     * @default '100'
      */
-    size?: OverridableStringUnion<'24' | '32' | '40', ChipPropsSizeOverrides>;
+    size?: OverridableStringUnion<'100' | '200' | '300', ChipPropsSizeOverrides>;
 
     /**
      * The variant to use.
