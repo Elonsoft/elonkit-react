@@ -1,6 +1,7 @@
 export * from './Alert';
 export * from './AppBar';
 export * from './AudioPlayer';
+export * from './Auth';
 export * from './Autocomplete';
 export * from './AutocompleteField';
 export * from './AutocompleteMenu';
