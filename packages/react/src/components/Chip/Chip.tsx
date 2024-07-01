@@ -11,7 +11,7 @@ import { styled, useThemeProps } from '@mui/material/styles';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { capitalize, useForkRef } from '@mui/material/utils';
 
-import { IconChipsClose } from '../../icons';
+import { IconCloseLineW350 } from '../../icons';
 import { Button, buttonClasses } from '../Button';
 import { ButtonBase, buttonBaseClasses } from '../ButtonBase';
 
@@ -42,6 +42,7 @@ const useUtilityClasses = (ownerState: ChipOwnerState) => {
     startIcon: ['startIcon'],
     endIcon: ['endIcon'],
     deleteIcon: ['deleteIcon'],
+    deleteIconWrapper: ['deleteIconWrapper'],
   };
 
   return composeClasses(slots, getChipUtilityClass, classes);
@@ -259,10 +260,10 @@ export const ChipRoot = styled('div', {
       },
     },
 
-    [`& .${chipClasses.deleteIcon}`]: {
+    [`& .${chipClasses.deleteIconWrapper}`]: {
       paddingRight: 1,
 
-      [`& .${buttonBaseClasses.wrapper}`]: {
+      [`& .${chipClasses.deleteIcon} .${buttonBaseClasses.wrapper}`]: {
         padding: '0 4px',
       },
     },
@@ -308,25 +309,20 @@ export const ChipRoot = styled('div', {
       },
     },
 
-    [`& .${chipClasses.deleteIcon}`]: {
+    [`& .${chipClasses.deleteIconWrapper}`]: {
       height: 32,
       paddingRight: 5,
       paddingLeft: 4,
 
-      [`& .${buttonBaseClasses.wrapper}`]: {
+      [`& .${chipClasses.deleteIcon} .${buttonBaseClasses.wrapper}`]: {
         padding: '0 4px',
       },
     },
   },
 
   [`& .${chipClasses.deleteIcon}.${buttonClasses.variantText}.${buttonClasses.colorTertiary}`]: {
+    borderRadius: '50%',
     '--icon': theme.vars.palette.monoA.A400,
-    '--hovered': 'transparent',
-    '--pressed': 'transparent',
-
-    '&:active': {
-      '--icon': theme.vars.palette.monoA.A600,
-    },
   },
 }));
 
@@ -342,6 +338,16 @@ export const ChipLabel = styled('span', {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+}));
+
+export const ChipDeleteIconWrapper = styled('div', {
+  name: 'ESChip',
+  slot: 'DeleteIconWrapper',
+  overridesResolver: (props, styles) => styles.label,
+})(() => ({
+  display: 'inline-flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 }));
 
 function isDeleteKeyboardEvent(event: React.KeyboardEvent) {
@@ -448,27 +454,28 @@ export const Chip = forwardRef(function Chip(inProps: ChipProps, ref) {
   let deleteIcon = null;
 
   if (onDelete) {
-    deleteIcon =
-      inIconDelete && isValidElement(inIconDelete) ? (
-        cloneElement(inIconDelete as ReactElement, {
-          className: clsx(inIconDelete.props.className, classes.deleteIcon),
-          onClick: handleDeleteIconClick,
-          onMouseDown: onStopRipple,
-          onTouchStart: onStopRipple,
-        })
-      ) : (
-        <Button
-          className={clsx(classes.deleteIcon)}
-          component="div"
-          size="300"
-          tabIndex={-1}
-          onClick={handleDeleteIconClick}
-          onMouseDown={onStopRipple}
-          onTouchStart={onStopRipple}
-        >
-          <IconChipsClose />
-        </Button>
-      );
+    deleteIcon = (
+      <ChipDeleteIconWrapper className={classes.deleteIconWrapper}>
+        {inIconDelete && isValidElement(inIconDelete) ? (
+          cloneElement(inIconDelete as ReactElement, {
+            className: clsx(inIconDelete.props.className, classes.deleteIcon),
+            onClick: handleDeleteIconClick,
+            onPointerDown: onStopRipple,
+          })
+        ) : (
+          <Button
+            className={clsx(classes.deleteIcon)}
+            component="div"
+            size="300"
+            tabIndex={-1}
+            onClick={handleDeleteIconClick}
+            onPointerDown={onStopRipple}
+          >
+            <IconCloseLineW350 />
+          </Button>
+        )}
+      </ChipDeleteIconWrapper>
+    );
   }
 
   let startIcon: ReactNode | null = null;

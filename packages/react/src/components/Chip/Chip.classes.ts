@@ -11,6 +11,8 @@ export type ChipClasses = {
   endIcon: string;
   /** Styles applied to the delete icon element. */
   deleteIcon: string;
+  /** Styles applied to the delete icon wrapper element. */
+  deleteIconWrapper: string;
   /** Styles applied to the root element if variant="filled". */
   variantFilled: string;
   /** Styles applied to the root element if variant="outlined". */
@@ -45,6 +47,7 @@ export const chipClasses: ChipClasses = generateUtilityClasses('ESChip', [
   'startIcon',
   'endIcon',
   'deleteIcon',
+  'deleteIconWrapper',
   'variantFilled',
   'variantOutlined',
   'size100',

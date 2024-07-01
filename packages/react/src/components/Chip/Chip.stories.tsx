@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Meta, StoryObj } from '@storybook/react';
 
 import { Chip } from './Chip';
@@ -41,6 +43,9 @@ type Story = StoryObj<typeof Chip>;
 
 export const Demo: Story = {
   render: (args, context) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [isChipDeleted, setChipDeleted] = useState(false);
+
     const locale = (context.globals.locale || 'en') as 'en' | 'ru';
     const size = ICON_SIZE_MAP[args.size || '100'];
 
@@ -49,14 +54,16 @@ export const Demo: Story = {
         <Chip component="button" {...args}>
           {locale === 'ru' ? 'Иванов Иван Иванович' : 'John Doe'}
         </Chip>
-        <Chip
-          component="button"
-          startIcon={<Avatar src="./avatar/6.png" sx={{ width: size, height: size }} variant="circle" />}
-          onDelete={() => {}}
-          {...args}
-        >
-          {locale === 'ru' ? 'Петров Петр Петрович' : 'John Smith'}
-        </Chip>
+        {isChipDeleted || (
+          <Chip
+            component="button"
+            startIcon={<Avatar src="./avatar/6.png" sx={{ width: size, height: size }} variant="circle" />}
+            onDelete={() => setChipDeleted(true)}
+            {...args}
+          >
+            {locale === 'ru' ? 'Петров Петр Петрович' : 'John Smith'}
+          </Chip>
+        )}
         <Chip
           component="button"
           startIcon={<Avatar src="./avatar/6.png" sx={{ width: size, height: size }} variant="circle" />}
@@ -64,7 +71,11 @@ export const Demo: Story = {
         >
           {locale === 'ru' ? 'Сергеев Сергей Сергеевич' : 'John Wick'}
         </Chip>
-        <Chip component="button" startIcon={<IconAt size={`${size}px`} />} {...args}>
+        <Chip
+          component="button"
+          startIcon={<IconAt size="24px" sx={(theme) => ({ color: theme.vars.palette.monoA.A500 })} />}
+          {...args}
+        >
           {locale === 'ru' ? 'Алексеев Алексей Алексеевич' : 'John Lennon'}
         </Chip>
       </div>
