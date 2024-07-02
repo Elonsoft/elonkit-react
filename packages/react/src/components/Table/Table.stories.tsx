@@ -132,7 +132,7 @@ export const Demo: Story = {
 
     const { onResize, onResizeCommit } = useTableResize(ref, rowRef, columns, setColumns);
 
-    const { selected, setSelected, isAllSelected, isSomeSelected, toggle, toggleAll } = useTableSelection(
+    const { selected, setSelected, isAllSelected, isSomeSelected, toggleAll, onChange } = useTableSelection(
       DATA[locale],
       {
         key: 'id',
@@ -193,7 +193,7 @@ export const Demo: Story = {
                     checked={isSelected}
                     color="secondary"
                     inputProps={{ 'aria-labelledby': labelId }}
-                    onChange={() => toggle(row.id)}
+                    onChange={(event) => onChange(event, row)}
                   />
                 </TableCell>
 
@@ -332,7 +332,6 @@ export const ColumnPinning: Story = {
 
       return undefined;
     };
-
     return (
       <Box>
         <Box
@@ -416,7 +415,6 @@ export const ColumnPinning: Story = {
             {DATA[locale].map((row) => {
               const isSelected = selected.indexOf(row.id) !== -1;
               const labelId = `story-usage-checkbox-${row.id}`;
-
               return (
                 <TableRow key={row.id} hover={false} selected={isSelected}>
                   <TableCell overlap padding="checkbox" pin={getPin('checkbox')}>
