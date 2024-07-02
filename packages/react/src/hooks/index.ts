@@ -1,5 +1,6 @@
 export { useBoolean } from './useBoolean';
 export { useCallbackDebounce } from './useCallbackDebounce';
+export { useCallbackThrottle } from './useCallbackThrottle';
 export { useClipboard } from './useClipboard';
 export { useControlled } from './useControlled';
 export { useCookie } from './useCookie';
@@ -26,8 +27,10 @@ export { useScrollSync } from './useScrollSync';
 export { useSessionStorage } from './useSessionStorage';
 export { useSticky } from './useSticky';
 export { useStuckSentinel } from './useStuckSentinel';
+export { useThrottle } from './useThrottle';
 export { useUpdateEffect } from './useUpdateEffect';
 export { useValueDebounce } from './useValueDebounce';
 export { useValueGate } from './useValueGate';
+export { useValueThrottle } from './useValueThrottle';
 export { useVibration } from './useVibration';
 export { useWindowEventListener } from './useWindowEventListener';
