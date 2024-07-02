@@ -12,8 +12,10 @@ import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { capitalize, useForkRef } from '@mui/material/utils';
 
 import { IconCloseLineW350 } from '../../icons';
+import { avatarClasses } from '../Avatar';
 import { Button, buttonClasses } from '../Button';
 import { ButtonBase, buttonBaseClasses } from '../ButtonBase';
+import { touchRippleClasses } from '../TouchRipple';
 
 type ChipOwnerState = {
   classes?: ChipProps['classes'];
@@ -90,9 +92,10 @@ export const ChipRoot = styled('div', {
           color: theme.vars.palette.monoA.A400,
         },
 
-        [`& .${chipClasses.startIcon}, & .${chipClasses.endIcon}`]: {
-          opacity: 0.4,
-        },
+        [`& .${chipClasses.startIcon}, & .${chipClasses.endIcon}, & .${chipClasses.deleteIconWrapper} .${chipClasses.deleteIcon}`]:
+          {
+            opacity: 0.5,
+          },
       },
 
       [`&:not(.${chipClasses.clickable})`]: {
@@ -136,9 +139,10 @@ export const ChipRoot = styled('div', {
           color: theme.vars.palette.monoA.A400,
         },
 
-        [`& .${chipClasses.startIcon}, & .${chipClasses.endIcon}`]: {
-          opacity: 0.4,
-        },
+        [`& .${chipClasses.startIcon}, & .${chipClasses.endIcon}, & .${chipClasses.deleteIconWrapper} .${chipClasses.deleteIcon}`]:
+          {
+            opacity: 0.5,
+          },
       },
     },
 
@@ -172,16 +176,19 @@ export const ChipRoot = styled('div', {
       color: theme.vars.palette.monoA.A400,
     },
 
-    [`& .${chipClasses.startIcon}, & .${chipClasses.endIcon}`]: {
-      opacity: 0.4,
-    },
+    [`& .${chipClasses.startIcon}, & .${chipClasses.endIcon}, & .${chipClasses.deleteIconWrapper} .${chipClasses.deleteIcon}`]:
+      {
+        opacity: 0.5,
+      },
   },
 
   [`&.${chipClasses.size100}`]: {
     height: 24,
 
     [`&:has(.${chipClasses.startIcon})`]: {
-      paddingLeft: 2,
+      [`&:has(.${avatarClasses.root})`]: {
+        paddingLeft: 2,
+      },
 
       [`& .${chipClasses.label}`]: {
         paddingLeft: 6,
@@ -189,12 +196,14 @@ export const ChipRoot = styled('div', {
     },
 
     [`&:has(.${chipClasses.endIcon})`]: {
-      paddingRight: 2,
+      [`&:has(.${avatarClasses.root})`]: {
+        paddingRight: 2,
+      },
 
       [`& .${chipClasses.label}`]: {
         paddingRight: 6,
       },
-      [`& .${chipClasses.deleteIcon}`]: {
+      [`& .${chipClasses.deleteIconWrapper}`]: {
         paddingLeft: 4,
       },
     },
@@ -241,7 +250,7 @@ export const ChipRoot = styled('div', {
       [`& .${chipClasses.label}`]: {
         paddingRight: 8,
       },
-      [`& .${chipClasses.deleteIcon}`]: {
+      [`& .${chipClasses.deleteIconWrapper}`]: {
         paddingLeft: 6,
       },
     },
@@ -277,7 +286,11 @@ export const ChipRoot = styled('div', {
     },
 
     [`&:has(.${chipClasses.startIcon})`]: {
-      paddingLeft: 4,
+      paddingLeft: 8,
+
+      [`&:has(.${avatarClasses.root})`]: {
+        paddingLeft: 4,
+      },
 
       [`& .${chipClasses.label}`]: {
         paddingLeft: 8,
@@ -285,12 +298,16 @@ export const ChipRoot = styled('div', {
     },
 
     [`&:has(.${chipClasses.endIcon})`]: {
-      paddingRight: 4,
+      paddingRight: 8,
+
+      [`&:has(.${avatarClasses.root})`]: {
+        paddingRight: 4,
+      },
 
       [`& .${chipClasses.label}`]: {
         paddingRight: 8,
       },
-      [`& .${chipClasses.deleteIcon}`]: {
+      [`& .${chipClasses.deleteIconWrapper}`]: {
         paddingLeft: 6,
       },
     },
@@ -323,6 +340,13 @@ export const ChipRoot = styled('div', {
   [`& .${chipClasses.deleteIcon}.${buttonClasses.variantText}.${buttonClasses.colorTertiary}`]: {
     borderRadius: '50%',
     '--icon': theme.vars.palette.monoA.A400,
+    '--hovered': 'transparent',
+
+    '@media (hover: hover)': {
+      [`&:not(:disabled):hover .${touchRippleClasses.root}`]: {
+        backgroundColor: theme.vars.palette.monoA.A50,
+      },
+    },
   },
 }));
 
