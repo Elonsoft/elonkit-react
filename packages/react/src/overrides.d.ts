@@ -272,6 +272,7 @@ import {
 } from './components/Table';
 import { TextFieldGroupClassKey, TextFieldGroupProps } from './components/TextFieldGroup';
 import { TouchRippleClassKey, TouchRippleProps } from './components/TouchRipple';
+import { TooltipClassKey, TooltipProps } from './components/Tooltip';
 import { buttonMixin, listItemMixin } from './theming/mixins';
 import { AvatarProps } from './components';
 import { BadgeProps, BadgeClassKey } from './components/Badge';
@@ -464,6 +465,7 @@ declare module '@mui/material/styles/props' {
     ESTableText: TableTextProps;
     ESTouchRipple: TouchRippleProps;
     ESTextFieldGroup: TextFieldGroupProps;
+    ESTooltip: TooltipProps;
   }
 }
 
@@ -599,6 +601,7 @@ declare module '@mui/material/styles/overrides' {
     ESTableText: TableTextClassKey;
     ESTouchRipple: TouchRippleClassKey;
     ESTextFieldGroup: TextFieldGroupClassKey;
+    ESTooltip: TooltipClassKey;
   }
 }
 
@@ -1127,6 +1130,10 @@ declare module '@mui/material/styles/components' {
     ESTextFieldGroup?: {
       defaultProps?: ComponentsProps['ESTextFieldGroup'];
       styleOverrides?: ComponentsOverrides['ESTextFieldGroup'];
+    };
+    ESTooltip?: {
+      defaultProps?: ComponentsProps['ESTooltip'];
+      styleOverrides?: ComponentsOverrides['ESTooltip'];
     };
   }
 }
