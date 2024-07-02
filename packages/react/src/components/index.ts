@@ -13,6 +13,7 @@ export * from './BottomSheet';
 export * from './Breadcrumbs';
 export * from './Button';
 export * from './ButtonBase';
+export * from './ButtonGroup';
 export * from './Calendar';
 export * from './Checkbox';
 export * from './DateAdapter';
