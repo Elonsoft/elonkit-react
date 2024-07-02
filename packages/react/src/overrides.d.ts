@@ -270,6 +270,14 @@ import {
   TableTextClassKey,
   TableTextProps,
 } from './components/Table';
+import {
+  TabClassKey,
+  TabProps,
+  TabsClassKey,
+  TabScrollButtonClassKey,
+  TabScrollButtonProps,
+  TabsProps
+} from './components/Tabs';
 import { TextFieldGroupClassKey, TextFieldGroupProps } from './components/TextFieldGroup';
 import { TouchRippleClassKey, TouchRippleProps } from './components/TouchRipple';
 import { buttonMixin, listItemMixin } from './theming/mixins';
@@ -462,6 +470,9 @@ declare module '@mui/material/styles/props' {
     ESTableRow: TableRowProps;
     ESTableScrollbar: TableScrollbarProps;
     ESTableText: TableTextProps;
+    ESTabs: TabsProps;
+    ESTab: TabProps;
+    ESTabScrollButton: TabScrollButtonProps;
     ESTouchRipple: TouchRippleProps;
     ESTextFieldGroup: TextFieldGroupProps;
   }
@@ -587,6 +598,9 @@ declare module '@mui/material/styles/overrides' {
     ESSwiperPagination: SwiperPaginationClassKey;
     ESTabBar: TabBarClassKey;
     ESTabBarItem: TabBarItemClassKey;
+    ESTabs: TabsClassKey;
+    ESTab: TabClassKey;
+    ESTabScrollButton: TabScrollButtonClassKey;
     ESTable: TableClassKey;
     ESTableActions: TableActionsClassKey;
     ESTableItem: TableItemClassKey;
@@ -1083,6 +1097,18 @@ declare module '@mui/material/styles/components' {
     ESTableText?: {
       defaultProps?: ComponentsProps['ESTableText'];
       styleOverrides?: ComponentsOverrides['ESTableText'];
+    };
+    ESTabs?: {
+      defaultProps?: ComponentsProps['ESTabs'];
+      styleOverrides?: ComponentsOverrides['ESTabs'];
+    };
+    ESTab?: {
+      defaultProps?: ComponentsProps['ESTab'];
+      styleOverrides?: ComponentsOverrides['ESTab'];
+    };
+    ESTabScrollButton?: {
+      defaultProps?: ComponentsProps['ESTabScrollButton'];
+      styleOverrides?: ComponentsOverrides['ESTabScrollButton'];
     };
     ESTouchRipple?: {
       defaultProps?: ComponentsProps['ESTouchRipple'];
