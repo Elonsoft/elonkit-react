@@ -37,6 +37,7 @@ export * from './LoadingButton';
 export * from './locale';
 export * from './MadeBy';
 export * from './MenuItem';
+export * from './Onboarding';
 export * from './PageHGroup';
 export * from './Pagination';
 export * from './PasswordField';
