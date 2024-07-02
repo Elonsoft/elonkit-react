@@ -188,10 +188,14 @@ export const ChipRoot = styled('div', {
     [`&:has(.${chipClasses.startIcon})`]: {
       [`&:has(.${avatarClasses.root})`]: {
         paddingLeft: 2,
+
+        [`& .${chipClasses.label}`]: {
+          paddingLeft: 6,
+        },
       },
 
       [`& .${chipClasses.label}`]: {
-        paddingLeft: 6,
+        paddingLeft: 4,
       },
     },
 
@@ -201,7 +205,7 @@ export const ChipRoot = styled('div', {
       },
 
       [`& .${chipClasses.label}`]: {
-        paddingRight: 6,
+        paddingRight: 4,
       },
       [`& .${chipClasses.deleteIconWrapper}`]: {
         paddingLeft: 4,
@@ -222,8 +226,8 @@ export const ChipRoot = styled('div', {
       },
     },
 
-    [`& .${chipClasses.deleteIcon}`]: {
-      [`& .${buttonBaseClasses.wrapper}`]: {
+    [`& .${chipClasses.deleteIconWrapper} .${chipClasses.deleteIcon}`]: {
+      [`&.${buttonClasses.size300}.${buttonClasses.variantText} .${buttonBaseClasses.wrapper}`]: {
         padding: '0 4px',
       },
     },
