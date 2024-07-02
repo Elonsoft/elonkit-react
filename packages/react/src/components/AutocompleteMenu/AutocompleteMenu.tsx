@@ -13,7 +13,7 @@ import Grow from '@mui/material/Grow';
 import InputAdornment, { inputAdornmentClasses } from '@mui/material/InputAdornment';
 import { inputBaseClasses } from '@mui/material/InputBase';
 import { inputLabelClasses } from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import Popper from '@mui/material/Popper';
@@ -273,8 +273,8 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
     name: 'ESAutocompleteMenu',
   });
 
-  // const paperRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const menuListRef = useRef<HTMLUListElement | null>(null);
   const [sentinelRef, setSentinelRef] = useState<HTMLElement | null>(null);
 
   const onCloseLatest = useLatest(onClose);
@@ -330,12 +330,11 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
         }
       }
     },
-    [props.multiple, props.value, props.onChange]
+    [props.multiple, props.value, props.onChange, getOptionValue]
   );
 
   const ownerState = { classes: inClasses };
   const classes = useUtilityClasses(ownerState);
-
   const groupedOptions: ReactNode[] = [];
 
   for (let index = 0; index < options.length; index++) {
@@ -371,6 +370,21 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
       </AutocompleteMenuMenuItem>
     );
   }
+
+  useEffect(() => {
+    if (open) {
+      requestAnimationFrame(() => {
+        if (menuListRef.current) {
+          const element = menuListRef.current.querySelector(`.${menuItemClasses.selected}`) as HTMLElement;
+
+          if (element) {
+            menuListRef.current.scrollTop =
+              element.offsetTop + element.clientHeight / 2 - menuListRef.current.clientHeight / 2;
+          }
+        }
+      });
+    }
+  }, [open]);
 
   return (
     <AutocompleteMenuRoot
@@ -478,7 +492,7 @@ export const AutocompleteMenu = forwardRef(function AutocompleteMenu(inProps, re
                         <SpinnerRing color="monoA" size={16} /> {labelLoading}
                       </AutocompleteMenuEmptyState>
                     ) : options.length ? (
-                      <AutocompleteMenuMenuList className={classes.menuList}>
+                      <AutocompleteMenuMenuList ref={menuListRef} className={classes.menuList}>
                         {groupedOptions}
                         {!!onLoadMore && (
                           <AutocompleteMenuSentinel
