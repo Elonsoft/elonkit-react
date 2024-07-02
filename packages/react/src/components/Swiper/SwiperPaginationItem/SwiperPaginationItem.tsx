@@ -115,8 +115,9 @@ const SwiperPaginationItemInput = styled('input', {
   position: 'absolute',
   top: 0,
   width: 0,
+
   [`&:focus-visible + .${swiperPaginationClasses.bulletActive}`]: {
-    boxShadow: `0 0 0 7px ${theme.vars.palette.secondary.A500}`,
+    boxShadow: `0px 0px 0px 2px ${theme.vars.palette.monoA[500]}`,
   },
 }));
 
