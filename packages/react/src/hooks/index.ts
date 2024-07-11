@@ -21,6 +21,7 @@ export { useOnLine } from './useOnLine';
 export { usePagination } from './usePagination';
 export { usePreviousValue } from './usePreviousValue';
 export { useResizeObserver } from './useResizeObserver';
+export { useScrollDirection } from './useScrollDirection';
 export { useScrollLock } from './useScrollLock';
 export { useScrollSync } from './useScrollSync';
 export { useSessionStorage } from './useSessionStorage';
