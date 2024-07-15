@@ -11,6 +11,7 @@ import { DialogClose } from './DialogClose';
 import { DialogContent } from './DialogContent';
 import { DialogTitle } from './DialogTitle';
 
+import { IconArrowLeftW500, IconCheckW500 } from '../../icons';
 import { Button } from '../Button';
 import { useDialogStack } from '../DialogStack';
 
@@ -30,7 +31,13 @@ const getCreateButtonText = (context: StoryContext<unknown>) => {
   return context.globals.locale === 'en' ? 'Create' : 'Создать';
 };
 
-type Args = ComponentProps<typeof Dialog> & { DialogTitleSticky?: boolean; DialogActionsSticky?: boolean };
+type Args = ComponentProps<typeof Dialog> & {
+  DialogTitleSticky?: boolean;
+  DialogActionsSticky?: boolean;
+  DialogTitleStartAdornment?: boolean;
+  DialogTitleEndAdornment?: boolean;
+  DialogTitleProminent?: boolean;
+};
 
 const meta: Meta<Args> = {
   tags: ['autodocs'],
@@ -61,10 +68,42 @@ const meta: Meta<Args> = {
         type: 'boolean',
       },
     },
+    DialogTitleStartAdornment: {
+      name: 'startAdornment',
+      description: 'Element placed before the children.',
+      table: {
+        category: 'DialogTitle',
+      },
+      control: {
+        type: 'boolean',
+      },
+    },
+    DialogTitleEndAdornment: {
+      name: 'endAdornment',
+      description: 'Element placed after the children.',
+      table: {
+        category: 'DialogTitle',
+      },
+      control: {
+        type: 'boolean',
+      },
+    },
+    DialogTitleProminent: {
+      name: 'prominent',
+      description: 'If true, the children will be show below the root element.',
+      table: {
+        category: 'DialogTitle',
+      },
+      control: {
+        type: 'boolean',
+      },
+    },
   },
   args: {
     DialogTitleSticky: true,
     DialogActionsSticky: true,
+    DialogTitleStartAdornment: false,
+    DialogTitleEndAdornment: false,
   },
 };
 
@@ -87,7 +126,26 @@ export const Demo: Story = {
           >
             <DialogArrow direction="prev" />
             <DialogArrow direction="next" />
-            <DialogTitle sticky={args.DialogTitleSticky}>{getHeadingText(context)}</DialogTitle>
+            <DialogTitle
+              endAdornment={
+                args.DialogTitleEndAdornment ? (
+                  <Button color="tertiary" size="40">
+                    <IconCheckW500 />
+                  </Button>
+                ) : null
+              }
+              prominent={args.DialogTitleProminent}
+              startAdornment={
+                args.DialogTitleStartAdornment ? (
+                  <Button color="tertiary" size="40">
+                    <IconArrowLeftW500 />
+                  </Button>
+                ) : null
+              }
+              sticky={args.DialogTitleSticky}
+            >
+              {getHeadingText(context)}
+            </DialogTitle>
             <DialogContent>
               <Typography variant="body200">
                 Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
@@ -162,7 +220,26 @@ export const Alignment: Story = {
       dialogStack
         .open(({ close }) => (
           <Dialog fullWidth align="flex-start" maxWidth="700px" onClose={() => close()}>
-            <DialogTitle sticky={args.DialogTitleSticky}>{getHeadingText(context)}</DialogTitle>
+            <DialogTitle
+              endAdornment={
+                args.DialogTitleEndAdornment ? (
+                  <Button color="tertiary" size="40">
+                    <IconCheckW500 />
+                  </Button>
+                ) : null
+              }
+              prominent={args.DialogTitleProminent}
+              startAdornment={
+                args.DialogTitleStartAdornment ? (
+                  <Button color="tertiary" size="40">
+                    <IconArrowLeftW500 />
+                  </Button>
+                ) : null
+              }
+              sticky={args.DialogTitleSticky}
+            >
+              {getHeadingText(context)}
+            </DialogTitle>
             <DialogContent>
               <Typography variant="body200">
                 Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
@@ -203,7 +280,26 @@ export const FullScreen: Story = {
       dialogStack
         .open(({ close }) => (
           <Dialog fullScreen align="flex-start" onClose={() => close()}>
-            <DialogTitle sticky={args.DialogTitleSticky}>{getHeadingText(context)}</DialogTitle>
+            <DialogTitle
+              endAdornment={
+                args.DialogTitleEndAdornment ? (
+                  <Button color="tertiary" size="40">
+                    <IconCheckW500 />
+                  </Button>
+                ) : null
+              }
+              prominent={args.DialogTitleProminent}
+              startAdornment={
+                args.DialogTitleStartAdornment ? (
+                  <Button color="tertiary" size="40">
+                    <IconArrowLeftW500 />
+                  </Button>
+                ) : null
+              }
+              sticky={args.DialogTitleSticky}
+            >
+              {getHeadingText(context)}
+            </DialogTitle>
             <DialogContent>
               <Typography variant="body200">
                 Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget
