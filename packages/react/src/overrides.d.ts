@@ -163,6 +163,14 @@ import { LoadingButtonClassKey, LoadingButtonProps } from './components/LoadingB
 import { MadeByClassKey, MadeByProps } from './components/MadeBy';
 import { MenuItemClassKey, MenuItemProps } from './components/MenuItem';
 import {
+  OnboardingClassKey,
+  OnboardingPopperClassKey,
+  OnboardingPopperProps,
+  OnboardingProps,
+  OnboardingSpotlightClassKey,
+  OnboardingSpotlightProps
+} from './components/Onboarding';
+import {
   PageHGroupActionsClassKey,
   PageHGroupActionsProps,
   PageHGroupBreadcrumbsClassKey,
@@ -407,6 +415,9 @@ declare module '@mui/material/styles/props' {
     ESLoadingButton: LoadingButtonProps;
     ESMenuItem: MenuItemProps;
     ESMadeBy: MadeByProps;
+    ESOnboarding: OnboardingProps;
+    ESOnboardingSpotlight: OnboardingSpotlightProps;
+    ESOnboardingPopper: OnboardingPopperProps;
     ESPageHGroup: PageHGroupProps;
     ESPageHGroupActions: PageHGroupActionsProps;
     ESPageHGroupBreadcrumbs: PageHGroupBreadcrumbsProps;
@@ -542,6 +553,9 @@ declare module '@mui/material/styles/overrides' {
     ESLoadingButton: LoadingButtonClassKey;
     ESMenuItem: MenuItemClassKey;
     ESMadeBy: MadeByClassKey;
+    ESOnboarding: OnboardingClassKey;
+    ESOnboardingSpotlight: OnboardingSpotlightClassKey;
+    ESOnboardingPopper: OnboardingPopperClassKey;
     ESPageHGroup: PageHGroupClassKey;
     ESPageHGroupActions: PageHGroupActionsClassKey;
     ESPageHGroupBreadcrumbs: PageHGroupBreadcrumbsClassKey;
@@ -919,6 +933,18 @@ declare module '@mui/material/styles/components' {
     ESMadeBy?: {
       defaultProps?: ComponentsProps['ESMadeBy'];
       styleOverrides?: ComponentsOverrides['ESMadeBy'];
+    };
+    ESOnboarding?: {
+      defaultProps?: ComponentsProps['ESOnboarding'];
+      styleOverrides?: ComponentsOverrides['ESOnboarding'];
+    };
+    ESOnboardingSpotlight?: {
+      defaultProps?: ComponentsProps['ESOnboardingSpotlight'];
+      styleOverrides?: ComponentsOverrides['ESOnboardingSpotlight'];
+    };
+    ESOnboardingPopper?: {
+      defaultProps?: ComponentsProps['ESOnboardingPopper'];
+      styleOverrides?: ComponentsOverrides['ESOnboardingPopper'];
     };
     ESPageHGroup?: {
       defaultProps?: ComponentsProps['ESPageHGroup'];
