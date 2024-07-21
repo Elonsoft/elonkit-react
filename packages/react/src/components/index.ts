@@ -15,6 +15,7 @@ export * from './Button';
 export * from './ButtonBase';
 export * from './Calendar';
 export * from './Checkbox';
+export * from './ConfirmationDialog';
 export * from './DateAdapter';
 export * from './Dialog';
 export * from './DialogStack';
