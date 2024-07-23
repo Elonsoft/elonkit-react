@@ -16,6 +16,7 @@ export * from './ButtonBase';
 export * from './Calendar';
 export * from './Checkbox';
 export * from './Chip';
+export * from './ChipList';
 export * from './DateAdapter';
 export * from './Dialog';
 export * from './DialogStack';
