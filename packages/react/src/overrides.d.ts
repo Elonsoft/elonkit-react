@@ -87,6 +87,7 @@ import {
 } from './components/Dialog';
 import { DividerClassKey, DividerProps } from './components/Divider';
 import { DropzoneClassKey, DropzoneProps } from './components/Dropzone';
+import { DropzoneOverlayClassKey, DropzoneOverlayProps } from './components/DropzoneOverlay';
 import { EmptyStateClassKey, EmptyStateProps } from './components/EmptyState';
 import { EmptyStateCompactClassKey, EmptyStateCompactProps } from './components/EmptyStateCompact';
 import {
@@ -369,6 +370,7 @@ declare module '@mui/material/styles/props' {
     ESDialogTitle: DialogTitleProps;
     ESDivider: DividerProps;
     ESDropzone: DropzoneProps;
+    ESDropzoneOverlay: DropzoneOverlayProps;
     ESEmptyState: EmptyStateProps;
     ESEmptyStateCompact: EmptyStateCompactProps;
     ESErrorPage: ErrorPageProps;
@@ -505,6 +507,7 @@ declare module '@mui/material/styles/overrides' {
     ESDialogTitle: DialogTitleClassKey;
     ESDivider: DividerClassKey;
     ESDropzone: DropzoneClassKey;
+    ESDropzoneOverlay: DropzoneOverlayClassKey;
     ESEmptyState: EmptyStateClassKey;
     ESEmptyStateCompact: EmptyStateCompactClassKey;
     ESErrorPage: ErrorPageClassKey;
@@ -855,6 +858,10 @@ declare module '@mui/material/styles/components' {
     ESDropzone?: {
       defaultProps?: ComponentsProps['ESDropzone'];
       styleOverrides?: ComponentsOverrides['ESDropzone'];
+    };
+    ESDropzoneOverlay?: {
+      defaultProps?: ComponentsProps['ESDropzoneOverlay'];
+      styleOverrides?: ComponentsOverrides['ESDropzoneOverlay'];
     };
     ESFileIcon?: {
       defaultProps?: ComponentsProps['ESFileIcon'];

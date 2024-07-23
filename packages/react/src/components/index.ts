@@ -20,6 +20,7 @@ export * from './Dialog';
 export * from './DialogStack';
 export * from './Divider';
 export * from './Dropzone';
+export * from './DropzoneOverlay';
 export * from './EmptyState';
 export * from './EmptyStateCompact';
 export * from './ErrorPage';
