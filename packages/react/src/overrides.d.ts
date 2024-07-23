@@ -72,6 +72,7 @@ import {
 } from './components/Calendar';
 import { CheckboxClassKey, CheckboxProps, CheckboxIconClassKey, CheckboxIconProps } from './components/Checkbox';
 import { ChipClassKey, ChipProps } from './components/Chip';
+import { ChipListClassKey, ChipListProps } from './components/ChipList';
 import {
   DialogActionsClassKey,
   DialogActionsProps,
@@ -363,6 +364,7 @@ declare module '@mui/material/styles/props' {
     ESCheckbox: CheckboxProps;
     ESCheckboxIcon: CheckboxIconProps;
     ESChip: ChipProps;
+    ESChipList: ChipListProps;
     ESDialog: DialogProps;
     ESDialogActions: DialogActionsProps;
     ESDialogArrow: DialogArrowProps;
@@ -500,6 +502,7 @@ declare module '@mui/material/styles/overrides' {
     ESCheckbox: CheckboxClassKey;
     ESCheckboxIcon: CheckboxIconClassKey;
     ESChip: ChipClassKey;
+    ESChipList: ChipListClassKey;
     ESDialog: DialogClassKey;
     ESDialogActions: DialogActionsClassKey;
     ESDialogArrow: DialogArrowClassKey;
@@ -722,6 +725,10 @@ declare module '@mui/material/styles/components' {
     ESChip?: {
       defaultProps?: ComponentsProps['ESChip'];
       styleOverrides?: ComponentsOverrides['ESChip'];
+    };
+    ESChipList?: {
+      defaultProps?: ComponentsProps['ESChipList'];
+      styleOverrides?: ComponentsOverrides['ESChipList'];
     };
     ESDialog?: {
       defaultProps?: ComponentsProps['ESDialog'];
