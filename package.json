@@ -7,6 +7,7 @@
     "packages/configs/cspell-config",
     "packages/configs/eslint-config",
     "packages/configs/prettier-config",
+    "packages/configs/webpack-config",
     "packages/react"
   ],
   "scripts": {

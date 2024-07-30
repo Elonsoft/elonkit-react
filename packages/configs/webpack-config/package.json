@@ -1,0 +1,32 @@
+{
+  "name": "@esfront/webpack-config",
+  "version": "0.0.0",
+  "description": "",
+  "private": false,
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elonsoft/esfront.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Elonsoft/esfront/issues"
+  },
+  "homepage": "https://github.com/Elonsoft/esfront#readme",
+  "peerDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
+    "copy-webpack-plugin": "^11.0.0",
+    "dotenv": "^10.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "react-refresh": "^0.14.0",
+    "react-refresh-typescript": "^2.0.9",
+    "resolve-ts-aliases": "^1.0.1",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.4.5",
+    "webpack": "^5.64.4",
+    "webpack-bundle-analyzer": "^4.9.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.6.0"
+  }
+}

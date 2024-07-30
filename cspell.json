@@ -2,5 +2,5 @@
   "import": ["@esfront/cspell-config", "@cspell/dict-lorem-ipsum/cspell-ext.json"],
   "dictionaries": ["lorem-ipsum"],
   "ignorePaths": ["**/lib/**", "**/storybook-static/**", "packages/react/src/typedoc.json", "lerna.json"],
-  "words": ["Svyatoslav", "Daria", "Alekhina"]
+  "words": ["fullhash", "pmmmwh", "Svyatoslav", "Daria", "Alekhina"]
 }
