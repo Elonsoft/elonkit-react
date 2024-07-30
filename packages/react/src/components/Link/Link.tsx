@@ -128,7 +128,8 @@ const LinkRoot = styled(Typography, {
         bottom: '-1px',
         left: ownerState.startIcon ? '-1px' : '-4px',
         right: ownerState.endIcon ? '-1px' : '-4px',
-        border: `2px solid ${theme.vars.palette.monoA.A700}`,
+        border: `2px solid ${theme.vars.palette.monoA[500]}`,
+        borderRadius: '4px',
         zIndex: 1,
       },
 
