@@ -9,6 +9,10 @@ export type KbdClasses = {
   contained: string;
   /** Styles applied to the root element if variant='outlined'. */
   outlined: string;
+  /** Styles applied to the root element if variant='primary'. */
+  primary: string;
+  /** Styles applied to the root element if variant='secondary'. */
+  secondary: string;
 };
 export type KbdClassKey = keyof KbdClasses;
 
@@ -16,4 +20,11 @@ export function getKbdUtilityClass(slot: string): string {
   return generateUtilityClass('ESKbd', slot);
 }
 
-export const kbdClasses: KbdClasses = generateUtilityClasses('ESKbd', ['root', 'raised', 'contained', 'outlined']);
+export const kbdClasses: KbdClasses = generateUtilityClasses('ESKbd', [
+  'root',
+  'raised',
+  'contained',
+  'outlined',
+  'primary',
+  'secondary',
+]);

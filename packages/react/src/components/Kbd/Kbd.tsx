@@ -9,7 +9,7 @@ import { styled, useThemeProps } from '@mui/material/styles';
 
 type KbdOwnerState = {
   classes?: KbdProps['classes'];
-  variant: 'raised' | 'contained' | 'outlined';
+  variant: 'raised' | 'contained' | 'outlined' | 'primary' | 'secondary';
 };
 
 const useUtilityClasses = (ownerState: KbdOwnerState) => {
@@ -50,6 +50,17 @@ const KbdRoot = styled('kbd', {
   }),
   ...(ownerState.variant === 'outlined' && {
     boxShadow: `inset 0 0 0 1px ${theme.vars.palette.monoA.A200}`,
+  }),
+  ...(ownerState.variant === 'primary' && {
+    padding: '1px 4px',
+    color: theme.vars.palette.monoB[500],
+    backgroundColor: theme.vars.palette.monoA.A550,
+    ...theme.typography.caption,
+  }),
+  ...(ownerState.variant === 'secondary' && {
+    padding: '1px 4px',
+    backgroundColor: theme.vars.palette.monoA.A200,
+    ...theme.typography.caption,
   }),
 }));
 
